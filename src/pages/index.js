@@ -22,7 +22,7 @@ export default class IndexPage extends React.Component {
 
     return (
       <div>
-        <p>plad</p>
+        <p>plouf</p>
         {/* <ul>
           {projects.map((project, index) => {
             return (
