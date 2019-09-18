@@ -5,7 +5,6 @@ class BlogPostContentfulTemplate extends React.Component {
   render() {
     const blogPost = this.props.data.contentfulBlogPost
     const { previous, next } = this.props.pageContext
-    console.log(previous.slug)
     return (
       <Layout>
         <h1>{blogPost.title}</h1>
