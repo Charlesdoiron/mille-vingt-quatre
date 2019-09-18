@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import Layout from "./../components/Layout"
-import { Tag } from "./../components/contentful/Tag"
+
 import { ImageGrid } from "./../components/contentful/ImageGrid"
 import { ProjectsSelected } from "./../components/contentful/ProjectsSelected"
 class Page extends React.Component {
