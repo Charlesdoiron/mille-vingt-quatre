@@ -1,6 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import Layout from "../components/Layout"
+import Layout from "./../components/Layout"
 class ProjectContentfulTemplate extends React.Component {
   render() {
     const project = this.props.data.contentfulProject

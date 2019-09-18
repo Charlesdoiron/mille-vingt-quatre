@@ -1,6 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import Layout from "../components/Layout"
+import Layout from "./../components/Layout"
 class BlogPostContentfulTemplate extends React.Component {
   render() {
     const blogPost = this.props.data.contentfulBlogPost
