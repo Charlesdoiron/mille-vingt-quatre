@@ -1,48 +1,45 @@
 import React from "react"
-import { graphql } from "gatsby"
-import Img from "gatsby-image"
-// export const indexPageQuery = graphql`
-//   query IndexPageQuery {
-//     allContentfulProject {
-//       edges {
-//         node {
-//           title
-//           description {
-//             description
-//           }
-//         }
-//       }
-//     }
-//   }
-// `
+import { Link, graphql } from "gatsby"
 
-export default class IndexPage extends React.Component {
+import Layout from "./../components/Layout"
+
+class BlogIndex extends React.Component {
   render() {
-  
-
+    const { data } = this.props
+    const siteTitle = data.site.siteMetadata.title
+    const blogPosts = data.allContentfulBlogPost.edges
     return (
-      <div>
-        <p>plouf</p>
-        {/* <ul>
-          {projects.map((project, index) => {
-            return (
-              <div>
-                <h1 key={index}>{project.title}</h1>
-                <p>{project.description.description}</p>
-                <div>
-                  <Img
-                    fixed={project.posterImage && project.posterImage.fixed.src}
-                  />
-                  <img
-                    src={project.posterImage && project.posterImage.fixed.src}
-                    alt=""
-                  />
-                </div>
-              </div>
-            )
-          })}
-        </ul> */}
-      </div>
+      <Layout>
+        {blogPosts.map(({ node }) => {
+          const title = node.title || node.slug
+          return (
+            <div key={node.slug}>
+              <h3>
+                <Link to={node.slug}>{title}</Link>
+              </h3>
+            </div>
+          )
+        })}
+      </Layout>
     )
   }
 }
+
+export default BlogIndex
+export const pageQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+    allContentfulBlogPost {
+      edges {
+        node {
+          title
+          slug
+        }
+      }
+    }
+  }
+`
