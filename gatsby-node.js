@@ -110,34 +110,34 @@ exports.createPages = ({ graphql, actions }) => {
   })
 
   // TAGS
-  const loadTags = new Promise((resolve, reject) => {
-    graphql(`
-      {
-        allContentfulTag {
-          edges {
-            node {
-              slug
-              blog_post {
-                title
-              }
-            }
-          }
-        }
-      }
-    `).then(result => {
-      const tags = result.data.allContentfulTag.edges
+  // const loadTags = new Promise((resolve, reject) => {
+  //   graphql(`
+  //     {
+  //       allContentfulTag {
+  //         edges {
+  //           node {
+  //             slug
+  //             blog_post {
+  //               title
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   `).then(result => {
+  //     const tags = result.data.allContentfulTag.edges
 
-      tags.forEach((tag, i) => {
-        createPage({
-          path: tag.node.slug,
-          component: path.resolve(`./src/templates/Tag.js`),
-          context: {
-            slug: tag.node.slug,
-          },
-        })
-      })
-      resolve()
-    })
-  })
+  //     tags.forEach((tag, i) => {
+  //       createPage({
+  //         path: tag.node.slug,
+  //         component: path.resolve(`./src/templates/Tag.js`),
+  //         context: {
+  //           slug: tag.node.slug,
+  //         },
+  //       })
+  //     })
+  //     resolve()
+  //   })
+  // })
   return Promise.all([loadBlogPosts, loadTags, loadPages, loadProjects])
 }
