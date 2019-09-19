@@ -4,6 +4,9 @@ import Layout from "./../components/Layout"
 
 import { ImageGrid } from "./../components/contentful/ImageGrid"
 import { ProjectsSelected } from "./../components/contentful/ProjectsSelected"
+import { Hero } from "./../components/contentful/Hero"
+import { Video } from "./../components/contentful/Video"
+import { TwoSectionsWithImage } from "./../components/contentful/TwoSectionsWithImage"
 class Page extends React.Component {
   render() {
     const page = this.props.data.contentfulPages
@@ -11,12 +14,22 @@ class Page extends React.Component {
     return (
       <Layout>
         <h1>{page.title}</h1>
-        {page.ui.map((module, i) => {
-          console.log(module)
+        {page.ui.map((data, i) => {
+          console.log(data)
           return (
             <div>
-              <ImageGrid data={module.grid} key={i} />
-              <ProjectsSelected data={module.projects} key={i} />
+              {data.grid && <ImageGrid data={data} key={`ImageGrid-${i}`} />}
+              {data.projects && (
+                <ProjectsSelected data={data} key={`ProjectsSelected-${i}`} />
+              )}
+              {data.hero && <Hero data={data} key={`Hero-${i}`} />}
+              {data.video && <Video data={data} key={`Video-${i}`} />}
+              {data.twoSectionsText && (
+                <TwoSectionsWithImage
+                  data={data}
+                  key={`TwoSectionsWithImage-${i}`}
+                />
+              )}
             </div>
           )
         })}
@@ -58,7 +71,6 @@ export const pageQuery = graphql`
           }
         }
         ... on ContentfulProjectsSelected {
-          id
           title
           projects {
             slug
@@ -79,12 +91,18 @@ export const pageQuery = graphql`
           }
         }
         ... on ContentfulTwoSectionsImageText {
-          text
+          title
           image {
-            fluid {
+            fixed {
               src
             }
           }
+          twoSectionsText {
+            twoSectionsText
+          }
+        }
+        ... on ContentfulVideo {
+          video
         }
       }
     }
