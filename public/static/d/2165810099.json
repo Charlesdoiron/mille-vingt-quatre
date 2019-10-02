@@ -1,1 +1,1 @@
-{"data":{"allContentfulPages":{"edges":[{"node":{"slug":"contact","title":"Contact"}},{"node":{"slug":"projects","title":"Projects"}},{"node":{"slug":"home","title":"Home"}}]}}}
+{"data":{"allContentfulPages":{"edges":[{"node":{"slug":"projects","title":"Projects"}},{"node":{"slug":"home","title":"Home"}},{"node":{"slug":"blog","title":"Blog"}},{"node":{"slug":"contact","title":"Contact"}}]}}}

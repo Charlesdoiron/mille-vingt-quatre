@@ -1,29 +1,22 @@
 import React from "react"
 export const ImageGrid = props => {
+  console.log("image grid props", props)
   return (
-    <div
-      className="image__grid"
-      style={{
-        display: `flex`,
-        flexWrap: `wrap`,
-        listStyle: `none`,
-        padding: `0`,
-      }}
-    >
-      {props.data.grid &&
-        props.data.grid.map((image, i) => {
-          return (
-            <div key={i}>
-              <img
-                src={image.fluid.src}
-                alt=""
-                style={{
-                  width: `200px`,
-                }}
-              />
-            </div>
-          )
-        })}
-    </div>
+    <ul>
+      {props.imageGrid.map(module => {
+        return (
+          <li>
+            {module.ContentfulImageGrid.fields.grid.map(g => {
+              return (
+                <div>
+                  <h2>{g.title}</h2>
+                  <img src={g.fluid.src} />
+                </div>
+              )
+            })}
+          </li>
+        )
+      })}
+    </ul>
   )
 }

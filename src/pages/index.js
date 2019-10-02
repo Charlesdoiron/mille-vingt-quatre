@@ -1,12 +1,11 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-
+import './../style/index.scss'
 import Layout from "./../components/Layout"
 
 class BlogIndex extends React.Component {
   render() {
     const { data } = this.props
-    const siteTitle = data.site.siteMetadata.title
     const blogPosts = data.allContentfulBlogPost.edges
     return (
       <Layout>

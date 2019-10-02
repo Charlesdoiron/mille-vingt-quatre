@@ -9,7 +9,7 @@ class ProjectContentfulTemplate extends React.Component {
     console.log(this.props.pageContext)
     return (
       <Layout>
-        <h1>{project.title}</h1>
+        <h1>{project.projectTitle}</h1>
         <h1>{project.description.description}</h1>
         <img src={project.cover.fluid.src} alt="" />
         <ul>
@@ -68,7 +68,7 @@ export const pageQuery = graphql`
       }
     }
     contentfulProject(slug: { eq: $slug }) {
-      title
+      projectTitle
       tags {
         title
         slug

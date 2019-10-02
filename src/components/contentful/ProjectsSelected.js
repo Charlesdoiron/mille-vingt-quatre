@@ -1,23 +1,24 @@
 import React from "react"
 import { Link } from "gatsby"
 export const ProjectsSelected = props => {
+  console.log("selected", props.projectsSelected)
   return (
     <div className="projects__selected">
       <ul>
-        {props.data.projects &&
-          props.data.projects.map(project => {
+        {props.projectsSelected &&
+          props.projectsSelected.map(selected => {
             return (
-              <Link to={`project/${project.slug}`}>
-                <img
-                  src={project.cover.fluid.src}
-                  alt=""
-                  style={{
-                    width: `50%`,
-                    margin: `0 auto`,
-                  }}
-                />
-                <p>{project.title}</p>
-              </Link>
+              selected.ContentfulProjectsSelected.fields.projectsSelected &&
+              selected.ContentfulProjectsSelected.fields.projectsSelected.map(
+                s => {
+                  return (
+                    <div>
+                      <p>{s.slug}</p>
+                      {s.cover && <img src={s.cover.fluid.src} />}
+                    </div>
+                  )
+                }
+              )
             )
           })}
       </ul>

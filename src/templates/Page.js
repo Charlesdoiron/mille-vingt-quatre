@@ -1,5 +1,5 @@
-import React from "react"
-import { Link, graphql } from "gatsby"
+import React, { useState } from "react"
+import { graphql } from "gatsby"
 import Layout from "./../components/Layout"
 
 import { ImageGrid } from "./../components/contentful/ImageGrid"
@@ -7,35 +7,61 @@ import { ProjectsSelected } from "./../components/contentful/ProjectsSelected"
 import { Hero } from "./../components/contentful/Hero"
 import { Video } from "./../components/contentful/Video"
 import { TwoSectionsWithImage } from "./../components/contentful/TwoSectionsWithImage"
-class Page extends React.Component {
-  render() {
-    const page = this.props.data.contentfulPages
+import { RichText } from "./../components/contentful/RichText"
+import { ProjectsPreview } from "../components/contentful/ProjectsPreview"
 
-    return (
-      <Layout>
-        <h1>{page.title}</h1>
-        {page.ui.map((data, i) => {
-          console.log(data)
-          return (
-            <div>
-              {data.grid && <ImageGrid data={data} key={`ImageGrid-${i}`} />}
-              {data.projects && (
-                <ProjectsSelected data={data} key={`ProjectsSelected-${i}`} />
-              )}
-              {data.hero && <Hero data={data} key={`Hero-${i}`} />}
-              {data.video && <Video data={data} key={`Video-${i}`} />}
-              {data.twoSectionsText && (
-                <TwoSectionsWithImage
-                  data={data}
-                  key={`TwoSectionsWithImage-${i}`}
-                />
-              )}
-            </div>
-          )
-        })}
-      </Layout>
-    )
+const Page = props => {
+  const page = props.data.contentfulPages
+  const ui = props.data.contentfulPages.ui
+
+  console.log("page", page)
+
+  const formatModule = ui => {
+    return ui.map(t => {
+      return {
+        [(module = t.__typename)]: {
+          fields: t,
+        },
+      }
+    })
   }
+
+  const formatData = type => formatModule(ui).filter(module => module[type])
+
+  console.log(ui, "ui")
+
+  const renderModule = ui => {
+    return ui.map(module => {
+      if (module.__typename === "ContentfulImageGrid") {
+        return <ImageGrid imageGrid={formatData("ContentfulImageGrid")} />
+      } else if (module.__typename === "ContentfulTwoSectionsImageText") {
+        return (
+          <TwoSectionsWithImage
+            twoSectionsImageText={formatData("ContentfulTwoSectionsImageText")}
+          />
+        )
+      } else if (module.__typename === "ContentfulProject") {
+        return <ProjectsPreview projects={formatData("ContentfulProject")} />
+      }
+    })
+  }
+  console.log(renderModule(ui))
+  return (
+    <Layout>
+      {renderModule(ui)}
+      {/* <ImageGrid imageGrid={formatData("ContentfulImageGrid")} />
+      <ProjectsSelected
+        projectsSelected={formatData("ContentfulProjectsSelected")}
+      />
+      <Hero hero={formatData("ContentfulHero")} />
+      <Video video={formatData("ContentfulVideo")} />
+      <RichText richText={formatData("ContentfulRichText")} />
+      <TwoSectionsWithImage
+        twoSectionsImageText={formatData("ContentfulTwoSectionsImageText")}
+      />
+      <ProjectsPreview projects={formatData("ContentfulProject")} /> */}
+    </Layout>
+  )
 }
 
 export default Page
@@ -72,28 +98,30 @@ export const pageQuery = graphql`
         }
         ... on ContentfulProjectsSelected {
           title
-          projects {
-            slug
-            title
-            description {
-              description
-            }
-            cover {
-              fluid {
-                src
+          projectsSelected {
+            ... on ContentfulProject {
+              slug
+              projectTitle
+              description {
+                description
+              }
+              cover {
+                fluid {
+                  src
+                }
               }
             }
           }
         }
         ... on ContentfulRichText {
           richText {
-            richText
+            json
           }
         }
         ... on ContentfulTwoSectionsImageText {
           title
           image {
-            fixed {
+            fluid {
               src
             }
           }
@@ -103,6 +131,16 @@ export const pageQuery = graphql`
         }
         ... on ContentfulVideo {
           video
+        }
+        ... on ContentfulProject {
+          projectTitle
+          projectTitleDate
+          slug
+          cover {
+            fluid(maxWidth: 2768, quality: 100) {
+              src
+            }
+          }
         }
       }
     }

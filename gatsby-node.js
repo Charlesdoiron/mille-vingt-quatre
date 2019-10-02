@@ -80,7 +80,7 @@ exports.createPages = ({ graphql, actions }) => {
             edges {
               node {
                 slug
-                title
+                projectTitle
               }
             }
           }

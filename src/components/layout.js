@@ -1,12 +1,22 @@
 import React from "react"
-import Menu from "./../components/Menu"
+
+import { ThemeProvider } from "styled-components"
+import PrimaryMenu from "./PrimaryMenu"
+
+const theme = {
+  black: "#00000",
+  white: "#FFFFF",
+}
 
 const Layout = props => {
   return (
-    <div className="layout">
-      <Menu />
-      {props.children}
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="layout">
+        <PrimaryMenu />
+        {props.children}
+      </div>
+    </ThemeProvider>
   )
 }
+
 export default Layout
