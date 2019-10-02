@@ -8,58 +8,50 @@ import { Hero } from "./../components/contentful/Hero"
 import { Video } from "./../components/contentful/Video"
 import { TwoSectionsWithImage } from "./../components/contentful/TwoSectionsWithImage"
 import { RichText } from "./../components/contentful/RichText"
-import { ProjectsPreview } from "../components/contentful/ProjectsPreview"
+import { Projects } from "../components/contentful/Projects"
+import { BlogPostsSelected } from "../components/contentful/BlogPostsSelected"
 
 const Page = props => {
   const page = props.data.contentfulPages
-  const ui = props.data.contentfulPages.ui
+  const modules = props.data.contentfulPages.ui
+  const projects = props.data.contentfulPages.projects
+  const currentPage = props.pageContext.slug
 
-  console.log("page", page)
+  console.log("PAGE", page)
+  console.log("CURRENT PAGE", currentPage)
+  console.log("MODULES", modules)
+  console.log("PROJECTS", projects)
 
-  const formatModule = ui => {
-    return ui.map(t => {
-      return {
-        [(module = t.__typename)]: {
-          fields: t,
-        },
-      }
-    })
-  }
-
-  const formatData = type => formatModule(ui).filter(module => module[type])
-
-  console.log(ui, "ui")
-
-  const renderModule = ui => {
-    return ui.map(module => {
+  const renderModulesOnPages = modules => {
+    return modules.map(module => {
       if (module.__typename === "ContentfulImageGrid") {
-        return <ImageGrid imageGrid={formatData("ContentfulImageGrid")} />
+        return <ImageGrid imageGrid={module} />
       } else if (module.__typename === "ContentfulTwoSectionsImageText") {
-        return (
-          <TwoSectionsWithImage
-            twoSectionsImageText={formatData("ContentfulTwoSectionsImageText")}
-          />
-        )
-      } else if (module.__typename === "ContentfulProject") {
-        return <ProjectsPreview projects={formatData("ContentfulProject")} />
+        return <TwoSectionsWithImage twoSectionsImageText={module} />
+      } else if (module.__typename === "ContentfulProjectsSelected") {
+        return <ProjectsSelected projectsSelected={module} />
+      } else if (module.__typename === "ContentfulVideo") {
+        return <Video video={module} />
+      } else if (module.__typename === "ContentfulBlogPostSelected") {
+        return <BlogPostsSelected posts={module} />
+      } else if (module.__typename === "ContentfulRichText") {
+        return <RichText text={module} />
+      } else if (module.__typename === "ContentfulHero") {
+        return <Hero hero={module} />
       }
     })
   }
-  console.log(renderModule(ui))
+  const renderProjects = projects => {
+    return projects.map(project => {
+      return <Projects projects={project} />
+    })
+  }
+
   return (
     <Layout>
-      {renderModule(ui)}
-      {/* <ImageGrid imageGrid={formatData("ContentfulImageGrid")} />
-      <ProjectsSelected
-        projectsSelected={formatData("ContentfulProjectsSelected")}
-      />
-      <Hero hero={formatData("ContentfulHero")} />
-      <Video video={formatData("ContentfulVideo")} />
-      <RichText richText={formatData("ContentfulRichText")} />
-      <TwoSectionsWithImage
-        twoSectionsImageText={formatData("ContentfulTwoSectionsImageText")}
-      />
-      <ProjectsPreview projects={formatData("ContentfulProject")} /> */}
+      {currentPage !== "projects"
+        ? renderModulesOnPages(modules)
+        : renderProjects(projects)}
     </Layout>
   )
 }
@@ -78,6 +70,16 @@ export const pageQuery = graphql`
       id
       title
       slug
+      projects {
+        projectTitle
+        projectTitleDate
+        slug
+        cover {
+          fluid {
+            src
+          }
+        }
+      }
       ui {
         ... on ContentfulHero {
           hero {
@@ -86,6 +88,18 @@ export const pageQuery = graphql`
             }
           }
           heroTitle
+        }
+        ... on ContentfulBlogPostSelected {
+          blogPost {
+            slug
+            title
+            subtitle
+            hero {
+              fluid {
+                src
+              }
+            }
+          }
         }
         ... on ContentfulImageGrid {
           title
@@ -131,16 +145,6 @@ export const pageQuery = graphql`
         }
         ... on ContentfulVideo {
           video
-        }
-        ... on ContentfulProject {
-          projectTitle
-          projectTitleDate
-          slug
-          cover {
-            fluid(maxWidth: 2768, quality: 100) {
-              src
-            }
-          }
         }
       }
     }

@@ -17,11 +17,8 @@ const options = {
 }
 
 export const RichText = props => {
-  console.log("props richText", props)
+  console.log("RICH TEXT", props)
   return (
-    <div>
-      {props.richText.richText &&
-        documentToReactComponents(props.richText.richText.json, options)}
-    </div>
+    <div>{documentToReactComponents(props.text.richText.json, options)}</div>
   )
 }
