@@ -7,32 +7,35 @@ class BlogPostContentfulTemplate extends React.Component {
     const { previous, next } = this.props.pageContext
     return (
       <Layout>
-        <h1>{blogPost.title}</h1>
-        <p>{blogPost.subtitle}</p>
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: `0`,
-          }}
-        >
-          <li>
-            {previous && (
-              <Link to={previous.node.slug} rel="prev">
-                Back {previous.node.title}
-              </Link>
-            )}
-          </li>
-          <li>
-            {next && (
-              <Link to={next.node.slug} rel="next">
-                Next {next.node.title}
-              </Link>
-            )}
-          </li>
-        </ul>
+        <div className="wrapper--m">
+          <h1>{blogPost.title}</h1>
+          <img src={blogPost.hero.fluid.src} />
+          <p>{blogPost.subtitle}</p>
+          <ul
+            style={{
+              display: `flex`,
+              flexWrap: `wrap`,
+              justifyContent: `space-between`,
+              listStyle: `none`,
+              padding: `0`,
+            }}
+          >
+            <li>
+              {previous && (
+                <Link to={previous.node.slug} rel="prev">
+                  Back {previous.node.title}
+                </Link>
+              )}
+            </li>
+            <li>
+              {next && (
+                <Link to={next.node.slug} rel="next">
+                  Next {next.node.title}
+                </Link>
+              )}
+            </li>
+          </ul>
+        </div>
       </Layout>
     )
   }
@@ -51,6 +54,11 @@ export const pageQuery = graphql`
     contentfulBlogPost(slug: { eq: $slug }) {
       title
       subtitle
+      hero {
+        fluid {
+          src
+        }
+      }
     }
   }
 `

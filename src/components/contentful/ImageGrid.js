@@ -1,22 +1,15 @@
 import React from "react"
-export const ImageGrid = props => {
-  console.log("image grid props", props)
-  return (
-    <ul>
-      {props.imageGrid.map(module => {
-        return (
-          <li>
-            {module.ContentfulImageGrid.fields.grid.map(g => {
-              return (
-                <div>
-                  <h2>{g.title}</h2>
-                  <img src={g.fluid.src} />
-                </div>
-              )
-            })}
-          </li>
-        )
-      })}
-    </ul>
-  )
+
+export class ImageGrid extends React.Component {
+  render() {
+    console.log("IMAGE GRID", this.props.imageGrid)
+    return (
+      <div className="wrapper--m">
+        <p>{this.props.imageGrid.title}</p>
+        {this.props.imageGrid.grid.map(img => {
+          return <img src={img.fluid.src} />
+        })}
+      </div>
+    )
+  }
 }

@@ -1,12 +1,11 @@
 import React from "react"
 
 export const Hero = props => {
-  return props.hero.map(hero => {
-    return (
-      <div>
-        <p>{hero.heroTitle}</p>
-        {hero.fluid && <img src={hero.fluid.src} />}
-      </div>
-    )
-  })
+  console.log("HERO", props.hero)
+  return (
+    <div>
+      <h2>{props.hero.heroTitle}</h2>
+      <img src={props.hero.hero.fluid.src} />
+    </div>
+  )
 }

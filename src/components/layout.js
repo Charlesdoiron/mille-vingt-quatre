@@ -1,5 +1,5 @@
 import React from "react"
-
+import styled from "styled-components"
 import { ThemeProvider } from "styled-components"
 import PrimaryMenu from "./PrimaryMenu"
 
@@ -9,12 +9,15 @@ const theme = {
 }
 
 const Layout = props => {
+  const { currentPage } = props
+  const Content = styled.div`
+    margin-top: ${currentPage === "projects" ? "0px" : "70px"};
+  `
+
   return (
     <ThemeProvider theme={theme}>
-      <div className="layout">
-        <PrimaryMenu />
-        {props.children}
-      </div>
+      <PrimaryMenu />
+      <Content className="content">{props.children}</Content>
     </ThemeProvider>
   )
 }

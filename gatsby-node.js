@@ -20,7 +20,7 @@ exports.createPages = ({ graphql, actions }) => {
       const pages = result.data.allContentfulPages.edges
       pages.map(({ node }) => {
         createPage({
-          path: `${node.slug}/`,
+          path: node.slug === "/home/" ? `/` : `${node.slug}/`,
           component: path.resolve(`./src/templates/Page.js`),
           context: {
             slug: node.slug,
@@ -92,8 +92,8 @@ exports.createPages = ({ graphql, actions }) => {
       }
       const projects = result.data.allContentfulProject.edges
       projects.forEach((project, i) => {
-        const previous = i === 0 ? null : project[i - 1]
-        const next = i === 0 ? null : project[i + 1]
+        const previous = i === 0 ? null : projects[i - 1]
+        const next = i === 0 ? null : projects[i + 1]
 
         createPage({
           path: `project/${project.node.slug}`,

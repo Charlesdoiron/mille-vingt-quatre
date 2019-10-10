@@ -1,6 +1,18 @@
-html {
+html,
+body {
   background-color: #000000;
   color: #ffffff;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "helvetica";
+  width: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
 a {
@@ -9,6 +21,9 @@ a {
   cursor: pointer;
 }
 
-li  {
+li,
+ul  {
   list-style: none;
+  list-style-type: none;
+  cursor: pointer;
 }

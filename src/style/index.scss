@@ -1,2 +1,14 @@
 @import "./var";
-@import "./general"
+@import "./general";
+@import "./modules/quote";
+@import "./modules/quote_and_text";
+@import "./modules/menu";
+@import "./modules/layout";
+@import "./modules/news_letter_suscribe";
+@import "./modules/socials";
+@import "./modules/primary_menu";
+@import "./modules/projects_selected";
+@import "./modules/contact_form";
+@import "./modules/blog_post_selected";
+
+@import "./pages/projects";

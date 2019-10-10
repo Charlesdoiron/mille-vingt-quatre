@@ -1,0 +1,35 @@
+.blog-post-selected__container {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  & > a {
+    width: 350px;
+    height: 500px;
+    margin-right: 20px;
+    position: relative;
+    &:hover {
+      cursor: pointer;
+      p {
+        opacity: 1;
+        transition: all 1s;
+      }
+    }
+
+    h1 {
+      position: absolute;
+      top: 50%; /* poussé de la moitié de hauteur du référent */
+      transform: translateY(-50%);
+      width: 100%;
+      text-align: center;
+    }
+    p {
+      opacity: 0;
+      transition: all 1s;
+      position: absolute;
+      top: 65%; /* poussé de la moitié de hauteur du référent */
+      transform: translateY(-50%);
+      margin: 0 auto;
+      text-align: center;
+    }
+  }
+}

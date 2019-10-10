@@ -1,65 +1,92 @@
 import React, { useState } from "react"
 import { graphql } from "gatsby"
-import Layout from "./../components/Layout"
+import Layout from "../components/Layout"
+import styled from "styled-components"
 
-import { ImageGrid } from "./../components/contentful/ImageGrid"
-import { ProjectsSelected } from "./../components/contentful/ProjectsSelected"
-import { Hero } from "./../components/contentful/Hero"
-import { Video } from "./../components/contentful/Video"
-import { TwoSectionsWithImage } from "./../components/contentful/TwoSectionsWithImage"
-import { RichText } from "./../components/contentful/RichText"
-import { ProjectsPreview } from "../components/contentful/ProjectsPreview"
+import { ImageGrid } from "../components/contentful/ImageGrid"
+import { ProjectsSelected } from "../components/contentful/ProjectsSelected"
+import { Hero } from "../components/contentful/Hero"
+import { Video } from "../components/contentful/Video"
+import { TwoSectionsWithImage } from "../components/contentful/TwoSectionsWithImage"
+import { RichText } from "../components/contentful/RichText"
+import { Quote } from "../components/contentful/Quote"
+import { BlogPostsSelected } from "../components/contentful/BlogPostsSelected"
+import { BlogPosts } from "../components/contentful/BlogPosts"
+import { ProjectsList } from "../components/contentful/ProjectsList"
+import { ImageFullScreen } from "../components/contentful/ImageFullScreen"
+import { QuoteAndText } from "../components/contentful/QuoteAndText"
+import { NewsLetterSuscribe } from "../components/contentful/NewsLetterSuscribe"
+import { Socials } from "../components/contentful/Socials"
+import { ContactForm } from "../components/contentful/ContactForm"
+const FullHeight = styled.div`
+  height: 100vh;
+  width: 100%;
+  position: relative;
+`
 
 const Page = props => {
   const page = props.data.contentfulPages
-  const ui = props.data.contentfulPages.ui
+  const modules = props.data.contentfulPages.ui
+  const projects = props.data.contentfulPages.allProjects
+  const categories = props.data.contentfulPages.allCategories
+  const currentPage = props.pageContext.slug
 
-  console.log("page", page)
+  console.log("PAGE", page)
+  console.log("CURRENT PAGE", currentPage)
+  console.log("MODULES", modules)
+  console.log("PROJECTS IN PAGE", projects)
+  console.log("PROJECTS CATEGORIES IN PAGE", categories)
 
-  const formatModule = ui => {
-    return ui.map(t => {
-      return {
-        [(module = t.__typename)]: {
-          fields: t,
-        },
-      }
-    })
-  }
-
-  const formatData = type => formatModule(ui).filter(module => module[type])
-
-  console.log(ui, "ui")
-
-  const renderModule = ui => {
-    return ui.map(module => {
-      if (module.__typename === "ContentfulImageGrid") {
-        return <ImageGrid imageGrid={formatData("ContentfulImageGrid")} />
+  const renderModulesOnPages = modules => {
+    return modules.map(module => {
+      if (module.__typename === "ContentfulHero") {
+        return <Hero hero={module} />
+      } else if (module.__typename === "ContentfulImageGrid") {
+        return <ImageGrid imageGrid={module} />
       } else if (module.__typename === "ContentfulTwoSectionsImageText") {
-        return (
-          <TwoSectionsWithImage
-            twoSectionsImageText={formatData("ContentfulTwoSectionsImageText")}
-          />
-        )
-      } else if (module.__typename === "ContentfulProject") {
-        return <ProjectsPreview projects={formatData("ContentfulProject")} />
+        return <TwoSectionsWithImage twoSectionsImageText={module} />
+      } else if (module.__typename === "ContentfulProjectsSelected") {
+        return <ProjectsSelected projectSelected={module} />
+      } else if (module.__typename === "ContentfulVideo") {
+        return <Video video={module} />
+      } else if (module.__typename === "ContentfulBlogPostSelected") {
+        return <BlogPostsSelected postSelected={module} />
+      } else if (module.__typename === "ContentfulRichText") {
+        return <RichText text={module} />
+      } else if (module.__typename === "ContentfulBlogPost") {
+        return <BlogPosts post={module} />
+      } else if (module.__typename === "ContentfulQuote") {
+        return <Quote quote={module} />
+      } else if (module.__typename === "ContentfulImageFullScreen") {
+        return <ImageFullScreen image={module} />
+      } else if (module.__typename === "ContentfulQuoteAndText") {
+        return <QuoteAndText quote_and_text={module} />
+      } else if (module.__typename === "ContentfulNewsLetterSuscribe") {
+        return <NewsLetterSuscribe news_letter={module} />
+      } else if (module.__typename === "ContentfulSocials") {
+        return <Socials social={module} />
+      } else if (module.__typename === "ContentfulContactForm") {
+        return <ContactForm contact_form={module} />
       }
     })
   }
-  console.log(renderModule(ui))
+  const renderProjects = (projects, modules, categories) => {
+    return (
+      <React.Fragment>
+        {modules.map(module => (
+          <Quote quote={module} />
+        ))}
+        <FullHeight>
+          <ProjectsList projects={projects} categories={categories} />
+        </FullHeight>
+      </React.Fragment>
+    )
+  }
   return (
-    <Layout>
-      {renderModule(ui)}
-      {/* <ImageGrid imageGrid={formatData("ContentfulImageGrid")} />
-      <ProjectsSelected
-        projectsSelected={formatData("ContentfulProjectsSelected")}
-      />
-      <Hero hero={formatData("ContentfulHero")} />
-      <Video video={formatData("ContentfulVideo")} />
-      <RichText richText={formatData("ContentfulRichText")} />
-      <TwoSectionsWithImage
-        twoSectionsImageText={formatData("ContentfulTwoSectionsImageText")}
-      />
-      <ProjectsPreview projects={formatData("ContentfulProject")} /> */}
+    <Layout currentPage={currentPage}>
+      {currentPage !== "projects"
+        ? renderModulesOnPages(modules)
+        : renderProjects(projects, modules, categories)}
     </Layout>
   )
 }
@@ -78,6 +105,24 @@ export const pageQuery = graphql`
       id
       title
       slug
+      allProjects: projects {
+        projectTitle
+        projectTitleDate
+        slug
+        cover {
+          fluid(quality: 50, maxWidth: 1800) {
+            ...GatsbyContentfulFluid
+          }
+        }
+        categories {
+          title
+          slug
+        }
+      }
+      allCategories: projectsCategories {
+        title
+        slug
+      }
       ui {
         ... on ContentfulHero {
           hero {
@@ -86,6 +131,49 @@ export const pageQuery = graphql`
             }
           }
           heroTitle
+        }
+        ... on ContentfulContactForm {
+          contactFormTitle
+          mailTo
+        }
+        ... on ContentfulBlogPostSelected {
+          blogPost {
+            slug
+            title
+            subtitle
+            hero {
+              fluid {
+                src
+              }
+            }
+          }
+        }
+        ... on ContentfulSocials {
+          socialsTitle
+          socials {
+            socialTitle
+            socialLink
+          }
+        }
+        ... on ContentfulNewsLetterSuscribe {
+          newsLetterSuscribeTitle
+          placeholderNewsLetterSuscribe
+          callToActionNewsLetterSuscribe
+        }
+        ... on ContentfulQuote {
+          quote {
+            quote
+          }
+        }
+        ... on ContentfulBlogPost {
+          slug
+          title
+          subtitle
+          hero {
+            fluid {
+              src
+            }
+          }
         }
         ... on ContentfulImageGrid {
           title
@@ -96,8 +184,25 @@ export const pageQuery = graphql`
             }
           }
         }
+        ... on ContentfulImageFullScreen {
+          id
+          image {
+            fluid(quality: 50, maxWidth: 1800) {
+              ...GatsbyContentfulFluid
+            }
+          }
+        }
+        ... on ContentfulQuoteAndText {
+          id
+          text {
+            text
+          }
+          quote {
+            quote
+          }
+        }
         ... on ContentfulProjectsSelected {
-          title
+          titleProjectsSelected
           projectsSelected {
             ... on ContentfulProject {
               slug
@@ -116,30 +221,6 @@ export const pageQuery = graphql`
         ... on ContentfulRichText {
           richText {
             json
-          }
-        }
-        ... on ContentfulTwoSectionsImageText {
-          title
-          image {
-            fluid {
-              src
-            }
-          }
-          twoSectionsText {
-            twoSectionsText
-          }
-        }
-        ... on ContentfulVideo {
-          video
-        }
-        ... on ContentfulProject {
-          projectTitle
-          projectTitleDate
-          slug
-          cover {
-            fluid(maxWidth: 2768, quality: 100) {
-              src
-            }
           }
         }
       }
