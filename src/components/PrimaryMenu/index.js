@@ -8,9 +8,10 @@ const MenuContainer = styled.div`
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 20px 0;
   z-index: 100;
-  position: relative;
+  width: 100%;
+  position: fixed;
 `
 
 const MenuRight = styled.div`
@@ -27,7 +28,10 @@ const Menu = ({ data }) => {
   return (
     <MenuContainer>
       <Link to={"/home"}>
-        <img src={Logo} style={{ width: "65px", height: "15px" }} />
+        <img
+          src={Logo}
+          style={{ width: "65px", height: "15px", marginLeft: "20px" }}
+        />
       </Link>
 
       <MenuRight>

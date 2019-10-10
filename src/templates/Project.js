@@ -1,19 +1,23 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+
 import Layout from "./../components/Layout"
 class ProjectContentfulTemplate extends React.Component {
   render() {
     const project = this.props.data.contentfulProject
-
     const { previous, next } = this.props.pageContext
-    console.log(this.props.pageContext)
+
+    console.log("INSIDE PROJECT", project)
+    console.log("CONTEXT PROJECT", this.props.pageContext)
+
     return (
       <Layout>
         <h1>{project.projectTitle}</h1>
-        <h1>{project.description.description}</h1>
-        <img src={project.cover.fluid.src} alt="" />
+        {project.description && <p>{project.description.description}</p>}
+
+        {project.cover && <img src={project.cover.fluid.src} alt="" />}
         <ul>
-          <p>Categories</p>
+          {project.categories && <p>Categories</p>}
           {project.categories &&
             project.categories.map(categorie => {
               return <li>{categorie.title}</li>
@@ -21,7 +25,7 @@ class ProjectContentfulTemplate extends React.Component {
         </ul>
 
         <ul>
-          <p>Tags</p>
+          {project.tags && <p>Tags</p>}
           {project.tags &&
             project.tags.map(tag => {
               return <li>{tag.title}</li>
@@ -39,15 +43,15 @@ class ProjectContentfulTemplate extends React.Component {
         >
           <li>
             {previous && (
-              <Link to={`project/${previous.node.title}`} rel="prev">
-                Back {previous.node.title}
+              <Link to={`project/${previous.node.slug}`} rel="prev">
+                {previous.node.projectTitle}
               </Link>
             )}
           </li>
           <li>
             {next && (
-              <Link to={`project/${next.node.title}`} rel="next">
-                Next {next.node.title}
+              <Link to={`project/${next.node.slug}`} rel="next">
+                {next.node.projectTitle}
               </Link>
             )}
           </li>

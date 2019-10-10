@@ -1,0 +1,14 @@
+.quote_and_text__container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10%;
+  h1 {
+    width: 50%;
+    font-weight: normal;
+  }
+  p {
+    padding: 20% 0 0 0;
+    width: 50%;
+    margin: 0 auto;
+  }
+}

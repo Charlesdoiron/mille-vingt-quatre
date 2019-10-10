@@ -1,17 +1,15 @@
 import React from "react"
-import { Link } from "gatsby"
+import { ProjectsSelectedList } from "./ProjectsSelectedList"
+
 export const ProjectsSelected = props => {
-  console.log("PROJECTS SELECTED", props.projectsSelected)
+  console.log("PROPS PROJECTS SELECTED", props)
+  const { projectSelected, categories } = props
   return (
-    <div className="projects__selected">
-      {props.projectsSelected.projectsSelected.map(project => {
-        return (
-          <div>
-            <p>{project.projectTitle}</p>
-            {project.cover && <img src={project.cover.fluid.src} />}
-          </div>
-        )
-      })}
+    <div className="wrapper--m">
+      <div className="projects__selected">
+        <span>{props.projectSelected.titleProjectsSelected}</span>
+        <ProjectsSelectedList projects={projectSelected.projectsSelected} />
+      </div>
     </div>
   )
 }
