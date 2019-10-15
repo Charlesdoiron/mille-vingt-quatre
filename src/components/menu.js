@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Link, StaticQuery } from "gatsby"
 import styled from "styled-components"
 import Img from "gatsby-image"
-import Logo from "./../../images/1024_logo.png"
+import logo from "./../../images/1024_logo.png"
 import { graphql } from "gatsby"
 
 const MenuContainer = styled.div`
@@ -30,7 +30,7 @@ const Menu = ({ data }) => {
     <MenuContainer>
       <Link to={"/home"}>
         <img
-          src={Logo}
+          src={logo}
           style={{ width: "65px", height: "15px", marginLeft: "20px" }}
         />
       </Link>
