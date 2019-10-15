@@ -18,7 +18,7 @@ import { QuoteAndText } from "../components/contentful/QuoteAndText"
 import { NewsLetterSuscribe } from "../components/contentful/NewsLetterSuscribe"
 import { Socials } from "../components/contentful/Socials"
 import { ContactForm } from "../components/contentful/ContactForm"
-import { ContactInformations } from "../components/contentful/contactInformations"
+import { contactInformations } from "../components/contentful/contactInformations"
 
 const FullHeight = styled.div`
   height: 100vh;
@@ -72,7 +72,7 @@ const Page = props => {
         case "ContentfulContactForm":
           return <ContactForm contact_form={module} key={i} />
         case "ContentfulSettings":
-          return <ContactInformations informations={module} key={i} />
+          return <contactInformations informations={module} key={i} />
         default:
           return null
       }
