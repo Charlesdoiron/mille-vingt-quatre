@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 import { ThemeProvider } from "styled-components"
-import PrimaryMenu from "./PrimaryMenu"
+import Menu from "./Menu"
 
 const theme = {
   black: "#00000",
@@ -21,7 +21,7 @@ const Layout = props => {
 
   return (
     <ThemeProvider theme={theme}>
-      <PrimaryMenu />
+      <Menu />
       <Content className="content">{props.children}</Content>
     </ThemeProvider>
   )
