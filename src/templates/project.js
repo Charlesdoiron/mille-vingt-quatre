@@ -4,7 +4,7 @@ import { Link, graphql } from "gatsby"
 import { H1 } from "../components/typos"
 
 import Layout from "../components/Layout"
-class ProjectContentfulTemplate extends React.Component {
+class project extends React.Component {
   render() {
     const project = this.props.data.contentfulProject
     const { previous, next } = this.props.pageContext
@@ -51,9 +51,9 @@ class ProjectContentfulTemplate extends React.Component {
   }
 }
 
-export default ProjectContentfulTemplate
+export default project
 
-export const pageQueryProject = graphql`
+export const pagequeryproject = graphql`
   query contentfulprojectbyslug($slug: String!) {
     site {
       siteMetadata {

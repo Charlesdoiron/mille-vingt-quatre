@@ -4,7 +4,7 @@ import Layout from "../components/Layout"
 import { PostBlogFont, Capitalize } from "../components/typos"
 import arrow from "./../img/pictos/arrow_right.svg"
 
-class BlogPostContentfulTemplate extends React.Component {
+class blogpost extends React.Component {
   render() {
     const blogPost = this.props.data.contentfulBlogPost
     const { previous, next } = this.props.pageContext
@@ -69,9 +69,9 @@ class BlogPostContentfulTemplate extends React.Component {
   }
 }
 
-export default BlogPostContentfulTemplate
+export default blogpost
 
-export const pageQueryBlogPost = graphql`
+export const pagequeryblogpost = graphql`
   query contentfulblogpostbyslug($slug: String!) {
     site {
       siteMetadata {
