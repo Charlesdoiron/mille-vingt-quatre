@@ -1,35 +1,75 @@
 .blog-post-selected__container {
-  display: flex;
-  justify-content: flex-start;
-  position: relative;
-  & > a {
-    width: 350px;
-    height: 500px;
-    margin-right: 20px;
-    position: relative;
-    &:hover {
-      cursor: pointer;
-      p {
-        opacity: 1;
-        transition: all 1s;
-      }
-    }
+  span {
+    margin-bottom: 10px;
+  }
 
-    h1 {
-      position: absolute;
-      top: 50%; /* poussé de la moitié de hauteur du référent */
-      transform: translateY(-50%);
-      width: 100%;
-      text-align: center;
-    }
-    p {
-      opacity: 0;
+  div {
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    overflow: scroll;
+
+    a {
+      width: 400px;
+      height: 570px;
+      min-width: 400px;
+      min-height: 570px;
+      margin-right: 20px;
+      position: relative;
+      filter: grayscale(1);
       transition: all 1s;
-      position: absolute;
-      top: 65%; /* poussé de la moitié de hauteur du référent */
-      transform: translateY(-50%);
-      margin: 0 auto;
-      text-align: center;
+
+      @media #{$mobile} {
+        width: 260px;
+        height: 370px;
+        min-width: 260px;
+        min-height: 370px;
+        margin-right: 15px;
+      }
+
+      &:hover {
+        transition: all 1s;
+        filter: grayscale(0.7);
+        cursor: pointer;
+
+        p {
+          opacity: 1;
+          transition: all 1s;
+
+          @media #{$mobile} {
+            opacity: 0;
+          }
+        }
+      }
+
+      .line {
+        width: 40px;
+        height: 1px;
+        margin-right: 5px;
+        transform: rotateX(180deg);
+        border: 1px solid #ffffff;
+        position: relative;
+        top: 5px;
+        display: inline-block;
+      }
+      h1 {
+        position: absolute;
+        top: 50%; /* poussé de la moitié de hauteur du référent */
+        transform: translateY(-50%);
+        width: 100%;
+        text-align: center;
+      }
+      p {
+        opacity: 0;
+        transition: all 1s;
+        position: absolute;
+        top: 65%; /* poussé de la moitié de hauteur du référent */
+        transform: translateY(-50%);
+        margin: 0 auto;
+        text-align: left;
+        width: 80%;
+        padding-left: 30px;
+      }
     }
   }
 }

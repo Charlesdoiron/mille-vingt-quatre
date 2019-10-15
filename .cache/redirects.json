@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "fromPath": "/",
+    "isPermanent": true,
+    "redirectInBrowser": true,
+    "toPath": "/home"
+  }
+]

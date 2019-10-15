@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react"
 import { Categories } from "./Categories"
-
+import { useMediaQuery } from "react-responsive"
+import classNames from "classnames"
 import Slider from "./../Slider"
+
 import Img from "gatsby-image"
 
 export const ProjectsList = props => {
-  console.log(props, "projects")
   const [categorieState, setCategorieState] = useState("All")
   const [imageState, setImageState] = useState("")
   const [projectsState, setProjectsState] = useState(props.projects)
@@ -13,12 +14,17 @@ export const ProjectsList = props => {
   const handleImage = img => {
     setImageState(img)
   }
+
+  const isDesktopOrLaptop = useMediaQuery({
+    query: "(min-width: 1224px)",
+  })
+
+  const isTabletOrMobileDevice = useMediaQuery({
+    query: "(max-width: 1224px)",
+  })
+
   const handleCategorie = categorieClicked => {
     setCategorieState(categorieClicked)
-    // document
-    //   .getElementsByClassName("project__list__container")[0]
-    //   .getElementsByTagName("ul")
-    //   .classList.add("isBluring")
 
     if (categorieClicked === "All") {
       setProjectsState(props.projects)
@@ -34,7 +40,6 @@ export const ProjectsList = props => {
           return resultsWithCategories[i]
         } else return
       })
-
       setProjectsState(projectsFiltered)
     }
   }
@@ -53,7 +58,11 @@ export const ProjectsList = props => {
       {imageState && (
         <Img fluid={imageState} className="project__img--background" />
       )}
-      <div className="project__section--two">
+      <div
+        className={classNames("project__section--two", {
+          isTabletOrMobileDevice: isTabletOrMobileDevice,
+        })}
+      >
         {props.categories && (
           <Categories
             categories={props.categories}

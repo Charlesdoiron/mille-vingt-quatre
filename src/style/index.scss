@@ -1,3 +1,4 @@
+@import "./fonts";
 @import "./var";
 @import "./general";
 @import "./modules/quote";
@@ -10,5 +11,11 @@
 @import "./modules/projects_selected";
 @import "./modules/contact_form";
 @import "./modules/blog_post_selected";
+@import "./modules/blog_post";
+@import "./modules/categories";
+@import "./modules/contact_informations";
+@import "./modules/hero";
 
 @import "./pages/projects";
+@import "./pages/project";
+@import "./pages/blog_post";

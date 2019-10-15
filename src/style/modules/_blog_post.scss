@@ -1,0 +1,86 @@
+.blog-post__container {
+  width: 100%;
+  overflow: scroll;
+
+  p {
+    margin-bottom: 60px;
+  }
+  span {
+    margin-bottom: 10px;
+  }
+
+  div {
+    padding-left: 15%;
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    overflow: auto;
+    width: 150%;
+
+    a {
+      width: 70%;
+      height: 70vh;
+
+      margin-right: 20px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+      filter: grayscale(1);
+      opacity: 1;
+      transition: all 1s;
+
+      @media #{$mobile} {
+        width: 260px;
+        height: 370px;
+        min-width: 260px;
+        min-height: 370px;
+        margin-right: 15px;
+      }
+
+      &:hover {
+        transition: all 1s;
+        opacity: 0.5;
+        cursor: pointer;
+
+        p {
+          opacity: 1;
+          transition: all 1s;
+
+          @media #{$mobile} {
+            opacity: 0;
+          }
+        }
+      }
+
+      .line {
+        width: 40px;
+        height: 1px;
+        margin-right: 5px;
+        transform: rotateX(180deg);
+        border: 1px solid #ffffff;
+        position: relative;
+        top: 5px;
+        display: inline-block;
+      }
+      h1 {
+        position: absolute;
+        top: 50%; /* poussé de la moitié de hauteur du référent */
+        transform: translateY(-50%);
+        width: 100%;
+        text-align: center;
+      }
+      p {
+        opacity: 0;
+        transition: all 1s;
+        position: absolute;
+        top: 65%; /* poussé de la moitié de hauteur du référent */
+        transform: translateY(-50%);
+        margin: 0 auto;
+        text-align: left;
+        width: 80%;
+        padding-left: 30px;
+      }
+    }
+  }
+}

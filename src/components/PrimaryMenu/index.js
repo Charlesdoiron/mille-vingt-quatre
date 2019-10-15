@@ -3,7 +3,7 @@ import { Link, StaticQuery } from "gatsby"
 import styled from "styled-components"
 import Img from "gatsby-image"
 import Logo from "./../../images/1024_logo.png"
-
+import { graphql } from "gatsby"
 const MenuContainer = styled.div`
   margin: 0 auto;
   display: flex;

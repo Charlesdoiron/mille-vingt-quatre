@@ -5,6 +5,11 @@
   background-repeat: no-repeat;
   height: 100vh;
 
+  &.isTabletOrMobileDevice {
+    flex-direction: column;
+    justify-content: center;
+  }
+
   .slick-slider {
     h1 {
       outline: none !important;
@@ -24,7 +29,7 @@
 
 .project__list__container {
   // border: 1px solid red;
-  width: 90%;
+
   margin-top: 10%;
   height: 550px;
   overflow: scroll;

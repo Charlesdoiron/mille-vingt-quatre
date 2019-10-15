@@ -1,0 +1,18 @@
+.project__categories__container {
+  li {
+    color: rgba(255, 255, 255, 0.5);
+    &.isActive {
+      color: $white;
+    }
+  }
+  &.isTabletOrMobileDevice {
+    display: flex;
+    overflow: scroll;
+    li {
+      margin-right: 40px;
+      &:last-child {
+        padding-right: 40px;
+      }
+    }
+  }
+}

@@ -1,6 +1,90 @@
 .socials__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 130px auto;
+
+  @media #{$mobile} {
+    margin: 80px 0px 55px 0px;
+    display: block;
+  }
+
+  p {
+    margin-bottom: 40px;
+  }
+
+  &:hover {
+    img {
+      left: 5px;
+      transition: left 0.4s;
+    }
+  }
+
+  & > div {
+    display: flex;
+
+    justify-content: flex-start;
+    flex-direction: column;
+    margin: 0 auto;
+    text-align: left;
+
+    div {
+      margin-right: 50px;
+      display: flex;
+
+      @media #{$mobile} {
+        flex-direction: column;
+      }
+    }
+  }
+  img {
+    position: relative;
+    bottom: 10px;
+    margin-right: 40px;
+    transition: left 0.4s;
+    left: 0;
+
+    @media #{$mobile} {
+      margin-right: 15px;
+    }
+  }
+
+  .arrow-desktop {
+    @media #{$mobile} {
+      display: none;
+    }
+  }
+
+  .arrow-mobile {
+    display: none;
+
+    @media #{$mobile} {
+      display: block;
+      top: 0px;
+      width: 30px;
+    }
+  }
+
+  h3 {
+    text-transform: uppercase;
+  }
+
   a {
     border-bottom: 1px solid $white;
     margin-right: 10px;
+
+    @media #{$mobile} {
+      display: flex;
+      justify-content: flex-start;
+      border-bottom: 0;
+      margin: 30px 0 0 0;
+    }
+  }
+
+  div {
+    @media #{$mobile} {
+      display: block;
+      border-bottom: 0;
+    }
   }
 }

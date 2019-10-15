@@ -1,11 +1,11 @@
 import React from "react"
+import Img from "gatsby-image"
 
 export const Hero = props => {
   console.log("HERO", props.hero)
   return (
-    <div>
-      <h2>{props.hero.heroTitle}</h2>
-      <img src={props.hero.hero.fluid.src} />
+    <div className="hero__container">
+      <Img fluid={props.hero.hero.fluid} />
     </div>
   )
 }

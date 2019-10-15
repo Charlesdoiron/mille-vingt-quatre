@@ -18,19 +18,21 @@
 
 .quote__container {
   height: 100vh;
-
   color: white;
   text-align: center;
   position: relative;
   margin: 0 auto;
-
   animation: noise 0.2s infinite;
 
-  h1 {
-    position: relative;
-    top: 50%; /* poussé de la moitié de hauteur du référent */
-    transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
-    width: 80%;
-    margin: 0 auto;
+  .gradient {
+    position: absolute;
+    height: 150px;
+    bottom: 0;
+    width: 100%;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(255, 0, 0, 0),
+      rgb(0, 0, 0)
+    );
   }
 }

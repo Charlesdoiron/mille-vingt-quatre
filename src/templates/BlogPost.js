@@ -1,40 +1,68 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import Layout from "./../components/Layout"
+import { PostBlogFont, Capitalize } from "./../components/typos"
+import arrow from "./../img/pictos/arrow_right.svg"
+
 class BlogPostContentfulTemplate extends React.Component {
   render() {
     const blogPost = this.props.data.contentfulBlogPost
     const { previous, next } = this.props.pageContext
     return (
       <Layout>
-        <div className="wrapper--m">
-          <h1>{blogPost.title}</h1>
-          <img src={blogPost.hero.fluid.src} />
-          <p>{blogPost.subtitle}</p>
-          <ul
-            style={{
-              display: `flex`,
-              flexWrap: `wrap`,
-              justifyContent: `space-between`,
-              listStyle: `none`,
-              padding: `0`,
-            }}
+        <div className="blog__post__container">
+          <div
+            className="cover"
+            style={{ backgroundImage: `url(${blogPost.hero.sizes.src})` }}
           >
-            <li>
-              {previous && (
-                <Link to={previous.node.slug} rel="prev">
-                  Back {previous.node.title}
-                </Link>
-              )}
-            </li>
-            <li>
-              {next && (
-                <Link to={next.node.slug} rel="next">
-                  Next {next.node.title}
-                </Link>
-              )}
-            </li>
-          </ul>
+            <div className="titles">
+              <PostBlogFont>{blogPost.title}</PostBlogFont>
+              <p>
+                <span className="line"></span>
+                {blogPost.subtitle}
+              </p>
+            </div>
+          </div>
+          <div className="wrapper--m">
+            <hr />
+            <ul
+              style={{
+                display: `flex`,
+                flexWrap: `wrap`,
+                justifyContent: `space-between`,
+                listStyle: `none`,
+                padding: `0`,
+              }}
+            >
+              <li className="previous__blog__container">
+                {previous && (
+                  <Link to={previous.node.slug} rel="prev">
+                    <PostBlogFont> {previous.node.title}</PostBlogFont>
+                    <Capitalize>
+                      <img
+                        src={arrow}
+                        style={{
+                          transform: "rotate(180deg)",
+                          margin: "0 20px 0 0",
+                        }}
+                      />
+                      previous article
+                    </Capitalize>
+                  </Link>
+                )}
+              </li>
+              <li className="next__blog__container">
+                {next && (
+                  <Link to={next.node.slug} rel="next">
+                    <PostBlogFont> {next.node.title}</PostBlogFont>
+                    <Capitalize>
+                      next article <img src={arrow} />
+                    </Capitalize>
+                  </Link>
+                )}
+              </li>
+            </ul>
+          </div>
         </div>
       </Layout>
     )
@@ -55,7 +83,7 @@ export const pageQuery = graphql`
       title
       subtitle
       hero {
-        fluid {
+        sizes(quality: 90, maxWidth: 1800) {
           src
         }
       }

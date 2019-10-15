@@ -1,14 +1,28 @@
 .quote_and_text__container {
   display: flex;
   justify-content: space-between;
-  padding-top: 10%;
-  h1 {
-    width: 50%;
-    font-weight: normal;
+  margin: 90px 0 200px 0;
+
+  @media #{$mobile} {
+    flex-direction: column;
+  }
+
+  h4 {
+    @media #{$mobile} {
+      margin-bottom: 0;
+    }
   }
   p {
     padding: 20% 0 0 0;
-    width: 50%;
+    width: 60%;
     margin: 0 auto;
+
+    @media #{$tablet} {
+      width: 90%;
+    }
+    @media #{$mobile} {
+      padding: 10% 0 0 0;
+      width: 100%;
+    }
   }
 }

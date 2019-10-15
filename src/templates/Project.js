@@ -1,61 +1,51 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 
+import { H1 } from "./../components/typos"
+
 import Layout from "./../components/Layout"
 class ProjectContentfulTemplate extends React.Component {
   render() {
     const project = this.props.data.contentfulProject
     const { previous, next } = this.props.pageContext
 
-    console.log("INSIDE PROJECT", project)
-    console.log("CONTEXT PROJECT", this.props.pageContext)
-
     return (
       <Layout>
-        <h1>{project.projectTitle}</h1>
-        {project.description && <p>{project.description.description}</p>}
+        <div className="project__container">
+          <H1>{project.projectTitle}</H1>
 
-        {project.cover && <img src={project.cover.fluid.src} alt="" />}
-        <ul>
-          {project.categories && <p>Categories</p>}
-          {project.categories &&
-            project.categories.map(categorie => {
-              return <li>{categorie.title}</li>
-            })}
-        </ul>
+          <div className="cover">
+            {project.cover && <img src={project.cover.fluid.src} alt="" />}
+          </div>
 
-        <ul>
-          {project.tags && <p>Tags</p>}
-          {project.tags &&
-            project.tags.map(tag => {
-              return <li>{tag.title}</li>
-            })}
-        </ul>
-
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: `0`,
-          }}
-        >
-          <li>
-            {previous && (
-              <Link to={`project/${previous.node.slug}`} rel="prev">
-                {previous.node.projectTitle}
-              </Link>
-            )}
-          </li>
-          <li>
-            {next && (
-              <Link to={`project/${next.node.slug}`} rel="next">
-                {next.node.projectTitle}
-              </Link>
-            )}
-          </li>
-        </ul>
+          <div className="wrapper--m">
+            {project.description && <p>{project.description.description}</p>}
+          </div>
+          <ul
+            style={{
+              display: `flex`,
+              flexWrap: `wrap`,
+              justifyContent: `space-between`,
+              listStyle: `none`,
+              padding: `0`,
+            }}
+          >
+            <li>
+              {previous && (
+                <Link to={`project/${previous.node.slug}`} rel="prev">
+                  {previous.node.projectTitle}
+                </Link>
+              )}
+            </li>
+            <li>
+              {next && (
+                <Link to={`project/${next.node.slug}`} rel="next">
+                  {next.node.projectTitle}
+                </Link>
+              )}
+            </li>
+          </ul>
+        </div>
       </Layout>
     )
   }

@@ -1,7 +1,6 @@
 import React from "react"
 import Img from "gatsby-image"
 export const ImageFullScreen = props => {
-  console.log("IMAGEFULL", props)
   return (
     <div style={{ width: "100%", position: "relative" }}>
       <Img

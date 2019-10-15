@@ -74,7 +74,6 @@ export const Projects = props => {
   }
 
   const { projects } = props
-  console.log("PROJECTS", props)
 
   return (
     <div>
@@ -88,9 +87,7 @@ export const Projects = props => {
                 }}
               >
                 {project.projectTitle}
-
                 <span>{project.projectTitleDate}</span>
-
                 {
                   <Link to={`/project/${project.slug}`}>
                     {" "}

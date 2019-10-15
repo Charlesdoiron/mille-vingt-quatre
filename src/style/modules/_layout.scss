@@ -1,4 +1,15 @@
 .wrapper--m {
-  max-width: 90%;
   margin: 0 auto;
+  padding: 0 15%;
+
+  @media #{$tablet} {
+    padding: 0 10%;
+  }
+  @media #{$mobile} {
+    padding: 0 5%;
+  }
+}
+
+.flex {
+  display: flex;
 }

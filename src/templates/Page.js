@@ -4,20 +4,22 @@ import Layout from "../components/Layout"
 import styled from "styled-components"
 
 import { ImageGrid } from "../components/contentful/ImageGrid"
-import { ProjectsSelected } from "../components/contentful/ProjectsSelected"
+import { ProjectsSelectedList } from "../components/contentful/ProjectsSelectedList"
 import { Hero } from "../components/contentful/Hero"
 import { Video } from "../components/contentful/Video"
 import { TwoSectionsWithImage } from "../components/contentful/TwoSectionsWithImage"
 import { RichText } from "../components/contentful/RichText"
 import { Quote } from "../components/contentful/Quote"
+import BlogPosts from "../components/contentful/BlogPosts"
 import { BlogPostsSelected } from "../components/contentful/BlogPostsSelected"
-import { BlogPosts } from "../components/contentful/BlogPosts"
 import { ProjectsList } from "../components/contentful/ProjectsList"
 import { ImageFullScreen } from "../components/contentful/ImageFullScreen"
 import { QuoteAndText } from "../components/contentful/QuoteAndText"
 import { NewsLetterSuscribe } from "../components/contentful/NewsLetterSuscribe"
 import { Socials } from "../components/contentful/Socials"
 import { ContactForm } from "../components/contentful/ContactForm"
+import { ContactInformations } from "../components/contentful/contactInformations"
+
 const FullHeight = styled.div`
   height: 100vh;
   width: 100%;
@@ -25,6 +27,7 @@ const FullHeight = styled.div`
 `
 
 const Page = props => {
+  const posts = props.data.allContentfulBlogPost
   const page = props.data.contentfulPages
   const modules = props.data.contentfulPages.ui
   const projects = props.data.contentfulPages.allProjects
@@ -32,49 +35,54 @@ const Page = props => {
   const currentPage = props.pageContext.slug
 
   console.log("PAGE", page)
-  console.log("CURRENT PAGE", currentPage)
-  console.log("MODULES", modules)
-  console.log("PROJECTS IN PAGE", projects)
-  console.log("PROJECTS CATEGORIES IN PAGE", categories)
+
+  console.log("POSTS", posts)
+  console.log("CURRENT", currentPage)
 
   const renderModulesOnPages = modules => {
-    return modules.map(module => {
-      if (module.__typename === "ContentfulHero") {
-        return <Hero hero={module} />
-      } else if (module.__typename === "ContentfulImageGrid") {
-        return <ImageGrid imageGrid={module} />
-      } else if (module.__typename === "ContentfulTwoSectionsImageText") {
-        return <TwoSectionsWithImage twoSectionsImageText={module} />
-      } else if (module.__typename === "ContentfulProjectsSelected") {
-        return <ProjectsSelected projectSelected={module} />
-      } else if (module.__typename === "ContentfulVideo") {
-        return <Video video={module} />
-      } else if (module.__typename === "ContentfulBlogPostSelected") {
-        return <BlogPostsSelected postSelected={module} />
-      } else if (module.__typename === "ContentfulRichText") {
-        return <RichText text={module} />
-      } else if (module.__typename === "ContentfulBlogPost") {
-        return <BlogPosts post={module} />
-      } else if (module.__typename === "ContentfulQuote") {
-        return <Quote quote={module} />
-      } else if (module.__typename === "ContentfulImageFullScreen") {
-        return <ImageFullScreen image={module} />
-      } else if (module.__typename === "ContentfulQuoteAndText") {
-        return <QuoteAndText quote_and_text={module} />
-      } else if (module.__typename === "ContentfulNewsLetterSuscribe") {
-        return <NewsLetterSuscribe news_letter={module} />
-      } else if (module.__typename === "ContentfulSocials") {
-        return <Socials social={module} />
-      } else if (module.__typename === "ContentfulContactForm") {
-        return <ContactForm contact_form={module} />
+    if (currentPage === "blog") {
+      return <BlogPosts />
+    }
+    return modules.map((module, i) => {
+      switch (module.__typename) {
+        case "ContentfulHero":
+          return <Hero hero={module} key={i} />
+        case "ContentfulImageGrid":
+          return <ImageGrid imageGrid={module} key={i} />
+        case "ContentfulTwoSectionsImageText":
+          return <TwoSectionsWithImage twoSectionsImageText={module} key={i} />
+        case "ContentfulProjectsSelected":
+          return <ProjectsSelectedList projectSelected={module} key={i} />
+        case "ContentfulVideo":
+          return <Video video={module} key={i} />
+        case "ContentfulBlogPostSelected":
+          return <BlogPostsSelected postSelected={module} key={i} />
+        case "ContentfulRichText":
+          return <RichText text={module} key={i} />
+        case "ContentfulQuote":
+          return <Quote quote={module} key={i} />
+        case "ContentfulImageFullScreen":
+          return <ImageFullScreen image={module} key={i} />
+        case "ContentfulQuoteAndText":
+          return <QuoteAndText quote_and_text={module} key={i} />
+        case "ContentfulNewsLetterSuscribe":
+          return <NewsLetterSuscribe news_letter={module} key={i} />
+        case "ContentfulSocials":
+          return <Socials social={module} key={i} />
+        case "ContentfulContactForm":
+          return <ContactForm contact_form={module} key={i} />
+        case "ContentfulSettings":
+          return <ContactInformations informations={module} key={i} />
+        default:
+          return null
       }
     })
   }
-  const renderProjects = (projects, modules, categories) => {
+  const renderProjectsPage = (projects, modules, categories) => {
     return (
       <React.Fragment>
-        {modules.map(module => (
-          <Quote quote={module} />
+        {modules.map((module, i) => (
+          <Quote quote={module} key={i} />
         ))}
         <FullHeight>
           <ProjectsList projects={projects} categories={categories} />
@@ -86,7 +94,7 @@ const Page = props => {
     <Layout currentPage={currentPage}>
       {currentPage !== "projects"
         ? renderModulesOnPages(modules)
-        : renderProjects(projects, modules, categories)}
+        : renderProjectsPage(projects, modules, categories)}
     </Layout>
   )
 }
@@ -102,7 +110,6 @@ export const pageQuery = graphql`
       }
     }
     contentfulPages(slug: { eq: $slug }) {
-      id
       title
       slug
       allProjects: projects {
@@ -126,24 +133,38 @@ export const pageQuery = graphql`
       ui {
         ... on ContentfulHero {
           hero {
-            fluid {
-              src
+            fluid(quality: 50, maxWidth: 1800) {
+              ...GatsbyContentfulFluid
             }
           }
           heroTitle
+        }
+        ... on ContentfulSettings {
+          contactInformations {
+            contact_page {
+              company_address
+              company_country
+              company_name
+            }
+            ctas {
+              e_mail
+              label
+            }
+          }
         }
         ... on ContentfulContactForm {
           contactFormTitle
           mailTo
         }
         ... on ContentfulBlogPostSelected {
+          blogPostSelectedTitle
           blogPost {
             slug
             title
             subtitle
             hero {
               fluid {
-                src
+                ...GatsbyContentfulFluid
               }
             }
           }
@@ -165,16 +186,7 @@ export const pageQuery = graphql`
             quote
           }
         }
-        ... on ContentfulBlogPost {
-          slug
-          title
-          subtitle
-          hero {
-            fluid {
-              src
-            }
-          }
-        }
+
         ... on ContentfulImageGrid {
           title
           grid {
@@ -207,6 +219,7 @@ export const pageQuery = graphql`
             ... on ContentfulProject {
               slug
               projectTitle
+              projectTitleDate
               description {
                 description
               }
