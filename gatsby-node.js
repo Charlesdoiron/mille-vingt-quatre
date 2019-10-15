@@ -29,7 +29,7 @@ exports.createPages = ({ graphql, actions }) => {
       pages.map(({ node }) => {
         createPage({
           path: node.slug === "/home/" ? `/` : `${node.slug}/`,
-          component: path.resolve(`./src/templates/Page.js`),
+          component: path.resolve(`./src/templates/page.js`),
           context: {
             slug: node.slug,
           },
@@ -66,7 +66,7 @@ exports.createPages = ({ graphql, actions }) => {
 
         createPage({
           path: blogPost.node.slug,
-          component: path.resolve(`./src/templates/BlogPost.js`),
+          component: path.resolve(`./src/templates/blogPost.js`),
           context: {
             slug: blogPost.node.slug,
             previous,
@@ -105,7 +105,7 @@ exports.createPages = ({ graphql, actions }) => {
 
         createPage({
           path: `project/${project.node.slug}`,
-          component: path.resolve(`./src/templates/Project.js`),
+          component: path.resolve(`./src/templates/project.js`),
           context: {
             slug: project.node.slug,
             previous,
