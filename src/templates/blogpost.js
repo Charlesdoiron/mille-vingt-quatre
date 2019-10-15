@@ -72,7 +72,7 @@ class BlogPostContentfulTemplate extends React.Component {
 export default BlogPostContentfulTemplate
 
 export const pageQueryBlogPost = graphql`
-  query ContentfulBlogPostBySlug($slug: String!) {
+  query contentfulblogpostbyslug($slug: String!) {
     site {
       siteMetadata {
         title
