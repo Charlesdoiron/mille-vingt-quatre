@@ -1,6 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import Layout from "../components/Layout"
+import layout from "../components/layout"
 import { PostBlogFont, Capitalize } from "../components/typos"
 import arrow from "./../img/pictos/arrow_right.svg"
 
@@ -9,7 +9,7 @@ class blogpost extends React.Component {
     const blogPost = this.props.data.contentfulBlogPost
     const { previous, next } = this.props.pageContext
     return (
-      <Layout>
+      <layout>
         <div className="blog__post__container">
           <div
             className="cover"
@@ -64,7 +64,7 @@ class blogpost extends React.Component {
             </ul>
           </div>
         </div>
-      </Layout>
+      </layout>
     )
   }
 }
