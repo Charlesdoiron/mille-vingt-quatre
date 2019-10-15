@@ -101,7 +101,7 @@ const Page = props => {
 
 export default Page
 
-export const pageQuery = graphql`
+export const pageQueryPageBySlug = graphql`
   query ContentfulPageBySlug($slug: String!) {
     site {
       siteMetadata {

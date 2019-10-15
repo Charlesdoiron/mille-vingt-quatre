@@ -53,7 +53,7 @@ class ProjectContentfulTemplate extends React.Component {
 
 export default ProjectContentfulTemplate
 
-export const pageQuery = graphql`
+export const pageQueryProject = graphql`
   query ContentfulProjectBySlug($slug: String!) {
     site {
       siteMetadata {
