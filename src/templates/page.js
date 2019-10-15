@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { graphql } from "gatsby"
-import Layout from "../components/layout"
+import layout from "../components/layout"
 import styled from "styled-components"
 
 import { ImageGrid } from "../components/contentful/imageGrid"
@@ -91,11 +91,11 @@ const Page = props => {
     )
   }
   return (
-    <Layout currentPage={currentPage}>
+    <layout currentPage={currentPage}>
       {currentPage !== "projects"
         ? renderModulesOnPages(modules)
         : renderProjectsPage(projects, modules, categories)}
-    </Layout>
+    </layout>
   )
 }
 
