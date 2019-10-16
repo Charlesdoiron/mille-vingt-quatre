@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 
-import { H1 } from "../components/typos"
+import { H1, ProjectDate } from "../components/typos"
 
 import Layout from "../components/layout"
 class project extends React.Component {
@@ -9,42 +9,38 @@ class project extends React.Component {
     const project = this.props.data.contentfulProject
     const { previous, next } = this.props.pageContext
 
+    console.log(this.props)
     return (
       <Layout>
         <div className="project__container">
-          <H1>{project.projectTitle}</H1>
-
-          <div className="cover">
-            {project.cover && <img src={project.cover.fluid.src} alt="" />}
-          </div>
-
-          <div className="wrapper--m">
-            {project.description && <p>{project.description.description}</p>}
-          </div>
-          <ul
-            style={{
-              display: `flex`,
-              flexWrap: `wrap`,
-              justifyContent: `space-between`,
-              listStyle: `none`,
-              padding: `0`,
-            }}
+          <div
+            className="cover"
+            style={{ backgroundImage: `url(${project.cover.fluid.src})` }}
           >
-            <li>
-              {previous && (
-                <Link to={`project/${previous.node.slug}`} rel="prev">
-                  {previous.node.projectTitle}
-                </Link>
-              )}
-            </li>
-            <li>
-              {next && (
-                <Link to={`project/${next.node.slug}`} rel="next">
-                  {next.node.projectTitle}
-                </Link>
-              )}
-            </li>
-          </ul>
+            <div className="wrapper--m">
+              <H1>
+                {project.projectTitle}
+                <ProjectDate>{project.projectTitleDate}</ProjectDate>
+              </H1>
+              <p>{project.projectSubTitle}</p>
+            </div>
+            <ul>
+              <li>
+                {previous && (
+                  <Link to={`project/${previous.node.slug}`} rel="prev">
+                    {previous.node.projectTitle}
+                  </Link>
+                )}
+              </li>
+              <li>
+                {next && (
+                  <Link to={`project/${next.node.slug}`} rel="next">
+                    {next.node.projectTitle}
+                  </Link>
+                )}
+              </li>
+            </ul>
+          </div>
         </div>
       </Layout>
     )
@@ -55,14 +51,10 @@ export default project
 
 export const pagequeryproject = graphql`
   query contentfulprojectbyslug($slug: String!) {
-    site {
-      siteMetadata {
-        title
-        author
-      }
-    }
     contentfulProject(slug: { eq: $slug }) {
       projectTitle
+      projectSubtitle
+      projectTitleDate
       tags {
         title
         slug

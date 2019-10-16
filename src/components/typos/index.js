@@ -11,6 +11,10 @@ export const H1 = styled.h1`
   text-align: left;
   vertical-align: top;
 
+  span {
+    bottom: 50px;
+  }
+
   @media (max-width: ${mobile}) {
     font-size: 60px;
   }

@@ -14,7 +14,7 @@ export const BlogPostsSelected = props => {
                 className="blog-post-selected__card"
                 to={`/${post.slug}`}
                 key={i}
-                style={{ backgroundImage: `url(${post.hero.fluid.src})` }}
+                style={{ backgroundImage: `url(${post.hero.sizes.src})` }}
               >
                 <h1>{post.title}</h1>
                 <p>

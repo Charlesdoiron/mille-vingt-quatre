@@ -163,8 +163,8 @@ export const pagequerypagebyslug = graphql`
             title
             subtitle
             hero {
-              fluid {
-                ...GatsbyContentfulFluid
+              sizes(quality: 90, maxWidth: 1800) {
+                src
               }
             }
           }
