@@ -1,9 +1,7 @@
 import React, { Component } from "react"
 import styled from "styled-components"
-import { Link } from "gatsby"
+
 import { H2, ProjectDate } from "./typos"
-import "./../../node_modules/slick-carousel/slick/slick.css"
-import "./../../node_modules/slick-carousel/slick/slick-theme.css"
 
 const Title = styled.div`
   display: flex;
