@@ -3,14 +3,14 @@ import { Link, graphql } from "gatsby"
 
 import { H1 } from "../components/typos"
 
-import layout from "../components/layout"
+import Layout from "../components/layout"
 class project extends React.Component {
   render() {
     const project = this.props.data.contentfulProject
     const { previous, next } = this.props.pageContext
 
     return (
-      <layout>
+      <Layout>
         <div className="project__container">
           <H1>{project.projectTitle}</H1>
 
@@ -46,7 +46,7 @@ class project extends React.Component {
             </li>
           </ul>
         </div>
-      </layout>
+      </Layout>
     )
   }
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { graphql } from "gatsby"
-import layout from "../components/layout"
+import Layout from "../components/layout"
 import styled from "styled-components"
 
 import { ImageGrid } from "../components/contentful/imageGrid"
@@ -18,7 +18,7 @@ import { QuoteAndText } from "../components/contentful/quoteAndText"
 import { NewsLetterSuscribe } from "../components/contentful/newsLetterSuscribe"
 import { Socials } from "../components/contentful/socials"
 import { ContactForm } from "../components/contentful/contactForm"
-import { contactInformations } from "../components/contentful/contactInformations"
+import { ContactInformations } from "../components/contentful/contactInformations"
 
 const FullHeight = styled.div`
   height: 100vh;
@@ -72,7 +72,7 @@ const Page = props => {
         case "ContentfulContactForm":
           return <ContactForm contact_form={module} key={i} />
         case "ContentfulSettings":
-          return <contactInformations informations={module} key={i} />
+          return <ContactInformations informations={module} key={i} />
         default:
           return null
       }
@@ -91,11 +91,11 @@ const Page = props => {
     )
   }
   return (
-    <layout currentPage={currentPage}>
+    <Layout currentPage={currentPage}>
       {currentPage !== "projects"
         ? renderModulesOnPages(modules)
         : renderProjectsPage(projects, modules, categories)}
-    </layout>
+    </Layout>
   )
 }
 
