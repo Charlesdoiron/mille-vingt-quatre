@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import layout from "../components/layout"
-import { styledPostBlogFont, styledCapitalize } from "../components/typos"
+import { styledpostblogfont, styledcapitalize } from "../components/typos"
 import arrow from "./../img/pictos/arrow_right.svg"
 
 class blogpost extends React.Component {
@@ -16,7 +16,7 @@ class blogpost extends React.Component {
             style={{ backgroundImage: `url(${blogPost.hero.sizes.src})` }}
           >
             <div className="titles">
-              <styledPostBlogFont>{blogPost.title}</styledPostBlogFont>
+              <styledpostblogfont>{blogPost.title}</styledpostblogfont>
               <p>
                 <span className="line"></span>
                 {blogPost.subtitle}
@@ -37,11 +37,11 @@ class blogpost extends React.Component {
               <li className="previous__blog__container">
                 {previous && (
                   <Link to={previous.node.slug} rel="prev">
-                    <styledPostBlogFont>
+                    <styledpostblogfont>
                       {" "}
                       {previous.node.title}
-                    </styledPostBlogFont>
-                    <styledCapitalize>
+                    </styledpostblogfont>
+                    <styledcapitalize>
                       <img
                         src={arrow}
                         style={{
@@ -50,17 +50,17 @@ class blogpost extends React.Component {
                         }}
                       />
                       previous article
-                    </styledCapitalize>
+                    </styledcapitalize>
                   </Link>
                 )}
               </li>
               <li className="next__blog__container">
                 {next && (
                   <Link to={next.node.slug} rel="next">
-                    <styledPostBlogFont> {next.node.title}</styledPostBlogFont>
-                    <styledCapitalize>
+                    <styledpostblogfont> {next.node.title}</styledpostblogfont>
+                    <styledcapitalize>
                       next article <img src={arrow} />
-                    </styledCapitalize>
+                    </styledcapitalize>
                   </Link>
                 )}
               </li>

@@ -3,9 +3,9 @@ import { Link, graphql } from "gatsby"
 
 import {
   styledH1,
-  styledH4,
-  styledProjectDate,
-  styledQuoteProjects,
+  styledh4,
+  styledprojectdate,
+  styledquoteprojects,
 } from "../components/typos"
 
 import { ImageGrid } from "../components/contentful/imageGrid"
@@ -57,11 +57,11 @@ class project extends React.Component {
                       return (
                         module.quote && (
                           <div className="quote__container">
-                            <styledH4
+                            <styledh4
                               dangerouslySetInnerHTML={{
                                 __html: module.quote.quote,
                               }}
-                            ></styledH4>
+                            ></styledh4>
                           </div>
                         )
                       )
@@ -70,13 +70,13 @@ class project extends React.Component {
                       return (
                         module.quoteForQuoteAndText && (
                           <div className="quote_and_text__container">
-                            <styledH4
+                            <styledh4
                               dangerouslySetInnerHTML={{
                                 __html:
                                   module.quoteForQuoteAndText
                                     .quoteForQuoteAndText,
                               }}
-                            ></styledH4>
+                            ></styledh4>
                             {module.textForQuoteAndText && (
                               <div
                                 dangerouslySetInnerHTML={{
@@ -149,9 +149,9 @@ class project extends React.Component {
                 {project.projectTitle && (
                   <styledH1>
                     {project.projectTitle}
-                    <styledProjectDate>
+                    <styledprojectdate>
                       {project.projectTitleDate}
-                    </styledProjectDate>
+                    </styledprojectdate>
                   </styledH1>
                 )}
                 {project.projectSubTitle && <p>{project.projectSubTitle}</p>}

@@ -1,17 +1,17 @@
 import React from "react"
-import { styledH5, styledCapitalize } from "../typos"
+import { styledh5, styledcapitalize } from "../typos"
 import arrow_right from "./../../img/pictos/arrow_right.svg"
 export const ContactForm = props => {
   return (
     <div className="wrapper--m">
       <div className="contact-form__container">
         <div>
-          <styledCapitalize>
+          <styledcapitalize>
             {props.contact_form.contactFormTitle}
-          </styledCapitalize>
+          </styledcapitalize>
           <a href={`mailto:${props.contact_form.mailTo}`}>
             <img src={arrow_right} alt="" />
-            <styledH5>{props.contact_form.mailTo}</styledH5>
+            <styledh5>{props.contact_form.mailTo}</styledh5>
           </a>
         </div>
       </div>

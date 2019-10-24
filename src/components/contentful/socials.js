@@ -1,12 +1,12 @@
 import React from "react"
-import { styledCapitalize, styledH5 } from "../typos"
+import { styledcapitalize, styledh5 } from "../typos"
 import arrow_right from "./../../img/pictos/arrow_right.svg"
 export const Socials = props => {
   return (
     <div className="wrapper--m">
       <div className="socials__container">
         <div>
-          <styledCapitalize>{props.social.socialsTitle}</styledCapitalize>
+          <styledcapitalize>{props.social.socialsTitle}</styledcapitalize>
           <div>
             <img src={arrow_right} alt="arrow" className="arrow-desktop" />
             {props.social.socials.map((s, i) => {
@@ -18,7 +18,7 @@ export const Socials = props => {
                       alt="arrow"
                       className="arrow-mobile"
                     />{" "}
-                    <styledH5>{s.socialTitle}</styledH5>
+                    <styledh5>{s.socialTitle}</styledh5>
                   </a>
                 </div>
               )
