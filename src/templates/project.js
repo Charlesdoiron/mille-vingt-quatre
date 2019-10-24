@@ -27,7 +27,7 @@ class project extends React.Component {
     const modules = this.props.data.contentfulProject.modulesUi
     const project = this.props.data.contentfulProject
     const { previous, next } = this.props.pageContext
-    console.log("MODULE UI", modules)
+    console.log("MODULEd UI", modules)
     const renderModulesOnPages = modules => {
       return modules.map((module, i) => {
         switch (module.__typename) {
