@@ -141,11 +141,13 @@ class project extends React.Component {
               style={{ backgroundImage: `url(${project.cover.fluid.src})` }}
             >
               <div className="wrapper--m">
-                <H1>
-                  {project.projectTitle}
-                  <ProjectDate>{project.projectTitleDate}</ProjectDate>
-                </H1>
-                <p>{project.projectSubTitle}</p>
+                {project.projectTitle && (
+                  <H1>
+                    {project.projectTitle}
+                    <ProjectDate>{project.projectTitleDate}</ProjectDate>
+                  </H1>
+                )}
+                {project.projectSubTitle && <p>{project.projectSubTitle}</p>}
               </div>
 
               <ul>
@@ -167,7 +169,7 @@ class project extends React.Component {
             </div>
           )}
         </div>
-        <div>{renderModulesOnPages(modules)}</div>
+        {modules && <div>{renderModulesOnPages(modules)}</div>}
       </Layout>
     )
   }
