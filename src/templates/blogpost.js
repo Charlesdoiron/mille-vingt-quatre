@@ -17,7 +17,7 @@ class blogpost extends React.Component {
             style={{ backgroundImage: `url(${blogPost.hero.sizes.src})` }}
           >
             <div className="titles">
-              <styledpostblogfont>{blogPost.title}</styledpostblogfont>
+              <Styledpostblogfont>{blogPost.title}</Styledpostblogfont>
               <p>
                 <span className="line"></span>
                 {blogPost.subtitle}
