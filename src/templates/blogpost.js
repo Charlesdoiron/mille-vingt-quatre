@@ -1,6 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
+import "./../style/index.scss"
 import { Styledpostblogfont, Styledcapitalize } from "../components/typos"
 import arrow from "./../img/pictos/arrow_right.svg"
 

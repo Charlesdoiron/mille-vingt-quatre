@@ -1,12 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-
-import {
-  StyledH1,
-  styledh4,
-  Styledprojectdate,
-  Styledquoteprojects,
-} from "../components/typos"
+import "./../style/index.scss"
+import { StyledH1, Styledh4, Styledprojectdate } from "../components/typos"
 
 import { ImageGrid } from "../components/contentful/imageGrid"
 import { ProjectsSelectedList } from "../components/contentful/projectsSelectedList"
@@ -57,11 +52,11 @@ class project extends React.Component {
                       return (
                         module.quote && (
                           <div className="quote__container">
-                            <styledh4
+                            <Styledh4
                               dangerouslySetInnerHTML={{
                                 __html: module.quote.quote,
                               }}
-                            ></styledh4>
+                            ></Styledh4>
                           </div>
                         )
                       )
@@ -70,13 +65,13 @@ class project extends React.Component {
                       return (
                         module.quoteForQuoteAndText && (
                           <div className="quote_and_text__container">
-                            <styledh4
+                            <Styledh4
                               dangerouslySetInnerHTML={{
                                 __html:
                                   module.quoteForQuoteAndText
                                     .quoteForQuoteAndText,
                               }}
-                            ></styledh4>
+                            ></Styledh4>
                             {module.textForQuoteAndText && (
                               <div
                                 dangerouslySetInnerHTML={{
