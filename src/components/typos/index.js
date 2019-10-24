@@ -20,7 +20,7 @@ export const styledH1 = styled.h1`
   }
 `
 // Gros titre des projets
-export const styledh2 = styled.h2`
+export const Styledh2 = styled.h2`
   font-family: "gt_walsheim_prolight";
   font-weight: 100;
   -webkit-font-smoothing: antialiased;
@@ -47,8 +47,6 @@ export const styledh2 = styled.h2`
   }
   @media (max-width: ${mobile}) {
     white-space: normal;
-  }
-  @media (max-width: ${mobile}) {
     font-size: 46px;
   }
 `
@@ -96,8 +94,13 @@ export const styledh3 = styled.h3`
 `
 
 // Quote sur la home
-export const styledh4 = styled.h4`
-  /* Wyziwyg generate a p */
+export const Styledh4 = styled.h4`
+  min-width: 59%;
+  padding-right: 5%;
+  margin: 0;
+  font-family: "gt_walsheim_prolight";
+  font-size: 40px;
+  line-height: 57px;
   p,
   a {
     font-family: "gt_walsheim_prolight";
@@ -110,12 +113,6 @@ export const styledh4 = styled.h4`
       line-height: 36px;
     }
   }
-  min-width: 59%;
-  padding-right: 5%;
-  margin: 0;
-  font-family: "gt_walsheim_prolight";
-  font-size: 40px;
-  line-height: 57px;
 
   @media (max-width: ${mobile}) {
     font-size: 25px;
@@ -124,13 +121,18 @@ export const styledh4 = styled.h4`
 `
 // Quote sur la page projet
 export const styledquoteprojects = styled.h4`
-  /* Wyziwyg generate a p */
+  min-width: 59%;
+  padding-right: 5%;
+  margin: 0;
+  font-family: "gt_walsheim_prolight";
+  font-size: 40px;
+  line-height: 57px;
   text-align: left;
   font-family: "gt_walsheim_prolight";
   font-size: 50px;
   position: relative;
-  top: 50%; /* poussé de la moitié de hauteur du référent */
-  transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+  top: 50%;
+  transform: translateY(-50%);
   width: 80%;
   margin: 0 auto;
 
@@ -143,8 +145,8 @@ export const styledquoteprojects = styled.h4`
     font-family: "gt_walsheim_prolight";
     font-size: 50px;
     position: relative;
-    top: 50%; /* poussé de la moitié de hauteur du référent */
-    transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+    top: 50%;
+    transform: translateY(-50%);
     width: 80%;
     margin: 0 auto;
 
@@ -154,6 +156,7 @@ export const styledquoteprojects = styled.h4`
     }
   }
 `
+
 // Gros texte
 export const styledh5 = styled.h5`
   text-align: left;

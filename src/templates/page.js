@@ -2,8 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 
-import "./../style/index.scss"
-import styled from "styled-components"
+// import "./../style/index.scss"
 
 import { ImageGrid } from "../components/contentful/imageGrid"
 import { ProjectsSelectedList } from "../components/contentful/projectsSelectedList"
@@ -19,13 +18,7 @@ import { Socials } from "../components/contentful/socials"
 import { ContactForm } from "../components/contentful/contactForm"
 import { ContactInformations } from "../components/contentful/contactInformations"
 
-import { styledh4 } from "../components/typos"
-
-const FullHeight = styled.div`
-  height: 100vh;
-  width: 100%;
-  position: relative;
-`
+import { Styledh4 } from "./../components/typos"
 
 const Page = props => {
   const posts = props.data.allContentfulBlogPost
@@ -50,11 +43,11 @@ const Page = props => {
               return (
                 module.quote && (
                   <div className="quote__container">
-                    <styledh4
+                    <Styledh4
                       dangerouslySetInnerHTML={{
                         __html: module.quote.quote,
                       }}
-                    ></styledh4>
+                    ></Styledh4>
                   </div>
                 )
               )
@@ -145,7 +138,6 @@ const Page = props => {
           return renderParagraphModules(module)
         case "ContentfulImageFullScreen":
           return <ImageFullScreen image={module} key={i} />
-
         case "ContentfulNewsLetterSuscribe":
           return <NewsLetterSuscribe news_letter={module} key={i} />
         case "ContentfulSocials":

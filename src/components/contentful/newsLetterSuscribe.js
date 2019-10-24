@@ -1,7 +1,9 @@
 import React from "react"
-import { styledcapitalize } from "../typos"
+
 import news_letter_picto from "./../../img/pictos/news_letter.svg"
 import small_arrow_right from "./../../img/pictos/small_arrow_right.svg"
+import styled from "styled-components"
+import { styledcapitalize } from "./../typos"
 
 export const NewsLetterSuscribe = props => {
   return (

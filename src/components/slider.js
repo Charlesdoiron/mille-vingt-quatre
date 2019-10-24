@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import styled from "styled-components"
 
-import { styledh2, styledprojectdate } from "./typos"
+import { Styledh2, styledprojectdate } from "./typos"
 
 const Title = styled.div`
   display: flex;
@@ -58,12 +58,12 @@ export default class Slider extends Component {
               }}
               className="project__slide"
             >
-              <styledh2>
+              <Styledh2>
                 {project.projectTitle}
                 <styledprojectdate>
                   {project.projectTitleDate}
                 </styledprojectdate>
-              </styledh2>
+              </Styledh2>
 
               {/* <Link to={`/project/${project.slug}`}> See the project -></Link> */}
             </Title>
