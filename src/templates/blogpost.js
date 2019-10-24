@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import layout from "../components/layout"
-import { styledpostblogfont, styledcapitalize } from "../components/typos"
+import { styledpostblogfont, Styledcapitalize } from "../components/typos"
 import arrow from "./../img/pictos/arrow_right.svg"
 
 class blogpost extends React.Component {
@@ -41,7 +41,7 @@ class blogpost extends React.Component {
                       {" "}
                       {previous.node.title}
                     </styledpostblogfont>
-                    <styledcapitalize>
+                    <Styledcapitalize>
                       <img
                         src={arrow}
                         style={{
@@ -50,7 +50,7 @@ class blogpost extends React.Component {
                         }}
                       />
                       previous article
-                    </styledcapitalize>
+                    </Styledcapitalize>
                   </Link>
                 )}
               </li>
@@ -58,9 +58,9 @@ class blogpost extends React.Component {
                 {next && (
                   <Link to={next.node.slug} rel="next">
                     <styledpostblogfont> {next.node.title}</styledpostblogfont>
-                    <styledcapitalize>
+                    <Styledcapitalize>
                       next article <img src={arrow} />
-                    </styledcapitalize>
+                    </Styledcapitalize>
                   </Link>
                 )}
               </li>

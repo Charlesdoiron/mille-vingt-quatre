@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { useMediaQuery } from "react-responsive"
 import Img from "gatsby-image"
-import { styledcapitalize } from "../typos"
+import { Styledcapitalize } from "../typos"
 
 import SliderSelected from "../sliderSelected"
 import SliderSelectedMobile from "../sliderSelectedMobile"
@@ -30,9 +30,9 @@ export const ProjectsSelectedList = props => {
       {isTabletOrMobileDevice && (
         <>
           <div className="wrapper--m">
-            <styledcapitalize>
+            <Styledcapitalize>
               {props.projectSelected.titleProjectsSelected}
-            </styledcapitalize>
+            </Styledcapitalize>
             <SliderSelectedMobile
               projects={props.projectSelected.projectsSelected}
               handleImage={img => handleImage(img)}
@@ -45,11 +45,11 @@ export const ProjectsSelectedList = props => {
         <>
           <div className="wrapper--m">
             <div className="flex">
-              <styledcapitalize
+              <Styledcapitalize
                 style={{ marginRight: "100px", paddingTop: "50px" }}
               >
                 {props.projectSelected.titleProjectsSelected}
-              </styledcapitalize>
+              </Styledcapitalize>
 
               <SliderSelected
                 projects={props.projectSelected.projectsSelected}

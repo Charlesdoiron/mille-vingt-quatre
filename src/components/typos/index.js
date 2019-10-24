@@ -68,7 +68,7 @@ export const styledprojectdate = styled.span`
 `
 
 // Sous-titre
-export const styledcapitalize = styled.p`
+export const Styledcapitalize = styled.p`
   font-weight: 100 !important;
   font-family: "gt_walsheim_prolight";
   font-size: 16px;

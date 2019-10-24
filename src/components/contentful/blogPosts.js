@@ -1,14 +1,14 @@
 import React from "react"
 import { Link } from "gatsby"
 import { StaticQuery, graphql } from "gatsby"
-import { styledcapitalize } from "../typos"
+import { Styledcapitalize } from "../typos"
 
 const BlogPost = ({ data }) => {
   return (
     <div>
       <div className="blog-post__container">
         <div className="wrapper--m">
-          <styledcapitalize>JOURNAL</styledcapitalize>
+          <Styledcapitalize>JOURNAL</Styledcapitalize>
         </div>
 
         <div>

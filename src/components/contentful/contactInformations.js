@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import map from "./../../img/1024_map.png"
 import map_mobile from "./../../img/1024_map_mobile.png"
-import styled from "styled-components"
+
 import { Styledcapitalize } from "../typos"
 import { useMediaQuery } from "react-responsive"
 
