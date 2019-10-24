@@ -8,17 +8,16 @@ import { ProjectsSelectedList } from "../components/contentful/projectsSelectedL
 import { Hero } from "../components/contentful/hero"
 import { Video } from "../components/contentful/video"
 import { TwoSectionsWithImage } from "../components/contentful/twoSectionsWithImage"
-import { RichText } from "../components/contentful/richText"
-import { Quote } from "../components/contentful/quote"
 import BlogPosts from "../components/contentful/blogPosts"
 import { BlogPostsSelected } from "../components/contentful/blogPostsSelected"
 import { ProjectsList } from "../components/contentful/projectsList"
 import { ImageFullScreen } from "../components/contentful/imageFullScreen"
-import { QuoteAndText } from "../components/contentful/quoteAndText"
 import { NewsLetterSuscribe } from "../components/contentful/newsLetterSuscribe"
 import { Socials } from "../components/contentful/socials"
 import { ContactForm } from "../components/contentful/contactForm"
 import { ContactInformations } from "../components/contentful/contactInformations"
+
+import { H4 } from "../components/typos"
 
 const FullHeight = styled.div`
   height: 100vh;
@@ -38,6 +37,89 @@ const Page = props => {
 
   console.log("POSTS", posts)
   console.log("CURRENT", currentPage)
+  console.log("MODULES", modules)
+
+  const renderParagraphModules = module => {
+    return (
+      <div className="wrapper--m">
+        {Object.keys(module).map(key => {
+          switch (key) {
+            case "quote":
+              return (
+                module.quote && (
+                  <div className="quote__container">
+                    <H4
+                      dangerouslySetInnerHTML={{
+                        __html: module.quote.quote,
+                      }}
+                    ></H4>
+                  </div>
+                )
+              )
+
+            case "quoteForQuoteAndText":
+              return (
+                module.quoteForQuoteAndText && (
+                  <div className="quote_and_text__container">
+                    <H4
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          module.quoteForQuoteAndText.quoteForQuoteAndText,
+                      }}
+                    ></H4>
+
+                    {module.textForQuoteAndText && (
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            module.textForQuoteAndText.textForQuoteAndText,
+                        }}
+                      ></div>
+                    )}
+                  </div>
+                )
+              )
+            case "textOneColumn":
+              return (
+                module.textOneColumn && (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-around",
+                      padding: "50px 0",
+                    }}
+                  >
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: module.textOneColumn.textOneColumn,
+                      }}
+                    ></div>
+
+                    {module.textTwoColumns && (
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: module.textTwoColumns.textTwoColumns,
+                        }}
+                      ></div>
+                    )}
+                    {module.textThreeColumns && (
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: module.textThreeColumns.textThreeColumns,
+                        }}
+                      ></div>
+                    )}
+                  </div>
+                )
+              )
+
+            default:
+              return null
+          }
+        })}
+      </div>
+    )
+  }
 
   const renderModulesOnPages = modules => {
     if (currentPage === "blog") {
@@ -57,14 +139,11 @@ const Page = props => {
           return <Video video={module} key={i} />
         case "ContentfulBlogPostSelected":
           return <BlogPostsSelected postSelected={module} key={i} />
-        case "ContentfulRichText":
-          return <RichText text={module} key={i} />
-        case "ContentfulQuote":
-          return <Quote quote={module} key={i} />
+        case "ContentfulParagraphModule":
+          return renderParagraphModules(module)
         case "ContentfulImageFullScreen":
           return <ImageFullScreen image={module} key={i} />
-        case "ContentfulQuoteAndText":
-          return <QuoteAndText quote_and_text={module} key={i} />
+
         case "ContentfulNewsLetterSuscribe":
           return <NewsLetterSuscribe news_letter={module} key={i} />
         case "ContentfulSocials":
@@ -78,15 +157,12 @@ const Page = props => {
       }
     })
   }
-  const renderProjectsPage = (projects, modules, categories) => {
+
+  const renderProjectsPage = (modules, projects, categories) => {
     return (
       <React.Fragment>
-        {modules.map((module, i) => (
-          <Quote quote={module} key={i} />
-        ))}
-        <FullHeight>
-          <ProjectsList projects={projects} categories={categories} />
-        </FullHeight>
+        {modules.map(module => renderParagraphModules(module))}
+        <ProjectsList projects={projects} categories={categories} />
       </React.Fragment>
     )
   }
@@ -94,7 +170,7 @@ const Page = props => {
     <Layout currentPage={currentPage}>
       {currentPage !== "projects"
         ? renderModulesOnPages(modules)
-        : renderProjectsPage(projects, modules, categories)}
+        : renderProjectsPage(modules, projects, categories)}
     </Layout>
   )
 }
@@ -139,6 +215,27 @@ export const pagequerypagebyslug = graphql`
           }
           heroTitle
         }
+        ... on ContentfulParagraphModule {
+          quote {
+            quote
+          }
+          quoteForQuoteAndText {
+            quoteForQuoteAndText
+          }
+          textForQuoteAndText {
+            textForQuoteAndText
+          }
+          textOneColumn {
+            textOneColumn
+          }
+          textTwoColumns {
+            textTwoColumns
+          }
+          textThreeColumns {
+            textThreeColumns
+          }
+          titleParagraph
+        }
         ... on ContentfulSettings {
           contactInformations {
             contact_page {
@@ -181,11 +278,6 @@ export const pagequerypagebyslug = graphql`
           placeholderNewsLetterSuscribe
           callToActionNewsLetterSuscribe
         }
-        ... on ContentfulQuote {
-          quote {
-            quote
-          }
-        }
 
         ... on ContentfulImageGrid {
           title
@@ -204,15 +296,7 @@ export const pagequerypagebyslug = graphql`
             }
           }
         }
-        ... on ContentfulQuoteAndText {
-          id
-          text {
-            text
-          }
-          quote {
-            quote
-          }
-        }
+
         ... on ContentfulProjectsSelected {
           titleProjectsSelected
           projectsSelected {
@@ -220,20 +304,12 @@ export const pagequerypagebyslug = graphql`
               slug
               projectTitle
               projectTitleDate
-              description {
-                description
-              }
               cover {
                 fluid {
                   src
                 }
               }
             }
-          }
-        }
-        ... on ContentfulRichText {
-          richText {
-            json
           }
         }
       }

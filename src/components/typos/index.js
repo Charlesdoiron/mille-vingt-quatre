@@ -97,8 +97,25 @@ export const H3 = styled.h3`
 
 // Quote sur la home
 export const H4 = styled.h4`
+  /* Wyziwyg generate a p */
+  p,
+  a {
+    font-family: "gt_walsheim_prolight";
+    font-size: 40px;
+    line-height: 57px;
+    margin: 0;
+
+    @media (max-width: ${mobile}) {
+      font-size: 25px;
+      line-height: 36px;
+    }
+  }
+  min-width: 59%;
+  padding-right: 5%;
+  margin: 0;
   font-family: "gt_walsheim_prolight";
   font-size: 40px;
+  line-height: 57px;
 
   @media (max-width: ${mobile}) {
     font-size: 25px;
@@ -107,6 +124,7 @@ export const H4 = styled.h4`
 `
 // Quote sur la page projet
 export const QuoteProjects = styled.h4`
+  /* Wyziwyg generate a p */
   text-align: left;
   font-family: "gt_walsheim_prolight";
   font-size: 50px;
@@ -120,8 +138,22 @@ export const QuoteProjects = styled.h4`
     font-size: 25px;
     line-height: 36px;
   }
-`
+  p {
+    text-align: left;
+    font-family: "gt_walsheim_prolight";
+    font-size: 50px;
+    position: relative;
+    top: 50%; /* poussé de la moitié de hauteur du référent */
+    transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+    width: 80%;
+    margin: 0 auto;
 
+    @media (max-width: ${mobile}) {
+      font-size: 25px;
+      line-height: 36px;
+    }
+  }
+`
 // Gros texte
 export const H5 = styled.h5`
   text-align: left;

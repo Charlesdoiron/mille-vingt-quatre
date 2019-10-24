@@ -4,7 +4,6 @@ import { StaticQuery, graphql } from "gatsby"
 import { Capitalize } from "../typos"
 
 const BlogPost = ({ data }) => {
-  console.log(data.allContentfulBlogPost.edges.map(({ node }) => node.slug))
   return (
     <div>
       <div className="blog-post__container">
