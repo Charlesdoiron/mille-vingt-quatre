@@ -5,7 +5,7 @@ const desktop = "992px"
 const tablet = `(min-width: ${mobile}) and (max-width: ${desktop} )`
 
 // Titre du projet dans la page projet
-export const styledH1 = styled.h1`
+export const StyledH1 = styled.h1`
   font-family: "gt_walsheim_prolight";
   font-size: 110px;
   text-align: left;
@@ -51,7 +51,7 @@ export const Styledh2 = styled.h2`
   }
 `
 //Date de projet (à droite des titres de projets)
-export const styledprojectdate = styled.span`
+export const Styledprojectdate = styled.span`
   font-family: "gt_walsheim_prolight";
   font-size: 13px;
   line-height: 19.5px;
@@ -82,7 +82,7 @@ export const Styledcapitalize = styled.p`
 `
 
 // Rebonds
-export const styledh3 = styled.h3`
+export const Styledh3 = styled.h3`
   font-family: "gt_walsheim_prolight";
   font-size: 60px;
   letter-spacing: -1%;
@@ -120,7 +120,7 @@ export const Styledh4 = styled.h4`
   }
 `
 // Quote sur la page projet
-export const styledquoteprojects = styled.h4`
+export const Styledquoteprojects = styled.h4`
   min-width: 59%;
   padding-right: 5%;
   margin: 0;
@@ -151,14 +151,14 @@ export const styledquoteprojects = styled.h4`
     margin: 0 auto;
 
     @media (max-width: ${mobile}) {
-      font-size: 25px;
+      sfont-size: 25px;
       line-height: 36px;
     }
   }
 `
 
 // Gros texte
-export const styledh5 = styled.h5`
+export const Styledh5 = styled.h5`
   text-align: left;
   font-family: "gt_walsheim_prolight";
   font-size: 40px;
@@ -170,7 +170,7 @@ export const styledh5 = styled.h5`
 `
 
 // Gros texte dans le post de blog
-export const styledpostblogfont = styled.h5`
+export const Styledpostblogfont = styled.h5`
   text-align: left;
   font-family: "gt_walsheim_prolight";
   font-size: 40px;
@@ -181,7 +181,7 @@ export const styledpostblogfont = styled.h5`
   }
 `
 
-export const styledblogdate = styled.span`
+export const Styledblogdate = styled.span`
   font-family: "gt_walsheim_prolight";
   font-size: 12px;
   text-align: left;

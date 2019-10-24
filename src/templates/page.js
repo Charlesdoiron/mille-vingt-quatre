@@ -36,13 +36,13 @@ const Page = props => {
 
   const renderParagraphModules = module => {
     return (
-      <div className="wrapper--m">
-        {Object.keys(module).map(key => {
+      <div className="wrapper--m" key={module}>
+        {Object.keys(module).map((key, i) => {
           switch (key) {
             case "quote":
               return (
                 module.quote && (
-                  <div className="quote__container">
+                  <div className="quote__container" key={i}>
                     <Styledh4
                       dangerouslySetInnerHTML={{
                         __html: module.quote.quote,
@@ -55,13 +55,13 @@ const Page = props => {
             case "quoteForQuoteAndText":
               return (
                 module.quoteForQuoteAndText && (
-                  <div className="quote_and_text__container">
-                    <styledh4
+                  <div className="quote_and_text__container" key={i}>
+                    <Styledh4
                       dangerouslySetInnerHTML={{
                         __html:
                           module.quoteForQuoteAndText.quoteForQuoteAndText,
                       }}
-                    ></styledh4>
+                    ></Styledh4>
 
                     {module.textForQuoteAndText && (
                       <div
@@ -83,11 +83,13 @@ const Page = props => {
                       justifyContent: "space-around",
                       padding: "50px 0",
                     }}
+                    key={i}
                   >
                     <div
                       dangerouslySetInnerHTML={{
                         __html: module.textOneColumn.textOneColumn,
                       }}
+                      key={i}
                     ></div>
 
                     {module.textTwoColumns && (
@@ -95,6 +97,7 @@ const Page = props => {
                         dangerouslySetInnerHTML={{
                           __html: module.textTwoColumns.textTwoColumns,
                         }}
+                        key={i}
                       ></div>
                     )}
                     {module.textThreeColumns && (
@@ -102,6 +105,7 @@ const Page = props => {
                         dangerouslySetInnerHTML={{
                           __html: module.textThreeColumns.textThreeColumns,
                         }}
+                        key={i}
                       ></div>
                     )}
                   </div>

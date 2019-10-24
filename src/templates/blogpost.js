@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import layout from "../components/layout"
-import { styledpostblogfont, Styledcapitalize } from "../components/typos"
+import Layout from "../components/layout"
+import { Styledpostblogfont, Styledcapitalize } from "../components/typos"
 import arrow from "./../img/pictos/arrow_right.svg"
 
 class blogpost extends React.Component {
@@ -9,7 +9,7 @@ class blogpost extends React.Component {
     const blogPost = this.props.data.contentfulBlogPost
     const { previous, next } = this.props.pageContext
     return (
-      <layout>
+      <Layout>
         <div className="blog__post__container">
           <div
             className="cover"
@@ -37,10 +37,9 @@ class blogpost extends React.Component {
               <li className="previous__blog__container">
                 {previous && (
                   <Link to={previous.node.slug} rel="prev">
-                    <styledpostblogfont>
-                      {" "}
+                    <Styledpostblogfont>
                       {previous.node.title}
-                    </styledpostblogfont>
+                    </Styledpostblogfont>
                     <Styledcapitalize>
                       <img
                         src={arrow}
@@ -67,7 +66,7 @@ class blogpost extends React.Component {
             </ul>
           </div>
         </div>
-      </layout>
+      </Layout>
     )
   }
 }

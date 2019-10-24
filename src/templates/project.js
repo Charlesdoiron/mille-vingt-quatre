@@ -2,10 +2,10 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 
 import {
-  styledH1,
+  StyledH1,
   styledh4,
-  styledprojectdate,
-  styledquoteprojects,
+  Styledprojectdate,
+  Styledquoteprojects,
 } from "../components/typos"
 
 import { ImageGrid } from "../components/contentful/imageGrid"
@@ -147,12 +147,12 @@ class project extends React.Component {
             >
               <div className="wrapper--m">
                 {project.projectTitle && (
-                  <styledH1>
+                  <StyledH1>
                     {project.projectTitle}
-                    <styledprojectdate>
+                    <Styledprojectdate>
                       {project.projectTitleDate}
-                    </styledprojectdate>
-                  </styledH1>
+                    </Styledprojectdate>
+                  </StyledH1>
                 )}
                 {project.projectSubTitle && <p>{project.projectSubTitle}</p>}
               </div>

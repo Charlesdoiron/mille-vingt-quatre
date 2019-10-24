@@ -1,5 +1,5 @@
 import React from "react"
-import { Styledcapitalize, styledh5 } from "../typos"
+import { Styledcapitalize, Styledh5 } from "../typos"
 import arrow_right from "./../../img/pictos/arrow_right.svg"
 export const Socials = props => {
   return (
@@ -18,7 +18,7 @@ export const Socials = props => {
                       alt="arrow"
                       className="arrow-mobile"
                     />{" "}
-                    <styledh5>{s.socialTitle}</styledh5>
+                    <Styledh5>{s.socialTitle}</Styledh5>
                   </a>
                 </div>
               )

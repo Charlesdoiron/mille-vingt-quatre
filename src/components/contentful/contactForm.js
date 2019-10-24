@@ -1,5 +1,5 @@
 import React from "react"
-import { styledh5, Styledcapitalize } from "../typos"
+import { Styledh5, Styledcapitalize } from "../typos"
 import arrow_right from "./../../img/pictos/arrow_right.svg"
 export const ContactForm = props => {
   return (
@@ -11,7 +11,7 @@ export const ContactForm = props => {
           </Styledcapitalize>
           <a href={`mailto:${props.contact_form.mailTo}`}>
             <img src={arrow_right} alt="" />
-            <styledh5>{props.contact_form.mailTo}</styledh5>
+            <Styledh5>{props.contact_form.mailTo}</Styledh5>
           </a>
         </div>
       </div>
