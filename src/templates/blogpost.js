@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import layout from "../components/layout"
-import { PostBlogFont, Capitalize } from "../components/typos"
+import { styledPostBlogFont, styledCapitalize } from "../components/typos"
 import arrow from "./../img/pictos/arrow_right.svg"
 
 class blogpost extends React.Component {
@@ -16,7 +16,7 @@ class blogpost extends React.Component {
             style={{ backgroundImage: `url(${blogPost.hero.sizes.src})` }}
           >
             <div className="titles">
-              <PostBlogFont>{blogPost.title}</PostBlogFont>
+              <styledPostBlogFont>{blogPost.title}</styledPostBlogFont>
               <p>
                 <span className="line"></span>
                 {blogPost.subtitle}
@@ -37,8 +37,11 @@ class blogpost extends React.Component {
               <li className="previous__blog__container">
                 {previous && (
                   <Link to={previous.node.slug} rel="prev">
-                    <PostBlogFont> {previous.node.title}</PostBlogFont>
-                    <Capitalize>
+                    <styledPostBlogFont>
+                      {" "}
+                      {previous.node.title}
+                    </styledPostBlogFont>
+                    <styledCapitalize>
                       <img
                         src={arrow}
                         style={{
@@ -47,17 +50,17 @@ class blogpost extends React.Component {
                         }}
                       />
                       previous article
-                    </Capitalize>
+                    </styledCapitalize>
                   </Link>
                 )}
               </li>
               <li className="next__blog__container">
                 {next && (
                   <Link to={next.node.slug} rel="next">
-                    <PostBlogFont> {next.node.title}</PostBlogFont>
-                    <Capitalize>
+                    <styledPostBlogFont> {next.node.title}</styledPostBlogFont>
+                    <styledCapitalize>
                       next article <img src={arrow} />
-                    </Capitalize>
+                    </styledCapitalize>
                   </Link>
                 )}
               </li>

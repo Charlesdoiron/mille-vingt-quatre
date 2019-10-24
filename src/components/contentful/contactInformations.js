@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import map from "./../../img/1024_map.png"
 import map_mobile from "./../../img/1024_map_mobile.png"
-import { Capitalize } from "../typos"
+import { styledCapitalize } from "../typos"
 import { useMediaQuery } from "react-responsive"
 
 export const ContactInformations = props => {
@@ -28,9 +28,9 @@ export const ContactInformations = props => {
       <div>
         <div className="content">
           <div>
-            <Capitalize>
+            <styledCapitalize>
               {props.informations.contactInformations.contact_page.company_name}
-            </Capitalize>
+            </styledCapitalize>
             <p>
               {
                 props.informations.contactInformations.contact_page

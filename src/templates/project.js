@@ -1,7 +1,12 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 
-import { H1, H4, ProjectDate, QuoteProjects } from "../components/typos"
+import {
+  styledH1,
+  styledH4,
+  styledProjectDate,
+  styledQuoteProjects,
+} from "../components/typos"
 
 import { ImageGrid } from "../components/contentful/imageGrid"
 import { ProjectsSelectedList } from "../components/contentful/projectsSelectedList"
@@ -52,11 +57,11 @@ class project extends React.Component {
                       return (
                         module.quote && (
                           <div className="quote__container">
-                            <H4
+                            <styledH4
                               dangerouslySetInnerHTML={{
                                 __html: module.quote.quote,
                               }}
-                            ></H4>
+                            ></styledH4>
                           </div>
                         )
                       )
@@ -65,13 +70,13 @@ class project extends React.Component {
                       return (
                         module.quoteForQuoteAndText && (
                           <div className="quote_and_text__container">
-                            <H4
+                            <styledH4
                               dangerouslySetInnerHTML={{
                                 __html:
                                   module.quoteForQuoteAndText
                                     .quoteForQuoteAndText,
                               }}
-                            ></H4>
+                            ></styledH4>
                             {module.textForQuoteAndText && (
                               <div
                                 dangerouslySetInnerHTML={{
@@ -142,10 +147,12 @@ class project extends React.Component {
             >
               <div className="wrapper--m">
                 {project.projectTitle && (
-                  <H1>
+                  <styledH1>
                     {project.projectTitle}
-                    <ProjectDate>{project.projectTitleDate}</ProjectDate>
-                  </H1>
+                    <styledProjectDate>
+                      {project.projectTitleDate}
+                    </styledProjectDate>
+                  </styledH1>
                 )}
                 {project.projectSubTitle && <p>{project.projectSubTitle}</p>}
               </div>

@@ -1,11 +1,13 @@
 import React from "react"
 import { Link } from "gatsby"
-import { Capitalize } from "../typos"
+import { styledCapitalize } from "../typos"
 export const BlogPostsSelected = props => {
   return (
     <div className="wrapper--m">
       <div className="blog-post-selected__container">
-        <Capitalize>{props.postSelected.blogPostSelectedTitle}</Capitalize>
+        <styledCapitalize>
+          {props.postSelected.blogPostSelectedTitle}
+        </styledCapitalize>
 
         <div>
           {props.postSelected.blogPost.map((post, i) => {

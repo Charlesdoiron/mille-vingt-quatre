@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import baffle from "baffle"
 
-import { QuoteProjects } from "../typos"
+import { styledQuoteProjects } from "../typos"
 
 export const Quote = props => {
   useEffect(() => {
@@ -13,9 +13,9 @@ export const Quote = props => {
 
   return (
     <div className="quote__container">
-      <QuoteProjects className="quote__text">
+      <styledQuoteProjects className="quote__text">
         {props.quote.quote.quote}
-      </QuoteProjects>
+      </styledQuoteProjects>
       <div className="gradient"></div>
     </div>
   )

@@ -17,7 +17,7 @@ import { Socials } from "../components/contentful/socials"
 import { ContactForm } from "../components/contentful/contactForm"
 import { ContactInformations } from "../components/contentful/contactInformations"
 
-import { H4 } from "../components/typos"
+import { styledH4 } from "../components/typos"
 
 const FullHeight = styled.div`
   height: 100vh;
@@ -48,11 +48,11 @@ const Page = props => {
               return (
                 module.quote && (
                   <div className="quote__container">
-                    <H4
+                    <styledH4
                       dangerouslySetInnerHTML={{
                         __html: module.quote.quote,
                       }}
-                    ></H4>
+                    ></styledH4>
                   </div>
                 )
               )
@@ -61,12 +61,12 @@ const Page = props => {
               return (
                 module.quoteForQuoteAndText && (
                   <div className="quote_and_text__container">
-                    <H4
+                    <styledH4
                       dangerouslySetInnerHTML={{
                         __html:
                           module.quoteForQuoteAndText.quoteForQuoteAndText,
                       }}
-                    ></H4>
+                    ></styledH4>
 
                     {module.textForQuoteAndText && (
                       <div

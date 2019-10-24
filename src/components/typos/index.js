@@ -5,7 +5,7 @@ const desktop = "992px"
 const tablet = `(min-width: ${mobile}) and (max-width: ${desktop} )`
 
 // Titre du projet dans la page projet
-export const H1 = styled.h1`
+export const styledH1 = styled.h1`
   font-family: "gt_walsheim_prolight";
   font-size: 110px;
   text-align: left;
@@ -20,7 +20,7 @@ export const H1 = styled.h1`
   }
 `
 // Gros titre des projets
-export const H2 = styled.h2`
+export const styledH2 = styled.h2`
   font-family: "gt_walsheim_prolight";
   font-weight: 100;
   -webkit-font-smoothing: antialiased;
@@ -53,7 +53,7 @@ export const H2 = styled.h2`
   }
 `
 //Date de projet (à droite des titres de projets)
-export const ProjectDate = styled.span`
+export const styledProjectDate = styled.span`
   font-family: "gt_walsheim_prolight";
   font-size: 13px;
   line-height: 19.5px;
@@ -70,7 +70,7 @@ export const ProjectDate = styled.span`
 `
 
 // Sous-titre
-export const Capitalize = styled.p`
+export const styledCapitalize = styled.p`
   font-weight: 100 !important;
   font-family: "gt_walsheim_prolight";
   font-size: 16px;
@@ -84,7 +84,7 @@ export const Capitalize = styled.p`
 `
 
 // Rebonds
-export const H3 = styled.h3`
+export const styledH3 = styled.h3`
   font-family: "gt_walsheim_prolight";
   font-size: 60px;
   letter-spacing: -1%;
@@ -96,7 +96,7 @@ export const H3 = styled.h3`
 `
 
 // Quote sur la home
-export const H4 = styled.h4`
+export const styledH4 = styled.h4`
   /* Wyziwyg generate a p */
   p,
   a {
@@ -123,7 +123,7 @@ export const H4 = styled.h4`
   }
 `
 // Quote sur la page projet
-export const QuoteProjects = styled.h4`
+export const styledQuoteProjects = styled.h4`
   /* Wyziwyg generate a p */
   text-align: left;
   font-family: "gt_walsheim_prolight";
@@ -155,7 +155,7 @@ export const QuoteProjects = styled.h4`
   }
 `
 // Gros texte
-export const H5 = styled.h5`
+export const styledH5 = styled.h5`
   text-align: left;
   font-family: "gt_walsheim_prolight";
   font-size: 40px;
@@ -167,7 +167,7 @@ export const H5 = styled.h5`
 `
 
 // Gros texte dans le post de blog
-export const PostBlogFont = styled.h5`
+export const styledPostBlogFont = styled.h5`
   text-align: left;
   font-family: "gt_walsheim_prolight";
   font-size: 40px;
@@ -178,7 +178,7 @@ export const PostBlogFont = styled.h5`
   }
 `
 
-export const BlogDate = styled.span`
+export const styledBlogDate = styled.span`
   font-family: "gt_walsheim_prolight";
   font-size: 12px;
   text-align: left;

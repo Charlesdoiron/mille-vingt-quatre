@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
 
-import { H2, ProjectDate } from "./typos"
+import { styledH2, styledProjectDate } from "./typos"
 
 const Title = styled.div`
   display: flex;
@@ -26,10 +26,12 @@ export default class SliderSelected extends Component {
               }}
               className="project__slide"
             >
-              <H2>
+              <styledH2>
                 {project.projectTitle}
-                <ProjectDate>{project.projectTitleDate}</ProjectDate>
-              </H2>
+                <styledProjectDate>
+                  {project.projectTitleDate}
+                </styledProjectDate>
+              </styledH2>
 
               {/* <Link to={`/project/${project.slug}`}> See the project -></Link> */}
             </Title>
