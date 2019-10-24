@@ -15,10 +15,10 @@ module.exports = {
         path: `${__dirname}/src/`,
       },
     },
+    `gatsby-plugin-styled-components`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sass`,
-    `gatsby-plugin-styled-components`,
     `gatsby-background-image`,
     {
       resolve: `gatsby-plugin-manifest`,

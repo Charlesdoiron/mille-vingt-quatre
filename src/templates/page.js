@@ -1,6 +1,8 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
+
+import "./../style/index.scss"
 import styled from "styled-components"
 
 import { ImageGrid } from "../components/contentful/imageGrid"
@@ -18,8 +20,6 @@ import { ContactForm } from "../components/contentful/contactForm"
 import { ContactInformations } from "../components/contentful/contactInformations"
 
 import { styledH4 } from "../components/typos"
-
-import "./../style/index.scss"
 
 const FullHeight = styled.div`
   height: 100vh;
