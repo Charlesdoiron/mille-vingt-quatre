@@ -19,6 +19,8 @@ import { ContactInformations } from "../components/contentful/contactInformation
 
 import { styledH4 } from "../components/typos"
 
+import "./../style/index.scss"
+
 const FullHeight = styled.div`
   height: 100vh;
   width: 100%;
