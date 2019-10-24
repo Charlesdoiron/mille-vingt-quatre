@@ -57,7 +57,7 @@ class blogpost extends React.Component {
               <li className="next__blog__container">
                 {next && (
                   <Link to={next.node.slug} rel="next">
-                    <styledpostblogfont> {next.node.title}</styledpostblogfont>
+                    <Styledpostblogfont> {next.node.title}</Styledpostblogfont>
                     <Styledcapitalize>
                       next article <img src={arrow} />
                     </Styledcapitalize>
