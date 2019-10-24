@@ -32,7 +32,7 @@ const Page = props => {
 
   console.log("POSTS", posts)
   console.log("CURRENT", currentPage)
-  console.log("MODULES", modules)
+  console.log("MODULESS", modules)
 
   const renderParagraphModules = module => {
     return (
