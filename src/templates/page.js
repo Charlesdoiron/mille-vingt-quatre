@@ -2,7 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 
-// import "./../style/index.scss"
+import "./../style/index.scss"
 
 import { ImageGrid } from "../components/contentful/imageGrid"
 import { ProjectsSelectedList } from "../components/contentful/projectsSelectedList"
