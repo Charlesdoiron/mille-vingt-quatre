@@ -1,5 +1,39 @@
 .project__container {
-  margin-top: -70px;
+  position: relative;
+  width: 100%;
+  .titles {
+    left: 15%;
+    bottom: 0;
+    position: absolute;
+    top: 50%; /* poussé de la moitié de hauteur du référent */
+    transform: translateY(-50%);
+
+    h1 {
+      margin-bottom: -10px;
+    }
+
+    @media #{$tablet} {
+      left: 10%;
+      right: 0;
+    }
+
+    @media #{$mobile} {
+      left: 5%;
+      right: 0;
+    }
+
+    p {
+      max-width: 300px;
+      font-size: 20px;
+      line-height: 29px;
+      font-family: $font-be-vietnam;
+
+      @media #{$mobile} {
+        max-width: 250px;
+      }
+    }
+  }
+
   .cover {
     position: relative;
     width: 100%;
@@ -15,6 +49,9 @@
     justify-content: space-between;
     list-style: none;
     padding: 0;
+    position: absolute;
+    z-index: 77777777;
+    width: 100%;
 
     li {
       a {

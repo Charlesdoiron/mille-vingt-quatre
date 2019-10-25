@@ -151,7 +151,7 @@ export const Styledquoteprojects = styled.h4`
     margin: 0 auto;
 
     @media (max-width: ${mobile}) {
-      sfont-size: 25px;
+      font-size: 25px;
       line-height: 36px;
     }
   }

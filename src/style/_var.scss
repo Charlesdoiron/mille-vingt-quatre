@@ -15,7 +15,7 @@ $width-xl: 1200px;
 
 // responsive mixins
 $mobile: "(max-width: #{$width-md - 1px})";
-$tablet: "(min-width: #{$width-md}) and (max-width: #{$width-lg - 1px})";
+$tablet: "(max-width: #{$width-lg - 1px})";
 $desktop: "(min-width: #{$width-lg})";
 
 $font-walsheim: "gt_walsheim_prolight", Helvetica, sans-serif;

@@ -27,7 +27,8 @@ class project extends React.Component {
     const modules = this.props.data.contentfulProject.modulesUi
     const project = this.props.data.contentfulProject
     const { previous, next } = this.props.pageContext
-    console.log("MODULEd UI", modules)
+    console.log("MODULE UI", modules)
+    console.log("PROJECT", project)
     const renderModulesOnPages = modules => {
       return modules.map((module, i) => {
         switch (module.__typename) {
@@ -41,7 +42,8 @@ class project extends React.Component {
             return <Video video={module} key={i} />
           case "ContentfulBlogPostSelected":
             return <BlogPostsSelected postSelected={module} key={i} />
-          case "ContentfulImage":
+
+          case "ContentfulImageImageAndText":
             return <Image image={module} key={i} />
           case "ContentfulParagraphModule":
             return (
@@ -141,15 +143,17 @@ class project extends React.Component {
               style={{ backgroundImage: `url(${project.cover.fluid.src})` }}
             >
               <div className="wrapper--m">
-                {project.projectTitle && (
-                  <StyledH1>
-                    {project.projectTitle}
-                    <Styledprojectdate>
-                      {project.projectTitleDate}
-                    </Styledprojectdate>
-                  </StyledH1>
-                )}
-                {project.projectSubTitle && <p>{project.projectSubTitle}</p>}
+                <div className="titles">
+                  {project.projectTitle && (
+                    <StyledH1>
+                      {project.projectTitle}
+                      <Styledprojectdate>
+                        {project.projectTitleDate}
+                      </Styledprojectdate>
+                    </StyledH1>
+                  )}
+                  {project.projectSubtitle && <p>{project.projectSubtitle}</p>}
+                </div>
               </div>
 
               <ul>
@@ -217,17 +221,20 @@ export const pagequeryproject = graphql`
           }
           titleParagraph
         }
-        ... on ContentfulImage {
-          displayImage
+        ... on ContentfulImageImageAndText {
+          display
+          text {
+            text
+          }
           image {
-            sizes(quality: 90, maxWidth: 1800) {
-              src
+            fluid(quality: 90, maxWidth: 1800) {
+              ...GatsbyContentfulFluid
             }
           }
         }
 
         ... on ContentfulImageGrid {
-          title
+          display
           grid {
             title
             fluid {
@@ -238,14 +245,6 @@ export const pagequeryproject = graphql`
         ... on ContentfulVideo {
           id
           video
-        }
-        ... on ContentfulImageFullScreen {
-          id
-          image {
-            fluid(quality: 50, maxWidth: 1800) {
-              ...GatsbyContentfulFluid
-            }
-          }
         }
       }
       categories {

@@ -1,16 +1,22 @@
 import React from "react"
 import classNames from "classnames"
 import Img from "gatsby-image"
+
 export const Image = props => {
-  console.log(props.image.displayImage[0])
-  const display = props.image.displayImage[0]
   return (
-    <div
-      className={classNames("image__container", {
-        alignRight: display === "Align-Right",
-      })}
-    >
-      <Img fluid={props.image.image.sizes} />
+    <div className="wrapper--m">
+      <div
+        className={classNames("image__container", {
+          [props.image.display.map(d => d).join(" ")]: true,
+        })}
+      >
+        <div>
+          <Img fluid={props.image.image.fluid} />
+          {props.image.text && (
+            <div dangerouslySetInnerHTML={{ __html: props.image.text.text }} />
+          )}
+        </div>
+      </div>
     </div>
   )
 }

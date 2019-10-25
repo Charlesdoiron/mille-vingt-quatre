@@ -12,7 +12,7 @@ import { TwoSectionsWithImage } from "../components/contentful/twoSectionsWithIm
 import BlogPosts from "../components/contentful/blogPosts"
 import { BlogPostsSelected } from "../components/contentful/blogPostsSelected"
 import { ProjectsList } from "../components/contentful/projectsList"
-import { ImageFullScreen } from "../components/contentful/imageFullScreen"
+import { CoverImage } from "../components/contentful/coverImage"
 import { NewsLetterSuscribe } from "../components/contentful/newsLetterSuscribe"
 import { Socials } from "../components/contentful/socials"
 import { ContactForm } from "../components/contentful/contactForm"
@@ -140,8 +140,8 @@ const Page = props => {
           return <BlogPostsSelected postSelected={module} key={i} />
         case "ContentfulParagraphModule":
           return renderParagraphModules(module)
-        case "ContentfulImageFullScreen":
-          return <ImageFullScreen image={module} key={i} />
+        case "ContentfulCoverImage":
+          return <CoverImage image={module} key={i} />
         case "ContentfulNewsLetterSuscribe":
           return <NewsLetterSuscribe news_letter={module} key={i} />
         case "ContentfulSocials":
@@ -205,14 +205,6 @@ export const pagequerypagebyslug = graphql`
         slug
       }
       ui {
-        ... on ContentfulHero {
-          hero {
-            fluid(quality: 50, maxWidth: 1800) {
-              ...GatsbyContentfulFluid
-            }
-          }
-          heroTitle
-        }
         ... on ContentfulParagraphModule {
           quote {
             quote
@@ -247,10 +239,33 @@ export const pagequerypagebyslug = graphql`
             }
           }
         }
+        ... on ContentfulCoverImage {
+          image {
+            fluid(quality: 90, maxWidth: 1800) {
+              src
+            }
+          }
+          focalPoint {
+            focalPoint {
+              x
+              y
+            }
+          }
+          image {
+            file {
+              details {
+                image {
+                  width
+                }
+              }
+            }
+          }
+        }
         ... on ContentfulContactForm {
           contactFormTitle
           mailTo
         }
+
         ... on ContentfulBlogPostSelected {
           blogPostSelectedTitle
           blogPost {
@@ -283,14 +298,6 @@ export const pagequerypagebyslug = graphql`
             title
             fluid {
               src
-            }
-          }
-        }
-        ... on ContentfulImageFullScreen {
-          id
-          image {
-            fluid(quality: 50, maxWidth: 1800) {
-              ...GatsbyContentfulFluid
             }
           }
         }

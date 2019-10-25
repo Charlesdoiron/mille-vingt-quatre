@@ -1,9 +1,22 @@
 .grid__container {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   width: 100%;
   padding: 0 5%;
-  img {
-    width: 30%;
+  margin: 0 auto;
+
+  @media #{$tablet} {
+    padding: 0;
+    img {
+      width: 90%;
+      margin: 15px auto;
+    }
+  }
+
+  &.marginBetween {
+    justify-content: space-between;
+  }
+  &.marginAround {
+    justify-content: space-around;
   }
 }

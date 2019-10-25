@@ -1,13 +1,19 @@
 import React from "react"
-
-export class ImageGrid extends React.Component {
-  render() {
-    return (
-      <div className="grid__container">
-        {this.props.imageGrid.grid.map((img, i) => {
-          return <img src={img.fluid.src} key={i} />
-        })}
-      </div>
-    )
-  }
+import classNames from "classnames"
+export const ImageGrid = props => {
+  console.log("grid", props)
+  const display = props.imageGrid.display[0]
+  console.log(display)
+  return (
+    <div
+      className={classNames("grid__container", {
+        marginBetween: display === "Same-Margin-Between-Images",
+        marginAround: display === "Images-Center-Margin-Outside",
+      })}
+    >
+      {props.imageGrid.grid.map((img, i) => {
+        return <img src={img.fluid.src} key={i} />
+      })}
+    </div>
+  )
 }
