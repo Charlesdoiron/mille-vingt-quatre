@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useMediaQuery } from "react-responsive"
 import { FocusedImage } from "image-focus"
 import Img from "gatsby-image"
-
+import BackgroundImage from "gatsby-background-image"
 export const CoverImage = props => {
   const [active, setActive] = useState("All")
 
@@ -29,10 +29,11 @@ export const CoverImage = props => {
   return (
     <>
       <div style={{ width: "100%", position: "relative", height: "80vh" }}>
-        <Img
+        <BackgroundImage
+          className="cover"
           fluid={props.image.image.fluid}
           style={{ width: "100%", position: "relative", height: "80vh" }}
-        />
+        ></BackgroundImage>
       </div>
       {/* {isDesktopOrLaptop && (
         <div style={{ width: "100%", position: "relative", height: "80vh" }}>

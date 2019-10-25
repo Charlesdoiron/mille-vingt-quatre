@@ -2,7 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import "./../style/index.scss"
 import { StyledH1, Styledh4, Styledprojectdate } from "../components/typos"
-
+import BackgroundImage from "gatsby-background-image"
 import { ImageGrid } from "../components/contentful/imageGrid"
 import { ProjectsSelectedList } from "../components/contentful/projectsSelectedList"
 import { Hero } from "../components/contentful/hero"
@@ -136,9 +136,10 @@ class project extends React.Component {
       <Layout>
         <div className="project__container">
           {project.cover && (
-            <div
+            <BackgroundImage
               className="cover"
-              style={{ backgroundImage: `url(${project.cover.fluid.src})` }}
+              fluid={project.cover.fluid}
+              style={{ height: "600px" }}
             >
               <div className="wrapper--m">
                 <div className="titles">
@@ -170,7 +171,7 @@ class project extends React.Component {
                   )}
                 </li>
               </ul>
-            </div>
+            </BackgroundImage>
           )}
         </div>
         {modules && <div>{renderModulesOnPages(modules)}</div>}
@@ -192,8 +193,8 @@ export const pagequeryproject = graphql`
         slug
       }
       cover {
-        fluid {
-          src
+        fluid(quality: 90, maxWidth: 1800) {
+          ...GatsbyContentfulFluid
         }
       }
 
