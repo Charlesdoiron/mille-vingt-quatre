@@ -1,9 +1,8 @@
 import React from "react"
 import classNames from "classnames"
 export const ImageGrid = props => {
-  console.log("grid", props)
-  const display = props.imageGrid.display[0]
-  console.log(display)
+  const display = props.imageGrid.display && props.imageGrid.display[0]
+
   return (
     <div
       className={classNames("grid__container", {
