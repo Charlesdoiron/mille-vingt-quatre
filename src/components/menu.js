@@ -1,10 +1,14 @@
 import React, { useState } from "react"
 import { Link, StaticQuery } from "gatsby"
 import styled from "styled-components"
-import Img from "gatsby-image"
+import { navigate } from "@reach/router"
+import close from "./../img/pictos/close.svg"
 import logo from "../images/1024_logo.png"
+import instagram from "./../img/pictos/instagram.svg"
+import facebook from "./../img/pictos/facebook.svg"
+import vimeo from "./../img/pictos/vimeo.svg"
 import { graphql } from "gatsby"
-
+import { Location, Router } from "@reach/router"
 const MenuContainer = styled.div`
   margin: 0 auto;
   display: flex;
@@ -27,32 +31,77 @@ const MenuRight = styled.div`
 const Menu = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false)
   return (
-    <MenuContainer>
-      <Link to={"/home"}>
-        <img
-          src={logo}
-          style={{ width: "65px", height: "15px", marginLeft: "20px" }}
-        />
-      </Link>
+    <Location>
+      {({ location }) => (
+        <MenuContainer>
+          <Link to={"/home"}>
+            <img src={logo} className="logo" />
+          </Link>
+          {/* location.pathname.substring(0, 9)=> remove project after pathname */}
+          {location.pathname.substring(0, 9) === "/project/" && (
+            <div
+              onClick={e => navigate(window.history.back())}
+              className="close"
+            >
+              <img src={close} alt="close" />
+              <p>Close</p>
+            </div>
+          )}
 
-      <MenuRight>
-        {isOpen &&
-          data.contentfulMenu &&
-          data.contentfulMenu.menu.map(item => {
-            const { slug, title } = item
-            return (
-              <Link
-                to={`/${slug}`}
-                key={slug}
-                activeStyle={{ textDecoration: "underline" }}
-              >
-                {title}
-              </Link>
-            )
-          })}
-        <a onMouseOver={e => setIsOpen(!isOpen)}>{isOpen ? "--" : "="}</a>
-      </MenuRight>
-    </MenuContainer>
+          <MenuRight className="menu-right__container">
+            {isOpen && data.contentfulMenu && (
+              <div className="menu__content">
+                {data.contentfulMenu.menu.map(item => {
+                  const { slug, title } = item
+                  return (
+                    <Link
+                      to={`/${slug}`}
+                      key={slug}
+                      activeClassName="isActive"
+                      className="menu_item"
+                    >
+                      {title}
+                    </Link>
+                  )
+                })}
+                <div className="socials">
+                  <a
+                    href="https://www.instagram.com/1024architecture/"
+                    target="_blank"
+                  >
+                    <img src={instagram} />
+                  </a>
+                  <a
+                    href="https://www.facebook.com/1024architecture/"
+                    target="_blank"
+                  >
+                    <img src={facebook} />
+                  </a>
+                  <a href="https://vimeo.com/the1024" target="_blank">
+                    <img src={vimeo} />
+                  </a>
+                </div>
+              </div>
+            )}
+            <a onClick={e => setIsOpen(!isOpen)}>
+              {!isOpen ? (
+                <div className="burger">
+                  <div className="line"></div>
+                  <div className="line"></div>
+                  <div className="line"></div>
+                </div>
+              ) : (
+                <div className="burger burgerIsClosed">
+                  <div className="line"></div>
+                  <div className="line"></div>
+                  <div className="line"></div>
+                </div>
+              )}
+            </a>
+          </MenuRight>
+        </MenuContainer>
+      )}
+    </Location>
   )
 }
 

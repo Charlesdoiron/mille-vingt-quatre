@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
+import styled from "styled-components"
 import Layout from "../components/layout"
 
 import "./../style/index.scss"
@@ -17,8 +18,21 @@ import { NewsLetterSuscribe } from "../components/contentful/newsLetterSuscribe"
 import { Socials } from "../components/contentful/socials"
 import { ContactForm } from "../components/contentful/contactForm"
 import { ContactInformations } from "../components/contentful/contactInformations"
+import { RenderParagraphModule } from "./../components/contentful/renderParagraphModule"
 
 import { Styledh4 } from "./../components/typos"
+
+const FullHeight = styled.div`
+  height: 100vh;
+  width: 100%;
+  position: relative;
+
+  h4 {
+    position: absolute;
+    top: 50%; /* poussé de la moitié de hauteur du référent */
+    transform: translateY(-50%);
+  }
+`
 
 const Page = props => {
   const posts = props.data.allContentfulBlogPost
@@ -34,98 +48,14 @@ const Page = props => {
   console.log("CURRENT", currentPage)
   console.log("MODULESS", modules)
 
-  const renderParagraphModules = module => {
-    return (
-      <div className="wrapper--m" key={module}>
-        {Object.keys(module).map((key, i) => {
-          switch (key) {
-            case "quote":
-              return (
-                module.quote && (
-                  <div className="quote__container" key={i}>
-                    <Styledh4
-                      dangerouslySetInnerHTML={{
-                        __html: module.quote.quote,
-                      }}
-                    ></Styledh4>
-                  </div>
-                )
-              )
-
-            case "quoteForQuoteAndText":
-              return (
-                module.quoteForQuoteAndText && (
-                  <div className="quote_and_text__container" key={i}>
-                    <Styledh4
-                      dangerouslySetInnerHTML={{
-                        __html:
-                          module.quoteForQuoteAndText.quoteForQuoteAndText,
-                      }}
-                    ></Styledh4>
-
-                    {module.textForQuoteAndText && (
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html:
-                            module.textForQuoteAndText.textForQuoteAndText,
-                        }}
-                      ></div>
-                    )}
-                  </div>
-                )
-              )
-            case "textOneColumn":
-              return (
-                module.textOneColumn && (
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-around",
-                      padding: "50px 0",
-                    }}
-                    key={i}
-                  >
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: module.textOneColumn.textOneColumn,
-                      }}
-                      key={i}
-                    ></div>
-
-                    {module.textTwoColumns && (
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: module.textTwoColumns.textTwoColumns,
-                        }}
-                        key={i}
-                      ></div>
-                    )}
-                    {module.textThreeColumns && (
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: module.textThreeColumns.textThreeColumns,
-                        }}
-                        key={i}
-                      ></div>
-                    )}
-                  </div>
-                )
-              )
-
-            default:
-              return null
-          }
-        })}
-      </div>
-    )
-  }
-
   const renderModulesOnPages = modules => {
     if (currentPage === "blog") {
       return <BlogPosts />
     }
     return modules.map((module, i) => {
       switch (module.__typename) {
+        case "ContentfulHero":
+          return <Hero hero={module} key={i} />
         case "ContentfulImageGrid":
           return <ImageGrid imageGrid={module} key={i} />
         case "ContentfulTwoSectionsImageText":
@@ -137,7 +67,7 @@ const Page = props => {
         case "ContentfulBlogPostSelected":
           return <BlogPostsSelected postSelected={module} key={i} />
         case "ContentfulParagraphModule":
-          return renderParagraphModules(module)
+          return <RenderParagraphModule module={module} key={i} />
         case "ContentfulCoverImage":
           return <CoverImage image={module} key={i} />
         case "ContentfulNewsLetterSuscribe":
@@ -156,10 +86,16 @@ const Page = props => {
 
   const renderProjectsPage = (modules, projects, categories) => {
     return (
-      <React.Fragment>
-        {modules.map(module => renderParagraphModules(module))}
+      <>
+        <FullHeight className="background-noise">
+          {modules.map(module => (
+            <RenderParagraphModule module={module} />
+          ))}
+          <div className="gradient"></div>
+        </FullHeight>
+
         <ProjectsList projects={projects} categories={categories} />
-      </React.Fragment>
+      </>
     )
   }
   return (
@@ -240,7 +176,7 @@ export const pagequerypagebyslug = graphql`
         ... on ContentfulCoverImage {
           image {
             fluid(quality: 90, maxWidth: 1800) {
-              src
+              ...GatsbyContentfulFluid
             }
           }
           focalPoint {
@@ -308,8 +244,8 @@ export const pagequerypagebyslug = graphql`
               projectTitle
               projectTitleDate
               cover {
-                fluid {
-                  src
+                fluid(quality: 90, maxWidth: 1800) {
+                  ...GatsbyContentfulFluid
                 }
               }
             }

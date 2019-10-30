@@ -78,7 +78,7 @@ exports.createPages = ({ graphql, actions }) => {
     })
   })
 
-  // PROJECTS
+  PROJECTS
 
   const loadProjects = new Promise((resolve, reject) => {
     graphql(
@@ -100,8 +100,9 @@ exports.createPages = ({ graphql, actions }) => {
       }
       const projects = result.data.allContentfulProject.edges
       projects.forEach((project, i) => {
+        console.log(project.length)
         const previous = i === 0 ? null : projects[i - 1]
-        const next = i === 0 ? null : projects[i + 1]
+        const next = i === projects.length ? null : projects[i + 1]
 
         createPage({
           path: `project/${project.node.slug}`,

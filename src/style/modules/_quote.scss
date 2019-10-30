@@ -1,41 +1,41 @@
-// @keyframes noise {
-//   0% {
-//     background: url("http://api.thumbr.it/whitenoise-361x370.png?background=000000ff&noise=626262&density=80&opacity=30");
-//     background-position-x: 2px;
-//   }
-//   30% {
-//     background: url("http://api.thumbr.it/whitenoise-361x370.png?background=000000ff&noise=626262&density=70&opacity=40");
-//   }
-//   68%,
-//   72% {
-//     background: url("http://api.thumbr.it/whitenoise-361x370.png?background=000000ff&noise=626262&density=90&opacity=30");
-//     background-position-x: 1px;
-//   }
-//   100% {
-//     background: url("http://api.thumbr.it/whitenoise-361x370.png?background=000000ff&noise=626262&density=98&opacity=30");
-//   }
-// }
+@keyframes noise {
+  0% {
+    background: url("http://api.thumbr.it/whitenoise-361x370.png?background=000000ff&noise=626262&density=20&opacity=30");
+    background-position-x: 2px;
+  }
+  30% {
+    background: url("http://api.thumbr.it/whitenoise-361x370.png?background=000000ff&noise=626262&density=10&opacity=40");
+  }
+  68%,
+  72% {
+    background: url("http://api.thumbr.it/whitenoise-361x370.png?background=000000ff&noise=626262&density=30&opacity=30");
+    background-position-x: 1px;
+  }
+  100% {
+    background: url("http://api.thumbr.it/whitenoise-361x370.png?background=000000ff&noise=626262&density=28&opacity=30");
+  }
+}
 
-// .quote__container {
-//   height: 100vh;
-//   color: white;
-//   text-align: center;
-//   position: relative;
-//   margin: 0 auto;
-//   animation: noise 0.2s infinite;
+.background-noise {
+  height: 100vh;
+  color: white;
+  text-align: center;
+  position: relative;
+  margin: 0 auto;
+  animation: noise 0.2s infinite;
 
-//   .gradient {
-//     position: absolute;
-//     height: 150px;
-//     bottom: 0;
-//     width: 100%;
-//     background-image: linear-gradient(
-//       to bottom,
-//       rgba(255, 0, 0, 0),
-//       rgb(0, 0, 0)
-//     );
-//   }
-// }
+  .gradient {
+    position: absolute;
+    height: 150px;
+    bottom: 0;
+    width: 100%;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(255, 0, 0, 0),
+      rgb(0, 0, 0)
+    );
+  }
+}
 
 .quote__container {
   padding: 50px 0;

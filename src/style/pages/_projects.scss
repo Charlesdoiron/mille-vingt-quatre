@@ -28,12 +28,9 @@
 }
 
 .project__list__container {
-  // border: 1px solid red;
-
-  margin-top: 10%;
-  height: 550px;
+  height: 600px;
   overflow: scroll;
-  opacity: 0;
+  opacity: 1;
 }
 
 .project__img--background {
@@ -41,16 +38,6 @@
   height: 100vh;
   position: absolute !important;
   animation: blur 5s;
-}
-
-.isBluring {
-  animation: blur 0.7s ease-in-out;
-  opacity: 1;
-  position: relative;
-}
-
-.isClear {
-  animation: clearness 2s;
 }
 
 @keyframes blur {
@@ -62,17 +49,5 @@
   to {
     filter: blur(0);
     opacity: 1 !important;
-  }
-}
-
-@keyframes clearness {
-  from {
-    filter: blur(0);
-    opacity: 1 !important;
-  }
-
-  to {
-    filter: blur(100px);
-    opacity: 0.2;
   }
 }

@@ -1,7 +1,9 @@
 .blog-post__container {
   width: 100%;
   overflow: scroll;
-  padding-top: 70px;
+  padding-top: 90px;
+  position: fixed;
+  height: 100vh;
 
   p {
     margin-bottom: 60px;
@@ -24,7 +26,8 @@
 
     a {
       width: 70%;
-      height: 70vh;
+      height: 50vh;
+
       margin-right: 20px;
       background-size: cover;
       background-position: center;

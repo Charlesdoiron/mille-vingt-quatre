@@ -32,7 +32,7 @@ export const Styledh2 = styled.h2`
   -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: white;
-  z-index: 100;
+  z-index: 10;
   position: relative;
   cursor: pointer;
   display: flex;
