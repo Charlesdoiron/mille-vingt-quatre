@@ -10,8 +10,13 @@
     margin-top: 90px;
   }
 
-  .project__list__container {
+  .overflow {
     height: 650px;
+    overflow: scroll;
+  }
+
+  .project__list__container {
+    height: 65000px;
     overflow: scroll;
     opacity: 1;
 

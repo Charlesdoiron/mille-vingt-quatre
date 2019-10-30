@@ -78,7 +78,7 @@ exports.createPages = ({ graphql, actions }) => {
     })
   })
 
-  PROJECTS
+  //PROJECTS
 
   const loadProjects = new Promise((resolve, reject) => {
     graphql(

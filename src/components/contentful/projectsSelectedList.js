@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useMediaQuery } from "react-responsive"
 import Img from "gatsby-image"
 import { Styledcapitalize } from "../typos"
@@ -27,7 +27,12 @@ const ImgBck = styled.div`
 
 export const ProjectsSelectedList = props => {
   const [imageState, setImageState] = useState("")
+  const [listHeight, setListHeight] = useState("")
 
+  useEffect(() => {
+    const list = document.querySelector(".project__list__container")
+    console.log(list)
+  }, [])
   const handleImage = img => {
     setImageState(img)
   }
@@ -57,6 +62,7 @@ export const ProjectsSelectedList = props => {
             <Styledcapitalize>
               {props.projectSelected.titleProjectsSelected}
             </Styledcapitalize>
+
             <Slider
               projects={props.projectSelected.projectsSelected}
               handleImage={img => handleImage(img)}
@@ -72,11 +78,12 @@ export const ProjectsSelectedList = props => {
             >
               {props.projectSelected.titleProjectsSelected}
             </Styledcapitalize>
-
-            <Slider
-              projects={props.projectSelected.projectsSelected}
-              handleImage={img => handleImage(img)}
-            />
+            <div className="overflow">
+              <Slider
+                projects={props.projectSelected.projectsSelected}
+                handleImage={img => handleImage(img)}
+              />
+            </div>
           </div>
         )}
       </div>
