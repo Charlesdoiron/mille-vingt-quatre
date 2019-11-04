@@ -26,36 +26,9 @@ const ImgBck = styled.div`
   animation: ${blur} 5s ease-in-out 0s;
 `
 
+
 export const ProjectsSelectedList = props => {
   const [imageState, setImageState] = useState("")
-
-  // const [listHeight, setListHeight] = useState("")
-  // function getCoords(elem) {
-  //   // crossbrowser version
-  //   var box = elem.getBoundingClientRect()
-
-  //   var body = document.body
-  //   var docEl = document.documentElement
-
-  //   var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop
-  //   var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft
-
-  //   var clientTop = docEl.clientTop || body.clientTop || 0
-  //   var clientLeft = docEl.clientLeft || body.clientLeft || 0
-
-  //   var top = box.top + scrollTop - clientTop
-  //   var left = box.left + scrollLeft - clientLeft
-
-  //   return { top: Math.round(top), left: Math.round(left) }
-  // }
-  // useEffect(() => {
-  //   const list = document.querySelector(".project__list__container")
-  //   const project = document.querySelector(".project__slide")
-  // }, [])
-
-  const handleImage = img => {
-    setImageState(img)
-  }
 
   const isDesktopOrLaptop = useMediaQuery({
     query: "(min-width: 1224px)",
@@ -82,12 +55,10 @@ export const ProjectsSelectedList = props => {
             <Styledcapitalize>
               {props.title || props.projectSelected.titleProjectsSelected}
             </Styledcapitalize>
-            <div className="overflow">
-              <Slider
-                projects={props.projectSelected.projectsSelected}
-                handleImage={img => handleImage(img)}
-              />
-            </div>
+            <Slider
+              projects={props.projectSelected.projectsSelected}
+              handleImage={setImageState}
+            />
           </div>
         )}
 
@@ -99,13 +70,10 @@ export const ProjectsSelectedList = props => {
             >
               {props.title || props.projectSelected.titleProjectsSelected}
             </Styledcapitalize>
-            <div className="overflow">
-              <Slider
-                projects={props.projectSelected.projectsSelected}
-                handleImage={img => handleImage(img)}
-                showLinkToProject
-              />
-            </div>
+            <Slider
+              projects={props.projectSelected.projectsSelected}
+              handleImage={setImageState}
+            />
           </div>
         )}
       </div>

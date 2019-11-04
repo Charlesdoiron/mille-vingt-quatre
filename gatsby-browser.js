@@ -5,7 +5,7 @@
  */
 
 // You can delete this file if you're not using it
-
+var smoothscroll = require('smoothscroll-polyfill');
 // ES5 way
 // exports.onClientEntry = () => {
 // ES6 way
@@ -14,5 +14,8 @@ export const onClientEntry = () => {
   if (typeof window.IntersectionObserver === `undefined`) {
     import(`intersection-observer`)
     console.log(`# IntersectionObserver is polyfilled!`)
+  }
+  if (typeof window !== `undefined`) {
+    smoothscroll.polyfill();
   }
 }
