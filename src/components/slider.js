@@ -118,10 +118,12 @@ export default class Slider extends Component {
 
   handleDisableWindowScroll = () => {
     document.body.classList.add('disable-overflow')
+    this.props.scrollbarIsVisible && document.body.classList.add('mock-scrollbar')
   }
 
   handleEnableWindowScroll = () => {
     document.body.classList.remove('disable-overflow')
+    this.props.scrollbarIsVisible && document.body.classList.remove('mock-scrollbar')
   }
 
   handleControlledScroll = e => {

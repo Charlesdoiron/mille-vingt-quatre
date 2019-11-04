@@ -20,7 +20,7 @@ function disableScroll(target, callback) {
   target.addEventListener('wheel', preventDefault(callback), {passive: false}); // Disable scrolling in Chrome
   target.onwheel = preventDefault(callback); // modern standard
   target.onmousewheel = preventDefault(callback); // older browsers, IE
-  target.ontouchmove  = preventDefault(callback); // mobile
+  // target.ontouchmove  = preventDefault(callback); // mobile
 }
 
 function enableScroll(target, callback) {
@@ -31,7 +31,7 @@ function enableScroll(target, callback) {
   target.removeEventListener('wheel', preventDefault(callback), {passive: false}); // Enable scrolling in Chrome
   target.onwheel = null;
   target.onmousewheel = null;
-  target.ontouchmove = null;
+  // target.ontouchmove = null;
 }
 
 export {

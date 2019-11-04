@@ -11,9 +11,11 @@ body {
   color: #ffffff;
   background-color: #000000;
   &.disable-overflow {
-      overflow: hidden;
-      padding-right: 14px;
-    }
+    overflow: hidden;
+  }
+  &.mock-scrollbar {
+    padding-right: 14px;
+  }
 }
 
 h1,

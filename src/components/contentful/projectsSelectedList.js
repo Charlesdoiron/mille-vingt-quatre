@@ -84,6 +84,7 @@ export const ProjectsSelectedList = props => {
               ]}
               handleImage={setImageState}
               showLinkToProject
+              scrollbarIsVisible
             />
           </div>
         )}
