@@ -87,7 +87,7 @@ export default class Slider extends Component {
     this.handleSaveProjectHeight()
     this.handleSaveScrollContainerInitPosition()
     this.handleScrollToProjectIndex(0, false)
-    disableScroll(this.scrollArea, this.handleDisabledScroll)
+    disableScroll(this.scrollArea, this.handleControlledScroll)
   }
 
   handleSaveScrollContainerInitPosition = () => {
@@ -98,9 +98,16 @@ export default class Slider extends Component {
     window.scrollTo({ top: this.initialPosition, behavior: "smooth" })
   }
 
-  handleDisabledScroll = e => {
-    // fix container on top of window
+  handleDisableWindowScroll = () => {
     document.body.classList.add('disable-overflow')
+  }
+
+  handleEnableWindowScroll = () => {
+    document.body.classList.remove('disable-overflow')
+  }
+
+  handleControlledScroll = e => {
+    // fix container on top of window
     this.handleFixScrollContainerOnTop();
     // debounce first
     this.debounceScrolling = Date.now() - this.timestamp;
@@ -161,7 +168,6 @@ export default class Slider extends Component {
     this.scrollToProjectTimeout = setTimeout(() => {
       fixScrollContainerOnTop && this.handleFixScrollContainerOnTop()
       this.scrolling = false;
-      document.body.classList.remove('disable-overflow')
     }, 700);
   }
 
@@ -180,6 +186,8 @@ export default class Slider extends Component {
     return(
       <SliderContainer
         ref={ref => this.scrollArea = ref}
+        onMouseEnter={this.handleDisableWindowScroll}
+        onMouseLeave={this.handleEnableWindowScroll}
       >
         <ScrollContainer
         >
