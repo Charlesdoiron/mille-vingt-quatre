@@ -1,6 +1,7 @@
 .wrapper--m {
   margin: 0 auto;
   padding: 0 15%;
+  position: relative;
 
   @media #{$tablet} {
     padding: 0 10%;

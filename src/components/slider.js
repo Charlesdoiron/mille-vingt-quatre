@@ -23,6 +23,7 @@ const Title = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 100;
   `
 
 const ScrollContainer = styled.div`
@@ -40,9 +41,14 @@ const Project = ({
   slug,
   showLinkToProject,
   isCurrentProject,
+  handleDisableWindowScroll,
+  handleEnableWindowScroll,
 }) =>
   <Title
     onClick={handleClick}
+    onMouseEnter={handleDisableWindowScroll}
+    onMouseMove={handleDisableWindowScroll}
+    onMouseLeave={handleEnableWindowScroll}
     className="project__slide"
     >
     <Styledh2 isCurrentProject={isCurrentProject}>
@@ -60,7 +66,14 @@ const Project = ({
     )}
   </Title>
 
-const Projects = ({ projects, handleClick, showLinkToProject, currentProjectIndex }) =>
+const Projects = ({
+  projects,
+  handleClick,
+  showLinkToProject,
+  currentProjectIndex,
+  handleDisableWindowScroll,
+  handleEnableWindowScroll,
+}) =>
   <React.Fragment>
     {projects.map((project, i) => {
       return <Project
@@ -68,6 +81,8 @@ const Projects = ({ projects, handleClick, showLinkToProject, currentProjectInde
         handleClick={() => handleClick(i)}
         showLinkToProject={showLinkToProject}
         isCurrentProject={currentProjectIndex === i}
+        handleDisableWindowScroll={handleDisableWindowScroll}
+        handleEnableWindowScroll={handleEnableWindowScroll}
         {...project}
       />
     })}
@@ -186,8 +201,6 @@ export default class Slider extends Component {
     return(
       <SliderContainer
         ref={ref => this.scrollArea = ref}
-        onMouseEnter={this.handleDisableWindowScroll}
-        onMouseLeave={this.handleEnableWindowScroll}
       >
         <ScrollContainer
         >
@@ -196,6 +209,8 @@ export default class Slider extends Component {
             handleClick={this.handleScrollToProjectIndex}
             showLinkToProject={showLinkToProject}
             currentProjectIndex={currentProjectIndex}
+            handleDisableWindowScroll={this.handleDisableWindowScroll}
+            handleEnableWindowScroll={this.handleEnableWindowScroll}
           />
           <MarginBottom projectHeight={projectHeight} />
         </ScrollContainer>
