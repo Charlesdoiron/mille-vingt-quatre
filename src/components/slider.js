@@ -49,6 +49,9 @@ const Project = ({
     onMouseEnter={handleDisableWindowScroll}
     onMouseMove={handleDisableWindowScroll}
     onMouseLeave={handleEnableWindowScroll}
+    onTouchStart={handleDisableWindowScroll}
+    onTouchMove={handleDisableWindowScroll}
+    onTouchEnd={handleEnableWindowScroll}
     className="project__slide"
     >
     <Styledh2 isCurrentProject={isCurrentProject}>
@@ -183,7 +186,7 @@ export default class Slider extends Component {
     this.scrollToProjectTimeout = setTimeout(() => {
       fixScrollContainerOnTop && this.handleFixScrollContainerOnTop()
       this.scrolling = false;
-    }, 700);
+    }, 100);
   }
 
   render() {

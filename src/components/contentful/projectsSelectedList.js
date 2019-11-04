@@ -56,7 +56,12 @@ export const ProjectsSelectedList = props => {
               {props.title || props.projectSelected.titleProjectsSelected}
             </Styledcapitalize>
             <Slider
-              projects={props.projectSelected.projectsSelected}
+              projects={[
+                ...props.projectSelected.projectsSelected,
+                ...props.projectSelected.projectsSelected,
+                ...props.projectSelected.projectsSelected,
+                ...props.projectSelected.projectsSelected,
+              ]}
               handleImage={setImageState}
             />
           </div>
