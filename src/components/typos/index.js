@@ -1,8 +1,6 @@
 import styled from "styled-components"
 
 const mobile = "768px"
-const desktop = "992px"
-const tablet = `(min-width: ${mobile}) and (max-width: ${desktop} )`
 
 // Titre du projet dans la page projet
 export const StyledH1 = styled.h1`
@@ -177,7 +175,7 @@ export const Styledpostblogfont = styled.h5`
   margin: 0;
 
   @media (max-width: ${mobile}) {
-    font-size: 30px;
+    font-size: 25px;
   }
 `
 
@@ -185,4 +183,8 @@ export const Styledblogdate = styled.span`
   font-family: "gt_walsheim_prolight";
   font-size: 12px;
   text-align: left;
+
+  @media (max-width: ${mobile}) {
+    font-size: 10px;
+  }
 `

@@ -1,37 +1,44 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import "./../style/index.scss"
 
-import { StyledH1, Styledh4, Styledprojectdate } from "../components/typos"
 import BackgroundImage from "gatsby-background-image"
-import { ImageGrid } from "../components/contentful/imageGrid"
-import { ProjectsSelectedList } from "../components/contentful/projectsSelectedList"
 
-import { Video } from "../components/contentful/video"
+import "./../style/index.scss"
 import arrow_next_project from "./../img/pictos/arrow_next_project.svg"
+
+import { StyledH1, Styledh3, Styledprojectdate } from "../components/typos"
+
+import { ImageGrid } from "../components/contentful/imageGrid"
+import { Credits } from "../components/contentful/credits"
+import { ProjectsSelectedList } from "../components/contentful/projectsSelectedList"
+import { Video } from "../components/contentful/video"
 import { BlogPostsSelected } from "../components/contentful/blogPostsSelected"
-
 import { Image } from "../components/contentful/image"
-
 import { NewsLetterSuscribe } from "../components/contentful/newsLetterSuscribe"
 import { Socials } from "../components/contentful/socials"
 import { ContactForm } from "../components/contentful/contactForm"
 import Layout from "../components/layout"
 import { RenderParagraphModule } from "./../components/contentful/renderParagraphModule"
+import { BehindTheScene } from "./../components/contentful/behindTheScene"
 
 class project extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      behindTheSceneIsOpen: false,
+    }
+  }
+
   render() {
     const modules = this.props.data.contentfulProject.modulesUi
     const project = this.props.data.contentfulProject
     const { previous, next } = this.props.pageContext
-
+    console.log(project, "project")
     const renderModulesOnPages = modules => {
       return modules.map((module, i) => {
         switch (module.__typename) {
           case "ContentfulImageGrid":
             return <ImageGrid imageGrid={module} key={i} />
-          case "ContentfulProjectsSelected":
-            return <ProjectsSelectedList projectSelected={module} key={i} />
           case "ContentfulVideo":
             return <Video video={module} key={i} />
           case "ContentfulBlogPostSelected":
@@ -84,10 +91,21 @@ class project extends React.Component {
                 }}
               >
                 {previous && (
-                  <Link to={`project/${previous.node.slug}`} rel="prev">
+                  <Link
+                    to={`project/${previous.node.slug}`}
+                    rel="prev"
+                    style={{
+                      position: "absolute",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      top: "0px",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
                     {previous.node.projectTitle}
                     <img
                       src={arrow_next_project}
+                      alt="previous"
                       style={{
                         transform: "rotate(270deg)",
                         marginLeft: "10px",
@@ -104,9 +122,19 @@ class project extends React.Component {
                 }}
               >
                 {next && (
-                  <Link to={`project/${next.node.slug}`} rel="next">
+                  <Link
+                    to={`project/${next.node.slug}`}
+                    rel="next"
+                    style={{
+                      top: "50px",
+                      whiteSpace: "nowrap",
+                      position: "absolute",
+                      right: "-30px",
+                    }}
+                  >
                     {next.node.projectTitle}
                     <img
+                      alt="next"
                       src={arrow_next_project}
                       style={{
                         transform: "rotate(270deg)",
@@ -130,6 +158,48 @@ class project extends React.Component {
           </BackgroundImage>
         </div>
         {modules && <div>{renderModulesOnPages(modules)}</div>}
+
+        <div className="wrapper--m">
+          <div className="credits__titles">
+            <Styledh3>
+              {project.projectTitle}
+              <Styledprojectdate>{project.projectTitleDate}</Styledprojectdate>
+            </Styledh3>
+            {project.creditSubtitle && (
+              <div
+                className="credits__subtitle"
+                dangerouslySetInnerHTML={{
+                  __html: project.creditSubtitle.creditSubtitle,
+                }}
+              ></div>
+            )}
+          </div>
+
+          {project.credits && (
+            <div className="credits__container">
+              {project.credits.map(credit => {
+                return <Credits credit={credit} />
+              })}
+            </div>
+          )}
+          <BehindTheScene project={project} />
+        </div>
+        <div className="related__project__container">
+          {modules.map(module => {
+            switch (module.__typename) {
+              case "ContentfulProjectsSelected":
+                return (
+                  <ProjectsSelectedList
+                    projectSelected={module}
+                    title="related project"
+                    showAllProjectsLink
+                  />
+                )
+              default:
+                return null
+            }
+          })}
+        </div>
       </Layout>
     )
   }
@@ -151,12 +221,52 @@ export const pagequeryproject = graphql`
         slug
       }
       cover {
-        fluid(quality: 90, maxWidth: 1800) {
+        fluid(quality: 90, maxWidth: 650) {
           ...GatsbyContentfulFluid
+        }
+      }
+      creditSubtitle {
+        creditSubtitle
+      }
+      credits {
+        title
+        text {
+          text
+        }
+      }
+      categories {
+        slug
+        blog_post {
+          createdAt(formatString: "DD.MM.Y")
+          title
+          slug
+          hero {
+            fluid(quality: 90, maxWidth: 1800) {
+              ...GatsbyContentfulFluid
+            }
+          }
+          excerpt {
+            excerpt
+          }
         }
       }
 
       modulesUi {
+        ... on ContentfulProjectsSelected {
+          titleProjectsSelected
+          projectsSelected {
+            ... on ContentfulProject {
+              slug
+              projectTitle
+              projectTitleDate
+              cover {
+                fluid(quality: 90, maxWidth: 1800) {
+                  ...GatsbyContentfulFluid
+                }
+              }
+            }
+          }
+        }
         ... on ContentfulParagraphModule {
           quote {
             quote

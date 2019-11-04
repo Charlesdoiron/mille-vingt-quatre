@@ -6,6 +6,7 @@
   "author": "Charles d'Oiron <doironcharles@gmail.com>",
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^13.4.0",
+    "add": "^2.0.6",
     "babel-plugin-styled-components": "^1.10.6",
     "baffle": "^0.3.6",
     "classnames": "^2.2.6",
@@ -30,6 +31,7 @@
     "node-sass": "^4.12.0",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
+    "react-collapse": "^5.0.0",
     "react-dom": "^16.9.0",
     "react-flickity-component": "^3.4.0",
     "react-headroom": "^3.0.0",
@@ -37,7 +39,8 @@
     "react-responsive": "^8.0.1",
     "react-slick": "^0.25.2",
     "slick-carousel": "^1.8.1",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.0",
+    "yarn": "^1.19.1"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

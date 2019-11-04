@@ -8,7 +8,7 @@ import instagram from "./../img/pictos/instagram.svg"
 import facebook from "./../img/pictos/facebook.svg"
 import vimeo from "./../img/pictos/vimeo.svg"
 import { graphql } from "gatsby"
-import { Location, Router } from "@reach/router"
+import { Location } from "@reach/router"
 const MenuContainer = styled.div`
   margin: 0 auto;
   display: flex;
@@ -35,7 +35,7 @@ const Menu = ({ data }) => {
       {({ location }) => (
         <MenuContainer>
           <Link to={"/home"}>
-            <img src={logo} className="logo" />
+            <img alt="logo" src={logo} className="logo" />
           </Link>
           {/* location.pathname.substring(0, 9)=> remove project after pathname */}
           {location.pathname.substring(0, 9) === "/project/" && (
@@ -68,22 +68,28 @@ const Menu = ({ data }) => {
                   <a
                     href="https://www.instagram.com/1024architecture/"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <img src={instagram} />
+                    <img src={instagram} alt="instagram" />
                   </a>
                   <a
                     href="https://www.facebook.com/1024architecture/"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <img src={facebook} />
+                    <img src={facebook} alt="facebook" />
                   </a>
-                  <a href="https://vimeo.com/the1024" target="_blank">
-                    <img src={vimeo} />
+                  <a
+                    href="https://vimeo.com/the1024"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={vimeo} alt="vimeo" />
                   </a>
                 </div>
               </div>
             )}
-            <a onClick={e => setIsOpen(!isOpen)}>
+            <span onClick={e => setIsOpen(!isOpen)}>
               {!isOpen ? (
                 <div className="burger">
                   <div className="line"></div>
@@ -97,7 +103,7 @@ const Menu = ({ data }) => {
                   <div className="line"></div>
                 </div>
               )}
-            </a>
+            </span>
           </MenuRight>
         </MenuContainer>
       )}

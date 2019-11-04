@@ -1,11 +1,8 @@
 .project__selected__container {
-  padding: 100px 0;
+  position: relative;
+  height: 100vh;
 
-  @media #{$mobile} {
-    padding: 50px 0;
-  }
-
-  .projects__list {
+  .project__selected__container__desktop {
     display: flex;
     margin-top: 90px;
   }
@@ -13,10 +10,11 @@
   .overflow {
     height: 650px;
     overflow: scroll;
+    width: 100%;
   }
 
   .project__list__container {
-    height: 65000px;
+    height: 200%;
     overflow: scroll;
     opacity: 1;
 
@@ -36,7 +34,7 @@
     }
 
     @media #{$mobile} {
-      height: 65%;
+      height: 100%;
     }
   }
 

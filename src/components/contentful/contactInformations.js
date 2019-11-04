@@ -1,5 +1,4 @@
 import React from "react"
-import { Link } from "gatsby"
 import map from "./../../img/1024_map.png"
 import map_mobile from "./../../img/1024_map_mobile.png"
 
@@ -19,11 +18,12 @@ export const ContactInformations = props => {
     <div className="contact__informations__container">
       <div>
         <a
+          rel="noopener noreferrer"
           target="_blank"
           href="https://www.google.com/maps/place/27+Passage+Courtois,+75011+Paris/@48.8573507,2.3860311,17z/data=!3m1!4b1!4m5!3m4!1s0x47e66df522f34a0f:0xff5d4ce24e893133!8m2!3d48.8573507!4d2.3882198"
         >
-          {isDesktopOrLaptop ? <img src={map} /> : ""}
-          {isTabletOrMobileDevice ? <img src={map_mobile} /> : ""}
+          {isDesktopOrLaptop ? <img alt="map" src={map} /> : ""}
+          {isTabletOrMobileDevice ? <img alt="map" src={map_mobile} /> : ""}
         </a>
       </div>
       <div>

@@ -7,6 +7,11 @@
     padding: 30px 0;
   }
 
+  .text__for__image {
+    display: flex;
+    flex-direction: column !important;
+  }
+
   &.Image-Align-Left {
     display: flex;
 

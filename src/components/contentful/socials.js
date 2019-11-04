@@ -12,12 +12,16 @@ export const Socials = props => {
             {props.social.socials.map((s, i) => {
               return (
                 <div key={i}>
-                  <a href={s.socialLink} target="_blank">
+                  <a
+                    href={s.socialLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <img
                       src={arrow_right}
                       alt="arrow"
                       className="arrow-mobile"
-                    />{" "}
+                    />
                     <Styledh5>{s.socialTitle}</Styledh5>
                   </a>
                 </div>

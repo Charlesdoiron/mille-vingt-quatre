@@ -5,7 +5,10 @@ export const TwoSectionsWithImage = props => {
   return (
     <div>
       <p>{props.twoSectionsImageText.twoSectionsText.twoSectionsText}</p>
-      <img src={props.twoSectionsImageText.image.fluid.src} />
+      <img
+        src={props.twoSectionsImageText.image.fluid.src}
+        alt="two sections"
+      />
     </div>
   )
 }

@@ -43,6 +43,7 @@ class blogpost extends React.Component {
                     </Styledpostblogfont>
                     <Styledcapitalize>
                       <img
+                        alt="previous"
                         src={arrow}
                         style={{
                           transform: "rotate(180deg)",
@@ -59,7 +60,7 @@ class blogpost extends React.Component {
                   <Link to={next.node.slug} rel="next">
                     <Styledpostblogfont> {next.node.title}</Styledpostblogfont>
                     <Styledcapitalize>
-                      next article <img src={arrow} />
+                      next article <img alt="next" src={arrow} />
                     </Styledcapitalize>
                   </Link>
                 )}

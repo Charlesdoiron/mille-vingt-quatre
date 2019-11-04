@@ -1,12 +1,15 @@
 import React, { Component } from "react"
 import styled from "styled-components"
-
+import { Link } from "gatsby"
 import { Styledh2, Styledprojectdate } from "./typos"
+import arrow_to_project from "./../img/pictos/arrow_to_project.svg"
 
 const Title = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
+  }
 `
 
 export default class Slider extends Component {
@@ -20,7 +23,7 @@ export default class Slider extends Component {
         {this.props.projects.map((project, i) => (
           <Title
             key={i}
-            onClick={e => {
+            onMouseEnter={e => {
               project.cover && handleImage(project.cover.fluid)
             }}
             className="project__slide"
@@ -29,13 +32,20 @@ export default class Slider extends Component {
               {project.projectTitle}
               <Styledprojectdate>{project.projectTitleDate}</Styledprojectdate>
             </Styledh2>
-
-            {/* <Link to={`/project/${project.slug}`}> See the project -></Link> */}
+            {this.props.showLinkToProject && (
+              <Link
+                to={`/project/${project.slug}`}
+                className="link__to__project"
+              >
+                See the project{" "}
+                <img alt="see the project" src={arrow_to_project} />
+              </Link>
+            )}
           </Title>
         ))}
       </ul>
     ) : (
-      "Pas de projets"
+      "NO PROJECT WITH THIS CATEGORY"
     )
   }
 }

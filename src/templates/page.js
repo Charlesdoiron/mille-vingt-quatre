@@ -20,8 +20,6 @@ import { ContactForm } from "../components/contentful/contactForm"
 import { ContactInformations } from "../components/contentful/contactInformations"
 import { RenderParagraphModule } from "./../components/contentful/renderParagraphModule"
 
-import { Styledh4 } from "./../components/typos"
-
 const FullHeight = styled.div`
   height: 100vh;
   width: 100%;

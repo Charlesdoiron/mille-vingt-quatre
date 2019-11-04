@@ -13,7 +13,10 @@ export const Image = props => {
         <div>
           <Img fluid={props.image.image.fluid} />
           {props.image.text && (
-            <div dangerouslySetInnerHTML={{ __html: props.image.text.text }} />
+            <div
+              dangerouslySetInnerHTML={{ __html: props.image.text.text }}
+              className="text__for__image"
+            />
           )}
         </div>
       </div>

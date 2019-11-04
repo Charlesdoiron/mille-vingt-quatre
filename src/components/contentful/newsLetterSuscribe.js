@@ -2,7 +2,6 @@ import React from "react"
 
 import news_letter_picto from "./../../img/pictos/news_letter.svg"
 import small_arrow_right from "./../../img/pictos/small_arrow_right.svg"
-import styled from "styled-components"
 import { Styledcapitalize } from "./../typos"
 
 export const NewsLetterSuscribe = props => {
@@ -11,7 +10,6 @@ export const NewsLetterSuscribe = props => {
       <div className="news--letter--suscribe__container">
         <div>
           <img src={news_letter_picto} alt="picto" />
-
           <div>
             <Styledcapitalize>
               {props.news_letter.newsLetterSuscribeTitle}

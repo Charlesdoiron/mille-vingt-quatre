@@ -34,7 +34,7 @@ export const ProjectsList = props => {
         )
         if (hadCategorie.length > 0) {
           return resultsWithCategories[i]
-        } else return
+        } else return null
       })
       setProjectsState(projectsFiltered)
     }
@@ -42,10 +42,9 @@ export const ProjectsList = props => {
 
   useEffect(() => {
     if (categorieState === "All") {
-      console.log("useEffect is All ")
       handleCategorie("All")
     }
-  }, [categorieState])
+  })
 
   console.log("STATE PROJECTS ", projectsState)
 
@@ -69,6 +68,7 @@ export const ProjectsList = props => {
         <Slider
           projects={projectsState}
           handleImage={img => handleImage(img)}
+          showLinkToProject
         />
       </div>
     </div>

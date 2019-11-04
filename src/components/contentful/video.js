@@ -12,6 +12,7 @@ export const Video = props => {
         autoplay
         loop
         allowFullScreen
+        title="video"
       ></iframe>
     </div>
   )

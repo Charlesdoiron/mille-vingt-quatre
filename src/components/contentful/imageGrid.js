@@ -11,7 +11,7 @@ export const ImageGrid = props => {
       })}
     >
       {props.imageGrid.grid.map((img, i) => {
-        return <img src={img.fluid.src} key={i} />
+        return <img src={img.fluid.src} key={i} alt="grid-img" />
       })}
     </div>
   )

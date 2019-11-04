@@ -94,9 +94,10 @@
 }
 
 .menu-right__container {
-  a {
+  span {
     display: flex;
     align-items: center;
+    margin-right: 20px;
   }
   .burger {
     display: flex;
