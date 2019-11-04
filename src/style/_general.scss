@@ -1,12 +1,19 @@
 html,
 body {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #fff;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   width: 100%;
   -webkit-overflow-scrolling: touch;
+}
+body {
+  color: #ffffff;
+  background-color: #000000;
+  &.disable-overflow {
+      overflow: hidden;
+      padding-right: 14px;
+    }
 }
 
 h1,

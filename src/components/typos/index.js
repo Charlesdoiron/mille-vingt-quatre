@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 const mobile = "768px"
 
@@ -18,6 +18,12 @@ export const StyledH1 = styled.h1`
   }
 `
 // Gros titre des projets
+const hoverCss = css`
+  -webkit-text-fill-color: white;
+  -webkit-text-stroke-width: 0.1px;
+  -webkit-text-stroke-color: transparent;
+`
+
 export const Styledh2 = styled.h2`
   font-family: "gt_walsheim_prolight";
   font-weight: 100;
@@ -38,10 +44,10 @@ export const Styledh2 = styled.h2`
   margin: 0 0 40px 0;
   white-space: nowrap;
 
+  ${props => props.isCurrentProject && hoverCss}
+
   &:hover {
-    -webkit-text-fill-color: white;
-    -webkit-text-stroke-width: 0.1px;
-    -webkit-text-stroke-color: transparent;
+    ${hoverCss}
   }
   @media (max-width: ${mobile}) {
     white-space: normal;

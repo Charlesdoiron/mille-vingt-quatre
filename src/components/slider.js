@@ -1,41 +1,33 @@
 import React, { Component } from "react"
-import 'react-perfect-scrollbar/dist/css/styles.css';
-import PerfectScrollbar from 'react-perfect-scrollbar'
 import styled from "styled-components"
 import { Link } from "gatsby"
 import { Styledh2, Styledprojectdate } from "./typos"
 import arrow_to_project from "./../img/pictos/arrow_to_project.svg"
+import { disableScroll } from "../utils/disableScroll"
 
 const sliderHeight = 650;
-const perfectScrollbarOptions = {
-  handlers : ['click-rail', 'drag-thumb', 'keyboard', 'wheel', 'touch'],
-  wheelSpeed: 0.5,
-  wheelPropagation: true,
-  // swipeEasing: true,
-  // minScrollbarLength: null,
-  // maxScrollbarLength: null,
-  // scrollingThreshold: 1000,
-  useBothWheelAxes: true,
-  suppressScrollX: true,
-  // suppressScrollY: false,
-  // scrollXMarginOffset: 0,
-  // scrollYMarginOffset: 0,
-}
 
 const SliderContainer = styled.div`
   height: ${sliderHeight}px;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
   padding-bottom: ${props => sliderHeight - props.projectHeight}px;
-`
+  -webkit-overflow-scrolling: auto !important;
+  `
 
 const MarginBottom = styled.div`
   height: ${props => sliderHeight - props.projectHeight}px;
-`
+  `
 
 const Title = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  `
+
+const ScrollContainer = styled.div`
+  -webkit-overflow-scrolling: auto !important;
+  /* border: 3px solid #fff; */
 `
 
 const getProjectImageToHandle = ({ cover }) => cover.fluid;
@@ -44,15 +36,16 @@ const Project = ({
   cover,
   projectTitle,
   projectTitleDate,
-  handleImage,
+  handleClick,
   slug,
   showLinkToProject,
+  isCurrentProject,
 }) =>
   <Title
-    onClick={() => cover && handleImage(getProjectImageToHandle({ cover }))}
+    onClick={handleClick}
     className="project__slide"
     >
-    <Styledh2>
+    <Styledh2 isCurrentProject={isCurrentProject}>
       {projectTitle}
       <Styledprojectdate>{projectTitleDate}</Styledprojectdate>
     </Styledh2>
@@ -67,13 +60,14 @@ const Project = ({
     )}
   </Title>
 
-const Projects = ({ projects, handleImage, showLinkToProject }) =>
+const Projects = ({ projects, handleClick, showLinkToProject, currentProjectIndex }) =>
   <React.Fragment>
     {projects.map((project, i) => {
       return <Project
-        key={project.slug}
-        handleImage={handleImage}
+        key={project.slug + i}
+        handleClick={() => handleClick(i)}
         showLinkToProject={showLinkToProject}
+        isCurrentProject={currentProjectIndex === i}
         {...project}
       />
     })}
@@ -83,13 +77,44 @@ export default class Slider extends Component {
 
   state = {
     projectHeight: 100,
+    currentProjectIndex: 0,
   }
 
   scrollling = null;
-  scrollTimeout = 300;
 
   componentDidMount(){
+    console.clear()
     this.handleSaveProjectHeight()
+    this.handleSaveScrollContainerInitPosition()
+    this.handleScrollToProjectIndex(0, false)
+    disableScroll(this.scrollArea, this.handleDisabledScroll)
+  }
+
+  handleSaveScrollContainerInitPosition = () => {
+    this.initialPosition = this.scrollArea.getBoundingClientRect().top
+  }
+
+  handleFixScrollContainerOnTop = () => {
+    window.scrollTo({ top: this.initialPosition, behavior: "smooth" })
+  }
+
+  handleDisabledScroll = e => {
+    // fix container on top of window
+    document.body.classList.add('disable-overflow')
+    this.handleFixScrollContainerOnTop();
+    // debounce first
+    this.debounceScrolling = Date.now() - this.timestamp;
+    if (this.debounceScrolling < 300) {
+      this.timestamp = Date.now();
+      return;
+    }
+    // prevent scrolling when already scrollin
+    if (this.scrolling) return;
+    this.scrolling = true;
+
+    // handle scroll
+    if (e.deltaY > 0) this.handleScrollDown();
+    if (e.deltaY < 0) this.handleScrollUp();
   }
 
   componentWillUnmount() {
@@ -100,63 +125,72 @@ export default class Slider extends Component {
     if (!this.scrollArea) return;
     if (!this.scrollArea.childNodes.length) return;
     setTimeout(() => {
-      const projectHeight = this.scrollArea.childNodes[0].getBoundingClientRect().height;
+      const projectHeight = this.scrollArea.childNodes[0].childNodes[0].getBoundingClientRect().height;
       this.setState({ projectHeight })
-    }, 500); // to make sure the title is mounted
+    }, 200); // to make sure the title is mounted
   }
 
-  handleScroll = (scroll) => {
-    clearTimeout(this.scrollToProjectTimeout)
-    this.scrollToProjectTimeout = setTimeout(() => {
-      this.handleScrollToProject(scroll)
-    }, this.scrollTimeout);
-  }
-
-  handleScrollToProject = (scroll) => {
-    const { projectHeight } = this.state;
+  handleScrollDown = () => {
+    const { currentProjectIndex } = this.state;
     const { projects } = this.props;
-    const scrollTop = scroll.scrollTop;
-    const numberOfProjects = scroll.childNodes.length - 3;
-    console.log(
-      'scroll tio flucking project',
-      scrollTop,
-      numberOfProjects,
-      this.state.projectHeight,
-    );
-    const projectToFocus = Math.round(scrollTop / projectHeight)
-    const newScrollTop = projectToFocus * projectHeight;
+    const nextProjectIndex =
+    currentProjectIndex === projects.length - 1
+    ? currentProjectIndex
+    : currentProjectIndex + 1
+    this.handleScrollToProjectIndex(nextProjectIndex)
+  }
+
+  handleScrollUp = () => {
+    const { currentProjectIndex } = this.state;
+    const nextProjectIndex =
+    currentProjectIndex === 0
+    ? currentProjectIndex
+    : currentProjectIndex - 1
+    this.handleScrollToProjectIndex(nextProjectIndex)
+  }
+
+  handleScrollToProjectIndex = (projectIndex, fixScrollContainerOnTop = true) => {
+    fixScrollContainerOnTop && this.handleFixScrollContainerOnTop()
+    const { projectHeight } = this.state;
+    const newScrollTop = projectIndex * projectHeight;
     this.scrollArea.scrollTo({ top: newScrollTop, behavior: 'smooth' })
-    this.props.handleImage(getProjectImageToHandle(projects[projectToFocus]))
+    const { projects, handleImage } = this.props;
+    this.setState({ currentProjectIndex: projectIndex }, () => {
+      handleImage(getProjectImageToHandle(projects[projectIndex]))
+    })
+    this.scrollToProjectTimeout = setTimeout(() => {
+      fixScrollContainerOnTop && this.handleFixScrollContainerOnTop()
+      this.scrolling = false;
+      document.body.classList.remove('disable-overflow')
+    }, 700);
   }
 
   render() {
     const {
-      handleImage,
       projects,
       showLinkToProject,
     } = this.props;
 
     const {
       projectHeight,
+      currentProjectIndex,
     } = this.state;
 
     if (!projects.length) return "Pas de projets"
     return(
-      <SliderContainer>
-        <PerfectScrollbar
-          component='ul'
-          options={perfectScrollbarOptions}
-          onScrollY={this.handleScroll}
-          containerRef={ref => (this.scrollArea = ref)}
-          ref={ref => (this._scrollAreaRef = ref)}
+      <SliderContainer
+        ref={ref => this.scrollArea = ref}
+      >
+        <ScrollContainer
         >
           <Projects
             projects={projects}
-            handleImage={handleImage}
+            handleClick={this.handleScrollToProjectIndex}
             showLinkToProject={showLinkToProject}
+            currentProjectIndex={currentProjectIndex}
           />
           <MarginBottom projectHeight={projectHeight} />
-        </PerfectScrollbar>
+        </ScrollContainer>
       </SliderContainer>
     )
   }
