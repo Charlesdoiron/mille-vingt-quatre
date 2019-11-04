@@ -4,26 +4,9 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 import styled from "styled-components"
 import { Link } from "gatsby"
 import { Styledh2, Styledprojectdate } from "./typos"
+import arrow_to_project from "./../img/pictos/arrow_to_project.svg"
 
 const sliderHeight = 650;
-
-const SliderContainer = styled.div`
-  height: ${sliderHeight}px;
-  overflow: hidden;
-  padding-bottom: ${props => sliderHeight - props.projectHeight}px;
-`
-
-const MarginBottom = styled.div`
-  height: ${props => sliderHeight - props.projectHeight}px;
-`
-
-const Title = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid #fff;
-`
-
 const perfectScrollbarOptions = {
   handlers : ['click-rail', 'drag-thumb', 'keyboard', 'wheel', 'touch'],
   wheelSpeed: 0.5,
@@ -39,43 +22,62 @@ const perfectScrollbarOptions = {
   // scrollYMarginOffset: 0,
 }
 
+const SliderContainer = styled.div`
+  height: ${sliderHeight}px;
+  overflow: hidden;
+  padding-bottom: ${props => sliderHeight - props.projectHeight}px;
+`
 
-const Projects = ({ projects, handleImage }) =>
-  <React.Fragment>
-    {projects.map((project, i) => {
-      return <Project
-        key={project.slug}
-        handleImage={handleImage}
-        {...project}
-      />
-    })}
-  </React.Fragment>
+const MarginBottom = styled.div`
+  height: ${props => sliderHeight - props.projectHeight}px;
+`
 
+const Title = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const getProjectImageToHandle = ({ cover }) => cover.fluid;
 
 const Project = ({
   cover,
   projectTitle,
   projectTitleDate,
   handleImage,
+  slug,
+  showLinkToProject,
 }) =>
   <Title
-    onClick={() => cover && handleImage(cover.fluid)}
+    onClick={() => cover && handleImage(getProjectImageToHandle({ cover }))}
     className="project__slide"
     >
     <Styledh2>
       {projectTitle}
       <Styledprojectdate>{projectTitleDate}</Styledprojectdate>
     </Styledh2>
-    {this.props.showLinkToProject && (
-              <Link
-                to={`/project/${project.slug}`}
-                className="link__to__project"
-              >
-                See the project{" "}
-                <img alt="see the project" src={arrow_to_project} />
-              </Link>
-            )}
+    {showLinkToProject && (
+      <Link
+        to={`/project/${slug}`}
+        className="link__to__project"
+      >
+        See the project{" "}
+        <img alt="see the project" src={arrow_to_project} />
+      </Link>
+    )}
   </Title>
+
+const Projects = ({ projects, handleImage, showLinkToProject }) =>
+  <React.Fragment>
+    {projects.map((project, i) => {
+      return <Project
+        key={project.slug}
+        handleImage={handleImage}
+        showLinkToProject={showLinkToProject}
+        {...project}
+      />
+    })}
+  </React.Fragment>
 
 export default class Slider extends Component {
 
@@ -100,17 +102,19 @@ export default class Slider extends Component {
     setTimeout(() => {
       const projectHeight = this.scrollArea.childNodes[0].getBoundingClientRect().height;
       this.setState({ projectHeight })
-    }, 500);
+    }, 500); // to make sure the title is mounted
   }
 
   handleScroll = (scroll) => {
     clearTimeout(this.scrollToProjectTimeout)
     this.scrollToProjectTimeout = setTimeout(() => {
       this.handleScrollToProject(scroll)
-    },  this.scrollTimeout);
+    }, this.scrollTimeout);
   }
 
   handleScrollToProject = (scroll) => {
+    const { projectHeight } = this.state;
+    const { projects } = this.props;
     const scrollTop = scroll.scrollTop;
     const numberOfProjects = scroll.childNodes.length - 3;
     console.log(
@@ -119,12 +123,17 @@ export default class Slider extends Component {
       numberOfProjects,
       this.state.projectHeight,
     );
+    const projectToFocus = Math.round(scrollTop / projectHeight)
+    const newScrollTop = projectToFocus * projectHeight;
+    this.scrollArea.scrollTo({ top: newScrollTop, behavior: 'smooth' })
+    this.props.handleImage(getProjectImageToHandle(projects[projectToFocus]))
   }
 
   render() {
     const {
       handleImage,
-      projects
+      projects,
+      showLinkToProject,
     } = this.props;
 
     const {
@@ -144,10 +153,8 @@ export default class Slider extends Component {
           <Projects
             projects={projects}
             handleImage={handleImage}
+            showLinkToProject={showLinkToProject}
           />
-          <Projects projects={projects} handleImage={handleImage} />
-          <Projects projects={projects} handleImage={handleImage} />
-          <Projects projects={projects} handleImage={handleImage} />
           <MarginBottom projectHeight={projectHeight} />
         </PerfectScrollbar>
       </SliderContainer>
