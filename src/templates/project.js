@@ -310,7 +310,6 @@ export const pagequeryproject = graphql`
           }
         }
         ... on ContentfulVideo {
-          id
           video
         }
       }

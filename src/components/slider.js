@@ -8,8 +8,6 @@ const Title = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
-  }
 `
 
 export default class Slider extends Component {
