@@ -4,15 +4,16 @@ import { Link } from "gatsby"
 import { Styledh2, Styledprojectdate } from "./typos"
 import arrow_to_project from "./../img/pictos/arrow_to_project.svg"
 import { disableScroll } from "../utils/disableScroll"
+import getScrollbarWidth from "../utils/scrollbarWidth"
 
 const sliderHeight = 650;
+const scrollbarWidth = getScrollbarWidth();
 
 const SliderContainer = styled.div`
   height: ${sliderHeight}px;
   overflow-x: hidden;
   overflow-y: scroll;
   padding-bottom: ${props => sliderHeight - props.projectHeight}px;
-  -webkit-overflow-scrolling: auto !important;
   `
 
 const MarginBottom = styled.div`
@@ -118,12 +119,13 @@ export default class Slider extends Component {
 
   handleDisableWindowScroll = () => {
     document.body.classList.add('disable-overflow')
-    this.props.scrollbarIsVisible && document.body.classList.add('mock-scrollbar')
+    this.props.scrollbarIsVisible && (document.body.style.paddingRight = `${scrollbarWidth}px`);
   }
 
   handleEnableWindowScroll = () => {
     document.body.classList.remove('disable-overflow')
-    this.props.scrollbarIsVisible && document.body.classList.remove('mock-scrollbar')
+    // this.props.scrollbarIsVisible && document.body.classList.remove('mock-scrollbar')
+    this.props.scrollbarIsVisible && (document.body.style.paddingRight = 0);
   }
 
   handleControlledScroll = e => {
@@ -138,6 +140,7 @@ export default class Slider extends Component {
     // prevent scrolling when already scrollin
     if (this.scrolling) return;
     this.scrolling = true;
+    disableScroll(this.scrollArea, this.handleControlledScroll);
 
     // handle scroll
     if (e.deltaY > 0) this.handleScrollDown();
@@ -188,7 +191,7 @@ export default class Slider extends Component {
     this.scrollToProjectTimeout = setTimeout(() => {
       fixScrollContainerOnTop && this.handleFixScrollContainerOnTop()
       this.scrolling = false;
-    }, 100);
+    }, 700);
   }
 
   render() {
