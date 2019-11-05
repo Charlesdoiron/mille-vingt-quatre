@@ -2,11 +2,20 @@
   overflow: hidden;
   padding-bottom: 56.25%;
   position: relative;
-  height: 0;
+  height: 100%;
   display: flex;
   justify-content: center;
   text-align: center;
   margin: 0 auto;
+  position: relative;
+
+  &.isCover {
+    width: 100%;
+    z-index: 10;
+    iframe {
+      padding: 0 !important;
+    }
+  }
 }
 
 .video__container iframe {

@@ -233,6 +233,10 @@ export const pagequerypagebyslug = graphql`
             }
           }
         }
+        ... on ContentfulVideo {
+          video
+          display
+        }
 
         ... on ContentfulProjectsSelected {
           titleProjectsSelected

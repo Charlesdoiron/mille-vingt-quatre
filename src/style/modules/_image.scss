@@ -1,14 +1,14 @@
 .image__container {
   width: 100%;
   position: relative;
-  padding: 85px 15%;
+  padding: 85px 0;
 
-  @media #{$tablet} {
-    padding: 30px 10%;
-  }
-  @media #{$mobile} {
-    padding: 0 5%;
-  }
+  // @media #{$tablet} {
+  //   padding: 30px 10%;
+  // }
+  // @media #{$mobile} {
+  //   padding: 0 5%;
+  // }
 
   .text__for__image {
     display: flex;
@@ -17,14 +17,20 @@
 
   &.Image-Align-Left {
     padding: 85px 30% 0 0;
+
     @media #{$mobile} {
       padding: 0 5%;
     }
   }
 
   &.Image-Align-Right {
-    padding: 85px 0 0 30%;
+    img {
+      padding: 85px 0 0 15%;
+    }
     @media #{$mobile} {
+      img {
+        padding: 0;
+      }
       padding: 0 5%;
     }
   }

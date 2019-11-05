@@ -20,6 +20,7 @@ import { ContactForm } from "../components/contentful/contactForm"
 import Layout from "../components/layout"
 import { RenderParagraphModule } from "./../components/contentful/renderParagraphModule"
 import { BehindTheScene } from "./../components/contentful/behindTheScene"
+import { CustomSlider as Slider } from "./../components/contentful/slider"
 
 class project extends React.Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class project extends React.Component {
     const modules = this.props.data.contentfulProject.modulesUi
     const project = this.props.data.contentfulProject
     const { previous, next } = this.props.pageContext
-    console.log(project, "project")
+    console.log(modules, "modules")
     const renderModulesOnPages = modules => {
       return modules.map((module, i) => {
         switch (module.__typename) {
@@ -44,7 +45,13 @@ class project extends React.Component {
           case "ContentfulBlogPostSelected":
             return <BlogPostsSelected postSelected={module} key={i} />
           case "ContentfulImageImageAndText":
-            return <Image image={module} key={i} />
+            return (
+              <div className="wrapper--m">
+                <Image image={module} key={i} />
+              </div>
+            )
+          case "ContentfulSlider":
+            return <Slider images={module} key={i} />
           case "ContentfulParagraphModule":
             return <RenderParagraphModule module={module} key={i} />
           case "ContentfulNewsLetterSuscribe":
@@ -252,6 +259,13 @@ export const pagequeryproject = graphql`
       }
 
       modulesUi {
+        ... on ContentfulSlider {
+          images {
+            fluid {
+              src
+            }
+          }
+        }
         ... on ContentfulProjectsSelected {
           titleProjectsSelected
           projectsSelected {

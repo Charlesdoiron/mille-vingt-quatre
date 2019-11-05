@@ -17,8 +17,10 @@ h5 {
   font-weight: 100;
 }
 a,
-li {
+li,
+span {
   font-family: $font-be-vietnam;
+  font-weight: 100 !important;
 }
 
 input,
