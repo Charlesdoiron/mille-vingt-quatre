@@ -38,14 +38,14 @@
 }
 
 .quote__container {
-  padding: 50px 0;
+  padding: 85px 0;
 
   @media #{$tablet} {
     padding: 10% 0;
   }
 
   @media #{$mobile} {
-    padding: 5% 0;
+    padding: 35px 0;
   }
 
   h4 {

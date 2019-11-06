@@ -5,8 +5,6 @@ import "./../style/index.scss"
 import { Styledpostblogfont, Styledcapitalize } from "../components/typos"
 
 import { ImageGrid } from "../components/contentful/imageGrid"
-import { Credits } from "../components/contentful/credits"
-import { ProjectsSelectedList } from "../components/contentful/projectsSelectedList"
 import { Video } from "../components/contentful/video"
 import { BlogPostsSelected } from "../components/contentful/blogPostsSelected"
 import { Image } from "../components/contentful/image"

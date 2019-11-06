@@ -11,7 +11,11 @@
       margin-bottom: 70px;
     }
     & > div {
-      padding-left: 40%;
+      padding-left: 20%;
     }
+  }
+
+  @media #{$mobile} {
+    padding: 35px 0;
   }
 }

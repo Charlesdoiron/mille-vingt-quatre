@@ -3,14 +3,18 @@
   flex-wrap: wrap;
   width: 100%;
   padding: 0 5%;
-  margin: 0 auto;
+  padding: 85px auto;
   flex-direction: row;
+
+  @media #{$mobile} {
+    padding: 35px 10% !important;
+  }
 
   &.marginBetween {
     justify-content: space-between;
   }
   &.marginAround {
-    justify-content: space-around;
+    justify-content: center;
   }
 
   &.TwoThirdsOneThird {
@@ -20,13 +24,26 @@
     img:first-child {
       width: 60% !important;
       height: 100%;
+
+      @media #{$mobile} {
+        width: 100% !important;
+      }
     }
     img:nth-child(2) {
       width: 40% !important;
       height: 100%;
+
+      @media #{$mobile} {
+        width: 100% !important;
+      }
     }
   }
 
+  &.TextBottom {
+    .content {
+      margin: 30px 0;
+    }
+  }
   @media #{$tablet} {
     padding: 0 10%;
   }

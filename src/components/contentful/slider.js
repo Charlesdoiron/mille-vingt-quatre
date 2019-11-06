@@ -1,16 +1,34 @@
 import React, { Component } from "react"
-import Img from "gatsby-image"
+
 import styled from "styled-components"
 import "./../../../node_modules/slick-carousel/slick/slick.css"
 import "./../../../node_modules/slick-carousel/slick/slick-theme.css"
 import arrow_right from "./../../img/pictos/arrow_right.svg"
 import arrow_left from "./../../img/pictos/arrow_left.svg"
+import slider_arrow from "./../../img/pictos/slider_arrow.svg"
 import Slider from "react-slick"
 
 let Container = styled.div`
   width: 100%;
   padding: 0 10%;
 `
+
+function SampleNextArrow(props) {
+  const { onClick } = props
+  return <img onClick={onClick} src={slider_arrow} alt="next" />
+}
+
+function SamplePrevArrow(props) {
+  const { onClick } = props
+  return (
+    <img
+      alt="prev"
+      onClick={onClick}
+      src={slider_arrow}
+      style={{ transform: "rotate(180deg)" }}
+    />
+  )
+}
 
 export class CustomSlider extends Component {
   state = {
@@ -35,6 +53,8 @@ export class CustomSlider extends Component {
             slidesToShow: 1,
             slidesToScroll: 1,
             arrows: true,
+            nextArrow: <SampleNextArrow />,
+            prevArrow: <SamplePrevArrow />,
           },
         },
       ],

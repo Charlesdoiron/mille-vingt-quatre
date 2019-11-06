@@ -6,21 +6,27 @@
     left: 15%;
     bottom: 0;
     position: absolute;
-    top: 50%; /* poussé de la moitié de hauteur du référent */
+    top: 50%;
     transform: translateY(-50%);
-
-    h1 {
-      margin-bottom: -10px;
-    }
+    z-index: 10;
 
     @media #{$tablet} {
-      left: 10%;
-      right: 0;
+      top: 50%;
     }
 
     @media #{$mobile} {
-      left: 5%;
-      right: 0;
+      top: 70%;
+      left: 50px;
+    }
+
+    h1 {
+      margin-bottom: -10px;
+      max-width: 500px;
+      line-height: 110px;
+
+      @media #{$mobile} {
+        line-height: 70px;
+      }
     }
 
     p {
@@ -30,6 +36,8 @@
       font-family: $font-be-vietnam;
 
       @media #{$mobile} {
+        margin-top: 15px;
+        font-size: 15px;
         max-width: 250px;
       }
     }
@@ -38,7 +46,7 @@
   .cover {
     position: relative;
     width: 100%;
-    height: 80vh;
+    height: 80vh !important;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -51,6 +59,10 @@
     right: 5%;
     text-align: right;
     z-index: 1000;
+
+    @media #{$tablet} {
+      display: none;
+    }
 
     p {
       font-size: 12px;

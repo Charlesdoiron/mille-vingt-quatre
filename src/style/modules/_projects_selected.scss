@@ -2,11 +2,22 @@
   position: relative;
   height: 100vh;
 
-  .project__selected__container__desktop {
-    display: flex;
-    margin-top: 90px;
+  @media #{$mobile} {
+    padding: 0 11%;
   }
 
+  .project__selected__container__desktop {
+    @media #{$mobile} {
+      display: none;
+    }
+  }
+  .project__selected__container__mobile {
+    display: none;
+    @media #{$mobile} {
+      display: flex;
+      margin-top: 90px;
+    }
+  }
   .overflow {
     height: 650px;
     overflow: scroll;

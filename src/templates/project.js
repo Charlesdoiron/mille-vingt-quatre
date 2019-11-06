@@ -72,8 +72,6 @@ class project extends React.Component {
           <BackgroundImage
             className="cover"
             fluid={project.cover && project.cover.fluid}
-            style={{ height: "600px" }}
-            fadeIn="false"
           >
             <div className="wrapper--m">
               <div className="titles">
@@ -124,7 +122,7 @@ class project extends React.Component {
               <li
                 style={{
                   transform: "rotate(90deg",
-                  right: "-20px",
+                  right: "-10px",
                   position: "relative",
                 }}
               >
@@ -133,7 +131,7 @@ class project extends React.Component {
                     to={`project/${next.node.slug}`}
                     rel="next"
                     style={{
-                      top: "50px",
+                      top: "20px",
                       whiteSpace: "nowrap",
                       position: "absolute",
                       right: "-30px",
@@ -228,7 +226,7 @@ export const pagequeryproject = graphql`
         slug
       }
       cover {
-        fluid(quality: 90, maxWidth: 650) {
+        fluid(quality: 100, maxWidth: 1850) {
           ...GatsbyContentfulFluid
         }
       }
@@ -316,8 +314,10 @@ export const pagequeryproject = graphql`
 
         ... on ContentfulImageGrid {
           display
+          text {
+            text
+          }
           grid {
-            title
             fluid {
               src
             }

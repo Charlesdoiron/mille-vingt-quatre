@@ -1,6 +1,13 @@
+.behind__the__scene {
+  padding: 75px 0;
+  @media #{$mobile} {
+    padding: 35px 0;
+  }
+}
+
 .behind__the__scene__post__container {
   display: flex;
-  margin-top: 80px;
+  padding-top: 80px;
 
   @media #{$tablet} {
     margin-top: 60px;
@@ -9,7 +16,7 @@
 
   .img__behind {
     margin-right: 40px;
-    width: 100%;
+    width: 100% !important;
     height: 400px;
 
     @media #{$mobile} {
@@ -43,5 +50,22 @@
 
   h5 {
     margin-bottom: 5px;
+  }
+}
+
+.behind__the__scene {
+  h3 {
+    span {
+      @media #{$mobile} {
+        font-size: 14px;
+      }
+    }
+    img {
+      @media #{$mobile} {
+        top: 4px;
+        position: relative;
+        width: 12px;
+      }
+    }
   }
 }

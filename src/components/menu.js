@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Link, StaticQuery } from "gatsby"
+
 import styled from "styled-components"
 import { navigate } from "@reach/router"
 import close from "./../img/pictos/close.svg"

@@ -3,6 +3,10 @@
   position: relative;
   padding: 85px 0;
 
+  @media #{$mobile} {
+    padding: 35px 0;
+  }
+
   // @media #{$tablet} {
   //   padding: 30px 10%;
   // }
@@ -72,6 +76,11 @@
           margin-top: 70px;
           padding: 0;
         }
+      }
+
+      .text__for__image {
+        display: flex;
+        align-items: flex-start;
       }
     }
 
