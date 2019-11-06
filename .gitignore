@@ -4,14 +4,17 @@
 /node_modules
 /.pnp
 .pnp.js
+
 now.json
 /public
-/cache
+/.cache
+
 # testing
 /coverage
 
 # production
 /build
+/public
 
 # misc
 .DS_Store

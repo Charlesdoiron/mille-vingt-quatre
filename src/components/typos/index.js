@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 const mobile = "768px"
 
@@ -17,6 +17,13 @@ export const StyledH1 = styled.h1`
     font-size: 60px;
   }
 `
+
+const selectedCss = css`
+  -webkit-text-fill-color: white;
+  -webkit-text-stroke-width: 0.1px;
+  -webkit-text-stroke-color: transparent;
+`
+
 // Gros titre des projets
 export const Styledh2 = styled.h2`
   font-family: "gt_walsheim_prolight";
@@ -38,10 +45,10 @@ export const Styledh2 = styled.h2`
   margin: 0 0 40px 0;
   white-space: nowrap;
 
+  ${props => props.selected && selectedCss}
+
   &:hover {
-    -webkit-text-fill-color: white;
-    -webkit-text-stroke-width: 0.1px;
-    -webkit-text-stroke-color: transparent;
+    ${selectedCss}
   }
   @media (max-width: ${mobile}) {
     white-space: normal;

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 import { useMediaQuery } from "react-responsive"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
@@ -26,36 +26,11 @@ const ImgBck = styled.div`
   animation: ${blur} 5s ease-in-out 0s;
 `
 
+
 export const ProjectsSelectedList = props => {
   const [imageState, setImageState] = useState("")
 
-  // const [listHeight, setListHeight] = useState("")
-  // function getCoords(elem) {
-  //   // crossbrowser version
-  //   var box = elem.getBoundingClientRect()
-
-  //   var body = document.body
-  //   var docEl = document.documentElement
-
-  //   var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop
-  //   var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft
-
-  //   var clientTop = docEl.clientTop || body.clientTop || 0
-  //   var clientLeft = docEl.clientLeft || body.clientLeft || 0
-
-  //   var top = box.top + scrollTop - clientTop
-  //   var left = box.left + scrollLeft - clientLeft
-
-  //   return { top: Math.round(top), left: Math.round(left) }
-  // }
-  // useEffect(() => {
-  //   const list = document.querySelector(".project__list__container")
-  //   const project = document.querySelector(".project__slide")
-  // }, [])
-
-  const handleImage = img => {
-    setImageState(img)
-  }
+  const containerRef = useRef(null)
 
   const isDesktopOrLaptop = useMediaQuery({
     query: "(min-width: 1224px)",
@@ -65,8 +40,14 @@ export const ProjectsSelectedList = props => {
     query: "(max-width: 1224px)",
   })
 
+  const projects = props.projectSelected.projectsSelected;
+  const title = props.title || props.projectSelected.titleProjectsSelected;
+
   return (
-    <div className="project__selected__container">
+    <div
+      className="project__selected__container"
+      ref={containerRef}
+    >
       {imageState && (
         <ImgBck>
           <Img
@@ -79,33 +60,26 @@ export const ProjectsSelectedList = props => {
         {/* MOBILE */}
         {isTabletOrMobileDevice && (
           <div className="project__selected__container__mobile">
-            <Styledcapitalize>
-              {props.title || props.projectSelected.titleProjectsSelected}
-            </Styledcapitalize>
-            <div className="overflow">
-              <Slider
-                projects={props.projectSelected.projectsSelected}
-                handleImage={img => handleImage(img)}
-              />
-            </div>
+            <Slider
+              title={title}
+              projects={projects}
+              handleImage={setImageState}
+              containerRef={containerRef}
+            />
           </div>
         )}
 
         {/* DESKTOP */}
         {isDesktopOrLaptop && (
           <div className="project__selected__container__desktop">
-            <Styledcapitalize
-              style={{ marginRight: "100px", paddingTop: "50px" }}
-            >
-              {props.title || props.projectSelected.titleProjectsSelected}
-            </Styledcapitalize>
-            <div className="overflow">
-              <Slider
-                projects={props.projectSelected.projectsSelected}
-                handleImage={img => handleImage(img)}
-                showLinkToProject
-              />
-            </div>
+            <Slider
+              title={title}
+              projects={projects}
+              handleImage={setImageState}
+              showLinkToProject
+              forDesktop
+              containerRef={containerRef}
+            />
           </div>
         )}
       </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Categories } from "./categories"
 import { useMediaQuery } from "react-responsive"
 import classNames from "classnames"
@@ -11,9 +11,7 @@ export const ProjectsList = props => {
   const [imageState, setImageState] = useState("")
   const [projectsState, setProjectsState] = useState(props.projects)
 
-  const handleImage = img => {
-    setImageState(img)
-  }
+  const containerRef = useRef(null)
 
   const isTabletOrMobileDevice = useMediaQuery({
     query: "(max-width: 1224px)",
@@ -46,10 +44,8 @@ export const ProjectsList = props => {
     }
   })
 
-  console.log("STATE PROJECTS ", projectsState)
-
   return (
-    <div>
+    <div ref={containerRef}>
       {imageState && (
         <Img fluid={imageState} className="project__img--background" />
       )}
@@ -61,14 +57,16 @@ export const ProjectsList = props => {
         {props.categories && (
           <Categories
             categories={props.categories}
-            handleCategorie={categorie => handleCategorie(categorie)}
+            handleCategorie={handleCategorie}
           />
         )}
 
         <Slider
           projects={projectsState}
-          handleImage={img => handleImage(img)}
-          showLinkToProject
+          handleImage={setImageState}
+          containerRef={containerRef}
+          showLinkToProject={!isTabletOrMobileDevice}
+          forDesktop={!isTabletOrMobileDevice}
         />
       </div>
     </div>

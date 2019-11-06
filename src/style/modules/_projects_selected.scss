@@ -1,6 +1,7 @@
 .project__selected__container {
   position: relative;
   height: 100vh;
+  overflow: hidden;
 
   @media #{$mobile} {
     padding: 0 11%;

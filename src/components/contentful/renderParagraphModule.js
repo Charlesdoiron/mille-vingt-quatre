@@ -5,12 +5,12 @@ import { Styledh4 } from "./../typos"
 export const RenderParagraphModule = props => {
   return (
     <div className="wrapper--m" key={module}>
-      {Object.keys(props.module).map(key => {
+      {Object.keys(props.module).map((key, i) => {
         switch (key) {
           case "quote":
             return (
               props.module.quote && (
-                <div className="quote__container">
+                <div key={i} className="quote__container">
                   <Styledh4
                     dangerouslySetInnerHTML={{
                       __html: props.module.quote.quote,
@@ -23,7 +23,7 @@ export const RenderParagraphModule = props => {
           case "quoteForQuoteAndText":
             return (
               props.module.quoteForQuoteAndText && (
-                <div className="quote_and_text__container">
+                <div key={i} className="quote_and_text__container">
                   <Styledh4
                     dangerouslySetInnerHTML={{
                       __html:
@@ -44,7 +44,7 @@ export const RenderParagraphModule = props => {
           case "textOneColumn":
             return (
               props.module.textOneColumn && (
-                <div className="text_one_column__container">
+                <div key={i} className="text_one_column__container">
                   <div
                     dangerouslySetInnerHTML={{
                       __html: props.module.textOneColumn.textOneColumn,

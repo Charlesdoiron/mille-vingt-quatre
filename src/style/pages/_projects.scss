@@ -4,6 +4,8 @@
   background-position: center center;
   background-repeat: no-repeat;
   height: 100vh;
+  position: relative;
+  overflow: hidden;
 
   &.isTabletOrMobileDevice {
     flex-direction: column;

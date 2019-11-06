@@ -1,7 +1,8 @@
 import React from "react"
 import classNames from "classnames"
 export const Video = props => {
-  const video_id = props.video.video.replace("https://vimeo.com/", "")
+
+  const video_id = props.video.video && props.video.video.replace("https://vimeo.com/", "")
   const isGif = props.video.display && props.video.display[0] === "Is-Gif"
   const isCover = props.video.display && props.video.display[0] === "Is-Cover"
 
