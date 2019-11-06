@@ -1,7 +1,7 @@
 import React, { Component } from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { Link } from "gatsby"
-import { Styledh2, Styledprojectdate } from "./typos"
+import { Styledh2, Styledprojectdate, Styledcapitalize } from "./typos"
 import arrow_to_project from "./../img/pictos/arrow_to_project.svg"
 import { disableScroll } from "../utils/disableScroll"
 import getScrollbarWidth from "../utils/scrollbarWidth"
@@ -9,33 +9,68 @@ import getScrollbarWidth from "../utils/scrollbarWidth"
 const sliderHeight = 650;
 const scrollbarWidth = getScrollbarWidth();
 
+const styledcapitalizeForDesktop = css`
+  margin-right: 100px;
+  padding-top: ${props => props.projectHeight + 50}px;
+`
+const SectionTitle = styled(Styledcapitalize)`
+ ${props => props.forDesktop && styledcapitalizeForDesktop}
+`
+
+const computeSliderContainerHeight = ({ windowHeight, projectHeight }) =>
+  Math.floor(windowHeight / projectHeight) * projectHeight;
+
 const SliderContainer = styled.div`
-  height: ${sliderHeight}px;
+  height: ${computeSliderContainerHeight}px;
+  max-height: 100vh;
   overflow-x: hidden;
   overflow-y: scroll;
-  padding-bottom: ${props => sliderHeight - props.projectHeight}px;
-  `
+  /* border: 3px solid #f0F; */
+  box-sizing: border-box;
+  position: relative;
+`
+
+const ScrollContainer = styled.div`
+  -webkit-overflow-scrolling: auto !important;
+  /* border: 3px solid #fff; */
+  box-sizing: border-box;
+  position: relative;
+`
 
 const MarginBottom = styled.div`
   height: ${props => sliderHeight - props.projectHeight}px;
-  `
+`
 
 const Title = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 100;
-  `
+  opacity: 1;
+  transition: opacity 250ms ease-in-out;
+`
 
-const ScrollContainer = styled.div`
-  -webkit-overflow-scrolling: auto !important;
-  /* border: 3px solid #fff; */
+const Spacer = styled.div`
+  height: ${props => props.visible ? props.projectHeight : 0}px;
+  /* transform: scale(${props => props.visible ? 1 : 0}); */
+  transition: height 250ms ease-in-out;
+  /* border: 1px solid #fff; */
+`
+
+const TopFader = styled.div`
+  height: ${props => props.projectHeight}px;
+  background: linear-gradient(to bottom, #000, transparent);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* border: 1px solid #f00; */
+  z-index: 101;
 `
 
 const getProjectImageToHandle = ({ cover }) => cover.fluid;
 
 const Project = ({
-  cover,
   projectTitle,
   projectTitleDate,
   handleClick,
@@ -71,6 +106,7 @@ const Project = ({
   </Title>
 
 const Projects = ({
+  projectHeight,
   projects,
   handleClick,
   showLinkToProject,
@@ -80,16 +116,25 @@ const Projects = ({
 }) =>
   <React.Fragment>
     {projects.map((project, i) => {
-      return <Project
-        key={project.slug + i}
-        handleClick={() => handleClick(i)}
-        showLinkToProject={showLinkToProject}
-        isCurrentProject={currentProjectIndex === i}
-        handleDisableWindowScroll={handleDisableWindowScroll}
-        handleEnableWindowScroll={handleEnableWindowScroll}
-        {...project}
-      />
-    })}
+      return (
+        <React.Fragment
+          key={`${project.slug}${i}${projectHeight}`}
+        >
+          <Spacer
+            projectHeight={projectHeight}
+            visible={currentProjectIndex === i}
+          />
+          <Project
+            handleClick={() => handleClick(i)}
+            showLinkToProject={showLinkToProject}
+            isCurrentProject={currentProjectIndex === i}
+            handleDisableWindowScroll={handleDisableWindowScroll}
+            handleEnableWindowScroll={handleEnableWindowScroll}
+            {...project}
+          />
+        </React.Fragment>
+
+    )})}
   </React.Fragment>
 
 export default class Slider extends Component {
@@ -97,12 +142,24 @@ export default class Slider extends Component {
   state = {
     projectHeight: 100,
     currentProjectIndex: 0,
+    windowHeight: null
   }
 
   scrollling = null;
 
+  static getDerivedStateFromProps(nextProps, prevState){
+    if (nextProps.containerRef.current) {
+      const windowHeight = nextProps.containerRef.current.getBoundingClientRect().height
+      return {
+        ...prevState,
+        windowHeight,
+      }
+    }
+    return prevState;
+  }
+
   componentDidMount(){
-    console.clear()
+    // console.clear()
     this.handleSaveProjectHeight()
     this.handleSaveScrollContainerInitPosition()
     this.handleScrollToProjectIndex(0, false)
@@ -155,9 +212,9 @@ export default class Slider extends Component {
     if (!this.scrollArea) return;
     if (!this.scrollArea.childNodes.length) return;
     setTimeout(() => {
-      const projectHeight = this.scrollArea.childNodes[0].childNodes[0].getBoundingClientRect().height;
+      const projectHeight = document.querySelector('.project__slide').getBoundingClientRect().height;
       this.setState({ projectHeight })
-    }, 200); // to make sure the title is mounted
+    }, 400); // to make sure the title is mounted
   }
 
   handleScrollDown = () => {
@@ -198,31 +255,48 @@ export default class Slider extends Component {
     const {
       projects,
       showLinkToProject,
+      title,
+      forDesktop,
     } = this.props;
 
     const {
       projectHeight,
       currentProjectIndex,
+      windowHeight,
     } = this.state;
 
     if (!projects.length) return "Pas de projets"
     return(
-      <SliderContainer
-        ref={ref => this.scrollArea = ref}
-      >
-        <ScrollContainer
+      <React.Fragment>
+        <SectionTitle
+          forDesktop={forDesktop}
+          projectHeight={projectHeight}
         >
-          <Projects
-            projects={projects}
-            handleClick={this.handleScrollToProjectIndex}
-            showLinkToProject={showLinkToProject}
-            currentProjectIndex={currentProjectIndex}
-            handleDisableWindowScroll={this.handleDisableWindowScroll}
-            handleEnableWindowScroll={this.handleEnableWindowScroll}
-          />
-          <MarginBottom projectHeight={projectHeight} />
-        </ScrollContainer>
-      </SliderContainer>
+            {title}
+        </SectionTitle>
+        <SliderContainer
+          ref={ref => this.scrollArea = ref}
+          projectHeight={projectHeight}
+          windowHeight={windowHeight}
+        >
+          <ScrollContainer
+          >
+            <Projects
+              projects={projects}
+              projectHeight={projectHeight}
+              handleClick={this.handleScrollToProjectIndex}
+              showLinkToProject={showLinkToProject}
+              currentProjectIndex={currentProjectIndex}
+              handleDisableWindowScroll={this.handleDisableWindowScroll}
+              handleEnableWindowScroll={this.handleEnableWindowScroll}
+            />
+            <MarginBottom projectHeight={projectHeight} />
+          </ScrollContainer>
+        </SliderContainer>
+        <TopFader
+          projectHeight={projectHeight}
+        />
+      </React.Fragment>
     )
   }
 }

@@ -71,7 +71,7 @@ export const Styledprojectdate = styled.span`
   }
 `
 
-// Sous-titre
+// Sous titre
 export const Styledcapitalize = styled.p`
   font-weight: 100 !important;
   font-family: "gt_walsheim_prolight";
@@ -84,7 +84,6 @@ export const Styledcapitalize = styled.p`
     letter-spacing: 14%;
   }
 `
-
 // Rebonds
 export const Styledh3 = styled.h3`
   font-family: "gt_walsheim_prolight";
