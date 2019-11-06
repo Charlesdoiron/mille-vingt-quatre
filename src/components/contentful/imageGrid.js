@@ -1,18 +1,38 @@
 import React from "react"
+
+import _ from "lodash"
 import classNames from "classnames"
 export const ImageGrid = props => {
-  const display = props.imageGrid.display && props.imageGrid.display[0]
+  const checkClassName = className => {
+    return _.includes(props.imageGrid.display, className)
+  }
 
   return (
     <div
       className={classNames("grid__container", {
-        marginBetween: display === "Same-Margin-Between-Images",
-        marginAround: display === "Images-Center-Margin-Outside",
+        marginBetween: checkClassName("Same-Margin-Between-Images"),
+        marginAround: checkClassName("Images-Center-Margin-Outside"),
+        TwoThirdsOneThird: checkClassName("Two-Thirds-One-Third"),
+        TextBottom: checkClassName("Text-Bottom"),
       })}
     >
       {props.imageGrid.grid.map((img, i) => {
-        return <img src={img.fluid.src} key={i} alt="grid-img" />
+        const imgStyle = {
+          // width: `calc(100% / ${props.imageGrid.grid.length})`,
+          width: "auto",
+          height: "auto",
+          padding: "0 10px",
+        }
+        return (
+          <img style={imgStyle} src={img.fluid.src} key={i} alt="grid-img" />
+        )
       })}
+      {props.imageGrid.text && (
+        <div
+          className="content"
+          dangerouslySetInnerHTML={{ __html: props.imageGrid.text.text }}
+        />
+      )}
     </div>
   )
 }

@@ -20,6 +20,7 @@ import { ContactForm } from "../components/contentful/contactForm"
 import Layout from "../components/layout"
 import { RenderParagraphModule } from "./../components/contentful/renderParagraphModule"
 import { BehindTheScene } from "./../components/contentful/behindTheScene"
+import { CustomSlider as Slider } from "./../components/contentful/slider"
 
 class project extends React.Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class project extends React.Component {
     const modules = this.props.data.contentfulProject.modulesUi
     const project = this.props.data.contentfulProject
     const { previous, next } = this.props.pageContext
-    console.log(project, "project")
+    console.log(modules, "modules")
     const renderModulesOnPages = modules => {
       return modules.map((module, i) => {
         switch (module.__typename) {
@@ -44,7 +45,13 @@ class project extends React.Component {
           case "ContentfulBlogPostSelected":
             return <BlogPostsSelected postSelected={module} key={i} />
           case "ContentfulImageImageAndText":
-            return <Image image={module} key={i} />
+            return (
+              <div className="wrapper--m">
+                <Image image={module} key={i} />
+              </div>
+            )
+          case "ContentfulSlider":
+            return <Slider images={module} key={i} />
           case "ContentfulParagraphModule":
             return <RenderParagraphModule module={module} key={i} />
           case "ContentfulNewsLetterSuscribe":
@@ -65,8 +72,6 @@ class project extends React.Component {
           <BackgroundImage
             className="cover"
             fluid={project.cover && project.cover.fluid}
-            style={{ height: "600px" }}
-            fadeIn="false"
           >
             <div className="wrapper--m">
               <div className="titles">
@@ -86,7 +91,6 @@ class project extends React.Component {
               <li
                 style={{
                   transform: "rotate(270deg",
-                  right: "-20px",
                   position: "relative",
                 }}
               >
@@ -96,9 +100,6 @@ class project extends React.Component {
                     rel="prev"
                     style={{
                       position: "absolute",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      top: "0px",
                       whiteSpace: "nowrap",
                     }}
                   >
@@ -116,8 +117,7 @@ class project extends React.Component {
               </li>
               <li
                 style={{
-                  transform: "rotate(90deg",
-                  right: "-20px",
+                  transform: "rotate(90deg)",
                   position: "relative",
                 }}
               >
@@ -126,21 +126,19 @@ class project extends React.Component {
                     to={`project/${next.node.slug}`}
                     rel="next"
                     style={{
-                      top: "50px",
                       whiteSpace: "nowrap",
                       position: "absolute",
-                      right: "-30px",
                     }}
                   >
-                    {next.node.projectTitle}
                     <img
                       alt="next"
                       src={arrow_next_project}
                       style={{
                         transform: "rotate(270deg)",
-                        marginLeft: "10px",
+                        marginRight: "10px",
                       }}
                     />
+                    {next.node.projectTitle}
                   </Link>
                 )}
               </li>
@@ -221,7 +219,7 @@ export const pagequeryproject = graphql`
         slug
       }
       cover {
-        fluid(quality: 90, maxWidth: 650) {
+        fluid(quality: 100, maxWidth: 1850) {
           ...GatsbyContentfulFluid
         }
       }
@@ -252,6 +250,13 @@ export const pagequeryproject = graphql`
       }
 
       modulesUi {
+        ... on ContentfulSlider {
+          images {
+            fluid {
+              src
+            }
+          }
+        }
         ... on ContentfulProjectsSelected {
           titleProjectsSelected
           projectsSelected {
@@ -302,15 +307,16 @@ export const pagequeryproject = graphql`
 
         ... on ContentfulImageGrid {
           display
+          text {
+            text
+          }
           grid {
-            title
             fluid {
               src
             }
           }
         }
         ... on ContentfulVideo {
-          id
           video
         }
       }

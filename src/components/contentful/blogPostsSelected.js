@@ -16,8 +16,11 @@ export const BlogPostsSelected = props => {
                 className="blog-post-selected__card"
                 to={`/${post.slug}`}
                 key={i}
-                style={{ backgroundImage: `url(${post.hero.sizes.src})` }}
               >
+                <div
+                  className="img__bck"
+                  style={{ backgroundImage: `url(${post.hero.sizes.src})` }}
+                ></div>
                 <h1>{post.title}</h1>
                 <p>
                   <span className="line"></span> {post.subtitle}

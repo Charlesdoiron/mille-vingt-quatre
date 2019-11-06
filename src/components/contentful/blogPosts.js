@@ -18,8 +18,11 @@ const BlogPost = ({ data }) => {
                 className="blog-post-selected__card"
                 to={`/${node.slug}`}
                 key={i}
-                style={{ backgroundImage: `url(${node.hero.sizes.src})` }}
               >
+                <div
+                  className="img__bck"
+                  style={{ backgroundImage: `url(${node.hero.sizes.src})` }}
+                ></div>
                 <h1>{node.title}</h1>
                 <p>
                   <span className="line"></span> {node.subtitle}

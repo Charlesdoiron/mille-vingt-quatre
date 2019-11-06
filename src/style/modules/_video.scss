@@ -2,11 +2,25 @@
   overflow: hidden;
   padding-bottom: 56.25%;
   position: relative;
-  height: 0;
+  height: 100%;
   display: flex;
   justify-content: center;
   text-align: center;
-  margin: 0 auto;
+  margin: 85px auto;
+  position: relative;
+
+  @media #{$mobile} {
+    margin: 35px 0;
+  }
+
+  &.isCover {
+    margin: 0 auto;
+    width: 100%;
+    z-index: 10;
+    iframe {
+      padding: 0 !important;
+    }
+  }
 }
 
 .video__container iframe {
@@ -16,4 +30,8 @@
   width: 100%;
   padding: 0 5%;
   position: absolute;
+
+  @media #{$mobile} {
+    padding: 0 13%;
+  }
 }

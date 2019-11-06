@@ -1,0 +1,16 @@
+.slider__container {
+  padding: 170px 0;
+
+  @media #{$mobile} {
+    padding: 35px 0;
+  }
+}
+
+.slick-slider {
+  @media #{$tablet} {
+    display: flex !important;
+  }
+  img {
+    width: auto;
+  }
+}

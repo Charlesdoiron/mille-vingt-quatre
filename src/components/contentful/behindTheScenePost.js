@@ -22,10 +22,12 @@ export const BehindTheScenePost = props => {
           <Styledpostblogfont>{props.title}</Styledpostblogfont>
         </Link>
 
-        <div
-          className="rich__text"
-          dangerouslySetInnerHTML={{ __html: props.excerpt.excerpt }}
-        ></div>
+        {props.excerpt && (
+          <div
+            className="rich__text"
+            dangerouslySetInnerHTML={{ __html: props.excerpt.excerpt }}
+          ></div>
+        )}
       </div>
     </div>
   )

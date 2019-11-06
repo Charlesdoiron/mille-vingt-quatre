@@ -62,7 +62,7 @@ exports.createPages = ({ graphql, actions }) => {
       const blogPosts = result.data.allContentfulBlogPost.edges
       blogPosts.forEach((blogPost, i) => {
         const previous = i === 0 ? null : blogPosts[i - 1]
-        const next = i === 0 ? null : blogPosts[i + 1]
+        const next = i === blogPosts.length ? null : blogPosts[i + 1]
 
         createPage({
           path: blogPost.node.slug,
