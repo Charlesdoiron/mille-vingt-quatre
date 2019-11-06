@@ -1,11 +1,13 @@
 import React, { Component } from "react"
+import 'react-perfect-scrollbar/dist/css/styles.css';
 import PerfectScrollbar from 'react-perfect-scrollbar'
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { Link } from "gatsby"
-import { Styledh2, Styledprojectdate } from "./typos"
+import { Styledh2, Styledprojectdate, Styledcapitalize } from "./typos"
 import arrow_to_project from "./../img/pictos/arrow_to_project.svg"
 
-const sliderHeight = 650;
+const marginTopMobile = 90;
+
 const perfectScrollbarOptions = {
   handlers : ['click-rail', 'drag-thumb', 'keyboard', 'wheel', 'touch'],
   wheelSpeed: 0.5,
@@ -21,40 +23,81 @@ const perfectScrollbarOptions = {
   // scrollYMarginOffset: 0,
 }
 
-const SliderContainer = styled.div`
-  height: ${sliderHeight}px;
-  overflow: hidden;
-  padding-bottom: ${props => sliderHeight - props.projectHeight}px;
+
+const styledcapitalizeForDesktop = css`
+  margin-right: 100px;
+  padding-top: ${props => props.projectHeight + 50}px;
 `
+const SectionTitle = styled(Styledcapitalize)`
+ ${props => props.forDesktop && styledcapitalizeForDesktop}
+`
+
+const computeSliderContainerHeight = ({ windowHeight, projectHeight }) =>
+  Math.floor(windowHeight / projectHeight) * projectHeight;
+
+const mobileCss = css`
+  /* margin-top: ${marginTopMobile}px; */
+  max-height: (100vh - ${marginTopMobile}px);
+`
+const SliderContainer = styled.div`
+  height: ${computeSliderContainerHeight}px;
+  max-height: 100vh;
+  overflow: hidden;
+  ${props => !props.forDesktop && mobileCss}
+`
+
+const computeSliderContainerMarginBottom = ({ windowHeight, projectHeight }) =>
+  Math.floor(windowHeight / projectHeight) * projectHeight - 2 * projectHeight;
 
 const MarginBottom = styled.div`
-  height: ${props => sliderHeight - props.projectHeight}px;
+  height: ${computeSliderContainerMarginBottom}px;
+`
+const MarginTop = styled.div`
+  height: ${props => props.projectHeight}px;
 `
 
-const Title = styled.div`
+const TitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `
 
+const Title = styled(Styledh2)`
+  max-width: 550px;
+  overflow-wrap: break-word;
+`
+
+const TopFader = styled.div`
+  height: ${props => props.projectHeight}px;
+  background: linear-gradient(to bottom, #000, transparent);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 101;
+  pointer-events: none;
+`
+
 const getProjectImageToHandle = ({ cover }) => cover.fluid;
 
 const Project = ({
-  cover,
+  isCurrentProject,
   projectTitle,
   projectTitleDate,
-  handleImage,
+  handleClick,
   slug,
   showLinkToProject,
+  projectNumber,
 }) =>
-  <Title
-    onClick={() => cover && handleImage(getProjectImageToHandle({ cover }))}
+  <TitleContainer
+    onClick={handleClick}
     className="project__slide"
-    >
-    <Styledh2>
+    projectNumber={projectNumber}
+  >
+    <Title selected={isCurrentProject}>
       {projectTitle}
       <Styledprojectdate>{projectTitleDate}</Styledprojectdate>
-    </Styledh2>
+    </Title>
     {showLinkToProject && (
       <Link
         to={`/project/${slug}`}
@@ -64,17 +107,27 @@ const Project = ({
         <img alt="see the project" src={arrow_to_project} />
       </Link>
     )}
-  </Title>
+  </TitleContainer>
 
-const Projects = ({ projects, handleImage, showLinkToProject }) =>
+const Projects = ({
+  projects,
+  handleClick,
+  showLinkToProject,
+  currentProjectIndex
+
+}) =>
   <React.Fragment>
     {projects.map((project, i) => {
-      return <Project
-        key={project.slug}
-        handleImage={handleImage}
-        showLinkToProject={showLinkToProject}
-        {...project}
-      />
+      return (
+        <Project
+          key={project.slug + i}
+          projectNumber={i}
+          isCurrentProject={currentProjectIndex === i}
+          handleClick={() => handleClick(i)}
+          showLinkToProject={showLinkToProject}
+          {...project}
+        />
+      )
     })}
   </React.Fragment>
 
@@ -82,13 +135,30 @@ export default class Slider extends Component {
 
   state = {
     projectHeight: 100,
+    windowHeight: null,
+    currentProjectIndex: 0,
   }
 
   scrollling = null;
   scrollTimeout = 300;
 
+  static getDerivedStateFromProps(nextProps, prevState){
+    if (nextProps.containerRef.current) {
+      const windowHeight = nextProps.containerRef.current.getBoundingClientRect().height
+      return {
+        ...prevState,
+        windowHeight,
+      }
+    }
+    return prevState;
+  }
+
   componentDidMount(){
-    this.handleSaveProjectHeight()
+    setTimeout(() => {
+      this.handleSaveProjectHeight()
+      this.handleSaveScrollContainerInitPosition()
+      this.handleScrollToProjectIndex(0, false)
+    }, 400); // to make sure the title is mounted
   }
 
   componentWillUnmount() {
@@ -98,10 +168,18 @@ export default class Slider extends Component {
   handleSaveProjectHeight = () => {
     if (!this.scrollArea) return;
     if (!this.scrollArea.childNodes.length) return;
-    setTimeout(() => {
-      const projectHeight = this.scrollArea.childNodes[0].getBoundingClientRect().height;
-      this.setState({ projectHeight })
-    }, 500); // to make sure the title is mounted
+    const projectHeight = document.querySelector('.project__slide').getBoundingClientRect().height;
+    this.setState({ projectHeight })
+  }
+
+  handleSaveScrollContainerInitPosition = () => {
+    this.initialPosition =
+      this.scrollArea.getBoundingClientRect().top
+      - (this.props.forDesktop ? 0 : marginTopMobile);
+  }
+
+  handleFixScrollContainerOnTop = () => {
+    window.scrollTo({ top: this.initialPosition, behavior: "smooth" })
   }
 
   handleScroll = (scroll) => {
@@ -113,50 +191,95 @@ export default class Slider extends Component {
 
   handleScrollToProject = (scroll) => {
     const { projectHeight } = this.state;
-    const { projects } = this.props;
+    const { projects, forDesktop } = this.props;
     const scrollTop = scroll.scrollTop;
-    const numberOfProjects = scroll.childNodes.length - 3;
-    console.log(
-      'scroll tio flucking project',
-      scrollTop,
-      numberOfProjects,
-      this.state.projectHeight,
-    );
     const projectToFocus = Math.round(scrollTop / projectHeight)
-    const newScrollTop = projectToFocus * projectHeight;
-    this.scrollArea.scrollTo({ top: newScrollTop, behavior: 'smooth' })
-    this.props.handleImage(getProjectImageToHandle(projects[projectToFocus]))
+    if (forDesktop && !!projects[projectToFocus]) {
+      this.handleFixScrollContainerOnTop()
+      if (!projects[projectToFocus]) return;
+      const newScrollTop = projectToFocus * projectHeight;
+      this.scrollArea.scrollTo({ top: newScrollTop, behavior: 'smooth' })
+    }
+    this.handleProjectIndex(projectToFocus)
   }
+
+  handleScrollToProjectIndex = (projectIndex, fixScrollContainerOnTop = true) => {
+    const { forDesktop } = this.props;
+    if (forDesktop) {
+      fixScrollContainerOnTop && this.handleFixScrollContainerOnTop()
+      const { projectHeight } = this.state;
+      const newScrollTop = projectIndex * projectHeight;
+      this.scrollArea.scrollTo({ top: newScrollTop, behavior: 'smooth' })
+    }
+    this.handleProjectIndex(projectIndex)
+  }
+
+  handleProjectIndex = projectIndex => {
+    const { projects, handleImage } = this.props;
+    this.setState({ currentProjectIndex: projectIndex }, () => {
+      handleImage(getProjectImageToHandle(projects[projectIndex]))
+    })
+  }
+
 
   render() {
     const {
-      handleImage,
       projects,
       showLinkToProject,
+      forDesktop,
+      title,
     } = this.props;
 
     const {
       projectHeight,
+      windowHeight,
+      currentProjectIndex,
     } = this.state;
 
+    console.log({ forDesktop })
     if (!projects.length) return "Pas de projets"
     return(
-      <SliderContainer>
-        <PerfectScrollbar
-          component='ul'
-          options={perfectScrollbarOptions}
-          onScrollY={this.handleScroll}
-          containerRef={ref => (this.scrollArea = ref)}
-          ref={ref => (this._scrollAreaRef = ref)}
+      <React.Fragment>
+        {Boolean(title) && (
+          <SectionTitle
+            forDesktop={forDesktop}
+            projectHeight={projectHeight}
+          >
+              {title}
+          </SectionTitle>
+        )}
+        <SliderContainer
+          projectHeight={projectHeight}
+          windowHeight={windowHeight}
+          forDesktop={forDesktop}
         >
-          <Projects
-            projects={projects}
-            handleImage={handleImage}
-            showLinkToProject={showLinkToProject}
-          />
-          <MarginBottom projectHeight={projectHeight} />
-        </PerfectScrollbar>
-      </SliderContainer>
+          <PerfectScrollbar
+            component='ul'
+            options={perfectScrollbarOptions}
+            onScrollY={this.handleScroll}
+            containerRef={ref => (this.scrollArea = ref)}
+            ref={ref => (this._scrollAreaRef = ref)}
+          >
+            {forDesktop && <MarginTop
+              projectHeight={projectHeight}
+            />}
+            <Projects
+              projects={projects}
+              handleClick={this.handleScrollToProjectIndex}
+              showLinkToProject={showLinkToProject}
+              currentProjectIndex={currentProjectIndex}
+            />
+            {forDesktop && <MarginBottom
+              projectHeight={projectHeight}
+              windowHeight={windowHeight}
+              forDesktop={forDesktop}
+            />}
+          </PerfectScrollbar>
+          {forDesktop && <TopFader
+            projectHeight={projectHeight}
+          />}
+        </SliderContainer>
+      </React.Fragment>
     )
   }
 }

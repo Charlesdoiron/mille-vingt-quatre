@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 import { useMediaQuery } from "react-responsive"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
@@ -30,6 +30,8 @@ const ImgBck = styled.div`
 export const ProjectsSelectedList = props => {
   const [imageState, setImageState] = useState("")
 
+  const containerRef = useRef(null)
+
   const isDesktopOrLaptop = useMediaQuery({
     query: "(min-width: 1224px)",
   })
@@ -38,8 +40,14 @@ export const ProjectsSelectedList = props => {
     query: "(max-width: 1224px)",
   })
 
+  const projects = props.projectSelected.projectsSelected;
+  const title = props.title || props.projectSelected.titleProjectsSelected;
+
   return (
-    <div className="project__selected__container">
+    <div
+      className="project__selected__container"
+      ref={containerRef}
+    >
       {imageState && (
         <ImgBck>
           <Img
@@ -52,12 +60,11 @@ export const ProjectsSelectedList = props => {
         {/* MOBILE */}
         {isTabletOrMobileDevice && (
           <div className="project__selected__container__mobile">
-            <Styledcapitalize>
-              {props.title || props.projectSelected.titleProjectsSelected}
-            </Styledcapitalize>
             <Slider
-              projects={props.projectSelected.projectsSelected}
+              title={title}
+              projects={projects}
               handleImage={setImageState}
+              containerRef={containerRef}
             />
           </div>
         )}
@@ -65,20 +72,13 @@ export const ProjectsSelectedList = props => {
         {/* DESKTOP */}
         {isDesktopOrLaptop && (
           <div className="project__selected__container__desktop">
-            <Styledcapitalize
-              style={{ marginRight: "100px", paddingTop: "50px" }}
-            >
-              {props.title || props.projectSelected.titleProjectsSelected}
-            </Styledcapitalize>
             <Slider
-              projects={[
-                ...props.projectSelected.projectsSelected,
-                ...props.projectSelected.projectsSelected,
-                ...props.projectSelected.projectsSelected,
-                ...props.projectSelected.projectsSelected,
-              ]}
+              title={title}
+              projects={projects}
               handleImage={setImageState}
               showLinkToProject
+              forDesktop
+              containerRef={containerRef}
             />
           </div>
         )}
