@@ -194,12 +194,12 @@ export default class Slider extends Component {
     const { projects, forDesktop } = this.props;
     const scrollTop = scroll.scrollTop;
     const projectToFocus = Math.round(scrollTop / projectHeight)
-    if (forDesktop && !!projects[projectToFocus]) {
-      this.handleFixScrollContainerOnTop()
-      if (!projects[projectToFocus]) return;
-      const newScrollTop = projectToFocus * projectHeight;
-      this.scrollArea.scrollTo({ top: newScrollTop, behavior: 'smooth' })
-    }
+    // if (forDesktop && !!projects[projectToFocus]) {
+    //   this.handleFixScrollContainerOnTop()
+    //   if (!projects[projectToFocus]) return;
+    //   const newScrollTop = projectToFocus * projectHeight;
+    //   this.scrollArea.scrollTo({ top: newScrollTop, behavior: 'smooth' })
+    // }
     this.handleProjectIndex(projectToFocus)
   }
 
@@ -236,7 +236,6 @@ export default class Slider extends Component {
       currentProjectIndex,
     } = this.state;
 
-    console.log({ forDesktop })
     if (!projects.length) return "Pas de projets"
     return(
       <React.Fragment>
