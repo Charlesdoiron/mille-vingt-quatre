@@ -92,8 +92,19 @@
     position: fixed;
     z-index: 77777777;
     width: 100%;
-    top: 30%; /* poussé de la moitié de hauteur du référent */
+    top: 50%; /* poussé de la moitié de hauteur du référent */
     transform: translateY(-50%);
+
+    li {
+      display: flex;
+      justify-content: space-around;
+      a {
+        // width: 100px;
+        // min-width: 113px;
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
   }
 }
 

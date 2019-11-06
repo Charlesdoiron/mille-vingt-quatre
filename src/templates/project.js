@@ -91,7 +91,6 @@ class project extends React.Component {
               <li
                 style={{
                   transform: "rotate(270deg",
-                  right: "-20px",
                   position: "relative",
                 }}
               >
@@ -101,9 +100,6 @@ class project extends React.Component {
                     rel="prev"
                     style={{
                       position: "absolute",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      top: "0px",
                       whiteSpace: "nowrap",
                     }}
                   >
@@ -121,8 +117,7 @@ class project extends React.Component {
               </li>
               <li
                 style={{
-                  transform: "rotate(90deg",
-                  right: "-10px",
+                  transform: "rotate(90deg)",
                   position: "relative",
                 }}
               >
@@ -131,21 +126,19 @@ class project extends React.Component {
                     to={`project/${next.node.slug}`}
                     rel="next"
                     style={{
-                      top: "20px",
                       whiteSpace: "nowrap",
                       position: "absolute",
-                      right: "-30px",
                     }}
                   >
-                    {next.node.projectTitle}
                     <img
                       alt="next"
                       src={arrow_next_project}
                       style={{
                         transform: "rotate(270deg)",
-                        marginLeft: "10px",
+                        marginRight: "10px",
                       }}
                     />
+                    {next.node.projectTitle}
                   </Link>
                 )}
               </li>
