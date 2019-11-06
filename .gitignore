@@ -5,7 +5,8 @@
 /.pnp
 .pnp.js
 now.json
-
+/public
+/cache
 # testing
 /coverage
 
