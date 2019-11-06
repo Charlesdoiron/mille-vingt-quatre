@@ -1,7 +1,7 @@
 import React from "react"
 
 export const Video = props => {
-  const video_id = props.video.video.replace("https://vimeo.com/", "")
+  const video_id = props.video.video && props.video.video.replace("https://vimeo.com/", "")
   return (
     <div className="video__container">
       <iframe

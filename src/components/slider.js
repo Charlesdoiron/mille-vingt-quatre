@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import 'react-perfect-scrollbar/dist/css/styles.css';
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import styled from "styled-components"
 import { Link } from "gatsby"
