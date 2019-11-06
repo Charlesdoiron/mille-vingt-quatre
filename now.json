@@ -1,0 +1,8 @@
+{
+  "build": {
+    "env": {
+      "CONTENTFUL_SPACE_ID": "361wjhuk7l11",
+      "CONTENTFUL_PREVIEW_ACCESS_TOKEN": "Fy2oQecr8bw5tvN5CFH3kbLAnARQhL7P349vT6UElaQ"
+    }
+  }
+}
