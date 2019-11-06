@@ -14,7 +14,7 @@ const MenuContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 20px 0;
-  z-index: 100;
+  z-index: 200;
   width: 100%;
   position: fixed;
 `

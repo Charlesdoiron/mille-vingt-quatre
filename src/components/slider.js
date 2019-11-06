@@ -6,7 +6,7 @@ import arrow_to_project from "./../img/pictos/arrow_to_project.svg"
 import { disableScroll } from "../utils/disableScroll"
 import getScrollbarWidth from "../utils/scrollbarWidth"
 
-const sliderHeight = 650;
+const marginTopMobile = 90;
 const scrollbarWidth = getScrollbarWidth();
 
 const styledcapitalizeForDesktop = css`
@@ -20,25 +20,32 @@ const SectionTitle = styled(Styledcapitalize)`
 const computeSliderContainerHeight = ({ windowHeight, projectHeight }) =>
   Math.floor(windowHeight / projectHeight) * projectHeight;
 
+const computeSliderContainerMarginBottom = ({ windowHeight, projectHeight }) =>
+  Math.floor(windowHeight / projectHeight) * projectHeight - projectHeight;
+
+const mobileCss = css`
+  margin-top: ${marginTopMobile}px;
+  max-height: (100vh - ${marginTopMobile}px);
+`
+
 const SliderContainer = styled.div`
   height: ${computeSliderContainerHeight}px;
   max-height: 100vh;
   overflow-x: hidden;
   overflow-y: scroll;
-  /* border: 3px solid #f0F; */
   box-sizing: border-box;
   position: relative;
+  ${props => !props.forDesktop && mobileCss}
 `
 
 const ScrollContainer = styled.div`
   -webkit-overflow-scrolling: auto !important;
-  /* border: 3px solid #fff; */
   box-sizing: border-box;
   position: relative;
 `
 
 const MarginBottom = styled.div`
-  height: ${props => sliderHeight - props.projectHeight}px;
+  height: ${computeSliderContainerMarginBottom}px;
 `
 
 const Title = styled.div`
@@ -54,7 +61,6 @@ const Spacer = styled.div`
   height: ${props => props.visible ? props.projectHeight : 0}px;
   /* transform: scale(${props => props.visible ? 1 : 0}); */
   transition: height 250ms ease-in-out;
-  /* border: 1px solid #fff; */
 `
 
 const TopFader = styled.div`
@@ -64,7 +70,6 @@ const TopFader = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  /* border: 1px solid #f00; */
   z-index: 101;
 `
 
@@ -113,6 +118,7 @@ const Projects = ({
   currentProjectIndex,
   handleDisableWindowScroll,
   handleEnableWindowScroll,
+  forDesktop,
 }) =>
   <React.Fragment>
     {projects.map((project, i) => {
@@ -120,10 +126,10 @@ const Projects = ({
         <React.Fragment
           key={`${project.slug}${i}${projectHeight}`}
         >
-          <Spacer
+          {forDesktop && <Spacer
             projectHeight={projectHeight}
             visible={currentProjectIndex === i}
-          />
+          />}
           <Project
             handleClick={() => handleClick(i)}
             showLinkToProject={showLinkToProject}
@@ -160,14 +166,25 @@ export default class Slider extends Component {
 
   componentDidMount(){
     // console.clear()
-    this.handleSaveProjectHeight()
-    this.handleSaveScrollContainerInitPosition()
     this.handleScrollToProjectIndex(0, false)
     disableScroll(this.scrollArea, this.handleControlledScroll)
+    setTimeout(() => {
+      this.handleSaveProjectHeight()
+      this.handleSaveScrollContainerInitPosition()
+    }, 400); // to make sure the title is mounted
+  }
+
+  handleSaveProjectHeight = () => {
+    if (!this.scrollArea) return;
+    if (!this.scrollArea.childNodes.length) return;
+    const projectHeight = document.querySelector('.project__slide').getBoundingClientRect().height;
+    this.setState({ projectHeight })
   }
 
   handleSaveScrollContainerInitPosition = () => {
-    this.initialPosition = this.scrollArea.getBoundingClientRect().top
+    this.initialPosition =
+      this.scrollArea.getBoundingClientRect().top
+      - (this.props.forDesktop ? 0 : marginTopMobile);
   }
 
   handleFixScrollContainerOnTop = () => {
@@ -176,13 +193,16 @@ export default class Slider extends Component {
 
   handleDisableWindowScroll = () => {
     document.body.classList.add('disable-overflow')
-    this.props.scrollbarIsVisible && (document.body.style.paddingRight = `${scrollbarWidth}px`);
+    if (this.props.scrollbarIsVisible) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
   }
 
   handleEnableWindowScroll = () => {
     document.body.classList.remove('disable-overflow')
-    // this.props.scrollbarIsVisible && document.body.classList.remove('mock-scrollbar')
-    this.props.scrollbarIsVisible && (document.body.style.paddingRight = 0);
+    if (this.props.scrollbarIsVisible) {
+      document.body.style.paddingRight = '0px';
+    }
   }
 
   handleControlledScroll = e => {
@@ -206,15 +226,6 @@ export default class Slider extends Component {
 
   componentWillUnmount() {
     clearTimeout(this.scrollToProjectTimeout)
-  }
-
-  handleSaveProjectHeight = () => {
-    if (!this.scrollArea) return;
-    if (!this.scrollArea.childNodes.length) return;
-    setTimeout(() => {
-      const projectHeight = document.querySelector('.project__slide').getBoundingClientRect().height;
-      this.setState({ projectHeight })
-    }, 400); // to make sure the title is mounted
   }
 
   handleScrollDown = () => {
@@ -278,6 +289,7 @@ export default class Slider extends Component {
           ref={ref => this.scrollArea = ref}
           projectHeight={projectHeight}
           windowHeight={windowHeight}
+          forDesktop={forDesktop}
         >
           <ScrollContainer
           >
@@ -289,13 +301,18 @@ export default class Slider extends Component {
               currentProjectIndex={currentProjectIndex}
               handleDisableWindowScroll={this.handleDisableWindowScroll}
               handleEnableWindowScroll={this.handleEnableWindowScroll}
+              forDesktop={forDesktop}
             />
-            <MarginBottom projectHeight={projectHeight} />
+            <MarginBottom
+              projectHeight={projectHeight}
+              windowHeight={windowHeight}
+              forDesktop={forDesktop}
+            />
           </ScrollContainer>
         </SliderContainer>
-        <TopFader
+        {forDesktop && <TopFader
           projectHeight={projectHeight}
-        />
+        />}
       </React.Fragment>
     )
   }

@@ -65,7 +65,12 @@ export const ProjectsSelectedList = props => {
         {isTabletOrMobileDevice && (
           <div className="project__selected__container__mobile">
             <Slider
-              projects={projects}
+              projects={[
+                ...projects,
+                ...projects,
+                ...projects,
+                ...projects,
+              ]}
               title={title}
               handleImage={setImageState}
               containerRef={containerRef}
