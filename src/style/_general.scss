@@ -9,6 +9,11 @@ body {
   height: 100%;
   -webkit-overflow-scrolling: touch;
   position: relative;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  display: none !important;
 }
 
 .layout {

@@ -1,11 +1,9 @@
 import React, { useState, useRef } from "react"
-import { useMediaQuery } from "react-responsive"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
-import { Styledcapitalize } from "../typos"
+import { Styledh2, Styledprojectdate, Styledcapitalize } from "./../typos"
+
 import styled, { keyframes } from "styled-components"
-import eye from "./../../img/pictos/eye.svg"
-import Slider from "../slider"
 
 const blur = keyframes`
   0% {
@@ -18,6 +16,16 @@ const blur = keyframes`
   }
 }
 `
+const TitleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const Title = styled(Styledh2)`
+  max-width: 550px;
+  overflow-wrap: break-word;
+`
 
 const ImgBck = styled.div`
   width: 100%;
@@ -26,28 +34,49 @@ const ImgBck = styled.div`
   animation: ${blur} 5s ease-in-out 0s;
 `
 
-
 export const ProjectsSelectedList = props => {
   const [imageState, setImageState] = useState("")
 
-  const containerRef = useRef(null)
+  const Project = ({
+    isCurrentProject,
+    projectTitle,
+    projectTitleDate,
+    slug,
+    cover,
+    projectNumber,
+  }) => (
+    <Link
+      to={`/project/${slug}`}
+      onMouseEnter={e => setImageState(cover.fluid)}
+    >
+      <TitleContainer className="project__slide" projectNumber={projectNumber}>
+        <Title selected={isCurrentProject}>
+          {projectTitle}
+          <Styledprojectdate>{projectTitleDate}</Styledprojectdate>
+        </Title>
+      </TitleContainer>
+    </Link>
+  )
 
-  const isDesktopOrLaptop = useMediaQuery({
-    query: "(min-width: 1224px)",
-  })
+  const Projects = ({ projects, currentProjectIndex }) => (
+    <div className="project__selected__list">
+      {projects.map((project, i) => {
+        return (
+          <Project
+            key={project.slug + i}
+            projectNumber={i}
+            isCurrentProject={currentProjectIndex === i}
+            {...project}
+          />
+        )
+      })}
+    </div>
+  )
 
-  const isTabletOrMobileDevice = useMediaQuery({
-    query: "(max-width: 1224px)",
-  })
-
-  const projects = props.projectSelected.projectsSelected;
-  const title = props.title || props.projectSelected.titleProjectsSelected;
+  const projects = props.projectSelected.projectsSelected
 
   return (
-    <div
-      className="project__selected__container"
-      ref={containerRef}
-    >
+    <div className="project__selected__container">
       {imageState && (
         <ImgBck>
           <Img
@@ -56,42 +85,11 @@ export const ProjectsSelectedList = props => {
           />
         </ImgBck>
       )}
-      <div className="wrapper--m">
-        {/* MOBILE */}
-        {isTabletOrMobileDevice && (
-          <div className="project__selected__container__mobile">
-            <Slider
-              title={title}
-              projects={projects}
-              handleImage={setImageState}
-              containerRef={containerRef}
-            />
-          </div>
-        )}
 
-        {/* DESKTOP */}
-        {isDesktopOrLaptop && (
-          <div className="project__selected__container__desktop">
-            <Slider
-              title={title}
-              projects={projects}
-              handleImage={setImageState}
-              showLinkToProject
-              forDesktop
-              containerRef={containerRef}
-            />
-          </div>
-        )}
+      <div className="project__selected">
+        <Styledcapitalize>{props.title}</Styledcapitalize>
+        <Projects projects={projects} />
       </div>
-
-      {props.showAllProjectsLink && (
-        <div className="see__all__projects">
-          <Link to="/projects">
-            <img src={eye} alt="eye" />
-            <span>See all projects</span>
-          </Link>
-        </div>
-      )}
     </div>
   )
 }

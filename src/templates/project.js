@@ -1,13 +1,11 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 
-import BackgroundImage from "gatsby-background-image"
-
 import "./../style/index.scss"
 import arrow_next_project from "./../img/pictos/arrow_next_project.svg"
 
 import { StyledH1, Styledh3, Styledprojectdate } from "../components/typos"
-
+import { ImgBlur, Gradient } from "../components/animations/image"
 import { ImageGrid } from "../components/contentful/imageGrid"
 import { Credits } from "../components/contentful/credits"
 import { ProjectsSelectedList } from "../components/contentful/projectsSelectedList"
@@ -69,10 +67,14 @@ class project extends React.Component {
     return (
       <Layout>
         <div className="project__container">
-          <BackgroundImage
-            className="cover"
-            fluid={project.cover && project.cover.fluid}
-          >
+          <div>
+            <ImgBlur
+              className="cover"
+              style={{
+                backgroundImage: `url(${project.cover &&
+                  project.cover.fluid.src})`,
+              }}
+            ></ImgBlur>
             <div className="wrapper--m">
               <div className="titles">
                 {project.projectTitle && (
@@ -152,8 +154,8 @@ class project extends React.Component {
                 className="legend"
               ></div>
             )}
-            <div className="gradient"></div>
-          </BackgroundImage>
+            <Gradient />
+          </div>
         </div>
         {modules && <div>{renderModulesOnPages(modules)}</div>}
 

@@ -42,8 +42,9 @@ export const Styledh2 = styled.h2`
   cursor: pointer;
   display: flex;
   align-items: center;
-  margin: 0 0 40px 0;
-  white-space: nowrap;
+  margin-bottom: 0;
+  line-height: 120px;
+  /* white-space: nowrap; */
 
   ${props => props.selected && selectedCss}
 
@@ -53,6 +54,7 @@ export const Styledh2 = styled.h2`
   @media (max-width: ${mobile}) {
     white-space: normal;
     font-size: 46px;
+    line-height: 70px;
   }
 `
 //Date de projet (à droite des titres de projets)
@@ -80,6 +82,7 @@ export const Styledcapitalize = styled.p`
   letter-spacing: 0.14em;
   text-transform: uppercase;
   white-space: nowrap;
+  z-index: 10;
   @media (max-width: ${mobile}) {
     font-size: 14px;
     letter-spacing: 14%;

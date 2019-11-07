@@ -59,7 +59,13 @@ const Page = props => {
         case "ContentfulTwoSectionsImageText":
           return <TwoSectionsWithImage twoSectionsImageText={module} key={i} />
         case "ContentfulProjectsSelected":
-          return <ProjectsSelectedList projectSelected={module} key={i} />
+          return (
+            <ProjectsSelectedList
+              projectSelected={module}
+              key={i}
+              title="selected projects"
+            />
+          )
         case "ContentfulVideo":
           return <Video video={module} key={i} />
         case "ContentfulBlogPostSelected":

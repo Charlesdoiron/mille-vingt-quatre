@@ -3,6 +3,7 @@ import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import "./../style/index.scss"
 import { Styledpostblogfont, Styledcapitalize } from "../components/typos"
+import { ImgBlur } from "./../components/animations/image"
 
 import { ImageGrid } from "../components/contentful/imageGrid"
 import { Video } from "../components/contentful/video"
@@ -50,7 +51,7 @@ class blogpost extends React.Component {
     return (
       <Layout>
         <div className="blog__post__container">
-          <div
+          <ImgBlur
             className="cover"
             style={{ backgroundImage: `url(${blogPost.hero.sizes.src})` }}
           >
@@ -61,7 +62,7 @@ class blogpost extends React.Component {
                 {blogPost.subtitle}
               </p>
             </div>
-          </div>
+          </ImgBlur>
           <div className="wrapper--m">
             <div className="blogpost__content">
               {blogPost.contentRich && (

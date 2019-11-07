@@ -1,6 +1,8 @@
 import React from "react"
 import { Link } from "gatsby"
 import { Styledcapitalize } from "../typos"
+import { ImgBlur } from "./../animations/image"
+
 export const BlogPostsSelected = props => {
   return (
     <div className="wrapper--m">
@@ -17,10 +19,10 @@ export const BlogPostsSelected = props => {
                 to={`/${post.slug}`}
                 key={i}
               >
-                <div
+                <ImgBlur
                   className="img__bck"
                   style={{ backgroundImage: `url(${post.hero.sizes.src})` }}
-                ></div>
+                ></ImgBlur>
                 <h1>{post.title}</h1>
                 <p>
                   <span className="line"></span> {post.subtitle}

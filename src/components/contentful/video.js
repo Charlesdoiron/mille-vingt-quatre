@@ -1,13 +1,15 @@
 import React from "react"
 import classNames from "classnames"
-export const Video = props => {
 
-  const video_id = props.video.video && props.video.video.replace("https://vimeo.com/", "")
+import { ImgBlur } from "./../animations/image"
+export const Video = props => {
+  const video_id =
+    props.video.video && props.video.video.replace("https://vimeo.com/", "")
   const isGif = props.video.display && props.video.display[0] === "Is-Gif"
   const isCover = props.video.display && props.video.display[0] === "Is-Cover"
 
   return (
-    <div className={classNames("video__container", { isCover: isCover })}>
+    <ImgBlur className={classNames("video__container", { isCover: isCover })}>
       <iframe
         // src={`https://player.vimeo.com/video/${video_id}?title=0&byline=0&portrait=0&controls=0&autoplay=1&loop=1&autopause=1&autopause=0`}
         src={
@@ -22,6 +24,6 @@ export const Video = props => {
         allowFullScreen
         title="video"
       ></iframe>
-    </div>
+    </ImgBlur>
   )
 }

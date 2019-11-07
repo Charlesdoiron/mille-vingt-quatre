@@ -4,10 +4,9 @@ import PerfectScrollbar from "react-perfect-scrollbar"
 import styled, { css } from "styled-components"
 import { Link } from "gatsby"
 import { Styledh2, Styledprojectdate, Styledcapitalize } from "./typos"
-import arrow_to_project from "./../img/pictos/arrow_to_project.svg"
 
 const marginTopMobile = 90
-console.log("plaf")
+
 const perfectScrollbarOptions = {
   handlers: ["click-rail", "drag-thumb", "keyboard", "wheel", "touch"],
   wheelSpeed: 0.5,
@@ -39,9 +38,8 @@ const mobileCss = css`
   max-height: (100vh - ${marginTopMobile}px);
 `
 const SliderContainer = styled.div`
-  height: ${computeSliderContainerHeight}px;
-  max-height: 100vh;
   overflow: hidden;
+  width: 100%;
   ${props => !props.forDesktop && mobileCss}
 `
 
@@ -85,24 +83,20 @@ const Project = ({
   projectTitleDate,
   handleClick,
   slug,
-  showLinkToProject,
   projectNumber,
 }) => (
-  <TitleContainer
-    onClick={handleClick}
-    className="project__slide"
-    projectNumber={projectNumber}
-  >
-    <Title selected={isCurrentProject}>
-      {projectTitle}
-      <Styledprojectdate>{projectTitleDate}</Styledprojectdate>
-    </Title>
-    {showLinkToProject && (
-      <Link to={`/project/${slug}`} className="link__to__project">
-        See the project <img alt="see the project" src={arrow_to_project} />
-      </Link>
-    )}
-  </TitleContainer>
+  <Link to={`/project/${slug}`}>
+    <TitleContainer
+      onClick={handleClick}
+      className="project__slide"
+      projectNumber={projectNumber}
+    >
+      <Title selected={isCurrentProject}>
+        {projectTitle}
+        <Styledprojectdate>{projectTitleDate}</Styledprojectdate>
+      </Title>
+    </TitleContainer>
+  </Link>
 )
 
 const Projects = ({
@@ -224,7 +218,6 @@ export default class Slider extends Component {
 
   render() {
     const { projects, showLinkToProject, forDesktop, title } = this.props
-
     const { projectHeight, windowHeight, currentProjectIndex } = this.state
 
     if (!projects.length) return "Pas de projets"
@@ -240,29 +233,12 @@ export default class Slider extends Component {
           windowHeight={windowHeight}
           forDesktop={forDesktop}
         >
-          <PerfectScrollbar
-            component="ul"
-            options={perfectScrollbarOptions}
-            onScrollY={this.handleScroll}
-            containerRef={ref => (this.scrollArea = ref)}
-            ref={ref => (this._scrollAreaRef = ref)}
-          >
-            {forDesktop && <MarginTop projectHeight={projectHeight} />}
-            <Projects
-              projects={projects}
-              handleClick={this.handleScrollToProjectIndex}
-              showLinkToProject={showLinkToProject}
-              currentProjectIndex={currentProjectIndex}
-            />
-            {forDesktop && (
-              <MarginBottom
-                projectHeight={projectHeight}
-                windowHeight={windowHeight}
-                forDesktop={forDesktop}
-              />
-            )}
-          </PerfectScrollbar>
-          {forDesktop && <TopFader projectHeight={projectHeight} />}
+          <Projects
+            projects={projects}
+            handleClick={this.handleScrollToProjectIndex}
+            showLinkToProject={showLinkToProject}
+            currentProjectIndex={currentProjectIndex}
+          />
         </SliderContainer>
       </React.Fragment>
     )

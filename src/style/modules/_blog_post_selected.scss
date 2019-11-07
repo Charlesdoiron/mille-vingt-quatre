@@ -1,5 +1,9 @@
 .blog-post-selected__container {
-  padding: 100px 0 30px 0;
+  padding: 85px 0;
+
+  @media #{$mobile} {
+    padding: 35px 0;
+  }
   p {
     margin-bottom: 90px;
   }
@@ -39,7 +43,7 @@
       width: 100%;
       min-width: 360px;
       @media #{$tablet} {
-        min-width: 360px;
+        min-width: 100%;
         margin-right: 15px;
       }
 

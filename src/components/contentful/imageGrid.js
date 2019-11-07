@@ -2,6 +2,7 @@ import React from "react"
 
 import _ from "lodash"
 import classNames from "classnames"
+
 export const ImageGrid = props => {
   const checkClassName = className => {
     return _.includes(props.imageGrid.display, className)
@@ -16,17 +17,19 @@ export const ImageGrid = props => {
         TextBottom: checkClassName("Text-Bottom"),
       })}
     >
-      {props.imageGrid.grid.map((img, i) => {
-        const imgStyle = {
-          // width: `calc(100% / ${props.imageGrid.grid.length})`,
-          width: "auto",
-          height: "auto",
-          padding: "0 10px",
-        }
-        return (
-          <img style={imgStyle} src={img.fluid.src} key={i} alt="grid-img" />
-        )
-      })}
+      <div>
+        {props.imageGrid.grid.map((img, i) => {
+          const imgStyle = {
+            width: "auto",
+            height: "auto",
+            padding: "0 10px",
+          }
+          return (
+            <img style={imgStyle} src={img.fluid.src} key={i} alt="grid-img" />
+          )
+        })}
+      </div>
+
       {props.imageGrid.text && (
         <div
           className="content"
