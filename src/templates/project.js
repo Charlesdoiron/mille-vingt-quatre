@@ -88,8 +88,8 @@ class project extends React.Component {
     const renderModulesOnPages = modules => {
       return modules.map((module, i) => {
         switch (module.__typename) {
-          case "ContentfulImageGrid":
-            return <ImageGrid imageGrid={module} key={i} />
+          // case "ContentfulImageGrid":
+          //   return <ImageGrid imageGrid={module} key={i} />
           case "ContentfulImageGrid2Photos":
             return <ImageGrid2Photos imageGrid={module} key={i} />
           case "ContentfulImageGrid3Or4Photos":

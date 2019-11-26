@@ -244,15 +244,15 @@ export const pagequerypagebyslug = graphql`
           callToActionNewsLetterSuscribe
         }
 
-        ... on ContentfulImageGrid {
-          title
-          grid {
-            title
-            fluid {
-              src
-            }
-          }
-        }
+        # ... on ContentfulImageGrid {
+        #   title
+        #   grid {
+        #     title
+        #     fluid {
+        #       src
+        #     }
+        #   }
+        # }
         ... on ContentfulVideo {
           video
           display
