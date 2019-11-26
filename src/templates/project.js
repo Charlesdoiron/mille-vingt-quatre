@@ -6,7 +6,7 @@ import arrow_next_project from "./../img/pictos/arrow_next_project.svg"
 
 import { StyledH1, Styledh3, Styledprojectdate } from "../components/typos"
 import { ImgBlur, Gradient } from "../components/animations/image"
-import { ImageGrid } from "../components/contentful/imageGrid"
+
 import { ImageGrid2Photos } from "../components/contentful/imageGrid2Photos"
 import { ImageGrid3Or4Photos } from "../components/contentful/imageGrid3Or4Photos"
 import { Credits } from "../components/contentful/credits"
@@ -88,8 +88,6 @@ class project extends React.Component {
     const renderModulesOnPages = modules => {
       return modules.map((module, i) => {
         switch (module.__typename) {
-          // case "ContentfulImageGrid":
-          //   return <ImageGrid imageGrid={module} key={i} />
           case "ContentfulImageGrid2Photos":
             return <ImageGrid2Photos imageGrid={module} key={i} />
           case "ContentfulImageGrid3Or4Photos":
@@ -278,7 +276,7 @@ export const pagequeryproject = graphql`
         slug
       }
       cover {
-        fluid(quality: 100, maxWidth: 1850) {
+        fluid(quality: 100, maxWidth: 1980) {
           ...GatsbyContentfulFluid
         }
       }
@@ -311,7 +309,7 @@ export const pagequeryproject = graphql`
       modulesUi {
         ... on ContentfulSlider {
           images {
-            fluid {
+            fluid(maxWidth: 2500, quality: 100) {
               src
             }
           }
