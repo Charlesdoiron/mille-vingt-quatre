@@ -1,23 +1,23 @@
 import styled, { keyframes } from "styled-components"
 
+const mobile = "768px"
+
 const blur = keyframes`
   0% {
     filter: blur(100px);
-    opacity: 0;
+    opacity: 0.5;
   }
-   70% {
-    filter: blur(20px);
-    opacity: 0.2;
-  }
+
   100%{
     filter: blur(0);
     opacity: 1 !important;
+
   }
 }
 `
 
 export const ImgBlur = styled.div`
-  animation: ${blur} 0.7s ease-in;
+  animation: ${blur} 1024ms ease-in;
 `
 
 export const Gradient = styled.div`
@@ -28,4 +28,11 @@ export const Gradient = styled.div`
   background: #000000;
   background: linear-gradient(0deg, #000000 0%, #ffffff00 100%);
   animation: ${blur} 0.1s ease-in;
+
+  @media (max-width: ${mobile}) {
+    background: linear-gradient(0deg, #000000 0%, #00000000 100%);
+    height: 100px;
+
+    bottom: 0px;
+  }
 `

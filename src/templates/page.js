@@ -6,6 +6,8 @@ import Layout from "../components/layout"
 import "./../style/index.scss"
 
 import { ImageGrid } from "../components/contentful/imageGrid"
+import { ImageGrid2Photos } from "../components/contentful/imageGrid2Photos"
+import { ImageGrid3Or4Photos } from "../components/contentful/imageGrid3Or4Photos"
 import { ProjectsSelectedList } from "../components/contentful/projectsSelectedList"
 import { Hero } from "../components/contentful/hero"
 import { Video } from "../components/contentful/video"
@@ -27,7 +29,7 @@ const FullHeight = styled.div`
 
   h4 {
     position: absolute;
-    top: 50%; /* poussé de la moitié de hauteur du référent */
+    top: 50%;
     transform: translateY(-50%);
   }
 `
@@ -74,6 +76,10 @@ const Page = props => {
           return <RenderParagraphModule module={module} key={i} />
         case "ContentfulCoverImage":
           return <CoverImage image={module} key={i} />
+        case "ContentfulImageGrid2Photos":
+          return <ImageGrid2Photos imageGrid={module} key={i} />
+        case "ContentfulImageGrid3Or4Photos":
+          return <ImageGrid3Or4Photos imageGrid={module} key={i} />
         case "ContentfulNewsLetterSuscribe":
           return <NewsLetterSuscribe news_letter={module} key={i} />
         case "ContentfulSocials":
@@ -143,6 +149,14 @@ export const pagequerypagebyslug = graphql`
         slug
       }
       ui {
+        ... on ContentfulImageGrid3Or4Photos {
+          grid {
+            fluid {
+              src
+            }
+          }
+          display
+        }
         ... on ContentfulParagraphModule {
           quote {
             quote

@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
-import { Styledh2, Styledprojectdate, Styledcapitalize } from "./../typos"
+import { Styledh2, Styledprojectdate, Styledcapitalize } from "../typos"
 
 import styled, { keyframes } from "styled-components"
 
+const blur = keyframes`
+  0% {
+    filter: blur(100px);
+    opacity: 0.5;
+  }
+  100%{
+    filter: blur(0);
+    opacity: 0.7 !important;
+  }
+}
+`
 const TitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -16,10 +27,16 @@ const Title = styled(Styledh2)`
   overflow-wrap: break-word;
 `
 
-export const ProjectsSelectedList = props => {
+const ImgBck = styled.div`
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  animation: ${blur} 5s ease-in-out 0s;
+`
+
+export const ProjectsRelatedList = props => {
   const [imageState, setImageState] = useState("")
 
-  // FOCUS ON FIRST PROJECT
   // function setDefaultImage() {
   //   setImageState(projects[0].cover.fluid)
   // }
@@ -34,15 +51,11 @@ export const ProjectsSelectedList = props => {
   //   setDefaultProject()
   // }, [])
 
-  const changeImage = img => {
-    document.querySelector(".project__img--background--selected") &&
-      document
-        .querySelector(".project__img--background--selected")
-        .classList.toggle("isOut")
-    setTimeout(() => {
-      setImageState(img)
-    }, 1000)
-  }
+  // useEffect(() => {
+  //   const titles = document.querySelectorAll(".project__title__link")
+  //   const firstTitle = titles[0]
+  //   firstTitle.classList.remove("isActive")
+  // }, [imageState])
 
   const Project = ({
     isCurrentProject,
@@ -54,7 +67,7 @@ export const ProjectsSelectedList = props => {
   }) => (
     <Link
       to={`/project/${slug}`}
-      onMouseEnter={e => changeImage(cover.fluid)}
+      onMouseEnter={e => setImageState(cover.fluid)}
       className="project__title__link"
     >
       <TitleContainer className="project__slide" projectNumber={projectNumber}>
@@ -67,7 +80,7 @@ export const ProjectsSelectedList = props => {
   )
 
   const Projects = ({ projects, currentProjectIndex }) => (
-    <div className="project__selected__list">
+    <div className="project__related__list">
       {projects.map((project, i) => {
         return (
           <Project
@@ -81,19 +94,21 @@ export const ProjectsSelectedList = props => {
     </div>
   )
 
-  const projects = props.projectSelected.projectsSelected
+  const projects = props.projectRelated.projectsSelected
 
   return (
-    <div className="project__selected__container">
+    <div className="project__related__container">
+      <Styledcapitalize>{props.title}</Styledcapitalize>
       {imageState && (
-        <Img
-          fluid={imageState}
-          className="project__img--background--selected"
-        />
+        <ImgBck>
+          <Img
+            fluid={imageState}
+            className="project__img--background--related"
+          />
+        </ImgBck>
       )}
 
-      <div className="project__selected">
-        <Styledcapitalize>{props.title}</Styledcapitalize>
+      <div className="project__related">
         <Projects projects={projects} />
       </div>
     </div>

@@ -40,11 +40,10 @@ export const Styledh2 = styled.h2`
   z-index: 10;
   position: relative;
   cursor: pointer;
-  display: flex;
+
   align-items: center;
   margin-bottom: 0;
   line-height: 120px;
-  /* white-space: nowrap; */
 
   ${props => props.selected && selectedCss}
 
@@ -62,7 +61,7 @@ export const Styledprojectdate = styled.span`
   font-family: "gt_walsheim_prolight";
   font-size: 13px;
   line-height: 19.5px;
-  bottom: 40px;
+  bottom: 50px;
   position: relative;
   color: $white;
   -webkit-text-fill-color: white;

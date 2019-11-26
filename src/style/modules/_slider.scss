@@ -5,11 +5,19 @@
     padding: 35px 0;
   }
 }
-
+.slick-track {
+  @media #{$tablet} {
+    width: 100px;
+  }
+}
 .slick-slider {
   @media #{$tablet} {
     display: flex !important;
   }
+  @media #{$desktop-lg} {
+    padding: 0 45px;
+  }
+
   img {
     width: auto;
   }

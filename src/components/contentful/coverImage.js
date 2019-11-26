@@ -1,15 +1,27 @@
 import React from "react"
-import BackgroundImage from "gatsby-background-image"
+import styled from "styled-components"
+import { ImgBlur } from "./../animations/image"
 export const CoverImage = props => {
+  const ImgResponsive = styled.div`
+    div {
+      height: 780px;
+      background-size: cover;
+      background-repeat: no-repeat;
+
+      @media screen and (max-width: 736px) {
+        width: 100%;
+        background-position-x: -${(props.image.focalPoint.focalPoint.x * 1800) / props.image.image.file.details.image.width / 1.8}px;
+      }
+    }
+  `
+
   return (
-    <div
-      style={{ width: "100%", position: "relative", height: "80vh !important" }}
-    >
-      <BackgroundImage
-        className="cover"
-        fluid={props.image.image.fluid}
-        style={{ width: "100%", position: "relative" }}
-      ></BackgroundImage>
-    </div>
+    <ImgResponsive>
+      <ImgBlur
+        style={{
+          backgroundImage: `url(${props.image && props.image.image.fluid.src})`,
+        }}
+      ></ImgBlur>
+    </ImgResponsive>
   )
 }

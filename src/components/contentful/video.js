@@ -1,7 +1,7 @@
 import React from "react"
 import classNames from "classnames"
 
-import { ImgBlur } from "./../animations/image"
+import { ImgBlur, Gradient } from "./../animations/image"
 export const Video = props => {
   const video_id =
     props.video.video && props.video.video.replace("https://vimeo.com/", "")
@@ -24,6 +24,7 @@ export const Video = props => {
         allowFullScreen
         title="video"
       ></iframe>
+      {isCover && <Gradient />}
     </ImgBlur>
   )
 }

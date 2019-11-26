@@ -9,6 +9,7 @@ import { BehindTheScenePost } from "./behindTheScenePost"
 export const BehindTheScene = props => {
   const [behindTheSceneIsOpen, setBehindTheSceneIsOpen] = useState(false)
   console.log(props.project)
+  if (!props.project.categories) return null
   return (
     <div className="behind__the__scene">
       <h3 onClick={e => setBehindTheSceneIsOpen(!behindTheSceneIsOpen)}>

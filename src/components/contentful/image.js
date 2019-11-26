@@ -1,7 +1,7 @@
 import React from "react"
 import classNames from "classnames"
-import Img from "gatsby-image"
 
+import { ImgBlur } from "./../animations/image"
 export const Image = props => {
   return (
     <div
@@ -10,7 +10,17 @@ export const Image = props => {
       })}
     >
       <div>
-        <Img fluid={props.image.image.fluid} />
+        <ImgBlur
+          className="image__blur"
+          style={{
+            backgroundImage: `url(${props.image.image.fluid.src})`,
+            width: "100%",
+            backgroundSize: "contain",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        ></ImgBlur>
+
         {props.image.text && (
           <div
             dangerouslySetInnerHTML={{ __html: props.image.text.text }}

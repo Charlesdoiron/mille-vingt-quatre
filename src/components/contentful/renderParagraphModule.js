@@ -44,7 +44,7 @@ export const RenderParagraphModule = props => {
           case "textOneColumn":
             return (
               props.module.textOneColumn && (
-                <div key={i} className="text_one_column__container">
+                <div key={i} className="text_column__container">
                   <div
                     dangerouslySetInnerHTML={{
                       __html: props.module.textOneColumn.textOneColumn,

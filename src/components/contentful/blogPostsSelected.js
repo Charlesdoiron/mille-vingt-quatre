@@ -5,7 +5,7 @@ import { ImgBlur } from "./../animations/image"
 
 export const BlogPostsSelected = props => {
   return (
-    <div className="wrapper--m">
+    <div className="wrapper--m no--wrapper--mobile">
       <div className="blog-post-selected__container">
         <Styledcapitalize>
           {props.postSelected.blogPostSelectedTitle}

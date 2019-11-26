@@ -7,8 +7,10 @@ import arrow_next_project from "./../img/pictos/arrow_next_project.svg"
 import { StyledH1, Styledh3, Styledprojectdate } from "../components/typos"
 import { ImgBlur, Gradient } from "../components/animations/image"
 import { ImageGrid } from "../components/contentful/imageGrid"
+import { ImageGrid2Photos } from "../components/contentful/imageGrid2Photos"
+import { ImageGrid3Or4Photos } from "../components/contentful/imageGrid3Or4Photos"
 import { Credits } from "../components/contentful/credits"
-import { ProjectsSelectedList } from "../components/contentful/projectsSelectedList"
+import { ProjectsRelatedList } from "../components/contentful/projectsRelatedList"
 import { Video } from "../components/contentful/video"
 import { BlogPostsSelected } from "../components/contentful/blogPostsSelected"
 import { Image } from "../components/contentful/image"
@@ -28,6 +30,56 @@ class project extends React.Component {
     }
   }
 
+  componentDidMount() {
+    console.clear()
+    let lastScrollTop = 0
+
+    window.addEventListener(
+      "scroll",
+      function() {
+        let st = window.pageYOffset || document.documentElement.scrollTop
+        let next = document.querySelector(".next")
+        let previous = document.querySelector(".previous")
+        if (st < lastScrollTop) {
+          if (next) {
+            next.style.opacity = "1"
+          }
+          if (previous) {
+            previous.style.opacity = "1"
+          }
+        } else {
+          if (next) {
+            next.style.opacity = "0"
+          }
+          if (previous) {
+            previous.style.opacity = "0"
+          }
+        }
+        lastScrollTop = st <= 0 ? 0 : st // For Mobile or negative scrolling
+      },
+      false
+    )
+  }
+
+  componentWillUnmount() {
+    var lastScrollTop = 0
+    window.removeEventListener(
+      "scroll",
+      function() {
+        var st = window.pageYOffset || document.documentElement.scrollTop
+        if (st < lastScrollTop) {
+          document.querySelector(".previous").style.opacity = "1"
+          document.querySelector(".next").style.opacity = "1"
+        } else {
+          document.querySelector(".previous").style.opacity = "0"
+          document.querySelector(".next").style.opacity = "0"
+        }
+        lastScrollTop = st <= 0 ? 0 : st // For Mobile or negative scrolling
+      },
+      false
+    )
+  }
+
   render() {
     const modules = this.props.data.contentfulProject.modulesUi
     const project = this.props.data.contentfulProject
@@ -38,6 +90,10 @@ class project extends React.Component {
         switch (module.__typename) {
           case "ContentfulImageGrid":
             return <ImageGrid imageGrid={module} key={i} />
+          case "ContentfulImageGrid2Photos":
+            return <ImageGrid2Photos imageGrid={module} key={i} />
+          case "ContentfulImageGrid3Or4Photos":
+            return <ImageGrid3Or4Photos imageGrid={module} key={i} />
           case "ContentfulVideo":
             return <Video video={module} key={i} />
           case "ContentfulBlogPostSelected":
@@ -89,8 +145,9 @@ class project extends React.Component {
               </div>
             </div>
 
-            <ul>
+            <ul className="project__navigation">
               <li
+                className="previous"
                 style={{
                   transform: "rotate(270deg",
                   position: "relative",
@@ -118,6 +175,7 @@ class project extends React.Component {
                 )}
               </li>
               <li
+                className="next"
                 style={{
                   transform: "rotate(90deg)",
                   position: "relative",
@@ -189,10 +247,9 @@ class project extends React.Component {
             switch (module.__typename) {
               case "ContentfulProjectsSelected":
                 return (
-                  <ProjectsSelectedList
-                    projectSelected={module}
+                  <ProjectsRelatedList
+                    projectRelated={module}
                     title="related project"
-                    showAllProjectsLink
                   />
                 )
               default:
@@ -259,6 +316,25 @@ export const pagequeryproject = graphql`
             }
           }
         }
+        ... on ContentfulImageGrid2Photos {
+          grid {
+            fluid {
+              src
+            }
+          }
+          text {
+            text
+          }
+          display
+        }
+        ... on ContentfulImageGrid3Or4Photos {
+          grid {
+            fluid {
+              src
+            }
+          }
+          display
+        }
         ... on ContentfulProjectsSelected {
           titleProjectsSelected
           projectsSelected {
@@ -307,17 +383,6 @@ export const pagequeryproject = graphql`
           }
         }
 
-        ... on ContentfulImageGrid {
-          display
-          text {
-            text
-          }
-          grid {
-            fluid {
-              src
-            }
-          }
-        }
         ... on ContentfulVideo {
           video
         }

@@ -33,6 +33,22 @@ function SamplePrevArrow(props) {
 export class CustomSlider extends Component {
   state = {
     cursorIsNext: false,
+    customCursor: "",
+  }
+
+  getDeviceWidth = () => {
+    if (window.innerWidth > 1000) {
+      this.setState({ customCursor: true })
+    } else {
+      this.setState({ customCursor: false })
+    }
+  }
+  componentDidMount() {
+    this.getDeviceWidth()
+    window.addEventListener("resize", this.getDeviceWidth, false)
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.getDeviceWidth, false)
   }
 
   render() {
@@ -80,9 +96,15 @@ export class CustomSlider extends Component {
             : this.slider.slickPrev()
         }
         style={
-          this.state.cursorIsNext
-            ? { cursor: `url(${arrow_right}), url(${arrow_right}), auto` }
-            : { cursor: `url(${arrow_left}), url(${arrow_left}), auto` }
+          this.state.customCursor
+            ? this.state.cursorIsNext
+              ? {
+                  cursor: `url(${arrow_right}), url(${arrow_right}), auto`,
+                }
+              : {
+                  cursor: `url(${arrow_left}), url(${arrow_left}), auto`,
+                }
+            : {}
         }
       >
         <Slider {...settings} ref={c => (this.slider = c)}>

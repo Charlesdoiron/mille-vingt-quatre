@@ -10,7 +10,7 @@
   position: relative;
 
   @media #{$mobile} {
-    margin: 35px 0;
+    margin: 0;
   }
 
   &.isCover {
@@ -37,6 +37,6 @@
   position: absolute;
 
   @media #{$mobile} {
-    padding: 0 13%;
+    padding: 0 10%;
   }
 }

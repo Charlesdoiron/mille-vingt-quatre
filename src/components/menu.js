@@ -10,6 +10,9 @@ import facebook from "./../img/pictos/facebook.svg"
 import vimeo from "./../img/pictos/vimeo.svg"
 import { graphql } from "gatsby"
 import { Location } from "@reach/router"
+
+// import { slide as Menu } from "react-burger-menu"
+
 const MenuContainer = styled.div`
   margin: 0 auto;
   display: flex;

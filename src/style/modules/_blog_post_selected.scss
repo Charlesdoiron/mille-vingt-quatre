@@ -2,10 +2,14 @@
   padding: 85px 0;
 
   @media #{$mobile} {
-    padding: 35px 0;
+    padding: 35px 0 0 10%;
   }
   p {
     margin-bottom: 90px;
+
+    @media #{$mobile} {
+      margin-bottom: 35px;
+    }
   }
   span {
     margin-bottom: 10px;
@@ -42,18 +46,22 @@
       transition: all 1s;
       width: 100%;
       min-width: 360px;
+
       @media #{$tablet} {
         min-width: 100%;
-        margin-right: 15px;
       }
 
       @media #{$mobile} {
-        margin-right: 15px;
+        min-width: 90%;
+        width: 90%;
       }
 
       &:hover {
         p {
           opacity: 1;
+          @media #{$mobile} {
+            margin-top: 35px;
+          }
         }
       }
 
@@ -77,6 +85,11 @@
 
         @media #{$tablet} {
           pointer-events: auto;
+        }
+
+        @media #{$mobile} {
+          top: 45%;
+          font-size: 40px;
         }
       }
       p {

@@ -158,16 +158,17 @@ export default class Slider extends Component {
   handleSaveProjectHeight = () => {
     if (!this.scrollArea) return
     if (!this.scrollArea.childNodes.length) return
-    const projectHeight = document
-      .querySelector(".project__slide")
-      .getBoundingClientRect().height
+    const projectHeight =
+      document.querySelector(".project__slide") &&
+      document.querySelector(".project__slide").getBoundingClientRect().height
     this.setState({ projectHeight })
   }
 
   handleSaveScrollContainerInitPosition = () => {
     this.initialPosition =
+      this.scrollArea &&
       this.scrollArea.getBoundingClientRect().top -
-      (this.props.forDesktop ? 0 : marginTopMobile)
+        (this.props.forDesktop ? 0 : marginTopMobile)
   }
 
   handleFixScrollContainerOnTop = () => {
@@ -204,7 +205,11 @@ export default class Slider extends Component {
       fixScrollContainerOnTop && this.handleFixScrollContainerOnTop()
       const { projectHeight } = this.state
       const newScrollTop = projectIndex * projectHeight
-      this.scrollArea.scrollTo({ top: newScrollTop, behavior: "smooth" })
+      this.scrollArea &&
+        this.scrollArea.scrollTo({
+          top: newScrollTop,
+          behavior: "smooth",
+        })
     }
     this.handleProjectIndex(projectIndex)
   }

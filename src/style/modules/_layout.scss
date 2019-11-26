@@ -6,10 +6,22 @@
     padding: 0 10%;
   }
   @media #{$mobile} {
-    padding: 0 13%;
+    padding: 0 10%;
+  }
+  &.no--wrapper--mobile {
+    @media #{$mobile} {
+      padding: 0;
+    }
   }
 }
 
 .flex {
   display: flex;
+}
+
+.layout {
+  height: 100%;
+  width: 100vw;
+  overflow: scroll;
+  position: relative;
 }
