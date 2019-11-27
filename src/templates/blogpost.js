@@ -177,15 +177,15 @@ export const pagequeryblogpost = graphql`
           }
         }
 
-        ... on ContentfulImageGrid {
-          display
-          grid {
-            title
-            fluid {
-              src
-            }
-          }
-        }
+        # ... on ContentfulImageGrid {
+        #   display
+        #   grid {
+        #     title
+        #     fluid {
+        #       src
+        #     }
+        #   }
+        # }
         ... on ContentfulVideo {
           id
           video
