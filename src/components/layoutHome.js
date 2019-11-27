@@ -5,7 +5,7 @@ const LayoutHome = props => {
   return (
     <div className="layout">
       <Menu currentPage={props.currentPage} />
-      <div className="children__container-in-home">{props.children}</div>
+      <div className="children__container_in-home">{props.children}</div>
     </div>
   )
 }
