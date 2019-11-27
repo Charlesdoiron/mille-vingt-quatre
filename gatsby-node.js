@@ -5,10 +5,10 @@ exports.createPages = ({ graphql, actions }) => {
   const { createRedirect } = actions
 
   createRedirect({
-    fromPath: `/`,
+    fromPath: `/home`,
     isPermanent: true,
     redirectInBrowser: true,
-    toPath: `/home`,
+    toPath: `/`,
   })
 
   // PAGES
@@ -28,8 +28,11 @@ exports.createPages = ({ graphql, actions }) => {
       const pages = result.data.allContentfulPages.edges
       pages.map(({ node }) => {
         createPage({
-          path: node.slug === "/home/" ? `/` : `${node.slug}/`,
-          component: path.resolve(`./src/templates/page.js`),
+          path: `${node.slug}/`,
+          component:
+            node.slug === "home"
+              ? path.resolve(`./src/pages/index.js`)
+              : path.resolve(`./src/templates/page.js`),
           context: {
             slug: node.slug,
           },
