@@ -1,6 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Link, StaticQuery } from "gatsby"
-
+import { useMediaQuery } from "react-responsive"
 import styled from "styled-components"
 import { navigate } from "@reach/router"
 import close from "./../img/pictos/close.svg"
@@ -10,9 +10,7 @@ import facebook from "./../img/pictos/facebook.svg"
 import vimeo from "./../img/pictos/vimeo.svg"
 import { graphql } from "gatsby"
 import { Location } from "@reach/router"
-
-// import { slide as Menu } from "react-burger-menu"
-
+import MenuMobile from "./menuMobile"
 const MenuContainer = styled.div`
   margin: 0 auto;
   display: flex;
@@ -26,7 +24,9 @@ const MenuContainer = styled.div`
 const MenuRight = styled.div`
   display: flex;
   justify-content: flex-end;
-
+  @media screen and (max-width: 990px) {
+    display: block;
+  }
   a {
     margin: 0 20px;
   }
@@ -34,6 +34,11 @@ const MenuRight = styled.div`
 
 const Menu = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false)
+
+  const isTabletOrMobileDevice = useMediaQuery({
+    query: "(max-width: 990px)",
+  })
+
   return (
     <Location>
       {({ location }) => (
@@ -51,9 +56,17 @@ const Menu = ({ data }) => {
               <p>Close</p>
             </div>
           )}
+          {/* MOBILE */}
+
+          {isTabletOrMobileDevice && isOpen && data.contentfulMenu && (
+            <div className="menu__content__mobile">
+              <MenuMobile />
+            </div>
+          )}
 
           <MenuRight className="menu-right__container">
-            {isOpen && data.contentfulMenu && (
+            {/* DESKTOP */}
+            {!isTabletOrMobileDevice && isOpen && data.contentfulMenu && (
               <div className="menu__content">
                 {data.contentfulMenu.menu.map(item => {
                   const { slug, title } = item

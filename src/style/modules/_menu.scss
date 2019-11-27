@@ -1,16 +1,5 @@
 .menu__content {
   display: flex;
-  @media #{$tablet} {
-    flex-direction: column;
-    width: 100%;
-    margin-top: -20px;
-    position: absolute;
-    height: 100vh;
-    background-color: black;
-    color: white;
-    padding-top: 30%;
-    padding-left: 40px;
-  }
 
   .socials {
     display: flex;
@@ -19,27 +8,10 @@
     right: 10px;
     top: 100px;
 
-    @media #{$tablet} {
-      bottom: 0;
-      flex-direction: row;
-      top: 80vh;
-      right: 0;
-      width: 100%;
-      margin: 0 auto;
-      text-align: center;
-      justify-content: space-evenly;
-      padding: 0 20%;
-    }
-
     img {
       width: 17px;
       margin-bottom: 25px;
       height: 17px;
-
-      @media #{$tablet} {
-        width: 24px;
-        height: 24px;
-      }
     }
   }
 
@@ -48,18 +20,8 @@
     font-size: 16px;
     margin-right: 70px !important;
 
-    @media #{$tablet} {
-      font-size: 20px;
-    }
-
     &.isActive {
       border-bottom: 1px solid white;
-      @media #{$tablet} {
-        border-bottom: 0;
-      }
-    }
-    @media #{$tablet} {
-      margin-bottom: 30px;
     }
   }
 }
@@ -159,5 +121,89 @@
         }
       }
     }
+  }
+}
+
+.menu__content__mobile {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20vh;
+
+  // animation: blur 2s;
+
+  .socials {
+    display: flex;
+    bottom: 0;
+    flex-direction: row;
+    position: absolute;
+    top: 80vh;
+    right: 0;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    justify-content: space-evenly;
+    padding: 0 20%;
+    animation: appear 2048ms;
+    opacity: 0.8;
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  .menu_item {
+    font-size: 20px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    animation: appear 2048ms;
+    animation: toRight 600ms;
+
+    &.isActive {
+      border-bottom: 0;
+    }
+  }
+  .bkg {
+    height: 100vh;
+    background-color: black;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    animation: blur 248ms ease-in-out;
+  }
+}
+@keyframes blur {
+  from {
+    filter: blur(100px);
+    opacity: 0;
+  }
+
+  to {
+    filter: blur(0px);
+    opacity: 0.5 !important;
+  }
+}
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.5 !important;
+  }
+}
+
+@keyframes toRight {
+  from {
+    transform: translateX(2px);
+  }
+
+  to {
+    transform: translateX(0px);
   }
 }
