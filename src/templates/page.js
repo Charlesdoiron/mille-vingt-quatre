@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import styled from "styled-components"
-import Layout from "../components/layoutHome"
+import LayoutHome from "../components/layoutHome"
 
 import "./../style/index.scss"
 
@@ -109,11 +109,11 @@ const Page = props => {
     )
   }
   return (
-    <Layout currentPage={currentPage}>
+    <LayoutHome currentPage={currentPage}>
       {currentPage !== "projects"
         ? renderModulesOnPages(modules)
         : renderProjectsPage(modules, projects, categories)}
-    </Layout>
+    </LayoutHome>
   )
 }
 

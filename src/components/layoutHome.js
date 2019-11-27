@@ -1,7 +1,7 @@
 import React from "react"
 import Menu from "./menu"
 
-const Layout = props => {
+const LayoutHome = props => {
   return (
     <div className="layout">
       <Menu currentPage={props.currentPage} />
@@ -10,4 +10,4 @@ const Layout = props => {
   )
 }
 
-export default Layout
+export default LayoutHome
