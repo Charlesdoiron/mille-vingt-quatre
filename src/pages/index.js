@@ -1,14 +1,14 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import './../style/index.scss'
-import layout from "./../components/layout"
+import "./../style/index.scss"
+import Layout from "./../components/layout"
 
 class BlogIndex extends React.Component {
   render() {
     const { data } = this.props
     const blogPosts = data.allContentfulBlogPost.edges
     return (
-      <layout>
+      <Layout>
         {blogPosts.map(({ node }) => {
           const title = node.title || node.slug
           return (
@@ -19,7 +19,7 @@ class BlogIndex extends React.Component {
             </div>
           )
         })}
-      </layout>
+      </Layout>
     )
   }
 }
