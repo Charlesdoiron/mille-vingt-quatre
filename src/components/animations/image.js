@@ -25,8 +25,7 @@ export const Gradient = styled.div`
   width: 100%;
   bottom: 0;
   height: 300px;
-  background: #000000;
-  background: linear-gradient(0deg, #000000 0%, #ffffff00 100%);
+  background: linear-gradient(0deg, #000000 0%, #00000000 100%);
   animation: ${blur} 0.1s ease-in;
 
   @media (max-width: ${mobile}) {

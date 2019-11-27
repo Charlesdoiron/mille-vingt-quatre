@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { Gradient } from "../components/animations/image"
 import styled from "styled-components"
 import LayoutHome from "../components/layoutHome"
 
@@ -101,7 +102,7 @@ const Page = props => {
           {modules.map(module => (
             <RenderParagraphModule module={module} />
           ))}
-          <div className="gradient"></div>
+          <Gradient />
         </FullHeight>
 
         <ProjectsList projects={projects} categories={categories} />
