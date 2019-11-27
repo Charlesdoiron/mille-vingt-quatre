@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
 import { Styledh2, Styledprojectdate, Styledcapitalize } from "./../typos"
 
-import styled, { keyframes } from "styled-components"
+import styled from "styled-components"
 
 const TitleContainer = styled.div`
   display: flex;

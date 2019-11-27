@@ -1,26 +1,26 @@
 import React, { Component } from "react"
 import "react-perfect-scrollbar/dist/css/styles.css"
-import PerfectScrollbar from "react-perfect-scrollbar"
+
 import styled, { css } from "styled-components"
 import { Link } from "gatsby"
 import { Styledh2, Styledprojectdate, Styledcapitalize } from "./typos"
 
 const marginTopMobile = 90
 
-const perfectScrollbarOptions = {
-  handlers: ["click-rail", "drag-thumb", "keyboard", "wheel", "touch"],
-  wheelSpeed: 0.5,
-  wheelPropagation: true,
-  // swipeEasing: true,
-  // minScrollbarLength: null,
-  // maxScrollbarLength: null,
-  // scrollingThreshold: 1000,
-  useBothWheelAxes: true,
-  suppressScrollX: true,
-  // suppressScrollY: false,
-  // scrollXMarginOffset: 0,
-  // scrollYMarginOffset: 0,
-}
+// const perfectScrollbarOptions = {
+//   handlers: ["click-rail", "drag-thumb", "keyboard", "wheel", "touch"],
+//   wheelSpeed: 0.5,
+//   wheelPropagation: true,
+//   // swipeEasing: true,
+//   // minScrollbarLength: null,
+//   // maxScrollbarLength: null,
+//   // scrollingThreshold: 1000,
+//   useBothWheelAxes: true,
+//   suppressScrollX: true,
+//   // suppressScrollY: false,
+//   // scrollXMarginOffset: 0,
+//   // scrollYMarginOffset: 0,
+// }
 
 const styledcapitalizeForDesktop = css`
   margin-right: 100px;
@@ -30,8 +30,8 @@ const SectionTitle = styled(Styledcapitalize)`
   ${props => props.forDesktop && styledcapitalizeForDesktop}
 `
 
-const computeSliderContainerHeight = ({ windowHeight, projectHeight }) =>
-  Math.floor(windowHeight / projectHeight) * projectHeight
+// const computeSliderContainerHeight = ({ windowHeight, projectHeight }) =>
+//   Math.floor(windowHeight / projectHeight) * projectHeight
 
 const mobileCss = css`
   /* margin-top: ${marginTopMobile}px; */
@@ -43,15 +43,8 @@ const SliderContainer = styled.div`
   ${props => !props.forDesktop && mobileCss}
 `
 
-const computeSliderContainerMarginBottom = ({ windowHeight, projectHeight }) =>
-  Math.floor(windowHeight / projectHeight) * projectHeight - 2 * projectHeight
-
-const MarginBottom = styled.div`
-  height: ${computeSliderContainerMarginBottom}px;
-`
-const MarginTop = styled.div`
-  height: ${props => props.projectHeight}px;
-`
+// const computeSliderContainerMarginBottom = ({ windowHeight, projectHeight }) =>
+//   Math.floor(windowHeight / projectHeight) * projectHeight - 2 * projectHeight
 
 const TitleContainer = styled.div`
   display: flex;
@@ -62,17 +55,6 @@ const TitleContainer = styled.div`
 const Title = styled(Styledh2)`
   max-width: 550px;
   overflow-wrap: break-word;
-`
-
-const TopFader = styled.div`
-  height: ${props => props.projectHeight}px;
-  background: linear-gradient(to bottom, #000, transparent);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 101;
-  pointer-events: none;
 `
 
 const getProjectImageToHandle = ({ cover }) => cover.fluid
@@ -184,7 +166,7 @@ export default class Slider extends Component {
 
   handleScrollToProject = scroll => {
     const { projectHeight } = this.state
-    const { projects, forDesktop } = this.props
+    // const { projects, forDesktop } = this.props
     const scrollTop = scroll.scrollTop
     const projectToFocus = Math.round(scrollTop / projectHeight)
     // if (forDesktop && !!projects[projectToFocus]) {

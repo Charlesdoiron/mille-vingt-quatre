@@ -1,5 +1,4 @@
 import React from "react"
-import Img from "gatsby-image"
 import { ImgBlur } from "./../animations/image"
 import { Link } from "gatsby"
 
