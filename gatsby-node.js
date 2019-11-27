@@ -1,5 +1,5 @@
 const path = require(`path`)
-
+const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin")
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
   const { createRedirect } = actions
@@ -119,4 +119,16 @@ exports.createPages = ({ graphql, actions }) => {
   })
 
   return Promise.all([loadBlogPosts, loadPages, loadProjects])
+}
+
+exports.onCreateWebpackConfig = ({
+  stage,
+  rules,
+  loaders,
+  plugins,
+  actions,
+}) => {
+  actions.setWebpackConfig({
+    plugins: [new CaseSensitivePathsPlugin({ debug: true })],
+  })
 }
