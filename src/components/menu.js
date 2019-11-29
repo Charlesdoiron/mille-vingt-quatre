@@ -32,11 +32,17 @@ const MenuRight = styled.div`
   }
 `
 
-const Menu = ({ data }) => {
+const Menu = ({ data }, props) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const isTabletOrMobileDevice = useMediaQuery({
     query: "(max-width: 990px)",
+  })
+
+  useEffect(() => {
+    if (isOpen) {
+      props.isOpen(isOpen)
+    }
   })
 
   return (
