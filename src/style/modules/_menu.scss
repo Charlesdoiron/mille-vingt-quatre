@@ -1,20 +1,6 @@
 .menu__content {
   display: flex;
 
-  .socials {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    right: 10px;
-    top: 100px;
-
-    img {
-      width: 17px;
-      margin-bottom: 25px;
-      height: 17px;
-    }
-  }
-
   .menu_item {
     font-family: $font-walsheim-thin;
     font-size: 16px;
@@ -28,9 +14,8 @@
 
 .logo {
   z-index: 1000;
-  width: 65px;
-  height: 15px;
-  margin-left: 20px;
+  height: 17px;
+  margin-left: 15px;
   position: relative;
 }
 
@@ -56,21 +41,7 @@
 }
 
 .menu-right__container {
-  span {
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
-  }
   .burger {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    width: 30px;
-    height: 30px;
-    position: relative;
-    top: 10px;
-    right: 10px;
-
     &:hover {
       cursor: pointer;
       .line {
@@ -131,8 +102,6 @@
   flex-direction: column;
   padding-top: 20vh;
 
-  // animation: blur 2s;
-
   .socials {
     display: flex;
     bottom: 0;
@@ -145,7 +114,7 @@
     text-align: center;
     justify-content: space-evenly;
     padding: 0 20%;
-    animation: appear 2048ms;
+    animation: appear 1700ms ease-in-out;
     opacity: 0.8;
 
     img {
@@ -153,19 +122,15 @@
       height: 24px;
     }
   }
-  .menu_item {
+
+  .menu__item {
     font-size: 20px;
-    margin-bottom: 30px;
+    transition: all 1700ms;
     display: flex;
     flex-direction: row;
     position: relative;
-    animation: appear 2048ms;
-    animation: toRight 600ms;
-
-    &.isActive {
-      border-bottom: 0;
-    }
   }
+
   .bkg {
     height: 100vh;
     background-color: black;
@@ -174,7 +139,7 @@
     top: 0;
     left: 0;
     z-index: -1;
-    animation: blur 248ms ease-in-out;
+    animation: blur 400ms ease-in-out;
   }
 }
 @keyframes blur {
@@ -186,24 +151,5 @@
   to {
     filter: blur(0px);
     opacity: 0.5 !important;
-  }
-}
-@keyframes appear {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 0.5 !important;
-  }
-}
-
-@keyframes toRight {
-  from {
-    transform: translateX(2px);
-  }
-
-  to {
-    transform: translateX(0px);
   }
 }

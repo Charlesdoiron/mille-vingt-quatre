@@ -1,6 +1,6 @@
-import React, { useState } from "react"
+import React, { useEffect } from "react"
 import { Link, StaticQuery } from "gatsby"
-
+import styled from "styled-components"
 import instagram from "./../img/pictos/instagram.svg"
 import facebook from "./../img/pictos/facebook.svg"
 import vimeo from "./../img/pictos/vimeo.svg"
@@ -14,9 +14,9 @@ const MenuMobile = ({ data }) => {
         return (
           <Link
             to={`/${slug}`}
-            key={slug}
             activeClassName="isActive"
-            className="menu_item"
+            key={slug}
+            className="menu__item"
           >
             {title}
           </Link>

@@ -2,7 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import { Gradient } from "../components/animations/image"
 import styled from "styled-components"
-import LayoutHome from "../components/layoutHome"
+import { Layout } from "../components/layout"
 
 import "./../style/index.scss"
 
@@ -110,11 +110,11 @@ const Page = props => {
     )
   }
   return (
-    <LayoutHome currentPage={currentPage}>
+    <Layout currentPage={currentPage}>
       {currentPage !== "projects"
         ? renderModulesOnPages(modules)
         : renderProjectsPage(modules, projects, categories)}
-    </LayoutHome>
+    </Layout>
   )
 }
 

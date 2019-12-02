@@ -34,6 +34,7 @@
   height: 100%;
   position: absolute !important;
   animation: blur 2s;
+  opacity: 0.5;
 
   &.isOut {
     animation: isOut 2s !important;

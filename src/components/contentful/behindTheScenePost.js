@@ -12,10 +12,6 @@ export const BehindTheScenePost = props => {
         className="img__behind"
         style={{
           backgroundImage: `url(${props.hero.fluid.src})`,
-          width: "100%",
-          backgroundSize: "contain",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
         }}
       />
       <div className="content__behind">

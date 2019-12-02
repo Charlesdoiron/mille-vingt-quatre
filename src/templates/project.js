@@ -17,7 +17,7 @@ import { Image } from "../components/contentful/image"
 import { NewsLetterSuscribe } from "../components/contentful/newsLetterSuscribe"
 import { Socials } from "../components/contentful/socials"
 import { ContactForm } from "../components/contentful/contactForm"
-import Layout from "../components/layout"
+import { Layout } from "../components/layout"
 import { RenderParagraphModule } from "./../components/contentful/renderParagraphModule"
 import { BehindTheScene } from "./../components/contentful/behindTheScene"
 import { CustomSlider as Slider } from "./../components/contentful/slider"
@@ -31,7 +31,6 @@ class project extends React.Component {
   }
 
   componentDidMount() {
-    console.clear()
     let lastScrollTop = 0
 
     window.addEventListener(
@@ -117,7 +116,7 @@ class project extends React.Component {
         }
       })
     }
-
+    console.log(this.props)
     return (
       <Layout>
         <div className="project__container">
@@ -289,7 +288,7 @@ export const pagequeryproject = graphql`
           text
         }
       }
-      categories {
+      tags {
         slug
         blog_post {
           createdAt(formatString: "DD.MM.Y")

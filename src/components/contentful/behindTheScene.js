@@ -8,8 +8,8 @@ import { BehindTheScenePost } from "./behindTheScenePost"
 
 export const BehindTheScene = props => {
   const [behindTheSceneIsOpen, setBehindTheSceneIsOpen] = useState(false)
-  console.log(props.project)
-  if (!props.project.categories) return null
+
+  if (!props.project.tags || !props.project.tags[0].blog_post) return null
   return (
     <div className="behind__the__scene">
       <h3 onClick={e => setBehindTheSceneIsOpen(!behindTheSceneIsOpen)}>
@@ -31,10 +31,10 @@ export const BehindTheScene = props => {
         />
       </h3>
 
-      {props.project.categories && (
+      {props.project.tags[0].blog_post && (
         <div className="content__collapsed">
           <Collapse isOpened={behindTheSceneIsOpen}>
-            {props.project.categories[0].blog_post.map(post => {
+            {props.project.tags[0].blog_post.map(post => {
               return <BehindTheScenePost {...post} />
             })}
           </Collapse>

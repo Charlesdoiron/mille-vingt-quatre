@@ -35,6 +35,14 @@
     margin-right: 40px;
     width: 100% !important;
     height: 400px;
+    width: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    @media #{$tablet} {
+      background-size: cover;
+    }
 
     @media #{$mobile} {
       width: 100%;
