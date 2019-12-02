@@ -25,4 +25,8 @@ export const CloseProject = () => {
 const StyledClose = styled.div`
   width: calc(100% / 3);
   margin: 0 auto;
+  padding-top: 28px;
+  @media screen and (max-width: 768px) {
+    padding-top: 0;
+  }
 `

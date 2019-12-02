@@ -49,8 +49,8 @@ const StyledSocials = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  right: 30px;
-  top: 76px;
+  right: 33px;
+  top: 90px;
 
   @media screen and (max-width: 768px) {
     animation: ${appear} 4500ms;

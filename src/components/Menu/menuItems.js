@@ -45,12 +45,9 @@ export default props => {
 
 const appear = keyframes`
   0% {
-
     opacity: 0;
   }
-
     opacity: 1 !important;
-
   }
 }`
 
@@ -60,6 +57,7 @@ const StyledMenuItems = styled.div`
   width: 100%;
   justify-content: flex-end;
   border: 0;
+  align-items: center;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -68,6 +66,7 @@ const StyledMenuItems = styled.div`
     position: absolute;
     left: 50px;
     z-index: 2;
+    align-items: flex-start;
   }
 
   a {
