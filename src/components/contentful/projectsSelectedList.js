@@ -41,7 +41,16 @@ export const ProjectsSelectedList = props => {
         .classList.toggle("isOut")
     setTimeout(() => {
       setImageState(img)
-    }, 1000)
+    }, 300)
+  }
+
+  const leaveImage = img => {
+    setTimeout(() => {
+      document.querySelector(".project__img--background--selected") &&
+        document
+          .querySelector(".project__img--background--selected")
+          .classList.toggle("isOut")
+    }, 500)
   }
 
   const Project = ({
@@ -84,7 +93,10 @@ export const ProjectsSelectedList = props => {
   const projects = props.projectSelected.projectsSelected
 
   return (
-    <div className="project__selected__container">
+    <div
+      className="project__selected__container"
+      onMouseLeave={e => leaveImage()}
+    >
       {imageState && (
         <Img
           fluid={imageState}

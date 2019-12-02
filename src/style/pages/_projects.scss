@@ -3,7 +3,7 @@
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  height: 100vh;
+  height: auto;
   position: relative;
   overflow: hidden;
 
@@ -55,9 +55,15 @@
 
 .project__img--background {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: absolute !important;
-  animation: blur 5s;
+  animation: blur 1s;
+  overflow: hidden;
+
+  &.isOut {
+    animation: isOut 1s !important;
+    opacity: 0;
+  }
 }
 
 @keyframes blur {
@@ -69,5 +75,17 @@
   to {
     filter: blur(0);
     opacity: 1 !important;
+  }
+}
+
+@keyframes isOut {
+  from {
+    filter: blur(0px);
+    opacity: 0.5;
+  }
+
+  to {
+    filter: blur(100px);
+    opacity: 0 !important;
   }
 }

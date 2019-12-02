@@ -33,11 +33,11 @@
   width: 100%;
   height: 100%;
   position: absolute !important;
-  animation: blur 2s;
+  animation: blur 800ms;
   opacity: 0.5;
 
   &.isOut {
-    animation: isOut 2s !important;
+    animation: isOut 800ms !important;
     opacity: 0;
   }
 

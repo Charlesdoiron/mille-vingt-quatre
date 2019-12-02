@@ -44,6 +44,16 @@ export const ProjectsList = props => {
     }
   })
 
+  const changeImage = img => {
+    document.querySelector(".project__img--background") &&
+      document
+        .querySelector(".project__img--background")
+        .classList.toggle("isOut")
+    setTimeout(() => {
+      setImageState(img)
+    }, 1000)
+  }
+
   return (
     <div ref={containerRef}>
       {imageState && (
@@ -63,9 +73,9 @@ export const ProjectsList = props => {
 
         <Slider
           projects={projectsState}
-          handleImage={setImageState}
+          handleImage={img => changeImage(img)}
           containerRef={containerRef}
-          showLinkToProject={!isTabletOrMobileDevice}
+          showLinkToProject={false}
           forDesktop={!isTabletOrMobileDevice}
         />
       </div>
