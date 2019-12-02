@@ -21,7 +21,10 @@ const BlogPost = ({ data }) => {
               >
                 <div
                   className="img__bck"
-                  style={{ backgroundImage: `url(${node.hero.sizes.src})` }}
+                  style={{
+                    backgroundImage: `url(${node.hero.sizes &&
+                      node.hero.sizes.src})`,
+                  }}
                 ></div>
                 <h1>{node.title}</h1>
                 <p>
