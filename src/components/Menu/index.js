@@ -8,8 +8,8 @@ import { Socials } from "./socials"
 import { Logo } from "./logo"
 import { Burger } from "./burger"
 
-export const Menu = ({ data }, props) => {
-  const [isOpen, setIsOpen] = useState(false)
+export const Menu = ({ data, menuIsOpen, isOpen }, props) => {
+  // const [isOpen, setIsOpen] = useState(false)
   const [willClose, setWillClose] = useState(false)
 
   const isMobile = useMediaQuery({
@@ -27,7 +27,7 @@ export const Menu = ({ data }, props) => {
 }`
 
   const StyledBackground = styled.div`
-    background-color: ${props => (props.isOpen ? "black" : "transparent")};
+    background-color: ${isOpen ? "black" : "transparent"};
     height: 100vh;
     width: 100%;
     z-index: 8000000;
@@ -37,13 +37,17 @@ export const Menu = ({ data }, props) => {
     pointer-events: none;
 
     overflow: hidden;
-    animation: ${props =>
-      props.isOpen
-        ? css`
-            ${appear} 500ms
-          `
-        : ""};
+
+    animation: ${isOpen
+      ? css`
+          ${appear} 500ms
+        `
+      : ""};
   `
+
+  const handleClick = e => {
+    menuIsOpen(!isOpen)
+  }
 
   return !isMobile ? (
     <DesktopContainer>
@@ -51,7 +55,7 @@ export const Menu = ({ data }, props) => {
       {!isOpen && <CloseProject isOpen={isOpen} />}
       {isOpen && <MenuItems isOpen={isOpen} />}
       <Socials isOpen={isOpen} />
-      <Burger handleClick={e => setIsOpen(!isOpen)} isOpen={isOpen} />
+      <Burger handleClick={e => handleClick(e)} isOpen={isOpen} />
     </DesktopContainer>
   ) : (
     <div>
@@ -61,7 +65,7 @@ export const Menu = ({ data }, props) => {
           {!isOpen && <CloseProject isOpen={isOpen} />}
           {isOpen && <MenuItems isOpen={isOpen} />}
           <Socials isOpen={isOpen} willClose={willClose} />
-          <Burger handleClick={e => setIsOpen(!isOpen)} isOpen={isOpen} />
+          <Burger handleClick={() => handleClick()} isOpen={isOpen} />
         </StyledFixed>
         <StyledBackground isOpen={isOpen} className={isOpen ? "isOpen" : {}} />
       </MobileContainer>
@@ -82,17 +86,18 @@ const DesktopContainer = styled.div`
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  padding: 28px 0;
+
   z-index: 100;
   width: 100%;
   position: fixed;
   transition: all 1024ms;
 `
 const MobileContainer = styled.div`
-  padding: 39px 0;
   margin: 0 auto;
   width: 100%;
   position: fixed;
   z-index: 999999;
   transition: all 2s;
+  overflow: hidden;
+  height: 100vh;
 `

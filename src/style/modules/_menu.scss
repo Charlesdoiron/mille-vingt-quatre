@@ -41,54 +41,35 @@
 }
 
 .menu-right__container {
-  .burger {
-    &:hover {
-      cursor: pointer;
+  button {
+    .burger {
       .line {
-        &:nth-child(1) {
-          width: 15px;
-          transition: all 0.2s;
-        }
-        &:nth-child(3) {
-          width: 15px;
-          position: relative;
-          transition: all 0.2s;
-        }
-      }
-    }
-    .line {
-      border-top: 1px solid white;
-      width: 10px;
-      margin-bottom: 5px;
-
-      &:nth-child(1) {
-        top: 0;
+        border-top: 1px solid white;
         width: 10px;
-        position: relative;
-        transition: all 0.4s;
-      }
-      &:nth-child(2) {
-        width: 15px;
-        position: relative;
-      }
-      &:nth-child(3) {
-        width: 20px;
-        position: relative;
-        bottom: 0;
-        transition: all 0.4s;
-      }
-    }
-    &.burgerIsClosed {
-      .line {
+        margin-bottom: 5px;
+
         &:nth-child(1) {
-          top: 6px !important;
+          width: 10px;
+          transition: all 1s;
+        }
+        &:nth-child(2) {
+          width: 15px;
           position: relative;
-          transition: all 0.4s;
         }
         &:nth-child(3) {
-          bottom: 6px !important;
+          width: 20px;
           position: relative;
-          transition: all 0.4s;
+          opacity: 1;
+        }
+      }
+      &.burgerIsClosed {
+        .line {
+          &:nth-child(1) {
+            opacity: 0;
+          }
+          &:nth-child(3) {
+            opacity: 0;
+          }
         }
       }
     }
@@ -142,14 +123,12 @@
     animation: blur 400ms ease-in-out;
   }
 }
-@keyframes blur {
+@keyframes animLineOne {
   from {
-    filter: blur(100px);
-    opacity: 0;
+    top: 6px;
   }
 
   to {
-    filter: blur(0px);
-    opacity: 0.5 !important;
+    top: 0px;
   }
 }

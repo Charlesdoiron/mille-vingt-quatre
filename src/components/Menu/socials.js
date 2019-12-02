@@ -56,7 +56,7 @@ const StyledSocials = styled.div`
     animation: ${appear} 4500ms;
     top: unset;
     flex-direction: row;
-    bottom: 92px;
+    bottom: 20px;
     width: 60%;
     margin: 0 auto;
     justify-content: space-around;
