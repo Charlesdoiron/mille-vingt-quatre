@@ -41,9 +41,18 @@
     width: 100%;
     justify-content: space-evenly;
     margin: 0 auto;
+    flex-wrap: wrap;
+    padding: 0 0 0 20%;
+
+    .project__title__link {
+      flex: 0 50%;
+    }
 
     h2 {
       font-size: 60px;
+      @media #{$mobile} {
+        font-size: 36px;
+      }
     }
 
     @media #{$tablet} {
@@ -59,9 +68,13 @@
   width: 100%;
   height: 100%;
   position: absolute !important;
-  animation: blur 5s;
+  animation: blur 800ms;
   opacity: 0.5;
 
+  &.isOut {
+    animation: isOut 800ms !important;
+    opacity: 0;
+  }
   &--mobile {
     padding-top: 30px;
   }

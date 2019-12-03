@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { useMediaQuery } from "react-responsive"
 import styled, { keyframes, css } from "styled-components"
 import { useStateValue } from "./../../context/state"
@@ -97,12 +97,12 @@ const DesktopContainer = styled.div`
   transition: all 1024ms;
 `
 
-const MobileContainer = styled.div`
-  margin: 0 auto;
-  width: 100%;
-  position: fixed;
-  z-index: 999999999999999;
-  transition: all 200ms;
-  overflow: hidden;
-  height: 100vh;
-`
+// const MobileContainer = styled.div`
+//   margin: 0 auto;
+//   width: 100%;
+//   position: fixed;
+//   z-index: 999999999999999;
+//   transition: all 200ms;
+//   overflow: hidden;
+//   height: 100vh;
+// `

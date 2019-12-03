@@ -5,17 +5,6 @@ import { Styledh2, Styledprojectdate, Styledcapitalize } from "../typos"
 
 import styled, { keyframes } from "styled-components"
 
-const blur = keyframes`
-  0% {
-    filter: blur(100px);
-    opacity: 0.5;
-  }
-  100%{
-    filter: blur(0);
-    opacity: 0.7 !important;
-  }
-}
-`
 const TitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -31,31 +20,29 @@ const ImgBck = styled.div`
   width: 100%;
   height: 100vh;
   position: absolute;
-  animation: ${blur} 5s ease-in-out 0s;
 `
 
 export const ProjectsRelatedList = props => {
   const [imageState, setImageState] = useState("")
 
-  // function setDefaultImage() {
-  //   setImageState(projects[0].cover.fluid)
-  // }
-  // async function setDefaultProject() {
-  //   await setDefaultImage()
-  //   const titles = document.querySelectorAll(".project__title__link")
-  //   const firstTitle = titles[0]
-  //   await firstTitle.classList.add("isActive")
-  // }
+  const changeImage = img => {
+    document.querySelector(".project__img--background--related") &&
+      document
+        .querySelector(".project__img--background--related")
+        .classList.toggle("isOut")
+    setTimeout(() => {
+      setImageState(img)
+    }, 300)
+  }
 
-  // useEffect(() => {
-  //   setDefaultProject()
-  // }, [])
-
-  // useEffect(() => {
-  //   const titles = document.querySelectorAll(".project__title__link")
-  //   const firstTitle = titles[0]
-  //   firstTitle.classList.remove("isActive")
-  // }, [imageState])
+  const leaveImage = img => {
+    setTimeout(() => {
+      document.querySelector(".project__img--background--related") &&
+        document
+          .querySelector(".project__img--background--related")
+          .classList.toggle("isOut")
+    }, 500)
+  }
 
   const Project = ({
     isCurrentProject,
@@ -67,7 +54,7 @@ export const ProjectsRelatedList = props => {
   }) => (
     <Link
       to={`/project/${slug}`}
-      onMouseEnter={e => setImageState(cover.fluid)}
+      onMouseEnter={e => changeImage(cover.fluid)}
       className="project__title__link"
     >
       <TitleContainer className="project__slide" projectNumber={projectNumber}>
@@ -97,7 +84,10 @@ export const ProjectsRelatedList = props => {
   const projects = props.projectRelated.projectsSelected
 
   return (
-    <div className="project__related__container">
+    <div
+      className="project__related__container"
+      onMouseLeave={e => leaveImage()}
+    >
       <Styledcapitalize>{props.title}</Styledcapitalize>
       {imageState && (
         <ImgBck>
@@ -114,3 +104,23 @@ export const ProjectsRelatedList = props => {
     </div>
   )
 }
+
+// function setDefaultImage() {
+//   setImageState(projects[0].cover.fluid)
+// }
+// async function setDefaultProject() {
+//   await setDefaultImage()
+//   const titles = document.querySelectorAll(".project__title__link")
+//   const firstTitle = titles[0]
+//   await firstTitle.classList.add("isActive")
+// }
+
+// useEffect(() => {
+//   setDefaultProject()
+// }, [])
+
+// useEffect(() => {
+//   const titles = document.querySelectorAll(".project__title__link")
+//   const firstTitle = titles[0]
+//   firstTitle.classList.remove("isActive")
+// }, [imageState])

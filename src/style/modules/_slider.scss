@@ -1,25 +1,9 @@
 .slider__container {
-  padding: 170px 5%;
+  padding: 0 5%;
+  margin: 85px 0;
 
   @media #{$mobile} {
-    padding: 35px 0;
-    overflow-x: hidden;
-  }
-}
-.slick-track {
-  @media #{$tablet} {
-    width: 100px;
-  }
-}
-.slick-slider {
-  @media #{$tablet} {
-    display: flex !important;
-  }
-  @media #{$desktop-lg} {
-    padding: 0 45px;
-  }
-
-  img {
-    width: auto;
+    margin: 35px 0;
+    padding: 0;
   }
 }
