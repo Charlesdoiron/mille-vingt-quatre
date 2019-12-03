@@ -25,10 +25,12 @@
     z-index: 99999;
     height: 100%;
     width: 100%;
+
     @media #{$tablet} {
       display: block;
     }
     @media #{$mobile} {
+      margin-top: 40px;
       padding: 35px 0;
     }
     p {
@@ -51,6 +53,7 @@
     h2 {
       font-size: 60px;
       @media #{$mobile} {
+        line-height: 40px;
         font-size: 36px;
       }
     }

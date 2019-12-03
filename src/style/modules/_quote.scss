@@ -39,9 +39,11 @@
 
 .quote__container {
   padding: 85px 0;
+  width: 75%;
 
   @media #{$tablet} {
     padding: 10% 0;
+    width: 100%;
   }
 
   @media #{$mobile} {
