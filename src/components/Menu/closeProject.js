@@ -8,13 +8,14 @@ export const CloseProject = () => {
       <Location>
         {({ location }) =>
           location.pathname.substring(0, 9) === "/project/" && (
-            <div
+            <button
+              type="button"
               onClick={e => navigate(window.history.back())}
               className="close"
             >
               <img src={close} alt="close" />
               <p>Close</p>
-            </div>
+            </button>
           )
         }
       </Location>
