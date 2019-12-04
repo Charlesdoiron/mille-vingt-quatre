@@ -126,6 +126,7 @@ class project extends React.Component {
               style={{
                 backgroundImage: `url(${project.cover &&
                   project.cover.fluid.src})`,
+                opacity: "0.8",
               }}
             ></ImgBlur>
             <div className="wrapper--m">
