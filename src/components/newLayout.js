@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 
-import { StateProvider } from "./../context/state"
+import { StateProvider } from "../context/state"
 
 import { Menu } from "./Menu/index.js"
 

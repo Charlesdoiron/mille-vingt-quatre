@@ -2,7 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import { Gradient } from "../components/animations/image"
 import styled from "styled-components"
-import { Layout } from "../components/layout"
+import { Layout } from "../components/newLayout"
 
 import "./../style/index.scss"
 
