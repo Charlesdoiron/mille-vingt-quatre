@@ -67,16 +67,16 @@ const Title = styled(Styledh2)`
   overflow-wrap: break-word;
 `
 
-const TopFader = styled.div`
-  height: ${props => props.projectHeight}px;
-  background: linear-gradient(to bottom, #000, transparent);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 101;
-  pointer-events: none;
-`
+// const TopFader = styled.div`
+//   height: ${props => props.projectHeight}px;
+//   background: linear-gradient(to bottom, #000, transparent);
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   z-index: 101;
+//   pointer-events: none;
+// `
 
 const getProjectImageToHandle = ({ cover }) => cover.fluid
 
@@ -190,7 +190,7 @@ export default class Slider extends Component {
 
   handleScrollToProject = scroll => {
     const { projectHeight } = this.state
-    const { projects, forDesktop } = this.props
+    // const { projects, forDesktop } = this.props
     const scrollTop = scroll.scrollTop
     const projectToFocus = Math.round(scrollTop / projectHeight)
     // if (forDesktop && !!projects[projectToFocus]) {
