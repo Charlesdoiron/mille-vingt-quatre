@@ -306,6 +306,7 @@ export const pagequeryproject = graphql`
       }
 
       modulesUi {
+        __typename
         ... on ContentfulSlider {
           images {
             fluid(maxWidth: 2500, quality: 100) {

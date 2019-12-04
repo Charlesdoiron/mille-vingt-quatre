@@ -144,6 +144,7 @@ export const pagequeryblogpost = graphql`
         }
       }
       modulesUi {
+        __typename
         ... on ContentfulParagraphModule {
           quote {
             quote

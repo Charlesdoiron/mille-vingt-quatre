@@ -150,6 +150,7 @@ export const pagequerypagebyslug = graphql`
         slug
       }
       ui {
+        __typename
         ... on ContentfulImageGrid3Or4Photos {
           grid {
             fluid {
