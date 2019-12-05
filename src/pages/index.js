@@ -46,7 +46,7 @@ const Page = props => {
 
   console.log("POSTS", posts)
   console.log("CURRENT", currentPage)
-  console.log("MODULESS", modules)
+  console.log("MODULES", modules)
 
   const renderModulesOnPages = modules => {
     if (currentPage === "blog") {
