@@ -30,7 +30,7 @@ export const CloseProject = () => {
 const StyledClose = styled.div`
   width: calc(100% / 3);
   margin: 0 auto;
-  padding-top: 28px;
+
   /* button {
     background-color: transparent;
     border: none;

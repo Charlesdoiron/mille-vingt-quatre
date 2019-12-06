@@ -15,8 +15,4 @@ export const Logo = () => {
 
 const StyledLogo = styled.div`
   width: calc(100% / 3);
-  padding: 28px 0;
-  @media screen and (max-width: 768px) {
-    padding: 39px 0;
-  }
 `

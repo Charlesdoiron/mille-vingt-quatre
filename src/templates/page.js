@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { graphql } from "gatsby"
 import { Gradient } from "../components/animations/image"
 import styled from "styled-components"
@@ -44,10 +44,13 @@ const Page = props => {
   const currentPage = props.pageContext.slug
 
   console.log("PAGE", page)
-
   console.log("POSTS", posts)
   console.log("CURRENT", currentPage)
-  console.log("MODULESS", modules)
+  console.log("MODULES", modules)
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }, [])
 
   const renderModulesOnPages = modules => {
     if (currentPage === "blog") {

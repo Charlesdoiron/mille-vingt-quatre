@@ -21,7 +21,6 @@ export const Burger = props => {
       padding: 30px;
       background-color: transparent;
       border: 0;
-
       @media screen and (max-width: 768px) {
         padding: 30px 0 30px 30px;
       }
