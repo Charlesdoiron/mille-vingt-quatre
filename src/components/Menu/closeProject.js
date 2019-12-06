@@ -31,11 +31,11 @@ const StyledClose = styled.div`
   width: calc(100% / 3);
   margin: 0 auto;
 
-  /* button {
+  button {
     background-color: transparent;
     border: none;
     color: white;
-  } */
+  }
   @media screen and (max-width: 768px) {
     padding-top: 0;
   }

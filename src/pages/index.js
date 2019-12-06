@@ -2,7 +2,6 @@ import React, { useEffect } from "react"
 import { graphql } from "gatsby"
 import styled from "styled-components"
 import { Layout } from "../components/newLayout"
-
 import "./../style/index.scss"
 
 import { ImageGrid } from "../components/contentful/imageGrid"
