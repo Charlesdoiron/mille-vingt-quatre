@@ -51,7 +51,9 @@ const Page = props => {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }, [])
 
-  console.log("WINDOW", window)
+  if (typeof window !== "undefined") {
+    console.log("WINDOW", window)
+  }
 
   const renderModulesOnPages = modules => {
     if (currentPage === "blog") {
