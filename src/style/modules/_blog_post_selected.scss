@@ -1,10 +1,7 @@
 .blog-post-selected__container {
   padding: 85px 0;
-  <<<<<<<
-    head
-    =======>>>>>>>cf22afe84be32e5cde88d77059ad6d3502789e88
-    @media
-    #{$mobile} {
+
+  @media #{$mobile} {
     padding: 35px 0 0 10%;
   }
   p {
