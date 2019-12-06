@@ -102,7 +102,28 @@
       a {
         display: flex;
         justify-content: flex-end;
+        img {
+          top: 0;
+          position: relative;
+        }
+        &:hover,
+        &:active {
+          img {
+            top: -100px;
+            transition: top 1s;
+          }
+        }
       }
+    }
+  }
+
+  .project__navigation {
+    button {
+      border: transparent;
+      background-color: transparent;
+      padding: 0 30px 30px 30px;
+      color: white;
+      font-size: 16px;
     }
   }
 }

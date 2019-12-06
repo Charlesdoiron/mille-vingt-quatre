@@ -3,9 +3,14 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 import logo from "./../../images/1024_logo.png"
 
-export const Logo = () => {
+export const Logo = props => {
+  const closeMenu = e => {
+    if (props.isOpen) {
+      props.handleClick(e)
+    }
+  }
   return (
-    <StyledLogo>
+    <StyledLogo onClick={e => closeMenu()}>
       <Link to={"/home"}>
         <img alt="logo" src={logo} className="logo" />
       </Link>

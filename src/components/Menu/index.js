@@ -66,7 +66,7 @@ export const Menu = ({ data, menuIsOpen }, props) => {
     <div>
       <div>
         <StyledFixed>
-          <Logo />
+          <Logo isOpen={isOpen} handleClick={e => toggleMenu(false)} />
           {!isOpen && <CloseProject />}
           {isOpen && <MenuItems isOpen={isOpen} />}
           <Socials isOpen={isOpen} />

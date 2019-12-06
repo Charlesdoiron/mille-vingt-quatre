@@ -7,6 +7,7 @@ export const CloseProject = () => {
     e.preventDefault()
     navigate(window.history.back())
   }
+
   return (
     <StyledClose>
       <Location>
@@ -30,6 +31,8 @@ export const CloseProject = () => {
 const StyledClose = styled.div`
   width: calc(100% / 3);
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
 
   button {
     background-color: transparent;

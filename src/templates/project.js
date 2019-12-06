@@ -1,5 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import { animateScroll as scroll } from "react-scroll"
 
 import "./../style/index.scss"
 import arrow_next_project from "./../img/pictos/arrow_next_project.svg"
@@ -30,6 +31,12 @@ class project extends React.Component {
   }
 
   componentDidMount() {
+    scroll.scrollToTop({
+      duration: 1024,
+      delay: 0,
+      smooth: "easeInOutQuart",
+    })
+
     let lastScrollTop = 0
 
     window.addEventListener(
@@ -65,7 +72,7 @@ class project extends React.Component {
       "scroll",
       function() {
         var st = window.pageYOffset || document.documentElement.scrollTop
-        if (st < lastScrollTop) {
+        if (st <= lastScrollTop) {
           document.querySelector(".previous").style.opacity = "1"
           document.querySelector(".next").style.opacity = "1"
         } else {
@@ -115,7 +122,7 @@ class project extends React.Component {
         }
       })
     }
-    console.log(this.props)
+
     return (
       <Layout>
         <div className="project__container">
@@ -159,15 +166,17 @@ class project extends React.Component {
                       whiteSpace: "nowrap",
                     }}
                   >
-                    {previous.node.projectTitle}
-                    <img
-                      src={arrow_next_project}
-                      alt="previous"
-                      style={{
-                        transform: "rotate(270deg)",
-                        marginLeft: "10px",
-                      }}
-                    />
+                    <button>
+                      {previous.node.projectTitle}
+                      <img
+                        src={arrow_next_project}
+                        alt="previous"
+                        style={{
+                          transform: "rotate(270deg)",
+                          marginLeft: "10px",
+                        }}
+                      />
+                    </button>
                   </Link>
                 )}
               </li>
@@ -187,15 +196,17 @@ class project extends React.Component {
                       position: "absolute",
                     }}
                   >
-                    <img
-                      alt="next"
-                      src={arrow_next_project}
-                      style={{
-                        transform: "rotate(270deg)",
-                        marginRight: "10px",
-                      }}
-                    />
-                    {next.node.projectTitle}
+                    <button>
+                      <img
+                        alt="next"
+                        src={arrow_next_project}
+                        style={{
+                          transform: "rotate(270deg)",
+                          marginRight: "10px",
+                        }}
+                      />
+                      {next.node.projectTitle}
+                    </button>
                   </Link>
                 )}
               </li>

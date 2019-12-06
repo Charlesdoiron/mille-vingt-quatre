@@ -17,6 +17,13 @@
   height: 17px;
   margin-left: 15px;
   position: relative;
+  top: 30px;
+  left: 30px;
+
+  @media #{$mobile} {
+    top: 0;
+    left: 0;
+  }
 }
 
 .close {
