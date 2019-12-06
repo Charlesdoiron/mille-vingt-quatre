@@ -1,0 +1,33 @@
+.contact-form__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 75px 0;
+
+  @media #{$mobile} {
+    justify-content: flex-start;
+    padding: 35px 0;
+  }
+
+  &:hover {
+    img {
+      position: relative;
+      left: 5px;
+      transition: left 0.4s;
+    }
+  }
+  a {
+    display: flex;
+
+    img {
+      margin-right: 40px;
+      position: relative;
+      left: 0px;
+      transition: left 0.4s;
+      @media #{$mobile} {
+        width: 30px;
+        margin-right: 15px;
+      }
+    }
+  }
+}

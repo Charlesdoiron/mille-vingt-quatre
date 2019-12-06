@@ -1,0 +1,9 @@
+.slider__container {
+  padding: 0 5%;
+  margin: 85px 0;
+
+  @media #{$mobile} {
+    margin: 35px 0;
+    padding: 0;
+  }
+}

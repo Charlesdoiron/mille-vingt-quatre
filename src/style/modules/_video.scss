@@ -1,0 +1,42 @@
+.video__container {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 85px auto;
+  position: relative;
+
+  @media #{$mobile} {
+    margin: 0;
+  }
+
+  &.isCover {
+    margin: 0 auto;
+    width: 100%;
+    z-index: 10;
+    margin-bottom: 85px;
+
+    @media #{$mobile} {
+      margin-bottom: 35px;
+    }
+    iframe {
+      padding: 0 !important;
+    }
+  }
+}
+
+.video__container iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  padding: 0 5%;
+  position: absolute;
+
+  @media #{$mobile} {
+    padding: 0 10%;
+  }
+}

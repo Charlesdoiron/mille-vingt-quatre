@@ -1,0 +1,25 @@
+// COLOUR
+
+$black: #333333;
+$white: #ffffff;
+
+// Breakpoints
+// Small devices (landscape phones, 576px and up)
+$width-sm: 576px;
+// Medium devices (tablets, 768px and up)
+$width-md: 768px;
+// Large devices (desktops, 992px and up)
+$width-lg: 992px;
+// Extra large devices (large desktops, 1200px and up)
+$width-xl: 1300px;
+
+// responsive mixins
+$mobile: "(max-width: #{$width-md - 1px})";
+$tablet: "(max-width: #{$width-lg - 1px})";
+$desktop: "(min-width: #{$width-lg})";
+$desktop-lg: "(max-width: #{$width-xl})";
+
+$font-walsheim: "gt_walsheim_prolight", Helvetica, sans-serif;
+$font-walsheim-thin: "GTWalsheimProThin", Helvetica, sans-serif;
+$font-walsheim-ultra-light: "GTWalsheimProUltraLight", Helvetica, sans-serif;
+$font-be-vietnam: "be_vietnamregular", Helvetica, sans-serif;

@@ -1,0 +1,33 @@
+import React from "react"
+import classNames from "classnames"
+
+import { ImgBlur } from "./../animations/image"
+export const Image = props => {
+  return (
+    <div
+      className={classNames("image__container", {
+        [props.image.display.map(d => d).join(" ")]: true,
+      })}
+    >
+      <div>
+        <ImgBlur
+          className="image__blur"
+          style={{
+            backgroundImage: `url(${props.image.image.fluid.src})`,
+            width: "100%",
+            backgroundSize: "contain",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        ></ImgBlur>
+
+        {props.image.text && (
+          <div
+            dangerouslySetInnerHTML={{ __html: props.image.text.text }}
+            className="text__for__image"
+          />
+        )}
+      </div>
+    </div>
+  )
+}

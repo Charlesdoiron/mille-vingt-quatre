@@ -1,0 +1,104 @@
+.grid__container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+
+  padding: 85px 0;
+  flex-direction: row;
+
+  @media #{$mobile} {
+    padding: 35px 10% !important;
+  }
+
+  &.marginBetween {
+    justify-content: space-between;
+    div {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      flex-wrap: wrap;
+
+      @media #{$tablet} {
+        flex-direction: column;
+      }
+    }
+  }
+  &.SameSize {
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    img {
+      @media #{$tablet} {
+        padding: 0 !important;
+      }
+    }
+    img:nth-child(2) {
+      @media #{$desktop} {
+        margin-top: 35px;
+      }
+      @media #{$tablet} {
+        margin-top: 25px 0 35px 0;
+      }
+    }
+  }
+
+  &.marginAround {
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &.TwoThirdsOneThird {
+    justify-content: space-around;
+    align-items: center;
+
+    div {
+      display: flex;
+      align-items: center;
+      @media #{$tablet} {
+        flex-direction: column;
+      }
+    }
+
+    img:first-child {
+      width: 60% !important;
+      height: 100%;
+
+      @media #{$tablet} {
+        width: 100% !important;
+      }
+    }
+    img:nth-child(2) {
+      width: 40% !important;
+      height: 100%;
+
+      @media #{$tablet} {
+        width: 100% !important;
+      }
+    }
+  }
+
+  &.TextBottom {
+    .content {
+      margin: 30px 0;
+    }
+  }
+  @media #{$tablet} {
+    padding: 0 10%;
+  }
+  @media #{$mobile} {
+    padding: 0 5%;
+  }
+
+  @media #{$tablet} {
+    flex-wrap: nowrap;
+    flex-direction: column;
+
+    img {
+      width: 100% !important;
+      margin: 15px auto;
+      height: 100%;
+    }
+  }
+}

@@ -1,0 +1,136 @@
+.image__container {
+  width: 100%;
+  position: relative;
+  padding: 85px 0;
+
+  @media #{$mobile} {
+    padding: 35px 0;
+  }
+
+  .text__for__image {
+    display: flex;
+    flex-direction: column !important;
+  }
+
+  &.Image-With-Padding {
+    .image__blur {
+      height: 600px;
+    }
+  }
+
+  &.Image-Align-Left {
+    padding: 85px 30% 0 0;
+
+    @media #{$mobile} {
+      padding: 35px 0;
+    }
+    .image__blur {
+      height: 570px !important;
+
+      @media #{$mobile} {
+        height: 220px !important;
+      }
+    }
+  }
+
+  &.Image-Align-Right {
+    div {
+      text-align: right;
+
+      .image__blur {
+        height: 570px !important;
+        width: 860px;
+
+        @media #{$mobile} {
+          height: 220px !important;
+        }
+      }
+
+      .text__for__image {
+        text-align: left;
+      }
+    }
+  }
+
+  &.Text-Bottom {
+    flex-direction: column;
+
+    div {
+      .image__blur {
+        width: 100%;
+      }
+    }
+    .text__for__image {
+      margin: 50px auto 0 auto;
+
+      @media #{$tablet} {
+        margin: 70px auto 0 auto;
+      }
+      @media #{$mobile} {
+        margin-top: 35px;
+      }
+    }
+  }
+
+  &.Text-Right {
+    .image__blur {
+      height: 600px;
+
+      @media #{$mobile} {
+        height: auto;
+      }
+    }
+
+    .image__blur {
+      width: 50%;
+
+      @media #{$tablet} {
+        width: 100%;
+      }
+    }
+    div {
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      position: relative;
+
+      @media #{$desktop-lg} {
+        flex-direction: column;
+      }
+
+      .gatsby-image-wrapper {
+        width: 50%;
+      }
+
+      .text__for__image {
+        width: 50%;
+        padding: 0 0 0 40px;
+        display: flex;
+        justify-content: center;
+
+        @media #{$desktop-lg} {
+          width: 100%;
+          margin-top: 70px;
+          padding: 0;
+          display: flex;
+          align-items: flex-start;
+        }
+
+        @media #{$mobile} {
+          margin-top: 35px;
+          width: 100%;
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  .image__blur {
+    @media #{$mobile} {
+      background-size: cover !important;
+      height: 220px !important;
+      min-height: 100% !important;
+    }
+  }
+}

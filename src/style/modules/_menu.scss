@@ -1,0 +1,138 @@
+.menu__content {
+  display: flex;
+
+  .menu_item {
+    font-family: $font-walsheim-thin;
+    font-size: 16px;
+    margin-right: 70px !important;
+
+    &.isActive {
+      border-bottom: 1px solid white;
+    }
+  }
+}
+
+.logo {
+  z-index: 1000;
+  height: 17px;
+  margin-left: 15px;
+  position: relative;
+}
+
+.close {
+  z-index: 20000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.24s;
+  img {
+    position: relative;
+  }
+  p {
+    margin-left: 10px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-family: $font-walsheim;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.menu-right__container {
+  button {
+    cursor: pointer;
+    &:focus {
+      outline: 0;
+    }
+    .burger {
+      .line {
+        border-top: 1px solid white;
+        width: 10px;
+        margin-bottom: 5px;
+
+        &:nth-child(1) {
+          width: 10px;
+          transition: all 1s;
+        }
+        &:nth-child(2) {
+          width: 15px;
+          position: relative;
+        }
+        &:nth-child(3) {
+          width: 20px;
+          position: relative;
+          opacity: 1;
+        }
+      }
+      &.burgerIsClosed {
+        .line {
+          &:nth-child(1) {
+            opacity: 0;
+          }
+          &:nth-child(3) {
+            opacity: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.menu__content__mobile {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20vh;
+
+  .socials {
+    display: flex;
+    bottom: 0;
+    flex-direction: row;
+    position: absolute;
+    top: 80vh;
+    right: 0;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    justify-content: space-evenly;
+    padding: 0 20%;
+    animation: appear 1700ms ease-in-out;
+    opacity: 0.8;
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .menu__item {
+    font-size: 20px;
+    transition: all 1700ms;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+  }
+
+  .bkg {
+    height: 100vh;
+    background-color: black;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    animation: blur 400ms ease-in-out;
+  }
+}
+@keyframes animLineOne {
+  from {
+    top: 6px;
+  }
+
+  to {
+    top: 0px;
+  }
+}

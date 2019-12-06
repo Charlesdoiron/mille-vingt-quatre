@@ -1,0 +1,145 @@
+.project__container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  .titles {
+    left: 15%;
+    bottom: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+
+    @media #{$tablet} {
+      top: 50%;
+    }
+
+    @media #{$mobile} {
+      top: 60%;
+      left: 50px;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      max-width: 500px;
+      line-height: 110px;
+
+      @media #{$mobile} {
+        font-size: 50px;
+        line-height: 55px;
+
+        span {
+          bottom: 30px;
+        }
+      }
+    }
+
+    p {
+      max-width: 300px;
+      font-size: 20px;
+      line-height: 29px;
+      font-family: $font-be-vietnam;
+
+      @media #{$mobile} {
+        font-size: 15px;
+        max-width: 250px;
+        line-height: 22px;
+      }
+    }
+  }
+
+  .cover {
+    position: relative;
+    width: 100%;
+    height: 80vh !important;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .legend {
+    position: absolute;
+    width: 100%;
+    bottom: 10%;
+    right: 5%;
+    text-align: right;
+    z-index: 1000;
+
+    @media #{$tablet} {
+      display: none;
+    }
+
+    p {
+      font-size: 12px;
+      line-height: 18px;
+    }
+
+    a {
+      border-bottom: 1px solid white;
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    position: fixed;
+    z-index: 99999;
+    width: 98%;
+    left: 0;
+    right: 0;
+    top: 50%;
+    margin: 0 auto;
+    transform: translateY(-50%);
+
+    li {
+      transition: all 0.48s;
+      display: flex;
+      justify-content: space-around;
+      a {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+  }
+}
+
+/// BEHIND THE SCENE
+
+.behind__the__scene {
+  .ReactCollapse--collapse {
+    transition: height 1000ms;
+  }
+
+  h3 {
+    font-family: $font-walsheim;
+    font-size: 25px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 45px;
+    span {
+      border-bottom: 1px solid white;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    img {
+      margin: 0 20px;
+      &:nth-child(1) {
+        transform: rotate(270deg);
+      }
+      transform: rotate(90deg);
+      &.isOpen {
+        &:nth-child(1) {
+          transform: rotate(0deg);
+        }
+        transform: rotate(0deg);
+      }
+    }
+  }
+}
