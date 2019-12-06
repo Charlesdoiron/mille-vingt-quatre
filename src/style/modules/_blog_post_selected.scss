@@ -1,10 +1,10 @@
 .blog-post-selected__container {
   padding: 85px 0;
-<<<<<<< HEAD
-
-=======
->>>>>>> cf22afe84be32e5cde88d77059ad6d3502789e88
-  @media #{$mobile} {
+  <<<<<<<
+    head
+    =======>>>>>>>cf22afe84be32e5cde88d77059ad6d3502789e88
+    @media
+    #{$mobile} {
     padding: 35px 0 0 10%;
   }
   p {
@@ -23,11 +23,8 @@
     justify-content: flex-start;
     position: relative;
     overflow: scroll;
-<<<<<<< HEAD
-=======
     overflow-y: scroll; /* has to be scroll, not auto */
     -webkit-overflow-scrolling: touch;
->>>>>>> cf22afe84be32e5cde88d77059ad6d3502789e88
 
     .img__bck {
       background-size: cover;
