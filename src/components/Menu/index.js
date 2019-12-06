@@ -96,13 +96,3 @@ const DesktopContainer = styled.div`
   position: fixed;
   transition: all 1024ms;
 `
-
-// const MobileContainer = styled.div`
-//   margin: 0 auto;
-//   width: 100%;
-//   position: fixed;
-//   z-index: 999999999999999;
-//   transition: all 200ms;
-//   overflow: hidden;
-//   height: 100vh;
-// `
