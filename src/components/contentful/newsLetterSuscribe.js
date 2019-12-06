@@ -10,7 +10,7 @@ export const NewsLetterSuscribe = props => {
       <div className="news--letter--suscribe__container">
         <div>
           <img src={news_letter_picto} alt="picto" />
-          <div>
+          <div style={{ width: "100%" }}>
             <Styledcapitalize>
               {props.news_letter.newsLetterSuscribeTitle}
             </Styledcapitalize>

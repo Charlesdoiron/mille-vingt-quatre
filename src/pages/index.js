@@ -1,8 +1,7 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { graphql } from "gatsby"
 import styled from "styled-components"
 import { Layout } from "../components/newLayout"
-
 import "./../style/index.scss"
 
 import { ImageGrid } from "../components/contentful/imageGrid"
@@ -47,6 +46,12 @@ const Page = props => {
   console.log("POSTS", posts)
   console.log("CURRENT", currentPage)
   console.log("MODULES", modules)
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }, [])
+
+  console.log("WINDOW", window)
 
   const renderModulesOnPages = modules => {
     if (currentPage === "blog") {

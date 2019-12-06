@@ -102,9 +102,36 @@
       a {
         display: flex;
         justify-content: flex-end;
+<<<<<<< HEAD
       }
     }
   }
+=======
+        img {
+          top: 0;
+          position: relative;
+        }
+        &:hover,
+        &:active {
+          img {
+            top: -100px;
+            transition: top 1s;
+          }
+        }
+      }
+    }
+  }
+
+  .project__navigation {
+    button {
+      border: transparent;
+      background-color: transparent;
+      padding: 0 30px 30px 30px;
+      color: white;
+      font-size: 16px;
+    }
+  }
+>>>>>>> cf22afe84be32e5cde88d77059ad6d3502789e88
 }
 
 /// BEHIND THE SCENE

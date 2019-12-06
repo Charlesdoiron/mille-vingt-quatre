@@ -17,6 +17,16 @@
   height: 17px;
   margin-left: 15px;
   position: relative;
+<<<<<<< HEAD
+=======
+  top: 30px;
+  left: 30px;
+
+  @media #{$mobile} {
+    top: 0;
+    left: 0;
+  }
+>>>>>>> cf22afe84be32e5cde88d77059ad6d3502789e88
 }
 
 .close {
