@@ -9,7 +9,7 @@ import { Menu } from "./Menu/index.js"
 export const Layout = props => {
   useEffect(() => {
     AOS.init({
-      duration: 1024,
+      duration: 2000,
     })
   }, [])
 

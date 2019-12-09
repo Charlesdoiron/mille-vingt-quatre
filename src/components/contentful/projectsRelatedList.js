@@ -86,7 +86,7 @@ export const ProjectsRelatedList = props => {
   return (
     <div
       className="project__related__container"
-      data-aos="fade-down"
+      data-aos="fade-up"
       onMouseLeave={e => leaveImage()}
     >
       <Styledcapitalize>{props.title}</Styledcapitalize>
