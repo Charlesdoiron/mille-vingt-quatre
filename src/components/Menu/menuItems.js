@@ -8,6 +8,7 @@ const MenuItems = ({ data, isOpen }) => {
     <StyledMenuItems>
       {data.contentfulMenu.menu.map((item, i) => {
         const { slug, title } = item
+
         return (
           isOpen && (
             <Link
@@ -75,7 +76,9 @@ const StyledMenuItems = styled.div`
     &.isActive {
       border-bottom: 1px solid white;
       @media screen and (max-width: 768px) {
-        border: none;
+        opacity: 0.7;
+        cursor: default;
+        pointer-events: none;
       }
     }
 

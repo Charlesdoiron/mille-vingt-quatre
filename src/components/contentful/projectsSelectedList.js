@@ -17,6 +17,7 @@ const Title = styled(Styledh2)`
 `
 
 export const ProjectsSelectedList = props => {
+  console.log(props, "selected")
   const [imageState, setImageState] = useState("")
 
   // FOCUS ON FIRST PROJECT
@@ -58,12 +59,12 @@ export const ProjectsSelectedList = props => {
     projectTitle,
     projectTitleDate,
     slug,
-    cover,
+    image,
     projectNumber,
   }) => (
     <Link
       to={`/project/${slug}`}
-      onMouseEnter={e => changeImage(cover.fluid)}
+      onMouseEnter={e => changeImage(image.fluid)}
       className="project__title__link"
     >
       <TitleContainer className="project__slide" projectNumber={projectNumber}>
@@ -95,6 +96,7 @@ export const ProjectsSelectedList = props => {
   return (
     <div
       className="project__selected__container"
+      data-aos="fade-up"
       onMouseLeave={e => leaveImage()}
     >
       {imageState && (

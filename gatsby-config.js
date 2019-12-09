@@ -20,6 +20,13 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sass`,
     `gatsby-background-image`,
+    {
+      resolve: "gatsby-plugin-mailchimp",
+      options: {
+        endpoint:
+          "https://hiver2010.us8.list-manage.com/subscribe/post?u=c4d90a0b380781cb3658a71b0&amp;id=b1feefc1bc",
+      },
+    },
     `gatsby-plugin-netlify-cache`,
     {
       resolve: `gatsby-plugin-manifest`,
@@ -30,7 +37,7 @@ module.exports = {
         background_color: `#000000`,
         theme_color: `#663399`,
         display: `standalone`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/gatsby-icon.png`,
         crossOrigin: `use-credentials`,
       },
     },

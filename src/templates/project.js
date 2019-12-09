@@ -21,7 +21,7 @@ import { ContactForm } from "../components/contentful/contactForm"
 import { RenderParagraphModule } from "./../components/contentful/renderParagraphModule"
 import { BehindTheScene } from "./../components/contentful/behindTheScene"
 import { CustomSlider as Slider } from "./../components/contentful/slider"
-
+import { CoverImage } from "./../components/contentful/coverImage"
 class project extends React.Component {
   constructor(props) {
     super(props)
@@ -32,7 +32,7 @@ class project extends React.Component {
 
   componentDidMount() {
     scroll.scrollToTop({
-      duration: 1024,
+      duration: 0,
       delay: 0,
       smooth: "easeInOutQuart",
     })
@@ -126,14 +126,8 @@ class project extends React.Component {
       <Layout>
         <div className="project__container">
           <div>
-            <ImgBlur
-              className="cover"
-              style={{
-                backgroundImage: `url(${project.cover &&
-                  project.cover.fluid.src})`,
-                opacity: "0.8",
-              }}
-            ></ImgBlur>
+            <CoverImage image={project.image} focalPoint={project.focalPoint} />
+
             <div className="wrapper--m">
               <div className="titles">
                 {project.projectTitle && (
@@ -225,7 +219,7 @@ class project extends React.Component {
         {modules && <div>{renderModulesOnPages(modules)}</div>}
 
         <div className="wrapper--m">
-          <div className="credits__titles">
+          <div className="credits__titles" data-aos="fade">
             <Styledh3>
               {project.projectTitle}
               <Styledprojectdate>{project.projectTitleDate}</Styledprojectdate>
@@ -284,9 +278,22 @@ export const pagequeryproject = graphql`
         title
         slug
       }
-      cover {
+      image {
+        file {
+          details {
+            image {
+              width
+            }
+          }
+        }
         fluid(quality: 100, maxWidth: 1980) {
           ...GatsbyContentfulFluid
+        }
+      }
+      focalPoint {
+        focalPoint {
+          x
+          y
         }
       }
       creditSubtitle {
@@ -350,9 +357,22 @@ export const pagequeryproject = graphql`
               slug
               projectTitle
               projectTitleDate
-              cover {
-                fluid(quality: 90, maxWidth: 1800) {
+              image {
+                file {
+                  details {
+                    image {
+                      width
+                    }
+                  }
+                }
+                fluid(quality: 100, maxWidth: 1980) {
                   ...GatsbyContentfulFluid
+                }
+              }
+              focalPoint {
+                focalPoint {
+                  x
+                  y
                 }
               }
             }

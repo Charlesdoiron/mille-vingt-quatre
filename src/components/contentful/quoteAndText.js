@@ -1,6 +1,5 @@
 import React from "react"
 
-import { styledh4 } from "../typos"
 export const QuoteAndText = props => {
   return (
     <div className="wrapper--m">

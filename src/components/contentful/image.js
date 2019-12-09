@@ -12,6 +12,7 @@ export const Image = props => {
       <div>
         <ImgBlur
           className="image__blur"
+          data-aos="fade-up"
           style={{
             backgroundImage: `url(${props.image.image.fluid.src})`,
             width: "100%",
@@ -24,7 +25,8 @@ export const Image = props => {
         {props.image.text && (
           <div
             dangerouslySetInnerHTML={{ __html: props.image.text.text }}
-            className="text__for__image"
+            className="text__for__image "
+            data-aos="fade-up"
           />
         )}
       </div>

@@ -15,6 +15,7 @@ export const ImageGrid2Photos = props => {
         TwoThirdsOneThird: checkClassName("Two-Thirds-One-Third"),
         TextBottom: checkClassName("Text-Bottom"),
       })}
+      data-aos="fade-up"
     >
       <div>
         {props.imageGrid.grid.map((img, i) => {

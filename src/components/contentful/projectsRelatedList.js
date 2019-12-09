@@ -49,12 +49,12 @@ export const ProjectsRelatedList = props => {
     projectTitle,
     projectTitleDate,
     slug,
-    cover,
+    image,
     projectNumber,
   }) => (
     <Link
       to={`/project/${slug}`}
-      onMouseEnter={e => changeImage(cover.fluid)}
+      onMouseEnter={e => changeImage(image.fluid)}
       className="project__title__link"
     >
       <TitleContainer className="project__slide" projectNumber={projectNumber}>
@@ -86,6 +86,7 @@ export const ProjectsRelatedList = props => {
   return (
     <div
       className="project__related__container"
+      data-aos="fade-down"
       onMouseLeave={e => leaveImage()}
     >
       <Styledcapitalize>{props.title}</Styledcapitalize>

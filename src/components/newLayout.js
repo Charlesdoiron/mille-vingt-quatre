@@ -1,11 +1,18 @@
-import React from "react"
+import React, { useEffect } from "react"
 import styled from "styled-components"
-
+import AOS from "aos"
+import "../../node_modules/aos/dist/aos.css"
 import { StateProvider } from "../context/state"
 
 import { Menu } from "./Menu/index.js"
 
 export const Layout = props => {
+  useEffect(() => {
+    AOS.init({
+      duration: 2000,
+    })
+  }, [])
+
   const StyledLayout = styled.div`
     height: 100%;
     width: 100vw;

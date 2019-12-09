@@ -4,7 +4,7 @@ import arrow_right from "./../../img/pictos/arrow_right.svg"
 export const ContactForm = props => {
   return (
     <div className="wrapper--m">
-      <div className="contact-form__container">
+      <div className="contact-form__container" data-aos="fade-up">
         <div>
           <Styledcapitalize>
             {props.contact_form.contactFormTitle}

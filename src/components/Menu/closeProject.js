@@ -8,7 +8,7 @@ export const CloseProject = () => {
     navigate(window.history.back())
   }
   return (
-    <StyledClose>
+    <StyledClose data-aos="fade-down">
       <Location>
         {({ location }) =>
           location.pathname.substring(0, 9) === "/project/" && (

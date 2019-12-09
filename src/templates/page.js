@@ -138,9 +138,22 @@ export const pagequerypagetemplatebyslug = graphql`
         projectTitle
         projectTitleDate
         slug
-        cover {
-          fluid(quality: 50, maxWidth: 1800) {
+        image {
+          file {
+            details {
+              image {
+                width
+              }
+            }
+          }
+          fluid(quality: 90, maxWidth: 1800) {
             ...GatsbyContentfulFluid
+          }
+        }
+        focalPoint {
+          focalPoint {
+            x
+            y
           }
         }
         categories {
@@ -198,6 +211,13 @@ export const pagequerypagetemplatebyslug = graphql`
         }
         ... on ContentfulCoverImage {
           image {
+            file {
+              details {
+                image {
+                  width
+                }
+              }
+            }
             fluid(quality: 90, maxWidth: 1800) {
               ...GatsbyContentfulFluid
             }
@@ -206,15 +226,6 @@ export const pagequerypagetemplatebyslug = graphql`
             focalPoint {
               x
               y
-            }
-          }
-          image {
-            file {
-              details {
-                image {
-                  width
-                }
-              }
             }
           }
         }
@@ -249,15 +260,6 @@ export const pagequerypagetemplatebyslug = graphql`
           callToActionNewsLetterSuscribe
         }
 
-        # ... on ContentfulImageGrid {
-        #   title
-        #   grid {
-        #     title
-        #     fluid {
-        #       src
-        #     }
-        #   }
-        # }
         ... on ContentfulVideo {
           video
           display
@@ -270,9 +272,22 @@ export const pagequerypagetemplatebyslug = graphql`
               slug
               projectTitle
               projectTitleDate
-              cover {
+              image {
+                file {
+                  details {
+                    image {
+                      width
+                    }
+                  }
+                }
                 fluid(quality: 90, maxWidth: 1800) {
                   ...GatsbyContentfulFluid
+                }
+              }
+              focalPoint {
+                focalPoint {
+                  x
+                  y
                 }
               }
             }

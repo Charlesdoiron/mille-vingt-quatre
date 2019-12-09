@@ -82,7 +82,7 @@ const Page = props => {
         case "ContentfulParagraphModule":
           return <RenderParagraphModule module={module} key={i} />
         case "ContentfulCoverImage":
-          return <CoverImage image={module} key={i} />
+          return <CoverImage image={module} focalPoint={module} key={i} />
         case "ContentfulImageGrid2Photos":
           return <ImageGrid2Photos imageGrid={module} key={i} />
         case "ContentfulImageGrid3Or4Photos":
@@ -142,9 +142,22 @@ export const pagequerypagebyslug = graphql`
         projectTitle
         projectTitleDate
         slug
-        cover {
-          fluid(quality: 50, maxWidth: 1800) {
+        image {
+          file {
+            details {
+              image {
+                width
+              }
+            }
+          }
+          fluid(quality: 90, maxWidth: 1800) {
             ...GatsbyContentfulFluid
+          }
+        }
+        focalPoint {
+          focalPoint {
+            x
+            y
           }
         }
         categories {
@@ -202,6 +215,13 @@ export const pagequerypagebyslug = graphql`
         }
         ... on ContentfulCoverImage {
           image {
+            file {
+              details {
+                image {
+                  width
+                }
+              }
+            }
             fluid(quality: 90, maxWidth: 1800) {
               ...GatsbyContentfulFluid
             }
@@ -210,15 +230,6 @@ export const pagequerypagebyslug = graphql`
             focalPoint {
               x
               y
-            }
-          }
-          image {
-            file {
-              details {
-                image {
-                  width
-                }
-              }
             }
           }
         }
@@ -252,16 +263,6 @@ export const pagequerypagebyslug = graphql`
           placeholderNewsLetterSuscribe
           callToActionNewsLetterSuscribe
         }
-
-        # ... on ContentfulImageGrid {
-        #   title
-        #   grid {
-        #     title
-        #     fluid {
-        #       src
-        #     }
-        #   }
-        # }
         ... on ContentfulVideo {
           video
           display
@@ -274,9 +275,22 @@ export const pagequerypagebyslug = graphql`
               slug
               projectTitle
               projectTitleDate
-              cover {
+              image {
+                file {
+                  details {
+                    image {
+                      width
+                    }
+                  }
+                }
                 fluid(quality: 90, maxWidth: 1800) {
                   ...GatsbyContentfulFluid
+                }
+              }
+              focalPoint {
+                focalPoint {
+                  x
+                  y
                 }
               }
             }
