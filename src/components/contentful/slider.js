@@ -93,6 +93,7 @@ export class CustomSlider extends Component {
     return (
       <Container
         className="slider__container"
+        data-aos="fade-up"
         onMouseMove={e => changeCursor(e)}
         onClick={e =>
           this.state.cursorIsNext

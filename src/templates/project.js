@@ -34,7 +34,7 @@ class project extends React.Component {
     scroll.scrollToTop({
       duration: 0,
       delay: 0,
-      smooth: "easeInOutQuart",
+      // smooth: "easeInOutQuart",
     })
 
     let lastScrollTop = 0

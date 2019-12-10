@@ -4,7 +4,7 @@ import arrow_right from "./../../img/pictos/arrow_right.svg"
 export const Socials = props => {
   return (
     <div className="wrapper--m">
-      <div className="socials__container" data-aos="fade-up">
+      <div className="socials__container" data-aos="fade">
         <div>
           <Styledcapitalize>{props.social.socialsTitle}</Styledcapitalize>
           <div>

@@ -15,9 +15,8 @@ export const ImageGrid2Photos = props => {
         TwoThirdsOneThird: checkClassName("Two-Thirds-One-Third"),
         TextBottom: checkClassName("Text-Bottom"),
       })}
-      data-aos="fade-up"
     >
-      <div>
+      <div data-aos="fade-up">
         {props.imageGrid.grid.map((img, i) => {
           const imgStyle = {
             width: "auto",
@@ -32,6 +31,7 @@ export const ImageGrid2Photos = props => {
 
       {props.imageGrid.text && (
         <div
+          data-aos="fade-up"
           className="content"
           dangerouslySetInnerHTML={{ __html: props.imageGrid.text.text }}
         />

@@ -10,7 +10,11 @@ export const RenderParagraphModule = props => {
           case "quote":
             return (
               props.module.quote && (
-                <div key={i} className="quote__container" data-aos="fade-up">
+                <div
+                  key={i}
+                  className="quote__container"
+                  data-aos={!props.withoutAnimation && `fade-up`}
+                >
                   <Styledh4
                     dangerouslySetInnerHTML={{
                       __html: props.module.quote.quote,
@@ -23,12 +27,9 @@ export const RenderParagraphModule = props => {
           case "quoteForQuoteAndText":
             return (
               props.module.quoteForQuoteAndText && (
-                <div
-                  key={i}
-                  className="quote_and_text__container"
-                  data-aos="fade-up"
-                >
+                <div key={i} className="quote_and_text__container">
                   <Styledh4
+                    data-aos="fade-up"
                     dangerouslySetInnerHTML={{
                       __html:
                         props.module.quoteForQuoteAndText.quoteForQuoteAndText,
@@ -37,6 +38,7 @@ export const RenderParagraphModule = props => {
 
                   {props.module.textForQuoteAndText && (
                     <div
+                      data-aos="fade-up"
                       dangerouslySetInnerHTML={{
                         __html:
                           props.module.textForQuoteAndText.textForQuoteAndText,

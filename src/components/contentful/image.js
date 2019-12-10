@@ -9,7 +9,7 @@ export const Image = props => {
         [props.image.display.map(d => d).join(" ")]: true,
       })}
     >
-      <div>
+      <div data-aos="fade-up">
         <ImgBlur
           className="image__blur"
           data-aos="fade-up"

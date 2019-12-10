@@ -9,10 +9,7 @@ export const Video = props => {
   const isCover = props.video.display && props.video.display[0] === "Is-Cover"
 
   return (
-    <ImgBlur
-      className={classNames("video__container", { isCover: isCover })}
-      data-aos="fade"
-    >
+    <ImgBlur className={classNames("video__container", { isCover: isCover })}>
       <iframe
         // src={`https://player.vimeo.com/video/${video_id}?title=0&byline=0&portrait=0&controls=0&autoplay=1&loop=1&autopause=1&autopause=0`}
         src={

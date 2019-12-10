@@ -103,7 +103,7 @@ const Page = props => {
       <>
         <FullHeight className="background-noise">
           {modules.map(module => (
-            <RenderParagraphModule module={module} />
+            <RenderParagraphModule module={module} withoutAnimation />
           ))}
           <Gradient />
         </FullHeight>

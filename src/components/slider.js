@@ -78,7 +78,7 @@ const Title = styled(Styledh2)`
 //   pointer-events: none;
 // `
 
-const getProjectImageToHandle = ({ cover }) => cover.fluid
+const getProjectImageToHandle = ({ image }) => image.fluid
 
 const Project = ({
   isCurrentProject,

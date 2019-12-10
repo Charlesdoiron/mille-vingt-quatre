@@ -53,7 +53,7 @@ export const NewsLetterSuscribe = props => {
   }
   return (
     <div className="wrapper--m">
-      <div className="news--letter--suscribe__container" data-aos="fade-up">
+      <div className="news--letter--suscribe__container" data-aos="fade">
         <div>
           <img src={news_letter_picto} alt="picto" />
           <div style={{ width: "100%" }}>

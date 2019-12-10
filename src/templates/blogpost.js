@@ -67,7 +67,6 @@ class blogpost extends React.Component {
             <div className="blogpost__content">
               {blogPost.contentRich && (
                 <div
-                  data-aos="fade-up"
                   dangerouslySetInnerHTML={{
                     __html: blogPost.contentRich.contentRich,
                   }}

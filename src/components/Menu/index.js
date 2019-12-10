@@ -55,7 +55,7 @@ export const Menu = ({ data, menuIsOpen }, props) => {
   `
 
   return !isMobile ? (
-    <DesktopContainer data-aos="fade-down">
+    <DesktopContainer>
       <Logo />
       {!isOpen && <CloseProject isOpen={isOpen} />}
       {isOpen && <MenuItems isOpen={isOpen} />}

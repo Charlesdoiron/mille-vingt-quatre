@@ -23,7 +23,13 @@ export const ImageGrid3Or4Photos = props => {
             padding: "0 10px",
           }
           return (
-            <img style={imgStyle} src={img.fluid.src} key={i} alt="grid-img" />
+            <img
+              style={imgStyle}
+              src={img.fluid.src}
+              key={i}
+              alt="grid-img"
+              data-aos="fade-up"
+            />
           )
         })}
       </Container>
