@@ -12,7 +12,6 @@ export const NewsLetterSuscribe = props => {
     props.news_letter.placeholderNewsLetterSuscribe
   const [email, setEmail] = useState("")
   const [placeholder, setPlaceholder] = useState(defaultPlaceholder)
-
   const [status, setStatus] = useState(defaultStatus)
   const [checkMail, setCheckMail] = useState(false)
 
