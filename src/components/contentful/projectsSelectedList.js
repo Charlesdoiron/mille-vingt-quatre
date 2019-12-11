@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
-import { Styledh2, Styledprojectdate, Styledcapitalize } from "./../typos"
+import { Styledh2, Styledprojectdate, Styledcapitalize } from "../typos"
 
 import styled from "styled-components"
 

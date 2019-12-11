@@ -13,6 +13,7 @@ export const RenderParagraphModule = props => {
                 <div
                   key={i}
                   className="quote__container"
+                  style={props.fullWidth && { width: "100%" }}
                   data-aos={!props.withoutAnimation && `fade-up`}
                 >
                   <Styledh4

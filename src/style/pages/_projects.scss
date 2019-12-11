@@ -1,15 +1,21 @@
-.project__section--two {
-  display: flex;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  height: auto;
-  position: relative;
-  overflow: hidden;
+.projects__container {
+  .projects {
+    display: flex;
+    z-index: 99999;
+    height: 100%;
 
-  &.isTabletOrMobileDevice {
-    flex-direction: column;
-    justify-content: center;
+    @media #{$tablet} {
+      display: block;
+    }
+    .projects__list {
+      margin: 100px 0 0 30px;
+      height: 500px;
+      overflow: scroll;
+
+      @media #{$tablet} {
+        margin: 0;
+      }
+    }
   }
 
   .slick-slider {

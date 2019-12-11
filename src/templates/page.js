@@ -1,7 +1,9 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useRef } from "react"
 import { graphql } from "gatsby"
 import { Gradient } from "../components/animations/image"
 import styled from "styled-components"
+import { SectionsContainer, Section } from "react-fullpage"
+
 import { Layout } from "../components/newLayout"
 
 import "./../style/index.scss"
@@ -23,18 +25,6 @@ import { ContactForm } from "../components/contentful/contactForm"
 import { ContactInformations } from "../components/contentful/contactInformations"
 import { RenderParagraphModule } from "./../components/contentful/renderParagraphModule"
 
-const FullHeight = styled.div`
-  height: 100vh;
-  width: 100%;
-  position: relative;
-
-  h4 {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-`
-
 const Page = props => {
   const posts = props.data.allContentfulBlogPost
   const page = props.data.contentfulPages
@@ -42,7 +32,7 @@ const Page = props => {
   const projects = props.data.contentfulPages.allProjects
   const categories = props.data.contentfulPages.allCategories
   const currentPage = props.pageContext.slug
-
+  const projectsListContainer = useRef(null)
   console.log("PAGE", page)
   console.log("POSTS", posts)
   console.log("CURRENT", currentPage)
@@ -51,6 +41,17 @@ const Page = props => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }, [])
+
+  const FullHeight = styled.div`
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    h4 {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  `
 
   const renderModulesOnPages = modules => {
     if (currentPage === "blog") {
@@ -99,16 +100,40 @@ const Page = props => {
   }
 
   const renderProjectsPage = (modules, projects, categories) => {
+    // let options = {
+    //   sectionClassName: "section",
+    //   anchors: ["intro", "projects__list"],
+    //   delay: 0,
+    //   scrollBar: false,
+    //   navigation: true,
+    //   verticalAlign: false,
+    //   sectionPaddingTop: "0px",
+    //   sectionPaddingBottom: "0px",
+    //   arrowNavigation: true,
+    //   scrollingSpeed: 200,
+    //   interlockedSlides: true,
+    //   fadingEffect: false,
+    //   normalScrollElements: "#projects__list",
+    // }
+
+    console.log(projectsListContainer)
+
     return (
       <>
-        <FullHeight className="background-noise">
+        <FullHeight className="background-noise" id="intro">
           {modules.map(module => (
-            <RenderParagraphModule module={module} withoutAnimation />
+            <RenderParagraphModule module={module} withoutAnimation fullWidth />
           ))}
+
           <Gradient />
         </FullHeight>
-
-        <ProjectsList projects={projects} categories={categories} />
+        <FullHeight id="projects__list" ref={projectsListContainer}>
+          <ProjectsList
+            projects={projects}
+            title="selected projects"
+            categories={categories}
+          />
+        </FullHeight>
       </>
     )
   }

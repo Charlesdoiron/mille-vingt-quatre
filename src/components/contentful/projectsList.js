@@ -1,20 +1,34 @@
 import React, { useState, useEffect, useRef } from "react"
+import { Link } from "gatsby"
 import { Categories } from "./categories"
-import { useMediaQuery } from "react-responsive"
-import classNames from "classnames"
-import Slider from "../slider"
-
 import Img from "gatsby-image"
+import { Styledh2, Styledprojectdate, Styledcapitalize } from "../typos"
+
+import styled from "styled-components"
+
+const TitleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const Title = styled(Styledh2)`
+  max-width: 550px;
+  overflow-wrap: break-word;
+`
 
 export const ProjectsList = props => {
   const [categorieState, setCategorieState] = useState("All")
   const [imageState, setImageState] = useState("")
   const [projectsState, setProjectsState] = useState(props.projects)
+  const [scrollPosition, setScrollPosition] = useState("")
+  const listContainer = useRef(null)
 
-  const containerRef = useRef(null)
-
-  const isTabletOrMobileDevice = useMediaQuery({
-    query: "(max-width: 1224px)",
+  useEffect(() => {
+    const element = listContainer.current
+    element.addEventListener("scroll", () => {
+      console.log(element.scrollTop)
+    })
   })
 
   const handleCategorie = categorieClicked => {
@@ -38,47 +52,80 @@ export const ProjectsList = props => {
     }
   }
 
-  useEffect(() => {
-    if (categorieState === "All") {
-      handleCategorie("All")
-    }
-  })
-
   const changeImage = img => {
     document.querySelector(".project__img--background") &&
       document
         .querySelector(".project__img--background")
         .classList.toggle("isOut")
+    console.log(scrollPosition, "myScroll")
     setTimeout(() => {
       setImageState(img)
-    }, 1000)
+    }, 300)
   }
 
+  // const leaveImage = img => {
+  //   setTimeout(() => {
+  //     document.querySelector(".project__img--background") &&
+  //       document
+  //         .querySelector(".project__img--background")
+  //         .classList.toggle("isOut")
+  //   }, 500)
+  // }
+
+  const Project = ({ projectTitle, projectTitleDate, slug, image }) => (
+    <Link
+      to={`/project/${slug}`}
+      onMouseEnter={e => changeImage(image.fluid)}
+      className="project__title__link"
+    >
+      <TitleContainer className="project__slide">
+        <Title>
+          {projectTitle}
+          <Styledprojectdate>{projectTitleDate}</Styledprojectdate>
+        </Title>
+      </TitleContainer>
+    </Link>
+  )
+
+  const Projects = ({ projects }) => (
+    <div className="projects__list" ref={listContainer}>
+      {projects.map((project, i) => {
+        return <Project key={project.slug + i} {...project} />
+      })}
+    </div>
+  )
+
   return (
-    <div ref={containerRef}>
+    // <div className="projects__container" onMouseLeave={e => leaveImage()}>
+    <div className="projects__container">
       {imageState && (
         <Img fluid={imageState} className="project__img--background" />
       )}
-      <div
-        className={classNames("project__section--two", {
-          isTabletOrMobileDevice: isTabletOrMobileDevice,
-        })}
-      >
+
+      <div className="projects">
         {props.categories && (
           <Categories
             categories={props.categories}
             handleCategorie={handleCategorie}
           />
         )}
-
-        <Slider
-          projects={projectsState}
-          handleImage={img => changeImage(img)}
-          containerRef={containerRef}
-          showLinkToProject={false}
-          forDesktop={!isTabletOrMobileDevice}
-        />
+        <Projects projects={projectsState} />
       </div>
     </div>
   )
 }
+
+// FOCUS ON FIRST PROJECT
+// function setDefaultImage() {
+//   setImageState(projects[0].cover.fluid)
+// }
+// async function setDefaultProject() {
+//   await setDefaultImage()
+//   const titles = document.querySelectorAll(".project__title__link")
+//   const firstTitle = titles[0]
+//   await firstTitle.classList.add("isActive")
+// }
+
+// useEffect(() => {
+//   setDefaultProject()
+// }, [])

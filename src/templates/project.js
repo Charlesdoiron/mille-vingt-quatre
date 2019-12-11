@@ -22,6 +22,7 @@ import { RenderParagraphModule } from "./../components/contentful/renderParagrap
 import { BehindTheScene } from "./../components/contentful/behindTheScene"
 import { CustomSlider as Slider } from "./../components/contentful/slider"
 import { CoverImage } from "./../components/contentful/coverImage"
+
 class project extends React.Component {
   constructor(props) {
     super(props)

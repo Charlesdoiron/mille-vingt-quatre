@@ -7,7 +7,7 @@ import { Styledh2, Styledprojectdate, Styledcapitalize } from "./typos"
 import arrow_to_project from "./../img/pictos/arrow_to_project.svg"
 
 const marginTopMobile = 90
-
+console.log("plaf")
 const perfectScrollbarOptions = {
   handlers: ["click-rail", "drag-thumb", "keyboard", "wheel", "touch"],
   wheelSpeed: 0.5,
@@ -67,18 +67,7 @@ const Title = styled(Styledh2)`
   overflow-wrap: break-word;
 `
 
-// const TopFader = styled.div`
-//   height: ${props => props.projectHeight}px;
-//   background: linear-gradient(to bottom, #000, transparent);
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   z-index: 101;
-//   pointer-events: none;
-// `
-
-const getProjectImageToHandle = ({ image }) => image.fluid
+const getProjectImageToHandle = ({ image }) => image && image.fluid
 
 const Project = ({
   isCurrentProject,
@@ -86,24 +75,21 @@ const Project = ({
   projectTitleDate,
   handleClick,
   slug,
-  showLinkToProject,
   projectNumber,
+  image,
 }) => (
-  <TitleContainer
-    onClick={handleClick}
-    className="project__slide"
-    projectNumber={projectNumber}
-  >
-    <Title selected={isCurrentProject}>
-      {projectTitle}
-      <Styledprojectdate>{projectTitleDate}</Styledprojectdate>
-    </Title>
-    {showLinkToProject && (
-      <Link to={`/project/${slug}`} className="link__to__project">
-        See the project <img alt="see the project" src={arrow_to_project} />
-      </Link>
-    )}
-  </TitleContainer>
+  <Link to={`/project/${slug}`}>
+    <TitleContainer
+      onClick={handleClick}
+      className="project__slide"
+      projectNumber={projectNumber}
+    >
+      <Title selected={isCurrentProject}>
+        {projectTitle}
+        <Styledprojectdate>{projectTitleDate}</Styledprojectdate>
+      </Title>
+    </TitleContainer>
+  </Link>
 )
 
 const Projects = ({
@@ -120,7 +106,6 @@ const Projects = ({
           projectNumber={i}
           isCurrentProject={currentProjectIndex === i}
           handleClick={() => handleClick(i)}
-          showLinkToProject={showLinkToProject}
           {...project}
         />
       )
@@ -155,7 +140,7 @@ export default class Slider extends Component {
       this.handleSaveProjectHeight()
       this.handleSaveScrollContainerInitPosition()
       this.handleScrollToProjectIndex(0, false)
-    }, 100) // to make sure the title is mounted
+    }, 400) // to make sure the title is mounted
   }
 
   componentWillUnmount() {
@@ -190,7 +175,7 @@ export default class Slider extends Component {
 
   handleScrollToProject = scroll => {
     const { projectHeight } = this.state
-    // const { projects, forDesktop } = this.props
+    const { projects, forDesktop } = this.props
     const scrollTop = scroll.scrollTop
     const projectToFocus = Math.round(scrollTop / projectHeight)
     // if (forDesktop && !!projects[projectToFocus]) {
@@ -225,7 +210,6 @@ export default class Slider extends Component {
 
   render() {
     const { projects, showLinkToProject, forDesktop, title } = this.props
-
     const { projectHeight, windowHeight, currentProjectIndex } = this.state
 
     if (!projects.length) return "Pas de projets"
@@ -263,7 +247,6 @@ export default class Slider extends Component {
               />
             )}
           </PerfectScrollbar>
-          {/* {forDesktop && <TopFader projectHeight={projectHeight} />} */}
         </SliderContainer>
       </React.Fragment>
     )
