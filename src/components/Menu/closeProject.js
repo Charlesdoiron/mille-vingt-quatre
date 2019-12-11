@@ -12,14 +12,15 @@ export const CloseProject = () => {
       <Location>
         {({ location }) =>
           location.pathname.substring(0, 9) === "/project/" && (
-            <button
-              type="button"
-              onClick={e => handleClick(e)}
-              className="close"
-            >
-              <img src={close} alt="close" />
-              <p>Close</p>
-            </button>
+            // <button
+            //   type="button"
+            //   onClick={e => handleClick(e)}
+            //   className="close"
+            // >
+            //   <img src={close} alt="close" />
+            //   <p>Close</p>
+            // </button>
+            <p></p>
           )
         }
       </Location>
