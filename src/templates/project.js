@@ -366,7 +366,7 @@ export const pagequeryproject = graphql`
                     }
                   }
                 }
-                fluid(quality: 100, maxWidth: 1980) {
+                fluid(quality: 100, maxWidth: 2000) {
                   ...GatsbyContentfulFluid
                 }
               }
