@@ -44,7 +44,7 @@ export const ProjectsList = props => {
           // LE TITRE PASSE DANS LA ZONE ACTIVE
           if (titles[i].getBoundingClientRect().top < trigger) {
             link.classList.add("isFocus")
-
+            changeImage(imgTitle)
             // LE TITRE EST ACTIF ET VA DISPARAITRE
             if (-20 > titles[i].getBoundingClientRect().top) {
               link.classList.add("isOut")
