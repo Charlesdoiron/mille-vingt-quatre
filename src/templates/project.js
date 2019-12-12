@@ -6,7 +6,7 @@ import "./../style/index.scss"
 import arrow_next_project from "./../img/pictos/arrow_next_project.svg"
 
 import { StyledH1, Styledh3, Styledprojectdate } from "../components/typos"
-import { ImgBlur, Gradient } from "../components/animations/image"
+import { Gradient } from "../components/animations/image"
 import { Layout } from "../components/newLayout"
 import { ImageGrid2Photos } from "../components/contentful/imageGrid2Photos"
 import { ImageGrid3Or4Photos } from "../components/contentful/imageGrid3Or4Photos"

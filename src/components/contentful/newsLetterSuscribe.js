@@ -8,10 +8,9 @@ import { Styledcapitalize } from "./../typos"
 
 export const NewsLetterSuscribe = props => {
   const defaultStatus = () => props.news_letter.newsLetterSuscribeTitle
-  const defaultPlaceholder = () =>
-    props.news_letter.placeholderNewsLetterSuscribe
+
   const [email, setEmail] = useState("")
-  const [placeholder, setPlaceholder] = useState(defaultPlaceholder)
+
   const [status, setStatus] = useState(defaultStatus)
   const [checkMail, setCheckMail] = useState(false)
 
@@ -62,7 +61,7 @@ export const NewsLetterSuscribe = props => {
                 <input
                   onChange={e => setEmail(e.target.value)}
                   type="e-mail"
-                  placeholder={placeholder}
+                  placeholder={props.news_letter.placeholderNewsLetterSuscribes}
                   onMouseLeave={e => setCheckMail(true)}
                 />
 

@@ -18,14 +18,7 @@ export const ImageGrid2Photos = props => {
     >
       <div data-aos="fade-up">
         {props.imageGrid.grid.map((img, i) => {
-          const imgStyle = {
-            width: "auto",
-            height: "auto",
-            padding: "0 10px",
-          }
-          return (
-            <img style={imgStyle} src={img.fluid.src} key={i} alt="grid-img" />
-          )
+          return <img src={img.fluid.src} key={i} alt="grid-img" />
         })}
       </div>
 

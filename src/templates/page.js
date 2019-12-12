@@ -1,8 +1,7 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect } from "react"
 import { graphql } from "gatsby"
 import { Gradient } from "../components/animations/image"
 import styled from "styled-components"
-import { SectionsContainer, Section } from "react-fullpage"
 
 import { Layout } from "../components/newLayout"
 
@@ -32,7 +31,7 @@ const Page = props => {
   const projects = props.data.contentfulPages.allProjects
   const categories = props.data.contentfulPages.allCategories
   const currentPage = props.pageContext.slug
-  const projectsListContainer = useRef(null)
+
   console.log("PAGE", page)
   console.log("POSTS", posts)
   console.log("CURRENT", currentPage)
@@ -100,34 +99,9 @@ const Page = props => {
   }
 
   const renderProjectsPage = (modules, projects, categories) => {
-    // let options = {
-    //   sectionClassName: "section",
-    //   anchors: ["intro", "projects__list"],
-    //   delay: 0,
-    //   scrollBar: false,
-    //   navigation: true,
-    //   verticalAlign: false,
-    //   sectionPaddingTop: "0px",
-    //   sectionPaddingBottom: "0px",
-    //   arrowNavigation: true,
-    //   scrollingSpeed: 200,
-    //   interlockedSlides: true,
-    //   fadingEffect: false,
-    //   normalScrollElements: "#projects__list",
-    // }
-
-    console.log(projectsListContainer)
-
     return (
       <>
-        <FullHeight className="background-noise" id="intro">
-          {modules.map(module => (
-            <RenderParagraphModule module={module} withoutAnimation fullWidth />
-          ))}
-
-          <Gradient />
-        </FullHeight>
-        <FullHeight id="projects__list" ref={projectsListContainer}>
+        <FullHeight id="projects__list">
           <ProjectsList
             projects={projects}
             title="selected projects"

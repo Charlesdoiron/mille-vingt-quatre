@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { Link } from "gatsby"
 import { Categories } from "./categories"
 import Img from "gatsby-image"
-import { Styledh2, Styledprojectdate, Styledcapitalize } from "../typos"
+import { Styledh2, Styledprojectdate } from "../typos"
 
 import styled from "styled-components"
 
@@ -21,13 +21,36 @@ export const ProjectsList = props => {
   const [categorieState, setCategorieState] = useState("All")
   const [imageState, setImageState] = useState("")
   const [projectsState, setProjectsState] = useState(props.projects)
-  const [scrollPosition, setScrollPosition] = useState("")
-  const listContainer = useRef(null)
+  const listProjects = useRef(null)
+  const projectTitleRef = useRef(null)
+  // const scrollRef = useRef(listProjects.current.scrollTop)
 
   useEffect(() => {
-    const element = listContainer.current
-    element.addEventListener("scroll", () => {
-      console.log(element.scrollTop)
+    listProjects.current.addEventListener("scroll", () => {
+      // console.log(
+      //   "Nombre de pixel scrollés dans la liste",
+      //   listProjects.current.scrollTop
+      // )
+      // console.log(scrollRef)
+      const trigger = listProjects.current.getBoundingClientRect().top + 100
+      const list = listProjects.current
+
+      console.log(list.scrollTop, "page")
+      console.log("TRIGGER (en px par rapport au haut de la page", trigger)
+      console.log("LIST", list)
+      const titles = list.children
+      for (var i = 0; i < titles.length; i++) {
+        console.log(titles[i].getBoundingClientRect().top)
+        if (titles[i].getBoundingClientRect().top < trigger) {
+          const title = titles[i].children[0]
+          const imgTitle = title.children[0].getAttribute("data-image")
+          title.style.textFillColor = "white"
+          // changeImage(imgTitle)
+        } else {
+          const title = titles[i].children[0]
+          title.style.opacity = "1"
+        }
+      }
     })
   })
 
@@ -57,7 +80,7 @@ export const ProjectsList = props => {
       document
         .querySelector(".project__img--background")
         .classList.toggle("isOut")
-    console.log(scrollPosition, "myScroll")
+
     setTimeout(() => {
       setImageState(img)
     }, 300)
@@ -72,23 +95,32 @@ export const ProjectsList = props => {
   //   }, 500)
   // }
 
-  const Project = ({ projectTitle, projectTitleDate, slug, image }) => (
-    <Link
-      to={`/project/${slug}`}
-      onMouseEnter={e => changeImage(image.fluid)}
-      className="project__title__link"
-    >
-      <TitleContainer className="project__slide">
-        <Title>
-          {projectTitle}
-          <Styledprojectdate>{projectTitleDate}</Styledprojectdate>
-        </Title>
-      </TitleContainer>
-    </Link>
-  )
+  const Project = ({ projectTitle, projectTitleDate, slug, image }) => {
+    return (
+      <Link
+        to={`/project/${slug}`}
+        onFocus={e => changeImage(image.fluid)}
+        className="project__title__link"
+      >
+        <TitleContainer className="project__slide">
+          <Title
+            style={{ border: "1px solid blue", margin: "0 0 50px 0" }}
+            data-image={image.fluid.src}
+          >
+            {projectTitle}
+            <Styledprojectdate>{projectTitleDate}</Styledprojectdate>
+          </Title>
+        </TitleContainer>
+      </Link>
+    )
+  }
 
   const Projects = ({ projects }) => (
-    <div className="projects__list" ref={listContainer}>
+    <div
+      className="projects__list"
+      ref={listProjects}
+      style={{ border: "1px solid red" }}
+    >
       {projects.map((project, i) => {
         return <Project key={project.slug + i} {...project} />
       })}
@@ -99,7 +131,7 @@ export const ProjectsList = props => {
     // <div className="projects__container" onMouseLeave={e => leaveImage()}>
     <div className="projects__container">
       {imageState && (
-        <Img fluid={imageState} className="project__img--background" />
+        <img src={imageState} className="project__img--background" />
       )}
 
       <div className="projects">
