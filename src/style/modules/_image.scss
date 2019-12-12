@@ -34,6 +34,10 @@
   }
 
   &.Image-Align-Right {
+    padding: 85px 0 0 30%;
+    @media #{$mobile} {
+      padding: 35px 0;
+    }
     div {
       text-align: right;
 
@@ -183,5 +187,8 @@
       height: 220px !important;
       min-height: 100% !important;
     }
+  }
+  a {
+    border-bottom: 1px solid white;
   }
 }

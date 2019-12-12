@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useRef, useEffect, useLayoutEffect } from "react"
 import { Link } from "gatsby"
 import { Categories } from "./categories"
 import Img from "gatsby-image"
@@ -23,35 +23,43 @@ export const ProjectsList = props => {
   const [projectsState, setProjectsState] = useState(props.projects)
   const listProjects = useRef(null)
   const projectTitleRef = useRef(null)
-  // const scrollRef = useRef(listProjects.current.scrollTop)
+  const prevScrollY = useRef(0)
+  const [goingUp, setGoingUp] = useState(false)
+
+  const [scrollPosition, setscrollPosition] = useState(0)
 
   useEffect(() => {
-    listProjects.current.addEventListener("scroll", () => {
-      // console.log(
-      //   "Nombre de pixel scrollés dans la liste",
-      //   listProjects.current.scrollTop
-      // )
-      // console.log(scrollRef)
-      const trigger = listProjects.current.getBoundingClientRect().top + 100
-      const list = listProjects.current
+    listProjects.current.addEventListener(
+      "scroll",
+      () => {
+        const trigger = 145
+        const list = listProjects.current
+        const titles = list.children
 
-      console.log(list.scrollTop, "page")
-      console.log("TRIGGER (en px par rapport au haut de la page", trigger)
-      console.log("LIST", list)
-      const titles = list.children
-      for (var i = 0; i < titles.length; i++) {
-        console.log(titles[i].getBoundingClientRect().top)
-        if (titles[i].getBoundingClientRect().top < trigger) {
+        for (var i = 0; i < titles.length; i++) {
           const title = titles[i].children[0]
           const imgTitle = title.children[0].getAttribute("data-image")
-          title.style.textFillColor = "white"
-          // changeImage(imgTitle)
-        } else {
-          const title = titles[i].children[0]
-          title.style.opacity = "1"
+          const link = title.children[0]
+
+          // LE TITRE PASSE DANS LA ZONE ACTIVE
+          if (titles[i].getBoundingClientRect().top < trigger) {
+            link.classList.add("isFocus")
+
+            // LE TITRE EST ACTIF ET VA DISPARAITRE
+            if (-20 > titles[i].getBoundingClientRect().top) {
+              link.classList.add("isOut")
+            } // LE TITRE EST ACTIF ET VA REAPARAITRE
+            else {
+              link.classList.remove("isOut")
+            }
+            // RESET
+          } else {
+            link.classList.remove("isFocus")
+          }
         }
-      }
-    })
+      },
+      { passive: true }
+    )
   })
 
   const handleCategorie = categorieClicked => {
@@ -103,10 +111,7 @@ export const ProjectsList = props => {
         className="project__title__link"
       >
         <TitleContainer className="project__slide">
-          <Title
-            style={{ border: "1px solid blue", margin: "0 0 50px 0" }}
-            data-image={image.fluid.src}
-          >
+          <Title style={{ margin: "0 0 50px 0" }} data-image={image.fluid.src}>
             {projectTitle}
             <Styledprojectdate>{projectTitleDate}</Styledprojectdate>
           </Title>
@@ -116,11 +121,7 @@ export const ProjectsList = props => {
   }
 
   const Projects = ({ projects }) => (
-    <div
-      className="projects__list"
-      ref={listProjects}
-      style={{ border: "1px solid red" }}
-    >
+    <div className="projects__list" ref={listProjects}>
       {projects.map((project, i) => {
         return <Project key={project.slug + i} {...project} />
       })}

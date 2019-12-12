@@ -245,19 +245,20 @@ class project extends React.Component {
           <BehindTheScene project={project} />
         </div>
         <div className="related__project__container">
-          {modules.map(module => {
-            switch (module.__typename) {
-              case "ContentfulProjectsSelected":
-                return (
-                  <ProjectsRelatedList
-                    projectRelated={module}
-                    title="related project"
-                  />
-                )
-              default:
-                return null
-            }
-          })}
+          {modules &&
+            modules.map(module => {
+              switch (module.__typename) {
+                case "ContentfulProjectsSelected":
+                  return (
+                    <ProjectsRelatedList
+                      projectRelated={module}
+                      title="related project"
+                    />
+                  )
+                default:
+                  return null
+              }
+            })}
         </div>
       </Layout>
     )
