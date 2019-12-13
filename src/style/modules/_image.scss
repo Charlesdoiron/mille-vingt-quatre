@@ -13,10 +13,12 @@
   }
 
   &.Image-With-Padding {
-    // .image__blur {
-    //   height: 600px;
-    // }
-    padding: 0 5%;
+    padding: 85px 5%;
+
+    @media #{$mobile} {
+      padding: 35px 0;
+    }
+
     img {
       width: 100%;
     }
@@ -28,13 +30,6 @@
     @media #{$mobile} {
       padding: 35px 0;
     }
-    // .image__blur {
-    //   height: 570px !important;
-
-    //   @media #{$mobile} {
-    //     height: 220px !important;
-    //   }
-    // }
     img {
       width: 100%;
     }
@@ -48,14 +43,6 @@
     div {
       text-align: right;
 
-      // .image__blur {
-      //   height: 570px !important;
-      //   width: 860px;
-
-      //   @media #{$mobile} {
-      //     height: 220px !important;
-      //   }
-      // }
       img {
         width: 100%;
       }
@@ -70,9 +57,6 @@
     flex-direction: column;
 
     div {
-      // .image__blur {
-      //   width: 100%;
-      // }
       img {
         width: 100%;
       }
@@ -90,24 +74,14 @@
   }
 
   &.Text-Right {
-    // .image__blur {
-    //   height: 600px;
-
-    //   @media #{$mobile} {
-    //     height: auto;
-    //   }
-    // }
     img {
       width: 50%;
+
+      @media #{$tablet} {
+        width: 100%;
+      }
     }
 
-    // .image__blur {
-    //   width: 50%;
-
-    //   @media #{$tablet} {
-    //     width: 100%;
-    //   }
-    // }
     div {
       height: 100%;
       display: flex;
@@ -115,7 +89,7 @@
       align-items: center;
       position: relative;
 
-      @media #{$desktop-lg} {
+      @media #{$tablet} {
         flex-direction: column;
       }
 
@@ -129,7 +103,7 @@
         display: flex;
         justify-content: center;
 
-        @media #{$desktop-lg} {
+        @media #{$tablet} {
           width: 100%;
           margin-top: 70px;
           padding: 0;
@@ -146,19 +120,11 @@
     }
   }
   &.Text-Left {
-    // .image__blur {
-    //   height: 600px;
-    //   width: 50%;
-
-    //   @media #{$tablet} {
-    //     width: 100%;
-    //   }
-    //   @media #{$mobile} {
-    //     height: auto;
-    //   }
-    // }
     img {
       width: 50%;
+      @media #{$tablet} {
+        width: 100%;
+      }
     }
 
     div {
@@ -169,7 +135,7 @@
       align-items: center;
       position: relative;
 
-      @media #{$desktop-lg} {
+      @media #{$tablet} {
         flex-direction: column;
       }
 
@@ -179,11 +145,11 @@
 
       .text__for__image {
         width: 50%;
-        padding: 0 0 0 40px;
+        padding: 0 40px 0 0;
         display: flex;
         justify-content: center;
 
-        @media #{$desktop-lg} {
+        @media #{$tablet} {
           width: 100%;
           margin-top: 70px;
           padding: 0;
