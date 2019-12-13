@@ -1,7 +1,6 @@
 import React from "react"
 import classNames from "classnames"
 
-import { ImgBlur } from "./../animations/image"
 export const Image = props => {
   return (
     <div
@@ -10,17 +9,6 @@ export const Image = props => {
       })}
     >
       <div data-aos="fade-up">
-        {/* <ImgBlur
-          className="image__blur"
-          data-aos="fade-up"
-          style={{
-            backgroundImage: `url(${props.image.image.fluid.src})`,
-            width: "100%",
-            backgroundSize: "contain",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-        ></ImgBlur> */}
         <img src={props.image.image.fluid.src} data-aos="fade-up"></img>
 
         {props.image.text && (

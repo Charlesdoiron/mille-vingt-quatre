@@ -5,7 +5,6 @@ import { Link } from "gatsby"
 import { Styledblogdate, Styledpostblogfont } from "../typos"
 
 export const BehindTheScenePost = props => {
-  console.log(props, "in behind")
   return (
     <div className="behind__the__scene__post__container">
       <ImgBlur

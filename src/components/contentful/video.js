@@ -20,7 +20,7 @@ export const Video = props => {
           }
           frameBorder="0"
           allow="autoplay; fullscreen"
-          autoplay
+          autoPlay
           loop
           allowFullScreen
           title="video"

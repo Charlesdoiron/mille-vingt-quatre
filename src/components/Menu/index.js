@@ -16,10 +16,7 @@ export const Menu = ({ data, menuIsOpen }, props) => {
     query: "(max-width: 768px)",
   })
 
-  console.log("state globale", isOpen)
-
   const toggleMenu = e => {
-    console.log(e)
     dispatch({
       type: "toggleMenu",
       menu: { isOpen: e },
@@ -34,8 +31,6 @@ export const Menu = ({ data, menuIsOpen }, props) => {
     opacity: 1 !important;
   }
 }`
-
-  console.log("STATE", isOpen)
 
   const StyledBackground = styled.div`
     background-color: ${isOpen ? "black" : "transparent"};

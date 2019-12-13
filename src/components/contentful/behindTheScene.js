@@ -34,8 +34,8 @@ export const BehindTheScene = props => {
       {props.project.tags[0].blog_post && (
         <div className="content__collapsed">
           <Collapse isOpened={behindTheSceneIsOpen}>
-            {props.project.tags[0].blog_post.map(post => {
-              return <BehindTheScenePost {...post} />
+            {props.project.tags[0].blog_post.map((post, i) => {
+              return <BehindTheScenePost {...post} key={i} />
             })}
           </Collapse>
         </div>

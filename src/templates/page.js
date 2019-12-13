@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { graphql } from "gatsby"
-import { Gradient } from "../components/animations/image"
+
 import styled from "styled-components"
 
 import { Layout } from "../components/newLayout"
@@ -25,17 +25,10 @@ import { ContactInformations } from "../components/contentful/contactInformation
 import { RenderParagraphModule } from "./../components/contentful/renderParagraphModule"
 
 const Page = props => {
-  const posts = props.data.allContentfulBlogPost
-  const page = props.data.contentfulPages
   const modules = props.data.contentfulPages.ui
   const projects = props.data.contentfulPages.allProjects
   const categories = props.data.contentfulPages.allCategories
   const currentPage = props.pageContext.slug
-
-  console.log("PAGE", page)
-  console.log("POSTS", posts)
-  console.log("CURRENT", currentPage)
-  console.log("MODULES", modules)
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" })
