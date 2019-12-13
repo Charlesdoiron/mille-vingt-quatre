@@ -10,7 +10,7 @@ export const Image = props => {
       })}
     >
       <div data-aos="fade-up">
-        <ImgBlur
+        {/* <ImgBlur
           className="image__blur"
           data-aos="fade-up"
           style={{
@@ -20,7 +20,8 @@ export const Image = props => {
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
           }}
-        ></ImgBlur>
+        ></ImgBlur> */}
+        <img src={props.image.image.fluid.src} data-aos="fade-up"></img>
 
         {props.image.text && (
           <div

@@ -13,8 +13,12 @@
   }
 
   &.Image-With-Padding {
-    .image__blur {
-      height: 600px;
+    // .image__blur {
+    //   height: 600px;
+    // }
+    padding: 0 5%;
+    img {
+      width: 100%;
     }
   }
 
@@ -24,12 +28,15 @@
     @media #{$mobile} {
       padding: 35px 0;
     }
-    .image__blur {
-      height: 570px !important;
+    // .image__blur {
+    //   height: 570px !important;
 
-      @media #{$mobile} {
-        height: 220px !important;
-      }
+    //   @media #{$mobile} {
+    //     height: 220px !important;
+    //   }
+    // }
+    img {
+      width: 100%;
     }
   }
 
@@ -41,13 +48,16 @@
     div {
       text-align: right;
 
-      .image__blur {
-        height: 570px !important;
-        width: 860px;
+      // .image__blur {
+      //   height: 570px !important;
+      //   width: 860px;
 
-        @media #{$mobile} {
-          height: 220px !important;
-        }
+      //   @media #{$mobile} {
+      //     height: 220px !important;
+      //   }
+      // }
+      img {
+        width: 100%;
       }
 
       .text__for__image {
@@ -60,7 +70,10 @@
     flex-direction: column;
 
     div {
-      .image__blur {
+      // .image__blur {
+      //   width: 100%;
+      // }
+      img {
         width: 100%;
       }
     }
@@ -77,21 +90,24 @@
   }
 
   &.Text-Right {
-    .image__blur {
-      height: 600px;
+    // .image__blur {
+    //   height: 600px;
 
-      @media #{$mobile} {
-        height: auto;
-      }
-    }
-
-    .image__blur {
+    //   @media #{$mobile} {
+    //     height: auto;
+    //   }
+    // }
+    img {
       width: 50%;
-
-      @media #{$tablet} {
-        width: 100%;
-      }
     }
+
+    // .image__blur {
+    //   width: 50%;
+
+    //   @media #{$tablet} {
+    //     width: 100%;
+    //   }
+    // }
     div {
       height: 100%;
       display: flex;
@@ -130,16 +146,19 @@
     }
   }
   &.Text-Left {
-    .image__blur {
-      height: 600px;
-      width: 50%;
+    // .image__blur {
+    //   height: 600px;
+    //   width: 50%;
 
-      @media #{$tablet} {
-        width: 100%;
-      }
-      @media #{$mobile} {
-        height: auto;
-      }
+    //   @media #{$tablet} {
+    //     width: 100%;
+    //   }
+    //   @media #{$mobile} {
+    //     height: auto;
+    //   }
+    // }
+    img {
+      width: 50%;
     }
 
     div {
@@ -181,13 +200,13 @@
     }
   }
 
-  .image__blur {
-    @media #{$mobile} {
-      background-size: cover !important;
-      height: 220px !important;
-      min-height: 100% !important;
-    }
-  }
+  // .image__blur {
+  //   @media #{$mobile} {
+  //     background-size: cover !important;
+  //     height: 220px !important;
+  //     min-height: 100% !important;
+  //   }
+  // }
   a {
     border-bottom: 1px solid white;
   }

@@ -73,7 +73,12 @@ class blogpost extends React.Component {
                 ></div>
               )}
             </div>
+          </div>
+          <div className="wrapper--m">
             {modules && <div>{renderModulesOnPages(modules)}</div>}
+          </div>
+
+          <div className="wrapper--m">
             <hr />
             <ul
               style={{
