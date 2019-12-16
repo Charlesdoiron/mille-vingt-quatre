@@ -22,22 +22,22 @@ export const Image = props => {
   console.log(props)
 
   const x =
-    props.focalPoint !== undefined
-      ? props.image.focalPoint !== undefined
+    props.focalPoint !== undefined || null
+      ? props.image.focalPoint !== undefined || null
         ? props.image.focalPoint.focalPoint.x
         : props.focalPoint.focalPoint.x
       : ""
 
   const imgWidth =
-    props.image.image !== undefined
-      ? props.image.image.file !== undefined
+    props.image.image !== undefined || null
+      ? props.image.image.file !== undefined || null
         ? props.image.image.file.details.image.width
         : ""
       : ""
 
   const img =
-    props.image.image !== undefined
-      ? props.image.image.fluid.src !== undefined
+    props.image.image !== undefined || null
+      ? props.image.image.fluid.src !== undefined || null
         ? props.image.image.fluid.src
         : props.image.fluid.src
       : props.image.image.fluid.src
