@@ -3,7 +3,9 @@ import classNames from "classnames"
 import styled from "styled-components"
 
 export const Image = props => {
-  const [deviceWidth, setDeviceWidth] = useState(window.innerWidth)
+  if (window !== undefined) {
+    const [deviceWidth, setDeviceWidth] = useState(window.innerWidth)
+  }
 
   function resizeListener() {
     if (window !== undefined) {
