@@ -6,13 +6,17 @@ export const Image = props => {
   const [deviceWidth, setDeviceWidth] = useState(window.innerWidth)
 
   function resizeListener() {
-    if (window.innerWidth < 800) {
-      setDeviceWidth(window.innerWidth)
+    if (window !== undefined) {
+      if (window.innerWidth < 800) {
+        setDeviceWidth(window.innerWidth)
+      }
     }
   }
   useEffect(() => {
-    window.addEventListener("resize", resizeListener)
-    return () => window.removeEventListener("resize", resizeListener)
+    if (window !== undefined) {
+      window.addEventListener("resize", resizeListener)
+      return () => window.removeEventListener("resize", resizeListener)
+    }
   }, [])
 
   console.log(props)
