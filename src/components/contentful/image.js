@@ -3,19 +3,17 @@ import classNames from "classnames"
 import styled from "styled-components"
 
 export const Image = props => {
-  if (typeof window !== undefined) {
-    const [deviceWidth, setDeviceWidth] = useState(window.innerWidth)
-  }
+  const [deviceWidth, setDeviceWidth] = useState("")
 
   function resizeListener() {
-    if (typeof window !== undefined) {
+    if (typeof window !== "undefined") {
       if (window.innerWidth < 800) {
         setDeviceWidth(window.innerWidth)
       }
     }
   }
   useEffect(() => {
-    if (typeof window !== undefined) {
+    if (typeof window !== "undefined") {
       window.addEventListener("resize", resizeListener)
       return () => window.removeEventListener("resize", resizeListener)
     }
@@ -24,9 +22,10 @@ export const Image = props => {
   console.log(props)
 
   const x =
-    props.focalPoint === undefined
+    props.focalPoint === "undefined"
       ? props.image.focalPoint.focalPoint.x
-      : props.focalPoint.focalPoint.x
+      : // : props.focalPoint.focalPoint.x
+        ""
 
   const imgWidth =
     props.image.image === undefined
