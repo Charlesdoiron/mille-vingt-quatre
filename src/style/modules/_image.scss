@@ -24,6 +24,22 @@
     }
   }
 
+  &.Image-Is-Cover {
+    top: 0;
+    padding: 0;
+    border: none;
+    height: 70vh;
+
+    .img__bkg {
+      background-size: cover;
+      background-repeat: no-repeat;
+
+      width: 100%;
+
+      border: 0px;
+    }
+  }
+
   &.Image-Align-Left {
     padding: 85px 30% 0 0;
 

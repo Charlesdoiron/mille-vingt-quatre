@@ -14,12 +14,13 @@ import { TwoSectionsWithImage } from "../components/contentful/twoSectionsWithIm
 import BlogPosts from "../components/contentful/blogPosts"
 import { BlogPostsSelected } from "../components/contentful/blogPostsSelected"
 import { ProjectsList } from "../components/contentful/projectsList"
-import { CoverImage } from "../components/contentful/coverImage"
+
 import { NewsLetterSuscribe } from "../components/contentful/newsLetterSuscribe"
 import { Socials } from "../components/contentful/socials"
 import { ContactForm } from "../components/contentful/contactForm"
 import { ContactInformations } from "../components/contentful/contactInformations"
 import { RenderParagraphModule } from "./../components/contentful/renderParagraphModule"
+import { Image } from "../components/contentful/image"
 
 const FullHeight = styled.div`
   height: 100vh;
@@ -75,14 +76,19 @@ const Page = props => {
               title="selected projects"
             />
           )
+        case "ContentfulImageImageAndText":
+          return (
+            <div className="wrapper--m">
+              <Image image={module} key={i} />
+            </div>
+          )
         case "ContentfulVideo":
           return <Video video={module} key={i} />
         case "ContentfulBlogPostSelected":
           return <BlogPostsSelected postSelected={module} key={i} />
         case "ContentfulParagraphModule":
           return <RenderParagraphModule module={module} key={i} />
-        case "ContentfulCoverImage":
-          return <CoverImage image={module} focalPoint={module} key={i} />
+
         case "ContentfulImageGrid2Photos":
           return <ImageGrid2Photos imageGrid={module} key={i} />
         case "ContentfulImageGrid3Or4Photos":
@@ -210,26 +216,6 @@ export const pagequerypagebyslug = graphql`
             ctas {
               e_mail
               label
-            }
-          }
-        }
-        ... on ContentfulCoverImage {
-          image {
-            file {
-              details {
-                image {
-                  width
-                }
-              }
-            }
-            fluid(quality: 90, maxWidth: 1800) {
-              ...GatsbyContentfulFluid
-            }
-          }
-          focalPoint {
-            focalPoint {
-              x
-              y
             }
           }
         }

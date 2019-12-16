@@ -16,7 +16,7 @@ export const ContactInformations = props => {
 
   return (
     <div className="contact__informations__container">
-      <div>
+      {/* <div>
         <a
           rel="noopener noreferrer"
           target="_blank"
@@ -25,7 +25,7 @@ export const ContactInformations = props => {
           {isDesktopOrLaptop ? <img alt="map" src={map} /> : ""}
           {isTabletOrMobileDevice ? <img alt="map" src={map_mobile} /> : ""}
         </a>
-      </div>
+      </div> */}
       <div>
         <div className="content">
           <div>

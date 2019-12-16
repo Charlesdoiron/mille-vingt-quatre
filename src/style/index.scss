@@ -1,6 +1,7 @@
 @import "./fonts";
 @import "./var";
 @import "./general";
+
 @import "./modules/quote";
 @import "./modules/quote_and_text";
 @import "./modules/menu";
@@ -16,7 +17,6 @@
 @import "./modules/categories";
 @import "./modules/contact_informations";
 @import "./modules/text_columns";
-@import "./modules/cover_image";
 @import "./modules/behind_the_scene";
 @import "./modules/credits";
 @import "./modules/slider";
@@ -24,7 +24,9 @@
 @import "./modules/hero";
 @import "./modules/video";
 @import "./modules/image";
+
 @import "./pages/projects";
 @import "./pages/project";
 @import "./pages/blog_post";
+
 @import "./transition";

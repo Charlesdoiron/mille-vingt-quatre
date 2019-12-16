@@ -17,12 +17,13 @@ import { TwoSectionsWithImage } from "../components/contentful/twoSectionsWithIm
 import BlogPosts from "../components/contentful/blogPosts"
 import { BlogPostsSelected } from "../components/contentful/blogPostsSelected"
 import { ProjectsList } from "../components/contentful/projectsList"
-import { CoverImage } from "../components/contentful/coverImage"
+
 import { NewsLetterSuscribe } from "../components/contentful/newsLetterSuscribe"
 import { Socials } from "../components/contentful/socials"
 import { ContactForm } from "../components/contentful/contactForm"
 import { ContactInformations } from "../components/contentful/contactInformations"
 import { RenderParagraphModule } from "./../components/contentful/renderParagraphModule"
+import { Image } from "../components/contentful/image"
 
 const Page = props => {
   const modules = props.data.contentfulPages.ui
@@ -30,6 +31,7 @@ const Page = props => {
   const categories = props.data.contentfulPages.allCategories
   const currentPage = props.pageContext.slug
 
+  console.log("MODULES", modules)
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }, [])
@@ -38,6 +40,7 @@ const Page = props => {
     height: 100vh;
     width: 100%;
     position: relative;
+
     h4 {
       position: absolute;
       top: 50%;
@@ -65,14 +68,14 @@ const Page = props => {
               title="selected projects"
             />
           )
+        case "ContentfulImageImageAndText":
+          return <Image image={module} key={i} />
         case "ContentfulVideo":
           return <Video video={module} key={i} />
         case "ContentfulBlogPostSelected":
           return <BlogPostsSelected postSelected={module} key={i} />
         case "ContentfulParagraphModule":
           return <RenderParagraphModule module={module} key={i} />
-        case "ContentfulCoverImage":
-          return <CoverImage image={module} key={i} />
         case "ContentfulImageGrid2Photos":
           return <ImageGrid2Photos imageGrid={module} key={i} />
         case "ContentfulImageGrid3Or4Photos":
@@ -188,6 +191,30 @@ export const pagequerypagetemplatebyslug = graphql`
           }
           titleParagraph
         }
+        ... on ContentfulImageImageAndText {
+          display
+          text {
+            text
+          }
+          image {
+            fluid(quality: 90, maxWidth: 1800) {
+              ...GatsbyContentfulFluid
+            }
+            file {
+              details {
+                image {
+                  width
+                }
+              }
+            }
+          }
+          focalPoint {
+            focalPoint {
+              x
+              y
+            }
+          }
+        }
         ... on ContentfulSettings {
           contactInformations {
             contact_page {
@@ -201,26 +228,7 @@ export const pagequerypagetemplatebyslug = graphql`
             }
           }
         }
-        ... on ContentfulCoverImage {
-          image {
-            file {
-              details {
-                image {
-                  width
-                }
-              }
-            }
-            fluid(quality: 90, maxWidth: 1800) {
-              ...GatsbyContentfulFluid
-            }
-          }
-          focalPoint {
-            focalPoint {
-              x
-              y
-            }
-          }
-        }
+
         ... on ContentfulContactForm {
           contactFormTitle
           mailTo

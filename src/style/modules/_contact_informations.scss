@@ -1,23 +1,15 @@
 .contact__informations__container {
-  height: 100vh;
-  overflow: hidden;
-  @media #{$tablet} {
-    overflow: scroll;
-    margin-top: -70px;
-  }
-  @media #{$mobile} {
-    overflow: scroll;
-    margin-top: -70px;
-  }
+  // @media #{$tablet} {
+  //   overflow: scroll;
+  //   margin-top: -70px;
+  // }
+  // @media #{$mobile} {
+  //   overflow: scroll;
+  //   margin-top: -70px;
+  // }
 
   & > div {
-    width: 100%;
-    height: 100vh;
-
     @media #{$tablet} {
-      height: auto;
-    }
-    @media #{$mobile} {
       height: auto;
     }
   }
@@ -34,23 +26,20 @@
     }
   }
   .content {
-    padding: 40px 0px;
     background-color: black;
-    position: fixed;
+    height: 30vh;
     bottom: 0;
     width: 100%;
+    align-items: center;
     display: flex;
     justify-content: space-around;
 
     @media #{$tablet} {
       flex-direction: column;
       padding: 40px;
+      align-items: flex-start;
       position: relative;
-    }
-    @media #{$mobile} {
-      flex-direction: column;
-      padding: 40px;
-      position: relative;
+      height: auto;
     }
     a {
       border-bottom: 1px solid $white;
@@ -59,6 +48,12 @@
       height: 20px;
     }
     div {
+      @media #{$tablet} {
+        margin-top: 30px;
+        &:first-child {
+          margin-top: 0;
+        }
+      }
       p {
         max-width: 170px;
         opacity: 0.7;
