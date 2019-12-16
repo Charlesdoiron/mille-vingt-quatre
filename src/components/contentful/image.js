@@ -3,19 +3,19 @@ import classNames from "classnames"
 import styled from "styled-components"
 
 export const Image = props => {
-  if (window !== undefined) {
+  if (typeof window !== undefined) {
     const [deviceWidth, setDeviceWidth] = useState(window.innerWidth)
   }
 
   function resizeListener() {
-    if (window !== undefined) {
+    if (typeof window !== undefined) {
       if (window.innerWidth < 800) {
         setDeviceWidth(window.innerWidth)
       }
     }
   }
   useEffect(() => {
-    if (window !== undefined) {
+    if (typeof window !== undefined) {
       window.addEventListener("resize", resizeListener)
       return () => window.removeEventListener("resize", resizeListener)
     }
