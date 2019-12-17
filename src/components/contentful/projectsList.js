@@ -14,6 +14,7 @@ export class ProjectsList extends React.Component {
       imageOnBackground: "",
       projects: this.props.projects,
       projectFocus: "",
+      isDesktop: "",
     }
     this.animateProject = this.animateProject.bind(this)
   }
@@ -34,7 +35,8 @@ export class ProjectsList extends React.Component {
   //   }, 500)
   // }
   animateProject = () => {
-    const TRIGGER = 145
+    const TRIGGER_APPEAR = this.state.isDesktop ? 145 : 160
+    const TRIGGER_DISAPPEAR = this.state.isDesktop ? -20 : 70
     const list = this.listProjects.current
     const titles = list.children
 
@@ -45,8 +47,8 @@ export class ProjectsList extends React.Component {
 
       if (
         // Le projet passe en mode focus.
-        titles[i].getBoundingClientRect().top < TRIGGER &&
-        titles[i].getBoundingClientRect().top > -20
+        titles[i].getBoundingClientRect().top < TRIGGER_APPEAR &&
+        titles[i].getBoundingClientRect().top > TRIGGER_DISAPPEAR
       ) {
         link.classList.add("isFocus")
         if (
@@ -58,7 +60,7 @@ export class ProjectsList extends React.Component {
 
         if (
           // Le projet est en mode focus et disparait.
-          -20 > titles[i].getBoundingClientRect().top
+          TRIGGER_DISAPPEAR > titles[i].getBoundingClientRect().top
         ) {
           link.classList.add("isOut")
         } else {
@@ -72,7 +74,20 @@ export class ProjectsList extends React.Component {
     }
   }
 
+  setDevice = () => {
+    if (window.innerWidth > 992) {
+      this.setState({ isDesktop: true })
+    } else {
+      this.setState({ isDesktop: false })
+    }
+  }
+
   componentDidMount() {
+    if (typeof window !== undefined) {
+      window.addEventListener("resize", () => this.setDevice(), {
+        passive: true,
+      })
+    }
     const list = this.listProjects.current
     list.addEventListener("scroll", () => this.animateProject(), true)
   }
@@ -80,6 +95,11 @@ export class ProjectsList extends React.Component {
   componentWillUnmount() {
     const list = this.listProjects.current
     list.removeEventListener("scroll", () => this.animateProject())
+    if (typeof window !== undefined) {
+      window.removeEventListener("resize", () => this.setDevice(), {
+        passive: true,
+      })
+    }
   }
 
   render() {

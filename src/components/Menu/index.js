@@ -27,6 +27,8 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
     }
     if (typeof window !== undefined) {
       window.addEventListener("scroll", transitionMenu, { passive: true })
+      return () =>
+        window.removeEventListener("scroll", transitionMenu, { passive: true })
     }
   })
 
