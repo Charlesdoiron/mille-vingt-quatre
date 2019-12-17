@@ -46,6 +46,13 @@
     img {
       width: 100%;
     }
+    .text__for__image {
+      text-align: left;
+      margin-top: 50px;
+      @media #{$mobile} {
+        margin-top: 35px;
+      }
+    }
   }
 
   &.Image-Align-Right {
@@ -62,6 +69,10 @@
 
       .text__for__image {
         text-align: left;
+        margin-top: 50px;
+        @media #{$mobile} {
+          margin-top: 35px;
+        }
       }
     }
   }
