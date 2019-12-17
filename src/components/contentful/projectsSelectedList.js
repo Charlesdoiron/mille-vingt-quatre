@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
 import { Styledh2, Styledprojectdate, Styledcapitalize } from "../typos"
@@ -20,29 +20,30 @@ export const ProjectsSelectedList = props => {
   console.log(props, "selected")
   const [imageState, setImageState] = useState("")
 
-  // FOCUS ON FIRST PROJECT
-  // function setDefaultImage() {
-  //   setImageState(projects[0].cover.fluid)
-  // }
-  // async function setDefaultProject() {
-  //   await setDefaultImage()
-  //   const titles = document.querySelectorAll(".project__title__link")
-  //   const firstTitle = titles[0]
-  //   await firstTitle.classList.add("isActive")
-  // }
+  //FOCUS ON FIRST PROJECT
+  function setDefaultImage() {
+    setImageState(projects[0].image.fluid)
+  }
+  async function setDefaultProject() {
+    await setDefaultImage()
+    const titles = document.querySelectorAll(".project__title__link")
+    const firstTitle = titles[0]
+    await firstTitle.classList.add("isActive")
+  }
 
-  // useEffect(() => {
-  //   setDefaultProject()
-  // }, [])
+  useEffect(() => {
+    setDefaultProject()
+  }, [])
 
   const changeImage = img => {
-    document.querySelector(".project__img--background--selected") &&
-      document
-        .querySelector(".project__img--background--selected")
-        .classList.toggle("isOut")
-    setTimeout(() => {
+    if (imageState !== img) {
+      document.querySelector(".project__img--background--selected") &&
+        document
+          .querySelector(".project__img--background--selected")
+          .classList.toggle("isOut")
+
       setImageState(img)
-    }, 300)
+    }
   }
 
   const leaveImage = img => {
@@ -62,13 +63,12 @@ export const ProjectsSelectedList = props => {
     image,
     projectNumber,
   }) => (
-    <Link
-      to={`/project/${slug}`}
-      onMouseEnter={e => changeImage(image.fluid)}
-      className="project__title__link"
-    >
+    <Link to={`/project/${slug}`} className="project__title__link">
       <TitleContainer className="project__slide" projectNumber={projectNumber}>
-        <Title selected={isCurrentProject}>
+        <Title
+          selected={isCurrentProject}
+          onMouseEnter={e => changeImage(image.fluid)}
+        >
           {projectTitle}
           <Styledprojectdate>{projectTitleDate}</Styledprojectdate>
         </Title>
