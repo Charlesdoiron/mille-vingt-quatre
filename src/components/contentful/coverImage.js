@@ -8,7 +8,7 @@ export const CoverImage = props => {
       ? props.image.focalPoint.focalPoint.x
       : props.focalPoint.focalPoint.x
 
-  const width =
+  const imgWidth =
     props.image.image === undefined
       ? props.image.file.details.image.width
       : props.image.image.file.details.image.width
@@ -26,7 +26,7 @@ export const CoverImage = props => {
       opacity: 0.8;
       @media screen and (max-width: 736px) {
         width: 100%;
-        background-position-x: -${(x * 1800) / width / 2.6}px;
+        background-position: ${(x * 100) / imgWidth}% 0;
       }
     }
   `
