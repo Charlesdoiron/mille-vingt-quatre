@@ -66,7 +66,7 @@ export class CustomSlider extends Component {
             dots: true,
             infinite: true,
             speed: 500,
-            slidesToShow: 1.03,
+            slidesToShow: 1,
             slidesToScroll: 1,
             arrows: false,
             autoplay: true,

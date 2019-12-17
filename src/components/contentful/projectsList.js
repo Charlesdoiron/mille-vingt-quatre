@@ -85,12 +85,16 @@ export class ProjectsList extends React.Component {
 
   componentDidMount() {
     if (typeof window !== undefined) {
+      this.setDevice()
       window.addEventListener("resize", () => this.setDevice(), {
         passive: true,
       })
     }
     const list = this.listProjects.current
     list.addEventListener("scroll", () => this.animateProject(), true)
+    setTimeout(() => {
+      list.scrollTo({ top: 5, behavior: "smooth" })
+    }, 2000)
   }
 
   componentWillUnmount() {

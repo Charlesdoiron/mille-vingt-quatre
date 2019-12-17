@@ -12,6 +12,7 @@ export const Categories = props => {
     props.handleCategorie(e)
     setActive(e)
   }
+  console.log(props.isDesktop)
 
   return (
     <ul
