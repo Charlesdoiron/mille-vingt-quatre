@@ -4,7 +4,7 @@ import { Categories } from "./categories"
 import { debounce } from "lodash"
 import { Styledh2, Styledprojectdate } from "../typos"
 import styled from "styled-components"
-
+import { ImgBlur } from "./../animations/image"
 export class ProjectsList extends React.Component {
   constructor(props) {
     super(props)
@@ -115,10 +115,23 @@ export class ProjectsList extends React.Component {
     return (
       <div className="projects__container" data-aos="fade-up">
         {this.state.imageOnBackground && (
-          <img
-            src={this.state.imageOnBackground}
+          // <img
+          //   src={this.state.imageOnBackground}
+          //   className="project__img--background"
+          //   style={{ opacity: "0.8" }}
+          // />
+          <ImgBlur
             className="project__img--background"
-            style={{ opacity: "0.8" }}
+            style={{
+              backgroundImage: `url(${this.state.imageOnBackground})`,
+              backgroundSize: "cover",
+              opacity: "0.8",
+              width: " 100%",
+              height: "100vh",
+              position: "absolute",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+            }}
           />
         )}
 
