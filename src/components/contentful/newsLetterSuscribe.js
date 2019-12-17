@@ -61,7 +61,7 @@ export const NewsLetterSuscribe = props => {
                 <input
                   onChange={e => setEmail(e.target.value)}
                   type="e-mail"
-                  placeholder={props.news_letter.placeholderNewsLetterSuscribes}
+                  placeholder={props.news_letter.placeholderNewsLetterSuscribe}
                   onMouseLeave={e => setCheckMail(true)}
                 />
 
