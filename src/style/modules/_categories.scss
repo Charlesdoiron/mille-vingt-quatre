@@ -15,6 +15,11 @@
   &.isTabletOrMobileDevice {
     display: flex;
     overflow: scroll;
+    overflow-y: scroll; /* has to be scroll, not auto */
+    -webkit-overflow-scrolling: touch;
+    position: fixed;
+    top: 30px;
+    width: 100%;
 
     li {
       margin-right: 40px;

@@ -19,11 +19,9 @@ export const Image = props => {
     }
   }, [])
 
-  console.log(props)
-
   const x =
-    props.focalPoint !== undefined || null
-      ? props.image.focalPoint !== undefined || null
+    props.image.focalPoint !== undefined || null
+      ? props.image.focalPoint.focalPoint !== undefined || null
         ? props.image.focalPoint.focalPoint.x
         : props.focalPoint.focalPoint.x
       : ""
@@ -50,7 +48,7 @@ export const Image = props => {
       opacity: 0.8;
       @media screen and (max-width: 736px) {
         width: 100%;
-        background-position-x: -${(x * deviceWidth) / imgWidth + deviceWidth}px;
+        background-position: ${(x * 100) / imgWidth}% 0;
       }
     }
   `

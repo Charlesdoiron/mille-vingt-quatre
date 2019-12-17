@@ -17,7 +17,22 @@ export class ProjectsList extends React.Component {
     }
     this.animateProject = this.animateProject.bind(this)
   }
+  changeImage = img => {
+    document.querySelector(".project__img--background") &&
+      document
+        .querySelector(".project__img--background")
+        .classList.toggle("isOut")
 
+    this.setState({ imageOnBackground: img })
+  }
+  // leaveImage = img => {
+  //   setTimeout(() => {
+  //     document.querySelector(".project__img--background") &&
+  //       document
+  //         .querySelector(".project__img--background")
+  //         .classList.toggle("isOut")
+  //   }, 500)
+  // }
   animateProject = () => {
     const TRIGGER = 145
     const list = this.listProjects.current
@@ -38,15 +53,7 @@ export class ProjectsList extends React.Component {
           // Si l'image dans le state est différente de l'image à appeller, je met à jour le state.
           this.state.imageOnBackground !== imgTitle
         ) {
-          // c'est ici que ça bug, si je setState dans le scroll, tous les projets sont envoyés dans le state,
-          // L'image qui part dans le state est celle du dernier projet de la liste.
-          //ça se vérifie avec le console log du dessus.
-
-          // Hypothèse : Quand j'update le state, le composant re-render et les projets sont en dessous du trigger, le condition ne fonctionne donc plus.
-          // J'ai essayé avec un cas très simple, l'event listener du scroll sur une ref() déclanche un setState, ça met aussi le bazar dans le scroll.
-
-          // this.setState({ imageOnBackground: imgTitle })
-          console.log(link.innerText)
+          this.changeImage(imgTitle)
         }
 
         if (
@@ -67,96 +74,53 @@ export class ProjectsList extends React.Component {
 
   componentDidMount() {
     const list = this.listProjects.current
-
     list.addEventListener("scroll", () => this.animateProject(), true)
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.state.imageOnBackground !== nextState.imageOnBackground) {
-      return true
-    }
-    return false
   }
 
   componentWillUnmount() {
     const list = this.listProjects.current
-
     list.removeEventListener("scroll", () => this.animateProject())
   }
+
   render() {
     const handleCategorie = categorieClicked => {
       this.setState({ categorie: categorieClicked })
-
+      console.log("CATEGORIE", categorieClicked)
+      console.log("HANDLE")
       if (categorieClicked === "All") {
+        console.log("THIS IS ALL")
         this.setState({ projects: this.props.projects })
       } else {
+        console.log("THIS IS NOT ALL")
         const resultsWithCategories = this.props.projects.filter(project => {
           return project.categories !== null
         })
+        console.log("resultsWithCategories", resultsWithCategories)
         const projectsFiltered = resultsWithCategories.filter((project, i) => {
           const hadCategorie = project.categories.filter(
             categorie => categorie.slug === categorieClicked
           )
+          console.log("hadCategorie", hadCategorie)
           if (hadCategorie.length > 0) {
             return resultsWithCategories[i]
           } else return null
         })
+        console.log("projectsFiltered", projectsFiltered)
         this.setState({ projects: projectsFiltered })
+        console.log(this.state.projects)
+        console.log(this.state.projects)
       }
     }
 
-    // const changeImage = img => {
-    //   document.querySelector(".project__img--background") &&
-    //     document
-    //       .querySelector(".project__img--background")
-    //       .classList.toggle("isOut")
-
-    //   setTimeout(() => {
-    //     this.setState({ imageOnBackground: img })
-    //     //setImageState(img)
-    //   }, 300)
-    // }
-
-    const leaveImage = img => {
-      // setTimeout(() => {
-      //   document.querySelector(".project__img--background") &&
-      //     document
-      //       .querySelector(".project__img--background")
-      //       .classList.toggle("isOut")
-      // }, 500)
-    }
-
-    const Project = ({ projectTitle, projectTitleDate, slug, image }) => {
-      return (
-        <Link to={`/project/${slug}`} className="project__title__link">
-          <TitleContainer className="project__slide">
-            <Title
-              style={{ margin: "0 0 50px 0" }}
-              data-image={image.fluid.src}
-            >
-              {projectTitle}
-              <Styledprojectdate>{projectTitleDate}</Styledprojectdate>
-            </Title>
-          </TitleContainer>
-        </Link>
-      )
-    }
-
-    const Projects = ({ projects }) => (
-      <div className="projects__list" ref={this.listProjects}>
-        {projects.map((project, i) => {
-          return <Project key={project.slug + i} {...project} />
-        })}
-      </div>
-    )
-
     return (
-      <div className="projects__container" onMouseLeave={e => leaveImage()}>
-        <img
-          src={this.state.imageOnBackground}
-          className="project__img--background"
-          style={{ opacity: "0.8" }}
-        />
+      <div className="projects__container" data-aos="fade-up">
+        {this.state.imageOnBackground && (
+          <img
+            src={this.state.imageOnBackground}
+            className="project__img--background"
+            style={{ opacity: "0.8" }}
+          />
+        )}
 
         <div className="projects">
           {this.props.categories && (
@@ -165,7 +129,30 @@ export class ProjectsList extends React.Component {
               handleCategorie={handleCategorie}
             />
           )}
-          <Projects projects={this.state.projects} />
+          <div className="projects__list" ref={this.listProjects}>
+            {this.state.projects.map(
+              ({ projectTitle, projectTitleDate, slug, image }) => {
+                return (
+                  <Link
+                    to={`/project/${slug}`}
+                    className="project__title__link"
+                  >
+                    <TitleContainer className="project__slide">
+                      <Title
+                        style={{ margin: "0 0 50px 0" }}
+                        data-image={image.fluid.src}
+                      >
+                        {projectTitle}
+                        <Styledprojectdate>
+                          {projectTitleDate}
+                        </Styledprojectdate>
+                      </Title>
+                    </TitleContainer>
+                  </Link>
+                )
+              }
+            )}
+          </div>
         </div>
       </div>
     )
