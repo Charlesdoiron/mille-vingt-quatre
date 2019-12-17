@@ -108,7 +108,10 @@ export class ProjectsList extends React.Component {
       this.setState({ categorie: categorieClicked })
 
       this.setState({ imageOnBackground: "" })
-      this.listProjects.current.scrollTo({ top: 0, behavior: "smooth" })
+      this.listProjects.current.scrollTo({ top: 10, behavior: "smooth" })
+      setTimeout(() => {
+        this.listProjects.current.scrollTo({ top: 5, behavior: "smooth" })
+      }, 200)
       if (categorieClicked === "All") {
         this.setState({ projects: this.props.projects })
       } else {
