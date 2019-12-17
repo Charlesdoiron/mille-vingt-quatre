@@ -33,6 +33,9 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
   const isMobile = useMediaQuery({
     query: "(max-width: 768px)",
   })
+  const isTablet = useMediaQuery({
+    query: "(max-width: 992px)",
+  })
 
   const toggleMenu = e => {
     dispatch({
@@ -86,7 +89,9 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
     width: 100%;
     position: fixed;
     transition: all 1024ms;
-    background-color: ${isSticky ? "black" : "transparent"};
+    background-color: ${isSticky || (isTablet && currentPage === "projects")
+      ? "black"
+      : "transparent"};
   `
   return !isMobile ? (
     <DesktopContainer ref={menuRef}>

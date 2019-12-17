@@ -14,7 +14,7 @@ export const Categories = props => {
   }
 
   const isTabletOrMobileDevice = useMediaQuery({
-    query: "(max-width: 1224px)",
+    query: "(max-width: 991px)",
   })
 
   return (

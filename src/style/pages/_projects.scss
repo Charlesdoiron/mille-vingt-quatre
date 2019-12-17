@@ -36,13 +36,16 @@
   padding-left: 30%;
   position: absolute;
 
-  @media #{$mobile} {
+  @media #{$tablet} {
     padding: 20vh 0 0 10%;
   }
 
   h2 {
     transition: all 200ms ease;
     white-space: nowrap;
+    @media #{$mobile} {
+      white-space: initial;
+    }
 
     &:hover {
       -webkit-text-fill-color: transparent;

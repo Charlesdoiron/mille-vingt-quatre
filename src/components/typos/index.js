@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components"
 
 const mobile = "768px"
+const tablet = "992px"
 
 // Titre du projet dans la page projet
 export const StyledH1 = styled.h1`
@@ -50,7 +51,7 @@ export const Styledh2 = styled.h2`
   &:hover {
     ${selectedCss}
   }
-  @media (max-width: ${mobile}) {
+  @media (max-width: ${tablet}) {
     white-space: normal;
     font-size: 46px;
     line-height: 70px;
