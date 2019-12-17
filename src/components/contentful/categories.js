@@ -25,7 +25,6 @@ export const Categories = props => {
     >
       <li
         onClick={e => handleCategorie("All")}
-        style={{ marginBottom: "14px" }}
         className={active === "All" ? "isActive" : ""}
       >
         All
@@ -34,7 +33,6 @@ export const Categories = props => {
         return (
           <li
             onClick={e => handleCategorie(categorie.slug)}
-            style={{ marginBottom: "14px" }}
             key={i}
             className={active === categorie.slug ? "isActive" : ""}
           >

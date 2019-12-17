@@ -5,13 +5,18 @@
 
   @media #{$tablet} {
     background-color: black;
-    padding: 5%;
+    padding: 20px;
     margin: 0;
   }
 
   li {
     white-space: nowrap;
     color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 14px;
+
+    @media #{$tablet} {
+      margin: 0;
+    }
 
     &.isActive {
       color: $white;

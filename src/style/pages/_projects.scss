@@ -37,7 +37,8 @@
   position: absolute;
 
   @media #{$tablet} {
-    padding: 20vh 0 0 10%;
+    padding: 0 0 0 10%;
+    margin-top: 120px !important;
   }
 
   h2 {
@@ -106,6 +107,10 @@
   position: fixed !important;
   animation: blur 1s;
   overflow: hidden;
+
+  @media #{$tablet} {
+    margin-top: 120px;
+  }
 
   &.isOut {
     animation: isOut 1s !important;
