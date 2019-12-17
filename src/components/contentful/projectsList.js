@@ -5,6 +5,7 @@ import { debounce } from "lodash"
 import { Styledh2, Styledprojectdate } from "../typos"
 import styled from "styled-components"
 import { ImgBlur } from "./../animations/image"
+import { animateScroll as scroll } from "react-scroll"
 export class ProjectsList extends React.Component {
   constructor(props) {
     super(props)
@@ -35,7 +36,7 @@ export class ProjectsList extends React.Component {
   //   }, 500)
   // }
   animateProject = () => {
-    const TRIGGER_APPEAR = this.state.isDesktop ? 145 : 160
+    const TRIGGER_APPEAR = this.state.isDesktop ? 145 : 170
     const TRIGGER_DISAPPEAR = this.state.isDesktop ? -20 : 70
     const list = this.listProjects.current
     const titles = list.children
@@ -105,30 +106,27 @@ export class ProjectsList extends React.Component {
   render() {
     const handleCategorie = categorieClicked => {
       this.setState({ categorie: categorieClicked })
-      console.log("CATEGORIE", categorieClicked)
-      console.log("HANDLE")
+
+      this.setState({ imageOnBackground: "" })
+      this.listProjects.current.scrollTo({ top: 0, behavior: "smooth" })
       if (categorieClicked === "All") {
-        console.log("THIS IS ALL")
         this.setState({ projects: this.props.projects })
       } else {
-        console.log("THIS IS NOT ALL")
         const resultsWithCategories = this.props.projects.filter(project => {
           return project.categories !== null
         })
-        console.log("resultsWithCategories", resultsWithCategories)
+
         const projectsFiltered = resultsWithCategories.filter((project, i) => {
           const hadCategorie = project.categories.filter(
             categorie => categorie.slug === categorieClicked
           )
-          console.log("hadCategorie", hadCategorie)
+
           if (hadCategorie.length > 0) {
             return resultsWithCategories[i]
           } else return null
         })
-        console.log("projectsFiltered", projectsFiltered)
+
         this.setState({ projects: projectsFiltered })
-        console.log(this.state.projects)
-        console.log(this.state.projects)
       }
     }
 
