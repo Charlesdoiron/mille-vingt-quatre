@@ -8,7 +8,6 @@
       display: block;
     }
     .projects__list {
-      margin: 0 0 0 30px;
       height: 100vh;
       overflow: scroll;
       width: 100%;
@@ -28,6 +27,11 @@
 .projects__list {
   width: 100%;
   padding: 20vh 0 70vh 5%;
+
+  z-index: 900;
+  width: 100%;
+  padding-left: 30%;
+  position: absolute;
 
   h2 {
     transition: all 200ms ease;

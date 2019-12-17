@@ -103,6 +103,7 @@ export const ProjectsSelectedList = props => {
         <Img
           fluid={imageState}
           className="project__img--background--selected"
+          style={{ opacity: "0.8" }}
         />
       )}
 
