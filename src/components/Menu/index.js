@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { useMediaQuery } from "react-responsive"
 import styled, { keyframes, css } from "styled-components"
 import { useStateValue } from "./../../context/state"
@@ -8,9 +8,27 @@ import { Socials } from "./socials"
 import { Logo } from "./logo"
 import { Burger } from "./burger"
 
-export const Menu = ({ data, menuIsOpen }, props) => {
+export const Menu = ({ data, menuIsOpen, currentPage }) => {
   const [{ menu }, dispatch] = useStateValue()
+  const [isSticky, setSticky] = useState(false)
   const { isOpen } = menu
+  const menuRef = useRef(null)
+
+  console.log(currentPage)
+
+  useEffect(() => {
+    const menuHeight = menuRef.current.offsetHeight
+    const transitionMenu = () => {
+      if (window.pageYOffset > menuHeight) {
+        setSticky(true)
+      } else {
+        setSticky(false)
+      }
+    }
+    if (typeof window !== undefined) {
+      window.addEventListener("scroll", transitionMenu, { passive: true })
+    }
+  })
 
   const isMobile = useMediaQuery({
     query: "(max-width: 768px)",
@@ -48,9 +66,30 @@ export const Menu = ({ data, menuIsOpen }, props) => {
         `
       : ""};
   `
-
+  const StyledFixed = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    z-index: 9000000;
+    background-color: ${isSticky || currentPage === "projects"
+      ? "black"
+      : "transparent"};
+    background-size: 30px;
+  `
+  const DesktopContainer = styled.div`
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    z-index: 100;
+    width: 100%;
+    position: fixed;
+    transition: all 1024ms;
+    background-color: ${isSticky ? "black" : "transparent"};
+  `
   return !isMobile ? (
-    <DesktopContainer>
+    <DesktopContainer ref={menuRef}>
       <Logo />
       {!isOpen && <CloseProject isOpen={isOpen} />}
       {isOpen && <MenuItems isOpen={isOpen} />}
@@ -60,7 +99,7 @@ export const Menu = ({ data, menuIsOpen }, props) => {
   ) : (
     <div>
       <div>
-        <StyledFixed>
+        <StyledFixed ref={menuRef}>
           <Logo isOpen={isOpen} handleClick={e => toggleMenu(false)} />
           {!isOpen && <CloseProject />}
           {isOpen && <MenuItems isOpen={isOpen} />}
@@ -72,22 +111,3 @@ export const Menu = ({ data, menuIsOpen }, props) => {
     </div>
   )
 }
-
-const StyledFixed = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: fixed;
-  width: 100%;
-  z-index: 9000000;
-`
-
-const DesktopContainer = styled.div`
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  z-index: 100;
-  width: 100%;
-  position: fixed;
-  transition: all 1024ms;
-`

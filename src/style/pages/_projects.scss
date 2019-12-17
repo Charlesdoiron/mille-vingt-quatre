@@ -9,8 +9,9 @@
     }
     .projects__list {
       height: 100vh;
-      overflow: scroll;
       width: 100%;
+      overflow-y: scroll; /* has to be scroll, not auto */
+      -webkit-overflow-scrolling: touch;
 
       @media #{$tablet} {
         margin: 0;
@@ -26,12 +27,18 @@
 }
 .projects__list {
   width: 100%;
-  padding: 20vh 0 70vh 5%;
+  padding: 10vh 0 70vh 5%;
+  overflow-y: scroll; /* has to be scroll, not auto */
+  -webkit-overflow-scrolling: touch;
 
   z-index: 900;
   width: 100%;
   padding-left: 30%;
   position: absolute;
+
+  @media #{$mobile} {
+    padding: 20vh 0 0 10%;
+  }
 
   h2 {
     transition: all 200ms ease;

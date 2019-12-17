@@ -3,6 +3,15 @@
   margin: 10%;
   z-index: 9000;
 
+  @media #{$tablet} {
+    background-color: black;
+
+    padding: 5%;
+  }
+  @media #{$mobile} {
+    margin: 0;
+  }
+
   li {
     white-space: nowrap;
     color: rgba(255, 255, 255, 0.5);
@@ -18,7 +27,7 @@
     overflow-y: scroll; /* has to be scroll, not auto */
     -webkit-overflow-scrolling: touch;
     position: fixed;
-    top: 30px;
+    top: 60px;
     width: 100%;
 
     li {
