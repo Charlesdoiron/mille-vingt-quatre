@@ -23,7 +23,7 @@
     }
   }
 
-  &.isTabletOrMobileDevice {
+  &.isTabletOrMobile {
     display: flex;
     overflow: scroll;
     overflow-y: scroll; /* has to be scroll, not auto */

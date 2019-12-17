@@ -13,14 +13,10 @@ export const Categories = props => {
     setActive(e)
   }
 
-  const isTabletOrMobileDevice = useMediaQuery({
-    query: "(max-width: 991px)",
-  })
-
   return (
     <ul
       className={classNames("project__categories__container", {
-        isTabletOrMobileDevice: isTabletOrMobileDevice,
+        isTabletOrMobile: !props.isDesktop,
       })}
     >
       <li

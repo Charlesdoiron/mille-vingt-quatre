@@ -158,6 +158,7 @@ export class ProjectsList extends React.Component {
         <div className="projects">
           {this.props.categories && (
             <Categories
+              isDesktop={this.state.isDesktop}
               categories={this.props.categories}
               handleCategorie={handleCategorie}
             />
