@@ -11,7 +11,7 @@ const BlogPost = ({ data }) => {
           <Styledcapitalize>JOURNAL</Styledcapitalize>
         </div>
 
-        <div style={{ height: "100%" }}>
+        <div className="blog-post__list">
           {data.allContentfulBlogPost.edges.map(({ node }, i) => {
             return (
               <Link

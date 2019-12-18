@@ -23,6 +23,17 @@
       width: 100%;
     }
   }
+  &.Image-Full-Width {
+    padding: 85px 0;
+
+    @media #{$mobile} {
+      padding: 35px 0;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
 
   &.Image-Is-Cover {
     top: 0;

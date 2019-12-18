@@ -9,14 +9,14 @@
   margin-bottom: 10px;
 
   p {
-    margin-bottom: 60px;
+    position: fixed;
   }
   span {
     margin-bottom: 10px;
   }
 
   div {
-    padding-left: 15%;
+    padding-left: 10%;
     display: flex;
     justify-content: flex-start;
     position: relative;
@@ -104,6 +104,15 @@
         width: 80%;
         padding-left: 30px;
       }
+    }
+  }
+
+  .blog-post__list {
+    height: 100%;
+    margin-top: 60px;
+
+    @media #{$mobile} {
+      margin-top: 40px;
     }
   }
 }

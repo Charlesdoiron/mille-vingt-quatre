@@ -1,13 +1,7 @@
 .wrapper--m {
   margin: 0 auto;
-  padding: 0 15%;
+  padding: 0 10%;
 
-  @media #{$tablet} {
-    padding: 0 10%;
-  }
-  @media #{$mobile} {
-    padding: 0 10%;
-  }
   &.no--wrapper--mobile {
     @media #{$mobile} {
       padding: 0;

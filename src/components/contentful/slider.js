@@ -59,6 +59,7 @@ export class CustomSlider extends Component {
       slidesToShow: 1,
       slidesToScroll: 1,
       arrows: false,
+      // fade: true,
       responsive: [
         {
           breakpoint: 1000,
