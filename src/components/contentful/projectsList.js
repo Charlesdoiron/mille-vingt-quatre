@@ -12,29 +12,32 @@ export class ProjectsList extends React.Component {
     this.listProjects = React.createRef()
     this.state = {
       categorie: "All",
-      imageOnBackground: "",
+      imageOnBackground: {
+        url: "",
+        backgroundPositionX: "",
+        defaultWidth: "",
+      },
       projects: this.props.projects,
       projectFocus: "",
       isDesktop: "",
     }
     this.animateProject = this.animateProject.bind(this)
   }
-  changeImage = img => {
+  changeImage = (imgUrl, imgBackgroundPositionX, imgDefaultWidth) => {
     document.querySelector(".project__img--background") &&
       document
         .querySelector(".project__img--background")
         .classList.toggle("isOut")
 
-    this.setState({ imageOnBackground: img })
+    this.setState({
+      imageOnBackground: {
+        url: imgUrl,
+        backgroundPositionX: imgBackgroundPositionX,
+        defaultWidth: imgDefaultWidth,
+      },
+    })
   }
-  // leaveImage = img => {
-  //   setTimeout(() => {
-  //     document.querySelector(".project__img--background") &&
-  //       document
-  //         .querySelector(".project__img--background")
-  //         .classList.toggle("isOut")
-  //   }, 500)
-  // }
+
   animateProject = () => {
     const TRIGGER_APPEAR = this.state.isDesktop ? 145 : 170
     const TRIGGER_DISAPPEAR = this.state.isDesktop ? -20 : 70
@@ -43,7 +46,13 @@ export class ProjectsList extends React.Component {
 
     for (var i = 0; i < titles.length; i++) {
       const title = titles[i].children[0]
-      const imgTitle = title.children[0].getAttribute("data-image")
+      const imgUrl = title.children[0].getAttribute("data-image")
+      const imgBackgroundPositionX = title.children[0].getAttribute(
+        "data-focal-x"
+      )
+      const imgDefaultWidth = title.children[0].getAttribute(
+        "data-default-width"
+      )
       const link = title.children[0]
 
       if (
@@ -54,9 +63,9 @@ export class ProjectsList extends React.Component {
         link.classList.add("isFocus")
         if (
           // Si l'image dans le state est différente de l'image à appeller, je met à jour le state.
-          this.state.imageOnBackground !== imgTitle
+          this.state.imageOnBackground.url !== imgUrl
         ) {
-          this.changeImage(imgTitle)
+          this.changeImage(imgUrl, imgBackgroundPositionX, imgDefaultWidth)
         }
 
         if (
@@ -75,7 +84,7 @@ export class ProjectsList extends React.Component {
     }
   }
 
-  setDevice = () => {
+  getDevice = () => {
     if (window.innerWidth > 992) {
       this.setState({ isDesktop: true })
     } else {
@@ -85,8 +94,8 @@ export class ProjectsList extends React.Component {
 
   componentDidMount() {
     if (typeof window !== undefined) {
-      this.setDevice()
-      window.addEventListener("resize", () => this.setDevice(), {
+      this.getDevice()
+      window.addEventListener("resize", () => this.getDevice(), {
         passive: true,
       })
     }
@@ -101,7 +110,7 @@ export class ProjectsList extends React.Component {
     const list = this.listProjects.current
     list.removeEventListener("scroll", () => this.animateProject())
     if (typeof window !== undefined) {
-      window.removeEventListener("resize", () => this.setDevice(), {
+      window.removeEventListener("resize", () => this.getDevice(), {
         passive: true,
       })
     }
@@ -109,12 +118,17 @@ export class ProjectsList extends React.Component {
 
   render() {
     const handleCategorie = categorieClicked => {
-      this.setState({ categorie: categorieClicked })
+      this.setState({
+        categorie: categorieClicked,
+        imageOnBackground: { url: "" },
+      })
 
-      this.setState({ imageOnBackground: "" })
       this.listProjects.current.scrollTo({ top: 10, behavior: "smooth" })
       setTimeout(() => {
-        this.listProjects.current.scrollTo({ top: 5, behavior: "smooth" })
+        this.listProjects.current.scrollTo({
+          top: 5,
+          behavior: "smooth",
+        })
       }, 200)
       if (categorieClicked === "All") {
         this.setState({ projects: this.props.projects })
@@ -137,27 +151,37 @@ export class ProjectsList extends React.Component {
       }
     }
 
+    const ImgResponsive = styled.div`
+      div {
+        background-size: cover;
+        background-repeat: no-repeat;
+        opacity: 0.8;
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        background-position: center;
+        @media screen and (max-width: 736px) {
+          width: 100%;
+          background-position: ${(this.state.imageOnBackground
+              .backgroundPositionX *
+              100) /
+              this.state.imageOnBackground.defaultWidth}%
+            0;
+        }
+      }
+    `
+
     return (
       <div className="projects__container" data-aos="fade-up">
         {this.state.imageOnBackground && (
-          // <img
-          //   src={this.state.imageOnBackground}
-          //   className="project__img--background"
-          //   style={{ opacity: "0.8" }}
-          // />
-          <ImgBlur
-            className="project__img--background"
-            style={{
-              backgroundImage: `url(${this.state.imageOnBackground})`,
-              backgroundSize: "cover",
-              opacity: "0.8",
-              width: " 100%",
-              height: "100vh",
-              position: "absolute",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
-            }}
-          />
+          <ImgResponsive>
+            <ImgBlur
+              className="project__img--background"
+              style={{
+                backgroundImage: `url(${this.state.imageOnBackground.url})`,
+              }}
+            />
+          </ImgResponsive>
         )}
 
         <div className="projects">
@@ -170,7 +194,7 @@ export class ProjectsList extends React.Component {
           )}
           <div className="projects__list" ref={this.listProjects}>
             {this.state.projects.map(
-              ({ projectTitle, projectTitleDate, slug, image }) => {
+              ({ projectTitle, projectTitleDate, slug, image, focalPoint }) => {
                 return (
                   <Link
                     to={`/project/${slug}`}
@@ -180,6 +204,8 @@ export class ProjectsList extends React.Component {
                       <Title
                         style={{ margin: "0 0 50px 0" }}
                         data-image={image.fluid.src}
+                        data-focal-x={focalPoint.focalPoint.x}
+                        data-default-width={image.file.details.image.width}
                       >
                         {projectTitle}
                         <Styledprojectdate>
@@ -223,3 +249,12 @@ const Title = styled(Styledh2)`
 // useEffect(() => {
 //   setDefaultProject()
 // }, [])
+
+// leaveImage = img => {
+//   setTimeout(() => {
+//     document.querySelector(".project__img--background") &&
+//       document
+//         .querySelector(".project__img--background")
+//         .classList.toggle("isOut")
+//   }, 500)
+// }
