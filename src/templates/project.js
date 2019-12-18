@@ -268,159 +268,164 @@ class project extends React.Component {
 export default project
 
 export const pagequeryproject = graphql`
-  query contentfulprojectbyslug($slug: String!) {
-    contentfulProject(slug: { eq: $slug }) {
-      projectTitle
-      projectSubtitle
-      projectTitleDate
-      legend {
-        legend
-      }
-      tags {
-        title
-        slug
-      }
-      image {
-        file {
-          details {
-            image {
-              width
-            }
-          }
-        }
-        fluid(quality: 100, maxWidth: 1980) {
-          ...GatsbyContentfulFluid
-        }
-      }
-      focalPoint {
-        focalPoint {
-          x
-          y
-        }
-      }
-      creditSubtitle {
-        creditSubtitle
-      }
-      credits {
-        title
-        text {
-          text
-        }
-      }
-      tags {
-        slug
-        blog_post {
-          createdAt(formatString: "DD.MM.Y")
-          title
-          slug
-          hero {
-            fluid(quality: 90, maxWidth: 1800) {
-              ...GatsbyContentfulFluid
-            }
-          }
-          excerpt {
-            excerpt
-          }
-        }
-      }
+         query contentfulprojectbyslug($slug: String!) {
+           contentfulProject(slug: { eq: $slug }) {
+             projectTitle
+             projectSubtitle
+             projectTitleDate
+             legend {
+               legend
+             }
+             tags {
+               title
+               slug
+             }
+             image {
+               file {
+                 details {
+                   image {
+                     width
+                   }
+                 }
+               }
+               fluid(quality: 100, maxWidth: 1980) {
+                 ...GatsbyContentfulFluid
+               }
+             }
+             focalPoint {
+               focalPoint {
+                 x
+                 y
+               }
+             }
+             creditSubtitle {
+               creditSubtitle
+             }
+             credits {
+               title
+               text {
+                 text
+               }
+             }
+             tags {
+               slug
+               blog_post {
+                 createdAt(formatString: "DD.MM.Y")
+                 title
+                 slug
+                 hero {
+                   fluid(quality: 90, maxWidth: 1800) {
+                     ...GatsbyContentfulFluid
+                   }
+                 }
+                 excerpt {
+                   excerpt
+                 }
+               }
+             }
 
-      modulesUi {
-        __typename
-        ... on ContentfulSlider {
-          images {
-            fluid(maxWidth: 2500, quality: 100) {
-              src
-            }
-          }
-          isWithFade
-        }
-        ... on ContentfulImageGrid2Photos {
-          grid {
-            fluid {
-              src
-            }
-          }
-          text {
-            text
-          }
-          display
-        }
-        ... on ContentfulImageGrid3Or4Photos {
-          grid {
-            fluid {
-              src
-            }
-          }
-          display
-        }
-        ... on ContentfulProjectsSelected {
-          titleProjectsSelected
-          projectsSelected {
-            ... on ContentfulProject {
-              slug
-              projectTitle
-              projectTitleDate
-              image {
-                file {
-                  details {
-                    image {
-                      width
-                    }
-                  }
-                }
-                fluid(quality: 100, maxWidth: 2000) {
-                  ...GatsbyContentfulFluid
-                }
-              }
-              focalPoint {
-                focalPoint {
-                  x
-                  y
-                }
-              }
-            }
-          }
-        }
-        ... on ContentfulParagraphModule {
-          quote {
-            quote
-          }
-          quoteForQuoteAndText {
-            quoteForQuoteAndText
-          }
-          textForQuoteAndText {
-            textForQuoteAndText
-          }
-          textOneColumn {
-            textOneColumn
-          }
-          textTwoColumns {
-            textTwoColumns
-          }
-          textThreeColumns {
-            textThreeColumns
-          }
-          titleParagraph
-        }
-        ... on ContentfulImageImageAndText {
-          display
-          text {
-            text
-          }
-          image {
-            fluid(quality: 90, maxWidth: 1800) {
-              ...GatsbyContentfulFluid
-            }
-          }
-        }
+             modulesUi {
+               __typename
+               ... on ContentfulSlider {
+                 images {
+                   fluid(maxWidth: 2500, quality: 100) {
+                     src
+                   }
+                 }
+                 isWithFade
+               }
+               ... on ContentfulImageGrid2Photos {
+                 grid {
+                   fluid {
+                     src
+                   }
+                 }
+                 text {
+                   text
+                 }
+                 display
+               }
+               ... on ContentfulImageGrid3Or4Photos {
+                 grid {
+                   fluid {
+                     src
+                   }
+                 }
+                 display
+               }
+               ... on ContentfulProjectsSelected {
+                 titleProjectsSelected
+                 projectsSelected {
+                   ... on ContentfulProject {
+                     slug
+                     projectTitle
+                     projectTitleDate
+                     image {
+                       file {
+                         details {
+                           image {
+                             width
+                           }
+                         }
+                       }
+                       fluid(quality: 100, maxWidth: 2000) {
+                         ...GatsbyContentfulFluid
+                       }
+                     }
+                     focalPoint {
+                       focalPoint {
+                         x
+                         y
+                       }
+                     }
+                   }
+                 }
+               }
+               ... on ContentfulParagraphModule {
+                 quote {
+                   quote
+                 }
+                 quoteForQuoteAndText {
+                   quoteForQuoteAndText
+                 }
+                 textForQuoteAndText {
+                   textForQuoteAndText
+                 }
+                 textOneColumn {
+                   textOneColumn
+                 }
+                 textTwoColumns {
+                   textTwoColumns
+                 }
+                 textThreeColumns {
+                   textThreeColumns
+                 }
+                 titleParagraph
+               }
+               ... on ContentfulImageImageAndText {
+                 display
+                 text {
+                   text
+                 }
+                 image {
+                   fluid(quality: 90, maxWidth: 1800) {
+                     ...GatsbyContentfulFluid
+                   }
+                 }
+               }
 
-        ... on ContentfulVideo {
-          video
-        }
-      }
-      categories {
-        title
-      }
-    }
-  }
-`
+               ... on ContentfulVideo {
+                 video
+                 staticVideo {
+                   file {
+                     url
+                   }
+                 }
+               }
+             }
+             categories {
+               title
+             }
+           }
+         }
+       `

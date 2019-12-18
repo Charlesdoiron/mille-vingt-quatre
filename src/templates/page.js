@@ -263,6 +263,11 @@ export const pagequerypagetemplatebyslug = graphql`
         ... on ContentfulVideo {
           video
           display
+          staticVideo {
+            file {
+              url
+            }
+          }
         }
 
         ... on ContentfulProjectsSelected {

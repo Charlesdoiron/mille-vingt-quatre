@@ -13,6 +13,28 @@
     margin: 0;
   }
 
+  .static--video__container {
+    padding: 0 10%;
+    & > div {
+      width: 100% !important;
+      height: auto !important;
+    }
+    video {
+      width: 100% !important;
+      height: auto !important;
+    }
+    &.isCover {
+      padding: 0;
+      @media #{$mobile} {
+        video {
+          height: 700px !important;
+          width: 400% !important;
+          margin-left: -140%;
+        }
+      }
+    }
+  }
+
   &.isCover {
     margin: 0 auto;
     width: 100%;
