@@ -109,7 +109,7 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
   ) : (
     <div>
       <div>
-        <StyledFixed ref={menuRef}>
+        <StyledFixed ref={menuRef} data-aos={!isOpen && "fade-down"}>
           <Logo isOpen={isOpen} handleClick={e => toggleMenu(false)} />
           {!isOpen && <CloseProject />}
           {isOpen && <MenuItems isOpen={isOpen} />}
