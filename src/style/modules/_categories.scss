@@ -5,8 +5,9 @@
 
   @media #{$tablet} {
     background-color: black;
-    padding: 20px;
+    padding: 10px 20px;
     margin: 0;
+    position: fixed;
   }
 
   li {
@@ -29,7 +30,7 @@
     overflow-y: scroll; /* has to be scroll, not auto */
     -webkit-overflow-scrolling: touch;
     position: fixed;
-    top: 60px;
+    top: 45px;
     width: 100%;
     li {
       margin-right: 40px;

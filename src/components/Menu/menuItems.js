@@ -59,7 +59,7 @@ const StyledMenuItems = styled.div`
   justify-content: flex-end;
   border: 0;
   align-items: center;
-
+  padding-bottom: 10px !important;
   @media screen and (max-width: 768px) {
     flex-direction: column;
     top: 140px;

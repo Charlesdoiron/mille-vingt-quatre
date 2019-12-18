@@ -30,6 +30,14 @@
       padding: 35px 0;
     }
 
+    .text__for__image {
+      text-align: left;
+      margin-top: 50px;
+      @media #{$mobile} {
+        margin-top: 35px;
+      }
+    }
+
     img {
       width: 100%;
     }

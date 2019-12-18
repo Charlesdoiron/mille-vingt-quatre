@@ -17,7 +17,7 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
   console.log(currentPage)
 
   useEffect(() => {
-    const menuHeight = menuRef.current.offsetHeight
+    const menuHeight = menuRef.current && menuRef.current.offsetHeight
     const transitionMenu = () => {
       if (window.pageYOffset > menuHeight) {
         setSticky(true)
@@ -82,6 +82,7 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
       ? "black"
       : "transparent"};
     background-size: 30px;
+    padding: 10px;
   `
   const DesktopContainer = styled.div`
     margin: 0 auto;
@@ -91,12 +92,14 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
     width: 100%;
     position: fixed;
     transition: all 1024ms;
-    background-color: ${isSticky || (isTablet && currentPage === "projects")
-      ? "black"
-      : "transparent"};
+    /* background-color: ${
+      isSticky || (isTablet && currentPage === "projects")
+        ? "black"
+        : "transparent"
+    }; */
   `
   return !isMobile ? (
-    <DesktopContainer ref={menuRef}>
+    <DesktopContainer>
       <Logo />
       {!isOpen && <CloseProject isOpen={isOpen} />}
       {isOpen && <MenuItems isOpen={isOpen} />}

@@ -5,7 +5,7 @@ export const Burger = props => {
   const MenuRight = styled.div`
     display: flex;
     justify-content: flex-end;
-    top: 7px;
+
     position: relative;
     width: ${props.isOpen ? "44px" : "calc(100%/3)"};
 
@@ -14,7 +14,6 @@ export const Burger = props => {
       justify-content: flex-end;
       z-index: 2;
       top: 2px;
-      margin-right: 15px;
     }
 
     button {
@@ -22,7 +21,7 @@ export const Burger = props => {
       background-color: transparent;
       border: 0;
       @media screen and (max-width: 768px) {
-        padding: 30px 0 30px 30px;
+        padding: 0;
       }
     }
     a {
