@@ -10,7 +10,7 @@ export const Logo = props => {
     }
   }
   return (
-    <StyledLogo onClick={e => closeMenu()}>
+    <StyledLogo onClick={e => closeMenu()} className="logo__container">
       <Link to={"/home"}>
         <img alt="logo" src={logo} className="logo" />
       </Link>

@@ -71,7 +71,7 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
         `
       : ""};
   `
-  const StyledFixed = styled.div`
+  const MobileContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -82,7 +82,6 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
       ? "black"
       : "transparent"};
     background-size: 30px;
-    padding: 10px;
   `
   const DesktopContainer = styled.div`
     margin: 0 auto;
@@ -109,13 +108,13 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
   ) : (
     <div>
       <div>
-        <StyledFixed ref={menuRef} data-aos={!isOpen && "fade-down"}>
+        <MobileContainer ref={menuRef} data-aos={!isOpen && "fade-down"}>
           <Logo isOpen={isOpen} handleClick={e => toggleMenu(false)} />
           {!isOpen && <CloseProject />}
           {isOpen && <MenuItems isOpen={isOpen} />}
           <Socials isOpen={isOpen} />
           <Burger handleClick={() => toggleMenu(!isOpen)} isOpen={isOpen} />
-        </StyledFixed>
+        </MobileContainer>
         <StyledBackground isOpen={isOpen} />
       </div>
     </div>
