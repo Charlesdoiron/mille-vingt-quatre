@@ -55,11 +55,13 @@ export class CustomSlider extends Component {
     const settings = {
       dots: true,
       infinite: true,
-      speed: 500,
+      speed: 2000,
       slidesToShow: 1,
       slidesToScroll: 1,
       arrows: false,
-      // fade: true,
+      fade: this.props.images.isWithFade,
+      autoplay: this.props.images.isWithFade,
+      autoplaySpeed: 1000,
       responsive: [
         {
           breakpoint: 1000,
@@ -91,6 +93,8 @@ export class CustomSlider extends Component {
         this.setState({ cursorIsNext: false })
       }
     }
+
+    console.log(this.props.images.isWithFade)
     return (
       <Container
         className="slider__container"

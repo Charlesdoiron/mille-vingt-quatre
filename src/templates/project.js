@@ -332,6 +332,7 @@ export const pagequeryproject = graphql`
               src
             }
           }
+          isWithFade
         }
         ... on ContentfulImageGrid2Photos {
           grid {
