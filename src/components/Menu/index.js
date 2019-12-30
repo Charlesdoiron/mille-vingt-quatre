@@ -14,8 +14,6 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
   const { isOpen } = menu
   const menuRef = useRef(null)
 
-  console.log(currentPage)
-
   useEffect(() => {
     const menuHeight = menuRef.current && menuRef.current.offsetHeight
     const transitionMenu = () => {

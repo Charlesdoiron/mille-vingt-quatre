@@ -7,14 +7,15 @@ import "./../style/index.scss"
 import { ImageGrid } from "../components/contentful/imageGrid"
 import { ImageGrid2Photos } from "../components/contentful/imageGrid2Photos"
 import { ImageGrid3Or4Photos } from "../components/contentful/imageGrid3Or4Photos"
-import { ProjectsSelectedList } from "../components/contentful/projectsSelectedList"
+
 import { Hero } from "../components/contentful/hero"
 import { Video } from "../components/contentful/video"
 import { TwoSectionsWithImage } from "../components/contentful/twoSectionsWithImage"
 import BlogPosts from "../components/contentful/blogPosts"
 import { BlogPostsSelected } from "../components/contentful/blogPostsSelected"
 import { ProjectsList } from "../components/contentful/projectsList"
-
+import { ProjectsSelected } from "../components/contentful/projectsSelected"
+import { ProjectsSelectedList } from "../components/contentful/projectsSelectedList"
 import { NewsLetterSuscribe } from "../components/contentful/newsLetterSuscribe"
 import { Socials } from "../components/contentful/socials"
 import { ContactForm } from "../components/contentful/contactForm"
@@ -70,7 +71,7 @@ const Page = props => {
           return <TwoSectionsWithImage twoSectionsImageText={module} key={i} />
         case "ContentfulProjectsSelected":
           return (
-            <ProjectsSelectedList
+            <ProjectsSelected
               projectSelected={module}
               key={i}
               title="selected projects"
@@ -88,7 +89,6 @@ const Page = props => {
           return <BlogPostsSelected postSelected={module} key={i} />
         case "ContentfulParagraphModule":
           return <RenderParagraphModule module={module} key={i} />
-
         case "ContentfulImageGrid2Photos":
           return <ImageGrid2Photos imageGrid={module} key={i} />
         case "ContentfulImageGrid3Or4Photos":

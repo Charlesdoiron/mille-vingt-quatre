@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react"
 import classNames from "classnames"
 import { ImgBlur, Gradient } from "./../animations/image"
 import ReactPlayer from "react-player"
-import styled from "styled-components"
 
 export const Video = props => {
   const video_id =
@@ -11,12 +10,11 @@ export const Video = props => {
   const isCover = props.video.display && props.video.display[0] === "Is-Cover"
   const staticVideo =
     props.video.staticVideo && props.video.staticVideo.file.url
-  const { isPlaying, setPlaying } = useState(false)
+  const [isPlaying, setPlaying] = useState(false)
   useEffect(() => {
-    setTimeout(() => {
-      setPlaying(true)
-    }, 200)
-  })
+    setPlaying(!isPlaying)
+  }, [])
+
   return (
     <div data-aos={isCover !== undefined ? "" : `fade-up`}>
       <ImgBlur
