@@ -1,6 +1,5 @@
 import React from "react"
 import { ProjectsSelectedList } from "./projectsSelectedList"
-import ShowIfDeviceIs from "./../../utils/mediaqueries"
 
 export const ProjectsSelected = props => {
   return (
