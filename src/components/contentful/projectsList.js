@@ -1,11 +1,11 @@
 import React from "react"
 import { Link } from "gatsby"
 import { Categories } from "./categories"
-import { debounce } from "lodash"
+import { detect } from "detect-browser"
 import { Styledh2, Styledprojectdate } from "../typos"
 import styled from "styled-components"
 import { ImgBlur } from "./../animations/image"
-import { animateScroll as scroll } from "react-scroll"
+
 export class ProjectsList extends React.Component {
   constructor(props) {
     super(props)
@@ -20,6 +20,7 @@ export class ProjectsList extends React.Component {
       projects: this.props.projects,
       projectFocus: "",
       isDesktop: "",
+      browser: "",
     }
     this.animateProject = this.animateProject.bind(this)
   }
@@ -94,6 +95,8 @@ export class ProjectsList extends React.Component {
 
   componentDidMount() {
     if (typeof window !== undefined) {
+      // Get browser for compatibility animation
+      detect() && this.setState({ browser: detect().name })
       this.getDevice()
       window.addEventListener("resize", () => this.getDevice(), {
         passive: true,
@@ -172,7 +175,10 @@ export class ProjectsList extends React.Component {
     `
 
     return (
-      <div className="projects__container" data-aos="fade-up">
+      <div
+        className="projects__container"
+        data-aos={this.state.browser !== "safari" && "fade-up"}
+      >
         {this.state.imageOnBackground && (
           <ImgResponsive>
             <ImgBlur

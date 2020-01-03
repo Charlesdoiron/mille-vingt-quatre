@@ -13,6 +13,7 @@
     "classnames": "^2.2.6",
     "contentful": "^7.10.0",
     "contentful-export": "^7.7.1",
+    "detect-browser": "^4.8.0",
     "dotenv": "^8.1.0",
     "email-validator": "^2.0.4",
     "env-cmd": "^10.0.1",
