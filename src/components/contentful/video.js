@@ -12,9 +12,10 @@ export const Video = props => {
     props.video.staticVideo && props.video.staticVideo.file.url
   const [isPlaying, setPlaying] = useState(false)
   useEffect(() => {
-    setPlaying(!isPlaying)
+    setPlaying(true)
   }, [])
 
+  console.log(video_id)
   return (
     <div data-aos={isCover !== undefined ? "" : `fade-up`}>
       <ImgBlur
