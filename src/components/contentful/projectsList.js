@@ -233,6 +233,7 @@ const TitleContainer = styled.div`
 const Title = styled(Styledh2)`
   max-width: 550px;
   overflow-wrap: break-word;
+  white-space: initial !important;
 `
 
 // FOCUS ON FIRST PROJECT
