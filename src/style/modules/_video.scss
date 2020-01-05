@@ -1,6 +1,6 @@
 .video__container {
   overflow: hidden;
-  padding-bottom: 56.25% !important;
+  padding-bottom: 56.25%;
   position: relative;
   height: 100%;
   display: flex;
@@ -9,6 +9,9 @@
   margin: 85px auto;
   position: relative;
 
+  &.isStatic {
+    padding: 0;
+  }
   @media #{$mobile} {
     margin: 0;
   }

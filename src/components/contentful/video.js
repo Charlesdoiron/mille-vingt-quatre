@@ -10,17 +10,18 @@ export const Video = props => {
   const isCover = props.video.display && props.video.display[0] === "Is-Cover"
   const staticVideo =
     props.video.staticVideo && props.video.staticVideo.file.url
-  const [isPlaying, setPlaying] = useState(false)
-  useEffect(() => {
-    setPlaying(true)
-  }, [])
 
-  console.log(video_id)
   return (
     <div data-aos={isCover !== undefined ? "" : `fade-up`}>
       <ImgBlur
-        className={classNames("video__container", { isCover: isCover })}
-        style={{ padding: "0" }}
+        className={classNames(
+          "video__container",
+          {
+            isCover: isCover,
+          },
+          { isStatic: staticVideo }
+        )}
+        // style={{ padding: "0" }}
       >
         {video_id && (
           <iframe
@@ -46,7 +47,7 @@ export const Video = props => {
           >
             <ReactPlayer
               url={staticVideo}
-              playing={isPlaying}
+              playing
               controls={false}
               loop={true}
             />
