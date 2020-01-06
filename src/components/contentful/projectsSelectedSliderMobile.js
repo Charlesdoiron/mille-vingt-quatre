@@ -20,6 +20,7 @@ export const ProjectsSelectedSliderMobile = props => {
     arrows: false,
     autoplay: true,
     autoplaySpeed: 5000,
+    swipeToSlide: true,
   }
   return (
     <div data-aos="fade-up">
