@@ -5,25 +5,26 @@ import close from "./../../img/pictos/close.svg"
 export const CloseProject = () => {
   const handleClick = e => {
     e.preventDefault()
-    navigate(window.history.back())
+    if (typeof window !== "undefined") {
+      navigate(window.history.back())
+    }
   }
   return (
     <StyledClose data-aos="fade-down">
-      {/*  <Location>
+      <Location>
         {({ location }) =>
           location.pathname.substring(0, 9) === "/project/" && (
-            // <button
-            //   type="button"
-            //   onClick={e => handleClick(e)}
-            //   className="close"
-            // >
-            //   <img src={close} alt="close" />
-            //   <p>Close</p>
-            // </button>
-            <p></p>
+            <button
+              type="button"
+              onClick={e => handleClick(e)}
+              className="close"
+            >
+              <img src={close} alt="close" />
+              <p>Close</p>
+            </button>
           )
         }
-      </Location> */}
+      </Location>
       <p></p>
     </StyledClose>
   )

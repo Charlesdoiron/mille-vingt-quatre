@@ -89,8 +89,24 @@ class project extends React.Component {
   render() {
     const modules = this.props.data.contentfulProject.modulesUi
     const project = this.props.data.contentfulProject
-    const { previous, next } = this.props.pageContext
+    const currentProjectSlug = this.props.data.contentfulProject.slug
+
+    const navigation = this.props.data.contentfulProject.projectsNavigation[0]
+      .projects
+
+    let currentProjectPosition
+    for (var i = 0; i < navigation.length; ++i) {
+      if (navigation[i].slug === currentProjectSlug) {
+        currentProjectPosition = i
+        break
+      }
+    }
+
+    const previous = navigation[currentProjectPosition - 1]
+    const next = navigation[currentProjectPosition + 1]
+
     console.log(modules, "modules")
+
     const renderModulesOnPages = modules => {
       return modules.map((module, i) => {
         switch (module.__typename) {
@@ -153,7 +169,7 @@ class project extends React.Component {
               >
                 {previous && (
                   <Link
-                    to={`project/${previous.node.slug}`}
+                    to={`project/${previous.slug}`}
                     rel="prev"
                     style={{
                       position: "absolute",
@@ -161,7 +177,7 @@ class project extends React.Component {
                     }}
                   >
                     <button>
-                      {previous.node.projectTitle}
+                      {previous.projectTitle}
                       <img
                         src={arrow_next_project}
                         alt="previous"
@@ -183,7 +199,7 @@ class project extends React.Component {
               >
                 {next && (
                   <Link
-                    to={`project/${next.node.slug}`}
+                    to={`project/${next.slug}`}
                     rel="next"
                     style={{
                       whiteSpace: "nowrap",
@@ -199,7 +215,7 @@ class project extends React.Component {
                           marginRight: "10px",
                         }}
                       />
-                      {next.node.projectTitle}
+                      {next.projectTitle}
                     </button>
                   </Link>
                 )}
@@ -268,164 +284,169 @@ class project extends React.Component {
 export default project
 
 export const pagequeryproject = graphql`
-         query contentfulprojectbyslug($slug: String!) {
-           contentfulProject(slug: { eq: $slug }) {
-             projectTitle
-             projectSubtitle
-             projectTitleDate
-             legend {
-               legend
-             }
-             tags {
-               title
-               slug
-             }
-             image {
-               file {
-                 details {
-                   image {
-                     width
-                   }
-                 }
-               }
-               fluid(quality: 100, maxWidth: 1980) {
-                 ...GatsbyContentfulFluid
-               }
-             }
-             focalPoint {
-               focalPoint {
-                 x
-                 y
-               }
-             }
-             creditSubtitle {
-               creditSubtitle
-             }
-             credits {
-               title
-               text {
-                 text
-               }
-             }
-             tags {
-               slug
-               blog_post {
-                 createdAt(formatString: "DD.MM.Y")
-                 title
-                 slug
-                 hero {
-                   fluid(quality: 90, maxWidth: 1800) {
-                     ...GatsbyContentfulFluid
-                   }
-                 }
-                 excerpt {
-                   excerpt
-                 }
-               }
-             }
+  query contentfulprojectbyslug($slug: String!) {
+    contentfulProject(slug: { eq: $slug }) {
+      slug
+      projectTitle
+      projectSubtitle
+      projectTitleDate
+      legend {
+        legend
+      }
+      projectsNavigation: pages {
+        slug
+        projects {
+          projectTitle
+          slug
+        }
+      }
+      image {
+        file {
+          details {
+            image {
+              width
+            }
+          }
+        }
+        fluid(quality: 100, maxWidth: 1980) {
+          ...GatsbyContentfulFluid
+        }
+      }
+      focalPoint {
+        focalPoint {
+          x
+          y
+        }
+      }
+      creditSubtitle {
+        creditSubtitle
+      }
+      credits {
+        title
+        text {
+          text
+        }
+      }
+      tags {
+        title
+        slug
+        blog_post {
+          createdAt(formatString: "DD.MM.Y")
+          title
+          slug
+          hero {
+            fluid(quality: 90, maxWidth: 1800) {
+              ...GatsbyContentfulFluid
+            }
+          }
+          excerpt {
+            excerpt
+          }
+        }
+      }
 
-             modulesUi {
-               __typename
-               ... on ContentfulSlider {
-                 images {
-                   fluid(maxWidth: 2500, quality: 100) {
-                     src
-                   }
-                 }
-                 isWithFade
-               }
-               ... on ContentfulImageGrid2Photos {
-                 grid {
-                   fluid {
-                     src
-                   }
-                 }
-                 text {
-                   text
-                 }
-                 display
-               }
-               ... on ContentfulImageGrid3Or4Photos {
-                 grid {
-                   fluid {
-                     src
-                   }
-                 }
-                 display
-               }
-               ... on ContentfulProjectsSelected {
-                 titleProjectsSelected
-                 projectsSelected {
-                   ... on ContentfulProject {
-                     slug
-                     projectTitle
-                     projectTitleDate
-                     image {
-                       file {
-                         details {
-                           image {
-                             width
-                           }
-                         }
-                       }
-                       fluid(quality: 100, maxWidth: 2000) {
-                         ...GatsbyContentfulFluid
-                       }
-                     }
-                     focalPoint {
-                       focalPoint {
-                         x
-                         y
-                       }
-                     }
-                   }
-                 }
-               }
-               ... on ContentfulParagraphModule {
-                 quote {
-                   quote
-                 }
-                 quoteForQuoteAndText {
-                   quoteForQuoteAndText
-                 }
-                 textForQuoteAndText {
-                   textForQuoteAndText
-                 }
-                 textOneColumn {
-                   textOneColumn
-                 }
-                 textTwoColumns {
-                   textTwoColumns
-                 }
-                 textThreeColumns {
-                   textThreeColumns
-                 }
-                 titleParagraph
-               }
-               ... on ContentfulImageImageAndText {
-                 display
-                 text {
-                   text
-                 }
-                 image {
-                   fluid(quality: 90, maxWidth: 1800) {
-                     ...GatsbyContentfulFluid
-                   }
-                 }
-               }
+      modulesUi {
+        __typename
+        ... on ContentfulSlider {
+          images {
+            fluid(maxWidth: 2500, quality: 100) {
+              src
+            }
+          }
+          isWithFade
+        }
+        ... on ContentfulImageGrid2Photos {
+          grid {
+            fluid {
+              src
+            }
+          }
+          text {
+            text
+          }
+          display
+        }
+        ... on ContentfulImageGrid3Or4Photos {
+          grid {
+            fluid {
+              src
+            }
+          }
+          display
+        }
+        ... on ContentfulProjectsSelected {
+          titleProjectsSelected
+          projectsSelected {
+            ... on ContentfulProject {
+              slug
+              projectTitle
+              projectTitleDate
+              image {
+                file {
+                  details {
+                    image {
+                      width
+                    }
+                  }
+                }
+                fluid(quality: 100, maxWidth: 2000) {
+                  ...GatsbyContentfulFluid
+                }
+              }
+              focalPoint {
+                focalPoint {
+                  x
+                  y
+                }
+              }
+            }
+          }
+        }
+        ... on ContentfulParagraphModule {
+          quote {
+            quote
+          }
+          quoteForQuoteAndText {
+            quoteForQuoteAndText
+          }
+          textForQuoteAndText {
+            textForQuoteAndText
+          }
+          textOneColumn {
+            textOneColumn
+          }
+          textTwoColumns {
+            textTwoColumns
+          }
+          textThreeColumns {
+            textThreeColumns
+          }
+          titleParagraph
+        }
+        ... on ContentfulImageImageAndText {
+          display
+          text {
+            text
+          }
+          image {
+            fluid(quality: 90, maxWidth: 1800) {
+              ...GatsbyContentfulFluid
+            }
+          }
+        }
 
-               ... on ContentfulVideo {
-                 video
-                 staticVideo {
-                   file {
-                     url
-                   }
-                 }
-               }
-             }
-             categories {
-               title
-             }
-           }
-         }
-       `
+        ... on ContentfulVideo {
+          video
+          staticVideo {
+            file {
+              url
+            }
+          }
+        }
+      }
+      categories {
+        title
+      }
+    }
+  }
+`
