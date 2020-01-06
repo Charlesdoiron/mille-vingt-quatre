@@ -11,8 +11,8 @@ export const CloseProject = () => {
   }
   return (
     <StyledClose data-aos="fade-down">
-      <Location>
-        {/* {({ location }) =>
+      {/* <Location>
+        {({ location }) =>
           location.pathname.substring(0, 9) === "/project/" && (
             <button
               type="button"
@@ -23,8 +23,8 @@ export const CloseProject = () => {
               <p>Close</p>
             </button>
           )
-        } */}
-      </Location>
+        }
+      </Location> */}
       <p></p>
     </StyledClose>
   )
