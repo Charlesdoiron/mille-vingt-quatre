@@ -52,15 +52,7 @@ export const Image = props => {
       }
     }
   `
-  console.log("x", x)
-  console.log("deviceWidth", deviceWidth)
-  console.log("imgWidth", imgWidth)
-  console.log(
-    "calcul 1",
-    (x * deviceWidth) / imgWidth + deviceWidth + deviceWidth / 2
-  )
-  console.log("calcul", (x * deviceWidth) / imgWidth + deviceWidth / 2)
-  console.log("deviceWidth / 2", deviceWidth / 2)
+
   return (
     <div
       className={classNames("image__container", {
@@ -78,7 +70,11 @@ export const Image = props => {
         </ImgResponsive>
       ) : (
         <div data-aos="fade-up">
-          <img src={props.image.image.fluid.src} data-aos="fade-up"></img>
+          <img
+            src={props.image.image.fluid.src}
+            data-aos="fade-up"
+            alt="blur"
+          ></img>
           {props.image.text && (
             <div
               dangerouslySetInnerHTML={{ __html: props.image.text.text }}

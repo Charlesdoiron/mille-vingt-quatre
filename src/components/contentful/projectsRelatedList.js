@@ -85,6 +85,8 @@ export const ProjectsRelatedList = props => {
 
   return (
     <div
+      role="button"
+      tabIndex="0"
       className="project__related__container"
       onMouseLeave={e => leaveImage()}
     >

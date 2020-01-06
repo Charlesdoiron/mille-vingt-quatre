@@ -94,7 +94,6 @@ export class CustomSlider extends Component {
       }
     }
 
-    console.log(this.props.images.isWithFade)
     return (
       <Container
         className="slider__container"
@@ -118,8 +117,9 @@ export class CustomSlider extends Component {
         }
       >
         <Slider {...settings} ref={c => (this.slider = c)}>
-          {this.props.images.images.map(image => (
+          {this.props.images.images.map((image, i) => (
             <img
+              key={i}
               src={image.fluid.src}
               alt="slider"
               style={{

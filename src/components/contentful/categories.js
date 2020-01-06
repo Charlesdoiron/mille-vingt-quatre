@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
-import { useMediaQuery } from "react-responsive"
 import classNames from "classnames"
+
 export const Categories = props => {
   const [active, setActive] = useState("All")
 

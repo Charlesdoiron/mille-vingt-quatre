@@ -120,7 +120,7 @@ class project extends React.Component {
             return <BlogPostsSelected postSelected={module} key={i} />
           case "ContentfulImageImageAndText":
             return (
-              <div className="wrapper--m">
+              <div className="wrapper--m" key={i}>
                 <Image image={module} key={i} />
               </div>
             )
@@ -253,8 +253,8 @@ class project extends React.Component {
 
           {project.credits && (
             <div className="credits__container">
-              {project.credits.map(credit => {
-                return <Credits credit={credit} />
+              {project.credits.map((credit, i) => {
+                return <Credits credit={credit} key={i} />
               })}
             </div>
           )}
@@ -262,13 +262,14 @@ class project extends React.Component {
         </div>
         <div className="related__project__container">
           {modules &&
-            modules.map(module => {
+            modules.map((module, i) => {
               switch (module.__typename) {
                 case "ContentfulProjectsSelected":
                   return (
                     <ProjectsRelatedList
                       projectRelated={module}
                       title="related project"
+                      key={i}
                     />
                   )
                 default:

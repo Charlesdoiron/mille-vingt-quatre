@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import classNames from "classnames"
-import { ImgBlur, Gradient } from "./../animations/image"
+import { Gradient } from "./../animations/image"
 import ReactPlayer from "react-player"
 
 export const Video = props => {
@@ -12,7 +12,6 @@ export const Video = props => {
   const staticVideo =
     props.video.staticVideo && props.video.staticVideo.file.url
 
-  console.log(props.video.display)
   const [isPlaying, setPlaying] = useState(false)
   const [isLooping, setLooping] = useState(false)
   useEffect(() => {
@@ -22,8 +21,8 @@ export const Video = props => {
     setTimeout(() => {
       setLooping(true)
     }, 120)
-    console.log("mount")
   }, [])
+
   return (
     <div data-aos={isCover !== undefined ? "" : `fade-up`}>
       <div

@@ -95,6 +95,8 @@ export const ProjectsSelectedList = props => {
 
   return (
     <div
+      role="button"
+      tabIndex="0"
       className="project__selected__container"
       data-aos="fade-up"
       onMouseLeave={e => leaveImage()}

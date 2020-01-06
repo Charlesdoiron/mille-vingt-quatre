@@ -2,7 +2,6 @@ import React from "react"
 import styled from "styled-components"
 import { ImgBlur } from "./../animations/image"
 export const CoverImage = props => {
-  console.log(props)
   const x =
     props.focalPoint === undefined
       ? props.image.focalPoint.focalPoint.x

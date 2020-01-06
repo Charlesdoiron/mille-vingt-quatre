@@ -15,7 +15,7 @@ import BlogPosts from "../components/contentful/blogPosts"
 import { BlogPostsSelected } from "../components/contentful/blogPostsSelected"
 import { ProjectsList } from "../components/contentful/projectsList"
 import { ProjectsSelected } from "../components/contentful/projectsSelected"
-import { ProjectsSelectedList } from "../components/contentful/projectsSelectedList"
+
 import { NewsLetterSuscribe } from "../components/contentful/newsLetterSuscribe"
 import { Socials } from "../components/contentful/socials"
 import { ContactForm } from "../components/contentful/contactForm"
@@ -44,7 +44,6 @@ const Page = props => {
   const currentPage = props.pageContext.slug
 
   console.log("PAGE", page)
-
   console.log("POSTS", posts)
   console.log("CURRENT", currentPage)
   console.log("MODULES", modules)
@@ -52,10 +51,6 @@ const Page = props => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }, [])
-
-  if (typeof window !== "undefined") {
-    console.log("WINDOW", window)
-  }
 
   const renderModulesOnPages = modules => {
     if (currentPage === "blog") {

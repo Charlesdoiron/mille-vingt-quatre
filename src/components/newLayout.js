@@ -35,7 +35,7 @@ export const Layout = props => {
         return state
     }
   }
-  console.log(props.currentPage)
+
   return (
     <StateProvider initialState={initialState} reducer={reducer}>
       <StyledLayout className="layout">
