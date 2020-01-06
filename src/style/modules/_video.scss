@@ -9,6 +9,11 @@
   margin: 85px auto;
   position: relative;
 
+  & > div {
+    width: 100% !important;
+    height: auto !important;
+  }
+
   &.isStatic {
     padding: 0;
   }

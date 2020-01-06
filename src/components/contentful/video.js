@@ -6,14 +6,27 @@ import ReactPlayer from "react-player"
 export const Video = props => {
   const video_id =
     props.video.video && props.video.video.replace("https://vimeo.com/", "")
+  const video_url = props.video.video && props.video.video
   const isGif = props.video.display && props.video.display[0] === "Is-Gif"
   const isCover = props.video.display && props.video.display[0] === "Is-Cover"
   const staticVideo =
     props.video.staticVideo && props.video.staticVideo.file.url
 
+  console.log(props.video.display)
+  const [isPlaying, setPlaying] = useState(false)
+  const [isLooping, setLooping] = useState(false)
+  useEffect(() => {
+    setTimeout(() => {
+      setPlaying(true)
+    }, 100)
+    setTimeout(() => {
+      setLooping(true)
+    }, 120)
+    console.log("mount")
+  }, [])
   return (
     <div data-aos={isCover !== undefined ? "" : `fade-up`}>
-      <ImgBlur
+      <div
         className={classNames(
           "video__container",
           {
@@ -21,24 +34,23 @@ export const Video = props => {
           },
           { isStatic: staticVideo }
         )}
-        // style={{ padding: "0" }}
       >
-        {video_id && (
-          <iframe
-            // src={`https://player.vimeo.com/video/${video_id}?title=0&byline=0&portrait=0&controls=0&autoplay=1&loop=1&autopause=1&autopause=0`}
-            src={
-              isGif || isCover
-                ? `https://player.vimeo.com/video/${video_id}?title=0&byline=0&portrait=0&controls=0&autoplay=1&loop=1&autopause=1&autopause=0&background=1`
-                : `https://player.vimeo.com/video/${video_id}?title=0&byline=0&portrait=0&controls=1`
-            }
-            frameBorder="0"
-            allow="autoplay; fullscreen"
-            autoPlay
-            loop
-            allowFullScreen
-            title="video"
-          ></iframe>
-        )}
+        {video_id &&
+          (isGif || isCover ? (
+            <ReactPlayer
+              style={{ width: "100%" }}
+              url={video_url}
+              controls={true}
+              loop={true}
+            />
+          ) : (
+            <ReactPlayer
+              url={video_url}
+              controls={true}
+              loop={false}
+              style={{ width: "100%" }}
+            />
+          ))}
         {staticVideo && (
           <div
             className={classNames("static--video__container", {
@@ -47,21 +59,14 @@ export const Video = props => {
           >
             <ReactPlayer
               url={staticVideo}
-              playing
-              controls={false}
-              loop={true}
+              playing={isPlaying}
+              loop={isLooping}
             />
           </div>
         )}
 
         {isCover && !staticVideo && <Gradient />}
-      </ImgBlur>
+      </div>
     </div>
   )
 }
-
-// width: 500%;
-//     height: 90vh;
-//     margin: 0 auto;
-//     text-align: center;
-//     margin-left: -200%;
