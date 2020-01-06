@@ -261,6 +261,7 @@ export const pagequerypagebyslug = graphql`
               slug
               projectTitle
               projectTitleDate
+              projectSubtitle
               image {
                 file {
                   details {

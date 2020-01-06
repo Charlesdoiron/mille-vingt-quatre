@@ -1,0 +1,25 @@
+.projects__selected__slider--mobile {
+  position: relative;
+  height: 90vh;
+  width: 100%;
+
+  .slider__titles {
+    position: absolute;
+    top: 80%;
+    transform: translateY(-80%);
+    z-index: 999999;
+    padding-left: 10%;
+  }
+  img {
+    width: 100%;
+  }
+  h2 {
+    -webkit-text-fill-color: white;
+  }
+  p {
+    font-size: 15px;
+    max-width: 300px;
+    line-height: 22px;
+    font-family: $font-be-vietnam;
+  }
+}

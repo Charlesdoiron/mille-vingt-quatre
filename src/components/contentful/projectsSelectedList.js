@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
 import { Styledh2, Styledprojectdate, Styledcapitalize } from "../typos"
@@ -19,16 +19,19 @@ const Title = styled(Styledh2)`
 export const ProjectsSelectedList = props => {
   console.log(props, "selected")
   const [imageState, setImageState] = useState("")
+  const projectTitleLink = useRef(null)
 
-  //FOCUS ON FIRST PROJECT
+  // FOCUS ON FIRST PROJECT
   function setDefaultImage() {
     setImageState(projects[0].image.fluid)
   }
   async function setDefaultProject() {
     await setDefaultImage()
-    const titles = document.querySelectorAll(".project__title__link")
-    const firstTitle = titles[0]
-    await firstTitle.classList.add("isActive")
+    const titles = projectTitleLink.current
+    const firstTitle = titles && titles[0]
+    if (firstTitle) {
+      await firstTitle.classList.add("isActive")
+    }
   }
 
   useEffect(() => {
@@ -63,7 +66,11 @@ export const ProjectsSelectedList = props => {
     image,
     projectNumber,
   }) => (
-    <Link to={`/project/${slug}`} className="project__title__link">
+    <Link
+      to={`/project/${slug}`}
+      className="project__title__link"
+      ref={projectTitleLink}
+    >
       <TitleContainer className="project__slide" projectNumber={projectNumber}>
         <Title
           selected={isCurrentProject}
