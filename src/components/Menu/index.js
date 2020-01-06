@@ -106,13 +106,19 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
   ) : (
     <div>
       <div>
-        <MobileContainer ref={menuRef} data-aos={!isOpen && "fade-down"}>
-          <Logo isOpen={isOpen} handleClick={e => toggleMenu(false)} />
-          {!isOpen && <CloseProject />}
-          {isOpen && <MenuItems isOpen={isOpen} />}
-          <Socials isOpen={isOpen} />
-          <Burger handleClick={() => toggleMenu(!isOpen)} isOpen={isOpen} />
-        </MobileContainer>
+        <div
+          data-aos={!isOpen && "fade-down"}
+          style={{ zIndex: "999999999", position: "relative" }}
+        >
+          <MobileContainer ref={menuRef}>
+            <Logo isOpen={isOpen} handleClick={e => toggleMenu(false)} />
+            {!isOpen && <CloseProject />}
+            {isOpen && <MenuItems isOpen={isOpen} />}
+            <Socials isOpen={isOpen} />
+            <Burger handleClick={() => toggleMenu(!isOpen)} isOpen={isOpen} />
+          </MobileContainer>
+        </div>
+
         <StyledBackground isOpen={isOpen} />
       </div>
     </div>
