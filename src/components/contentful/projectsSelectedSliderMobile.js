@@ -14,7 +14,7 @@ export const ProjectsSelectedSliderMobile = props => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 2000,
+    speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
@@ -27,8 +27,11 @@ export const ProjectsSelectedSliderMobile = props => {
       <Slider {...settings}>
         {props.projectSelected.projectsSelected.map(project => {
           return (
-            <div className="projects__selected__slider--mobile">
-              <Link className="slider__titles" to={`/project/${project.slug}`}>
+            <Link
+              className="projects__selected__slider--mobile"
+              to={`/project/${project.slug}`}
+            >
+              <div className="slider__titles">
                 <Title>
                   {project.projectTitle}
                   <Styledprojectdate>
@@ -36,13 +39,12 @@ export const ProjectsSelectedSliderMobile = props => {
                   </Styledprojectdate>
                 </Title>
                 <p>{project.projectSubtitle}</p>
-              </Link>
-
+              </div>
               <FocalImage
                 image={project.image}
                 focalPoint={project.focalPoint.focalPoint}
               ></FocalImage>
-            </div>
+            </Link>
           )
         })}
       </Slider>
