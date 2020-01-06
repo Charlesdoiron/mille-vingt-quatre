@@ -2,7 +2,7 @@ import React from "react"
 import { ProjectsSelectedList } from "./projectsSelectedList"
 import { ProjectsSelectedSliderMobile } from "./projectsSelectedSliderMobile"
 
-import { ShowIfDeviceIs as showIfDeviceIs } from "./../../utils/mediaqueries"
+import { ShowIfDeviceIs as showIfDeviceIs } from "../../utils/mediaqueries"
 export const ProjectsSelected = props => {
   if (showIfDeviceIs("mobile")) {
     return (
