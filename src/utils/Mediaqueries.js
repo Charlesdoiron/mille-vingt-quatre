@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-export default function ShowIfDeviceIs(arg) {
+export function ShowIfDeviceIs(arg) {
   const [device, setDevice] = useState("")
   const ShowIfDeviceIs = () => {
     if (window.innerWidth > 992) {
