@@ -1,11 +1,8 @@
 import React from "react"
 import { Link } from "gatsby"
-
 import { Styledh2, Styledprojectdate } from "../typos"
 import { FocalImage } from "./../contentful/focalImage"
-
 import Slider from "react-slick"
-
 import styled from "styled-components"
 
 const Title = styled(Styledh2)`
