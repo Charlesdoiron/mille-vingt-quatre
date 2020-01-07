@@ -14,14 +14,6 @@ export const Video = props => {
 
   const [isPlaying, setPlaying] = useState(false)
   const [isLooping, setLooping] = useState(false)
-  useEffect(() => {
-    setTimeout(() => {
-      setPlaying(true)
-    }, 100)
-    setTimeout(() => {
-      setLooping(true)
-    }, 120)
-  }, [])
 
   return (
     <div data-aos={isCover !== undefined ? "" : `fade-up`}>
@@ -41,6 +33,17 @@ export const Video = props => {
               url={video_url}
               controls={true}
               loop={true}
+              volume={0}
+              muted
+              playing
+              config={{
+                file: {
+                  attributes: {
+                    autoPlay: true,
+                    muted: true,
+                  },
+                },
+              }}
             />
           ) : (
             <ReactPlayer
@@ -57,9 +60,21 @@ export const Video = props => {
             })}
           >
             <ReactPlayer
+              style={{ width: "100%" }}
               url={staticVideo}
-              playing={isPlaying}
-              loop={isLooping}
+              controls={false}
+              loop={true}
+              volume={0}
+              muted
+              playing
+              config={{
+                file: {
+                  attributes: {
+                    autoPlay: true,
+                    muted: true,
+                  },
+                },
+              }}
             />
           </div>
         )}
