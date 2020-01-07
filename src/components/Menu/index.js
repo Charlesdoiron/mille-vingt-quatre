@@ -80,6 +80,8 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
       ? "black"
       : "transparent"};
     background-size: 30px;
+    left: 0 !important;
+    width: 100%;
   `
   const DesktopContainer = styled.div`
     margin: 0 auto;
@@ -101,11 +103,7 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
   ) : (
     <div>
       <div>
-        <MobileContainer
-          ref={menuRef}
-          data-aos={!isOpen && "fade-down"}
-          style={{ width: "100%", left: "0" }}
-        >
+        <MobileContainer ref={menuRef} data-aos={!isOpen && "fade-down"}>
           <Logo isOpen={isOpen} handleClick={e => toggleMenu(false)} />
           {!isOpen && <CloseProject />}
           {isOpen && <MenuItems isOpen={isOpen} />}
