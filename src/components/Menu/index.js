@@ -89,11 +89,6 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
     width: 100%;
     position: fixed;
     transition: all 1024ms;
-    /* background-color: ${
-      isSticky || (isTablet && currentPage === "projects")
-        ? "black"
-        : "transparent"
-    }; */
   `
   return !isMobile ? (
     <DesktopContainer>
@@ -106,18 +101,13 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
   ) : (
     <div>
       <div>
-        <div
-          data-aos={!isOpen && "fade-down"}
-          style={{ zIndex: "999999999", position: "relative" }}
-        >
-          <MobileContainer ref={menuRef}>
-            <Logo isOpen={isOpen} handleClick={e => toggleMenu(false)} />
-            {!isOpen && <CloseProject />}
-            {isOpen && <MenuItems isOpen={isOpen} />}
-            <Socials isOpen={isOpen} />
-            <Burger handleClick={() => toggleMenu(!isOpen)} isOpen={isOpen} />
-          </MobileContainer>
-        </div>
+        <MobileContainer ref={menuRef}>
+          <Logo isOpen={isOpen} handleClick={e => toggleMenu(false)} />
+          {!isOpen && <CloseProject />}
+          {isOpen && <MenuItems isOpen={isOpen} />}
+          <Socials isOpen={isOpen} />
+          <Burger handleClick={() => toggleMenu(!isOpen)} isOpen={isOpen} />
+        </MobileContainer>
 
         <StyledBackground isOpen={isOpen} />
       </div>
