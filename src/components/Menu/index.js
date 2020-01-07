@@ -101,7 +101,11 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
   ) : (
     <div>
       <div>
-        <MobileContainer ref={menuRef} data-aos={!isOpen && "fade-down"}>
+        <MobileContainer
+          ref={menuRef}
+          data-aos={!isOpen && "fade-down"}
+          style={{ width: "100%", left: "0 !important" }}
+        >
           <Logo isOpen={isOpen} handleClick={e => toggleMenu(false)} />
           {!isOpen && <CloseProject />}
           {isOpen && <MenuItems isOpen={isOpen} />}
