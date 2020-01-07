@@ -69,6 +69,7 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
         `
       : ""};
   `
+
   const MobileContainer = styled.div`
     display: flex;
     align-items: center;
