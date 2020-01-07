@@ -11,24 +11,14 @@
     }
   }
 }
-.logo__container {
-  a {
-    @media #{$mobile} {
-      padding: 10px;
-    }
-  }
-}
+
 .logo {
   z-index: 1000;
   height: 17px;
-
   position: relative;
-  top: 30px;
-  left: 30px;
 
   @media #{$mobile} {
     left: 0;
-    top: 2px !important;
   }
 }
 
