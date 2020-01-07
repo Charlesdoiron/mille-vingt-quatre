@@ -60,6 +60,7 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
     z-index: 8000000;
     position: fixed;
     top: 0;
+    left: 0 !important;
     bottom: 0;
     pointer-events: none;
     overflow: hidden;
@@ -82,6 +83,7 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
       : "transparent"};
     background-size: 30px;
     left: 0 !important;
+    top: 0 !important;
     width: 100%;
   `
   const DesktopContainer = styled.div`
