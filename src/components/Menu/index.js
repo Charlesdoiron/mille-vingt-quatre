@@ -104,7 +104,7 @@ export const Menu = ({ data, menuIsOpen, currentPage }) => {
         <MobileContainer
           ref={menuRef}
           data-aos={!isOpen && "fade-down"}
-          style={{ width: "100%", left: "0 !important" }}
+          style={{ width: "100%", left: "0" }}
         >
           <Logo isOpen={isOpen} handleClick={e => toggleMenu(false)} />
           {!isOpen && <CloseProject />}
