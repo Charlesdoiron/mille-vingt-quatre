@@ -90,20 +90,23 @@ class project extends React.Component {
     const modules = this.props.data.contentfulProject.modulesUi
     const project = this.props.data.contentfulProject
     const currentProjectSlug = this.props.data.contentfulProject.slug
-
-    const navigation = this.props.data.contentfulProject.projectsNavigation[0]
-      .projects
+    console.log(this.props.data.contentfulProject)
+    const navigation =
+      this.props.data.contentfulProject.projectsNavigation &&
+      this.props.data.contentfulProject.projectsNavigation[0].projects
 
     let currentProjectPosition
-    for (var i = 0; i < navigation.length; ++i) {
-      if (navigation[i].slug === currentProjectSlug) {
-        currentProjectPosition = i
-        break
+    if (navigation) {
+      for (var i = 0; i < navigation.length; ++i) {
+        if (navigation[i].slug === currentProjectSlug) {
+          currentProjectPosition = i
+          break
+        }
       }
     }
 
-    const previous = navigation[currentProjectPosition - 1]
-    const next = navigation[currentProjectPosition + 1]
+    const previous = navigation && navigation[currentProjectPosition - 1]
+    const next = navigation && navigation[currentProjectPosition + 1]
 
     console.log(modules, "modules")
 

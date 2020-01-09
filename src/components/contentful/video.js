@@ -65,8 +65,13 @@ export const Video = props => {
               controls={false}
               loop={true}
               volume={0}
+              onReady={() =>
+                setTimeout(() => {
+                  setPlaying(true)
+                }, 100)
+              }
               muted
-              playing
+              playing={isPlaying}
               config={{
                 file: {
                   attributes: {
