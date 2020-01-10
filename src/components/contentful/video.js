@@ -65,6 +65,7 @@ export const Video = props => {
               controls={false}
               loop={true}
               volume={0}
+              playsinline
               onReady={() =>
                 setTimeout(() => {
                   setPlaying(true)
