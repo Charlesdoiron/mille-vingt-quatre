@@ -37,8 +37,9 @@
         video {
           height: 700px !important;
           width: 400% !important;
-          margin-left: -140%;
+          margin-left: -145%;
           margin-top: -60px;
+          margin-bottom: -60px;
         }
       }
     }
@@ -51,7 +52,7 @@
     // margin-bottom: 85px;
 
     @media #{$mobile} {
-      margin-bottom: 35px;
+      //margin-bottom: 35px;
     }
     iframe {
       padding: 0 !important;
