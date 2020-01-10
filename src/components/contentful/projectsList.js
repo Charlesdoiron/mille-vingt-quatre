@@ -105,8 +105,8 @@ export class ProjectsList extends React.Component {
     const list = this.listProjects.current
     list.addEventListener("scroll", () => this.animateProject(), true)
     setTimeout(() => {
-      list.scrollTo({ top: 5, behavior: "smooth" })
-    }, 2000)
+      list.scrollTo({ top: 1, behavior: "smooth" })
+    }, 1000)
   }
 
   componentWillUnmount() {
