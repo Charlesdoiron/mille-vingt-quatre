@@ -54,6 +54,7 @@ in which sound and light scores are orchestrated within the space, and controlle
       options: {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
         accessToken: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,
+        environment: "master",
       },
     },
   ],
