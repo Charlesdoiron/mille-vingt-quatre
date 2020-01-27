@@ -41,7 +41,7 @@ in which sound and light scores are orchestrated within the space, and controlle
         background_color: `#000000`,
         theme_color: `#663399`,
         display: `standalone`,
-        icon: `src/images/gatsby-icon.png`,
+        icon: `static/images/favicon/fav.jpg`,
         crossOrigin: `use-credentials`,
       },
     },
