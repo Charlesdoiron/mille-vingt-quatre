@@ -3,10 +3,10 @@ import { graphql } from "gatsby"
 
 import styled from "styled-components"
 
-import { Layout } from "../components/newLayout"
+import { Layout } from "../components/layout"
 
 import "./../style/index.scss"
-
+import SEO from "../components/seo"
 import { ImageGrid } from "../components/contentful/imageGrid"
 import { ImageGrid2Photos } from "../components/contentful/imageGrid2Photos"
 import { ImageGrid3Or4Photos } from "../components/contentful/imageGrid3Or4Photos"
@@ -30,8 +30,8 @@ const Page = props => {
   const projects = props.data.contentfulPages.allProjects
   const categories = props.data.contentfulPages.allCategories
   const currentPage = props.pageContext.slug
-
-  console.log("MODULES", modules)
+  const page = props.data.contentfulPages
+  console.log(page)
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }, [])
@@ -50,7 +50,15 @@ const Page = props => {
 
   const renderModulesOnPages = modules => {
     if (currentPage === "blog") {
-      return <BlogPosts />
+      return (
+        <>
+          <SEO
+            title={`${page.title}`}
+            description={page.descriptionMetadatas}
+          />
+          <BlogPosts />
+        </>
+      )
     }
     return modules.map((module, i) => {
       switch (module.__typename) {
@@ -97,6 +105,7 @@ const Page = props => {
   const renderProjectsPage = (modules, projects, categories) => {
     return (
       <>
+        <SEO title={`${page.title}`} description={page.descriptionMetadatas} />
         <FullHeight id="projects__list">
           <ProjectsList
             projects={projects}
@@ -109,9 +118,17 @@ const Page = props => {
   }
   return (
     <Layout currentPage={currentPage}>
-      {currentPage !== "projects"
-        ? renderModulesOnPages(modules)
-        : renderProjectsPage(modules, projects, categories)}
+      {currentPage !== "projects" ? (
+        <>
+          <SEO
+            title={`${page.title}`}
+            description={page.descriptionMetadatas}
+          />
+          {renderModulesOnPages(modules)}
+        </>
+      ) : (
+        renderProjectsPage(modules, projects, categories)
+      )}
     </Layout>
   )
 }
@@ -129,6 +146,7 @@ export const pagequerypagetemplatebyslug = graphql`
     contentfulPages(slug: { eq: $slug }) {
       title
       slug
+      descriptionMetadatas
       allProjects: projects {
         projectTitle
         projectTitleDate

@@ -1,8 +1,10 @@
 import React, { useEffect } from "react"
 import { graphql } from "gatsby"
 import styled from "styled-components"
-import { Layout } from "../components/newLayout"
+import { Layout } from "../components/layout"
 import "./../style/index.scss"
+
+import SEO from "../components/seo"
 
 import { ImageGrid } from "../components/contentful/imageGrid"
 import { ImageGrid2Photos } from "../components/contentful/imageGrid2Photos"
@@ -36,26 +38,15 @@ const FullHeight = styled.div`
 `
 
 const Page = props => {
-  const posts = props.data.allContentfulBlogPost
   const page = props.data.contentfulPages
   const modules = props.data.contentfulPages.ui
-  const projects = props.data.contentfulPages.allProjects
-  const categories = props.data.contentfulPages.allCategories
   const currentPage = props.pageContext.slug
-
-  console.log("PAGE", page)
-  console.log("POSTS", posts)
-  console.log("CURRENT", currentPage)
-  console.log("MODULES", modules)
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }, [])
 
   const renderModulesOnPages = modules => {
-    if (currentPage === "blog") {
-      return <BlogPosts />
-    }
     return modules.map((module, i) => {
       switch (module.__typename) {
         case "ContentfulHero":
@@ -102,25 +93,12 @@ const Page = props => {
     })
   }
 
-  const renderProjectsPage = (modules, projects, categories) => {
-    return (
-      <>
-        <FullHeight className="background-noise">
-          {modules.map(module => (
-            <RenderParagraphModule module={module} />
-          ))}
-          <div className="gradient"></div>
-        </FullHeight>
-
-        <ProjectsList projects={projects} categories={categories} />
-      </>
-    )
-  }
   return (
     <Layout currentPage={currentPage}>
-      {currentPage !== "projects"
-        ? renderModulesOnPages(modules)
-        : renderProjectsPage(modules, projects, categories)}
+      <>
+        <SEO description={page.descriptionMetadatas} />
+        {renderModulesOnPages(modules)}
+      </>
     </Layout>
   )
 }
@@ -139,9 +117,11 @@ export const pagequerypagebyslug = graphql`
     contentfulPages(slug: { eq: "home" }) {
       title
       slug
+      descriptionMetadatas
       allProjects: projects {
         projectTitle
         projectTitleDate
+        projectSubtitle
         slug
         image {
           file {

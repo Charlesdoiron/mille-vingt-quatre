@@ -2,9 +2,13 @@ require(`dotenv`).config({ path: `.env` })
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `1024 Architecture`,
+    description: `1024 designs architectural and digital works,
+in which sound and light scores are orchestrated within the space, and controlled by custom computer code.`,
+    url: "https://www.1024architecture.net",
+    image: "/images/1024.jpg",
+    author: `Fragile - David Benmussa & Charles d'Oiron`,
+    twitterUsername: "@1024official",
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

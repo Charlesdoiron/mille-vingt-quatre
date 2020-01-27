@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import classNames from "classnames"
 import { Gradient } from "./../animations/image"
 import ReactPlayer from "react-player"
@@ -13,7 +13,6 @@ export const Video = props => {
     props.video.staticVideo && props.video.staticVideo.file.url
 
   const [isPlaying, setPlaying] = useState(false)
-  const [isLooping, setLooping] = useState(false)
 
   return (
     <div data-aos={isCover !== undefined ? "" : `fade-up`}>

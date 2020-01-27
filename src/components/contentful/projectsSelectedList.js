@@ -17,24 +17,22 @@ const Title = styled(Styledh2)`
 `
 
 export const ProjectsSelectedList = props => {
-  console.log(props, "selected")
   const [imageState, setImageState] = useState("")
   const projectTitleLink = useRef(null)
 
-  // FOCUS ON FIRST PROJECT
-  function setDefaultImage() {
-    setImageState(projects[0].image.fluid)
-  }
-  async function setDefaultProject() {
-    await setDefaultImage()
-    const titles = projectTitleLink.current
-    const firstTitle = titles && titles[0]
-    if (firstTitle) {
-      await firstTitle.classList.add("isActive")
-    }
-  }
-
   useEffect(() => {
+    // FOCUS ON FIRST PROJECT
+    function setDefaultImage() {
+      setImageState(projects[0].image.fluid)
+    }
+    async function setDefaultProject() {
+      setDefaultImage()
+      const titles = projectTitleLink.current
+      const firstTitle = titles && titles[0]
+      if (firstTitle) {
+        await firstTitle.classList.add("isActive")
+      }
+    }
     setDefaultProject()
   }, [])
 

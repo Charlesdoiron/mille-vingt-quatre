@@ -1,6 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import { Layout } from "../components/newLayout"
+import SEO from "../components/seo"
+import { Layout } from "../components/layout"
 import "./../style/index.scss"
 import { Styledpostblogfont, Styledcapitalize } from "../components/typos"
 import { ImgBlur } from "./../components/animations/image"
@@ -23,7 +24,6 @@ class blogpost extends React.Component {
     const blogPost = this.props.data.contentfulBlogPost
     const { previous, next } = this.props.pageContext
 
-    console.log("this.props.pageContext", this.props.pageContext)
     const renderModulesOnPages = modules => {
       return modules.map((module, i) => {
         switch (module.__typename) {
@@ -49,80 +49,86 @@ class blogpost extends React.Component {
       })
     }
     return (
-      <Layout>
-        <div className="blog__post__container">
-          <ImgBlur
-            className="cover"
-            style={{ backgroundImage: `url(${blogPost.hero.sizes.src})` }}
-          >
-            <div className="titles">
-              <Styledpostblogfont>{blogPost.title}</Styledpostblogfont>
-              <p>
-                <span className="line"></span>
-                {blogPost.subtitle}
-              </p>
-            </div>
-          </ImgBlur>
-          <div className="wrapper--m">
-            <div className="blogpost__content">
-              {blogPost.contentRich && (
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: blogPost.contentRich.contentRich,
-                  }}
-                ></div>
-              )}
-            </div>
-          </div>
-          <div className="wrapper--m">
-            {modules && <div>{renderModulesOnPages(modules)}</div>}
-          </div>
-
-          <div className="wrapper--m">
-            <hr />
-            <ul
-              style={{
-                display: `flex`,
-                flexWrap: `wrap`,
-                justifyContent: `space-between`,
-                listStyle: `none`,
-                padding: `0`,
-              }}
+      <>
+        <SEO title={`${blogPost.title}`} description={blogPost.subtitle} />
+        <Layout>
+          <div className="blog__post__container">
+            <ImgBlur
+              className="cover"
+              style={{ backgroundImage: `url(${blogPost.hero.sizes.src})` }}
             >
-              <li className="previous__blog__container">
-                {previous && (
-                  <Link to={previous.node.slug} rel="prev">
-                    <Styledpostblogfont>
-                      {previous.node.title}
-                    </Styledpostblogfont>
-                    <Styledcapitalize>
-                      <img
-                        alt="previous"
-                        src={arrow}
-                        style={{
-                          transform: "rotate(180deg)",
-                          margin: "0 20px 0 0",
-                        }}
-                      />
-                      previous article
-                    </Styledcapitalize>
-                  </Link>
+              <div className="titles">
+                <Styledpostblogfont>{blogPost.title}</Styledpostblogfont>
+                <p>
+                  <span className="line"></span>
+                  {blogPost.subtitle}
+                </p>
+              </div>
+            </ImgBlur>
+            <div className="wrapper--m">
+              <div className="blogpost__content">
+                {blogPost.contentRich && (
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: blogPost.contentRich.contentRich,
+                    }}
+                  ></div>
                 )}
-              </li>
-              <li className="next__blog__container">
-                {next && (
-                  <Link to={next.node.slug} rel="next">
-                    <Styledpostblogfont> {next.node.title}</Styledpostblogfont>
-                    <Styledcapitalize>
-                      next article <img alt="next" src={arrow} />
-                    </Styledcapitalize>
-                  </Link>
-                )}
-              </li>
-            </ul>
+              </div>
+            </div>
+            <div className="wrapper--m">
+              {modules && <div>{renderModulesOnPages(modules)}</div>}
+            </div>
+
+            <div className="wrapper--m">
+              <hr />
+              <ul
+                style={{
+                  display: `flex`,
+                  flexWrap: `wrap`,
+                  justifyContent: `space-between`,
+                  listStyle: `none`,
+                  padding: `0`,
+                }}
+              >
+                <li className="previous__blog__container">
+                  {previous && (
+                    <Link to={previous.node.slug} rel="prev">
+                      <Styledpostblogfont>
+                        {previous.node.title}
+                      </Styledpostblogfont>
+                      <Styledcapitalize>
+                        <img
+                          alt="previous"
+                          src={arrow}
+                          style={{
+                            transform: "rotate(180deg)",
+                            margin: "0 20px 0 0",
+                          }}
+                        />
+                        previous article
+                      </Styledcapitalize>
+                    </Link>
+                  )}
+                </li>
+                <li className="next__blog__container">
+                  {next && (
+                    <Link to={next.node.slug} rel="next">
+                      <Styledpostblogfont>
+                        {" "}
+                        {next.node.title}
+                      </Styledpostblogfont>
+                      <Styledcapitalize>
+                        next article <img alt="next" src={arrow} />
+                      </Styledcapitalize>
+                    </Link>
+                  )}
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-      </Layout>
+        </Layout>
+      </>
     )
   }
 }
