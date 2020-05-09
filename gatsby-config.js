@@ -31,7 +31,6 @@ in which sound and light scores are orchestrated within the space, and controlle
           "https://hiver2010.us8.list-manage.com/subscribe/post?u=c4d90a0b380781cb3658a71b0&amp;id=b1feefc1bc",
       },
     },
-    `gatsby-plugin-netlify-cache`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
