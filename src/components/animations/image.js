@@ -6,11 +6,13 @@ const blur = keyframes`
   0% {
     filter: blur(100px);
     opacity: 0.5;
+
   }
 
   100%{
-    filter: blur(0);
+    filter: blur(0px);
     opacity: 1 !important;
+
 
   }
 }

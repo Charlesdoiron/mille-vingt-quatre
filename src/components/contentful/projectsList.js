@@ -181,7 +181,7 @@ export class ProjectsList extends React.Component {
       >
         {this.state.imageOnBackground && (
           <ImgResponsive>
-            <ImgBlur
+            <div
               className="project__img--background"
               style={{
                 backgroundImage: `url(${this.state.imageOnBackground.url})`,

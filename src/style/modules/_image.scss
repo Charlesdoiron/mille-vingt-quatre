@@ -22,6 +22,18 @@
     img {
       width: 100%;
     }
+    &.Text-Top {
+      & > div {
+        display: flex;
+        flex-direction: column-reverse;
+        .text__for__image {
+          margin-bottom: 50px;
+          @media #{$mobile} {
+            margin-bottom: 35px;
+          }
+        }
+      }
+    }
   }
   &.Image-Full-Width {
     padding: 85px 0;
